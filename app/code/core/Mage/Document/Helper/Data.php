@@ -1,5 +1,5 @@
 <?php
-class Mage_Attendance_Helper_Data extends Mage_Core_Helper_Abstract
+class Mage_Document_Helper_Data extends Mage_Core_Helper_Abstract
 {
     public function isUrl($s)  
     {  

@@ -1,5 +1,5 @@
 <?php
-class Mage_Attendance_Block_Adminhtml_Template_Edit_Company_Advance extends Mage_Adminhtml_Block_Widget_Form
+class Mage_Document_Block_Adminhtml_Template_Edit_Company_Advance extends Mage_Adminhtml_Block_Widget_Form
 {
     /**
      * Define Form settings
@@ -30,7 +30,7 @@ class Mage_Attendance_Block_Adminhtml_Template_Edit_Company_Advance extends Mage
             'legend'    => ('高级设置'),
             'class'    => 'fieldset-wide',
         ));
-        $collection = Mage::getResourceModel('attendance/company_attr_collection')
+        $collection = Mage::getResourceModel('document/company_attr_collection')
         	->setOrder('position','desc');
         foreach ($collection as $_attr) {
         	if ($_attr->getData('attr_type')=='select') {
@@ -73,7 +73,7 @@ class Mage_Attendance_Block_Adminhtml_Template_Edit_Company_Advance extends Mage
         	
         }
         if ($model->getId()) {
-        	$values = Mage::getResourceModel('attendance/company_attr_value_collection')
+        	$values = Mage::getResourceModel('document/company_attr_value_collection')
 				->addFieldToFilter('company_id',$model->getId());
 			foreach ($values as $_value) {
 				$data['attr['.$_value->getAttrId().']'] = $_value->getValue();

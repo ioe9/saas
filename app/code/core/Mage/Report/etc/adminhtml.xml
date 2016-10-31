@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <report>
+        	<sort_order>888</sort_order>
+	        <title>工作报告</title>
+	        <action>adminhtml/report/</action>
+	        <children>
+		        <submitto>
+		        	<sort_order>10</sort_order>
+			        <title>提交给我的</title>
+			        <action>adminhtml/report_submitto/</action>
+		        </submitto>
+			    <ccto>
+		        	<sort_order>20</sort_order>
+			        <title>抄送给我的</title>
+			        <action>adminhtml/report_ccto/</action>
+		        </ccto>
+		        <submit>
+		        	<sort_order>30</sort_order>
+			        <title>提交给我的</title>
+			        <action>adminhtml/report_submit/</action>
+		        </submit>
+	               
+	        </children>
+        </report>
+    </menu>
+</config>

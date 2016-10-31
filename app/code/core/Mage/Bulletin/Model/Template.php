@@ -1,11 +1,11 @@
 <?php
-class Mage_Attendance_Model_Template extends Mage_Core_Model_Abstract
+class Mage_Bulletin_Model_Template extends Mage_Core_Model_Abstract
 {
 	const MEDIA_IMAGE_PREFIX = 'template';
     
     protected function _construct()
     {
-        $this->_init('attendance/template');
+        $this->_init('bulletin/template');
     }
     
     public function getImageUrl() {

@@ -1,5 +1,5 @@
 <?php
-class Mage_Attendance_Block_Adminhtml_Template_Edit_Company_Base extends Mage_Adminhtml_Block_Widget_Form
+class Mage_Bulletin_Block_Adminhtml_Template_Edit_Company_Base extends Mage_Adminhtml_Block_Widget_Form
 {
     /**
      * Define Form settings
@@ -42,14 +42,14 @@ class Mage_Attendance_Block_Adminhtml_Template_Edit_Company_Base extends Mage_Ad
             'name'      => 'category_a',
             'label'     => '邮件模板大类',
             'title'     => '邮件模板大类',
-            'values'      => Mage::getModel('attendance/template_category')->getCategoriesMulitiOption(1,true),
+            'values'      => Mage::getModel('bulletin/template_category')->getCategoriesMulitiOption(1,true),
             'required'  => false,
             'size'  => '5',
             'style' => 'height:100px'
            
         ));
         if ($model) {
-        	$cats = Mage::getResourceModel('attendance/company_category_collection')
+        	$cats = Mage::getResourceModel('bulletin/company_category_collection')
 				->addFieldToFilter('company_id',$model->getId());
         }
 		      
@@ -62,7 +62,7 @@ class Mage_Attendance_Block_Adminhtml_Template_Edit_Company_Base extends Mage_Ad
             'name'      => 'category_b',
             'label'     => '邮件模板二级类别',
             'title'     => '邮件模板二级类别',
-            'values'    => Mage::getModel('attendance/template_category')->getSecondMulitiOption(),
+            'values'    => Mage::getModel('bulletin/template_category')->getSecondMulitiOption(),
             'required'  => false,
             'size'  => '5',
             'style' => 'height:100px'

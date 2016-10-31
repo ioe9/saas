@@ -1,30 +1,30 @@
 <?php
-class Mage_Attendance_Block_Adminhtml_Template extends Mage_Adminhtml_Block_Template
+class Mage_Document_Block_Adminhtml_Template extends Mage_Adminhtml_Block_Template
 {
 	protected $_pageSize = 20;
     public function __construct()
     {
         parent::__construct();
-        $this->setTemplate('attendance/template.phtml');
+        $this->setTemplate('document/template.phtml');
     }
     
     protected function _prepareLayout(){
         parent::_prepareLayout();
         $tag= trim($this->getRequest()->getParam('tag',null));
         $categoryId = trim($this->getRequest()->getParam('cid',null));
-        $collection = Mage::getModel('attendance/template')->getCollection();
+        $collection = Mage::getModel('document/template')->getCollection();
         if ($tag) {
-        	$tagModel = Mage::getModel('attendance/template_tag')->loadByName($tag);
+        	$tagModel = Mage::getModel('document/template_tag')->loadByName($tag);
         	if ($tagModel->getId()) {
         		$collection->getSelect()
-        			->join(array('r'=>'attendance_template_tag_relate'),
+        			->join(array('r'=>'document_template_tag_relate'),
 							'main_table.template_id=r.template_id and tag_id='.$tagModel->getId(),array());
         	}
         }
         if ($categoryId) {
 
     		$collection->getSelect()
-        			->join(array('r'=>'attendance_template_category_relate'),
+        			->join(array('r'=>'document_template_category_relate'),
 							'main_table.template_id=r.template_id and category_id='.$categoryId,array());
         	
         }
@@ -35,7 +35,7 @@ class Mage_Attendance_Block_Adminhtml_Template extends Mage_Adminhtml_Block_Temp
         }
         $this->setCollection($collection);
         $pager = $this->getLayout()->createBlock('page/html_pager')
-                ->setTemplate('attendance/html/pager.phtml')
+                ->setTemplate('document/html/pager.phtml')
                 ->setLimit($this->_pageSize)
             ->setCollection($collection);
         $this->setChild('pager', $pager);

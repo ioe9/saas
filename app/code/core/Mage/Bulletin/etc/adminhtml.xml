@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <bulletin>
+        	<sort_order>10</sort_order>
+	        <title>企业公告</title>
+	        <action>adminhtml/bulletin/</action>
+	        <children>
+		        <published>
+		        	<sort_order>10</sort_order>
+			        <title>已发布公告</title>
+			        <action>adminhtml/bulletin_published/</action>
+		        </published>
+		        <audit>
+		        	<sort_order>20</sort_order>
+			        <title>签发公告</title>
+			        <action>adminhtml/bulletin_audit/</action>
+		        </audit>
+		        <my>
+		        	<sort_order>30</sort_order>
+			        <title>我创建的</title>
+			        <action>adminhtml/bulletin_my/</action>
+		        </my>
+	        </children>
+        </bulletin>
+    </menu>
+</config>

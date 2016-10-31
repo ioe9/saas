@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <approve>
+        	<sort_order>10</sort_order>
+	        <title>审批管理</title>
+	        <action>adminhtml/approve/</action>
+	        <children>
+		        <todo>
+		        	<sort_order>10</sort_order>
+			        <title>我的待办</title>
+			        <action>adminhtml/approve_todo/</action>
+		        </todo>
+		        <done>
+		        	<sort_order>20</sort_order>
+			        <title>我的已办</title>
+			        <action>adminhtml/approve_done/</action>
+		        </done>
+		        <ccto>
+		        	<sort_order>30</sort_order>
+			        <title>抄送给我</title>
+			        <action>adminhtml/approve_ccto/</action>
+		        </ccto>
+		        <data>
+		        	<sort_order>40</sort_order>
+			        <title>数据管理</title>
+			        <action>adminhtml/approve_data/</action>
+		        </data>
+		        <setting>
+		        	<sort_order>999</sort_order>
+			        <title>应用设置</title>
+			        <action>adminhtml/approve_setting/</action>
+		        </setting>
+	        </children>
+        </approve>
+    </menu>
+</config>

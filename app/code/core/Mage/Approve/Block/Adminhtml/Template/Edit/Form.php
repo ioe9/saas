@@ -1,5 +1,5 @@
 <?php
-class Mage_Attendance_Block_Adminhtml_Template_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
+class Mage_Approve_Block_Adminhtml_Template_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 {
     /**
      * Define Form settings
@@ -40,7 +40,7 @@ class Mage_Attendance_Block_Adminhtml_Template_Edit_Form extends Mage_Adminhtml_
             'label'     => '所属分类',
             'title'     => '所属分类',
             'required'  => false,
-            'options'   => Mage::getModel('attendance/template_category')->getCategoriesOption(),
+            'options'   => Mage::getModel('approve/template_category')->getCategoriesOption(),
         ));
         $fieldset->addField('name', 'text', array(
             'name'      => 'name',
