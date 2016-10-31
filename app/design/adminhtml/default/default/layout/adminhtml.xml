@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_noroute>
+        <reference name="content">
+            <block type="core/text" name="content.noRoute">
+                <action method="setText" translate="text" module="adminhtml"><text><![CDATA[<h1 class="page-heading">404 Error</h1><p>Page not found.</p>]]></text></action>
+            </block>
+        </reference>
+    </adminhtml_noroute>
+    <adminhtml_denied>
+        <reference name="content">
+            <block type="adminhtml/denied" name="content.denied" template="access_denied.phtml"/>
+        </reference>
+    </adminhtml_denied>
+    <adminhtml_index_login>
+    	
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="adminhtml/template" name="content" template="login.phtml">
+                <block type="core/text_list" name="form.additional.info" />
+            </block>
+        </block>
+        
+    </adminhtml_index_login>
+    
+    <adminhtml_index_register>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="adminhtml/template" name="content" template="register.phtml">
+                <block type="core/text_list" name="form.additional.info" />
+            </block>
+        </block>
+    </adminhtml_index_register>
+    
+    
+    <adminhtml_index_forgotpassword>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="adminhtml/template" name="content" template="forgotpassword.phtml">
+                <block type="core/text_list" name="form.additional.info" />
+            </block>
+        </block>
+    </adminhtml_index_forgotpassword>
+    <adminhtml_system_config_edit>
+        
+    </adminhtml_system_config_edit>
+    <adminhtml_dashboard_index>
+        <reference name="content">
+            <block type="adminhtml/dashboard" name="dashboard"/>
+        </reference>
+    </adminhtml_dashboard_index>
+    <adminhtml_dashboard_guidesuccess>
+        <reference name="content">
+            <block type="adminhtml/template" name="guide" template="edm/guide/success.phtml"/>
+        </reference>
+    </adminhtml_dashboard_guidesuccess>
+    <adminhtml_cache_index>
+        <reference name="content">
+            <block type="adminhtml/cache" name="cache"></block>
+            <block type="adminhtml/cache_additional" name="cache.additional" template="system/cache/additional.phtml"></block>
+        </reference>
+    </adminhtml_cache_index>
+    
+   
+</layout>

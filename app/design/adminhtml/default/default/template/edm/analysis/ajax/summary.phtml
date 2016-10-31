@@ -1,0 +1,113 @@
+<!-- 客户分析结果   -->
+<?php $user = Mage::getSingleton('admin/session')->getUser(); ?>
+<?php
+$company = Mage::registry('current_company');
+$client = $this->getClient();
+$categories = $client->getData('categories');
+$attrs = $client->getData('attrs');
+$emails = $client->getData('emails');
+
+?>
+<div class="a-left pr" id="ke">
+	<button class="btn pa" style="border-radius: 5px; font-size: 20px; padding: 4px 17px; top: -9px; right: -6px;" onclick="renderEmail();">帮我写封开发信</button>
+	<h2>客户分析</h2.
+	<input type="hidden" value="<?php echo $client->getId(); ?>" id="client_id"  name="client_id"/></span>
+	<input type="hidden" vlaue="<?php echo $client->getName(); ?>" id="client_name"  name="client_name"/></span>
+	
+	
+	<?php $type = array(); ?>
+	<?php $options = $this->getAttrOptions($attrs['客户渠道特征']['attr']->getId()); ?>
+	<?php foreach ($attrs['客户渠道特征']['value']  as $_value): ?>
+	<?php array_push($type,ucwords($options[$_value->getValue()]->getData('value'))); ?>
+	<?php endforeach; ?>
+	<?php if (count($type)): ?>
+	<h3>类型：<?php echo implode(' & ',$type); ?></h3>
+	<?php endif; ?>
+	<?php 
+	$quality=$client->getData('index_quality');
+	$price = $client->getData('index_price');
+	$design = $client->getData('index_design');
+	$service = $client->getData('index_service');
+	$indexArr = array($quality,$price,$design,$service);
+	$maxPos = array_search(max($indexArr), $indexArr);
+	unset($indexArr[$maxPos]);
+	$secondMaxPos = array_search(max($indexArr), $indexArr);
+	$strArr = array('Good Quality','Lower Price','Good Design','Good Service');
+	$strArr2 = $strArr;
+	unset($strArr2[$maxPos]);
+	?>
+	<h3>定位</h3>
+	<h5>该客户最关注：<span class="r"><?php echo $strArr[$maxPos]; ?></span> & <span class="r"><?php echo $strArr2[$secondMaxPos]; ?></span></h5>
+	<div class="" id="focus_1">
+	
+	</div>
+	<div class="" id="focus_2">
+	
+	</div>
+	<div class="focus_chart">
+	
+	</div>
+	
+	<div class="clr mt25"></div>
+	<?php if (count($emails)): ?>
+	<h3>联系信息：</h3>
+	<div class="" id="joystep_4">
+		
+		<div class="bx f-left wp100" >
+			<p>联系人：<?php echo $client->getData('contact_person'); ?></p>
+			<?php $emailWebsite = array(); ?>
+			<?php $emailWhois = array(); ?>
+			<?php foreach ($emails  as $_email): ?>
+			<?php if ($_email->getData('source')==1): ?>
+			<?php array_push($emailWhois,$_email); ?>
+			<?php elseif ($_email->getData('source')==2 || true): ?>
+			<?php array_push($emailWebsite,$_email); ?>	
+			<?php endif; ?>
+			<?php endforeach; ?>
+			<?php if (count($emailWhois)): ?>
+			<h4>来自Whois</h4>
+			
+			<ul>
+			<?php foreach ($emailWhois  as $_email): ?>
+			<li><input type="radio" name="client_email" class="mr10" value="<?php echo $_email->getData('email'); ?>"/><?php echo $_email->getData('email'); ?></li>
+			<?php endforeach; ?>
+			</ul>
+			<?php endif; ?>
+			<?php if (count($emailWebsite)): ?>
+			<h4>来自网站</h4>
+			<ul>
+			<?php foreach ($emailWebsite  as $_email): ?>
+			<li><input type="radio" name="client_email" class="mr10" value="<?php echo $_email->getData('email'); ?>"/><?php echo $_email->getData('email'); ?></li>
+			<?php endforeach; ?>
+			</ul>
+			<?php endif; ?>
+			<div class="clr"></div>
+		</div>
+		<div class="f-right wp100">
+			<p>哇，系统没找到，请将您找到的联系信息贴在这里</p>
+			<textarea>
+			
+			</textarea>
+		</div>
+	</div>
+	<div class="clr"></div>
+	<?php endif; ?>
+	<div class="clr mt25"></div>
+	<div class=" a-center" style="padding: 20px"  id="joystep_5">
+		<button class="btn" style="border-radius: 5px; font-size: 20px; padding: 4px 17px; " onclick="renderEmail();">帮我写封开发信</button>
+	</div>
+	<div class="clr mt25"></div>
+
+</div>
+<script>
+jQuery(function(){
+	jQuery(".chosen-select").chosen({disable_search_threshold: 10});
+});
+jQuery(function(){
+	var status = '<?php if(!$user->getData('status_guide_email') && !$_SESSION['status_guide_email']){ echo 0; }else { echo 1;} ?>';
+
+	if (status=='0') {
+		renderJoyride();
+	}
+})
+</script>

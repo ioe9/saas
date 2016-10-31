@@ -1,0 +1,160 @@
+<?php
+$company = Mage::registry('current_company');
+$cats = Mage::getResourceModel('edm/company_category_collection')
+				->addFieldToFilter('company_id',$company->getId());	
+$cats->getSelect()->join(array('p'=>'edm_product_category'),'p.category_id=main_table.category_id',array('level','name'));
+$catOldIds = array();
+$catNames = array();
+$subCatNames = array();
+foreach ($cats as $_cat) {
+	array_push($catOldIds,$_cat->getCategoryId());
+	
+	if ($_cat->getLevel()==1) {
+		array_push($catNames,$_cat->getName());
+	} else if ($_cat->getLevel()==2) {
+		array_push($subCatNames,$_cat->getName());
+	}
+}
+
+?>
+<style>
+
+.guide-success-box dt {
+    float: left;
+    margin-right: 10px;
+    text-align: right;
+    width: 99px;
+}
+.guide-success-box dl {
+    float: left;
+    width: 100%;
+}
+.guide-success-box dd {
+    color: #eb284f;
+}
+.guide-success-box .bx {
+    background: #f8f8f8 none repeat scroll 0 0;
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+    height: auto;
+    margin-bottom: 25px;
+    padding: 10px;
+    width: 100%;
+}
+.guide-success-box .success-adv dt {
+    float: left;
+    margin: 5px 0;
+    text-align: left;
+    width: 100%;
+}
+</style>
+
+<div class="c-box">
+	<div class="content-header">
+		<h2 class="head-dashboard" style="color:green">恭喜您，已成功完成设置向导</h2></td>
+		<div id="messages">
+            <?php echo $this->getMessagesBlock()->toHtml() ?>
+        </div>
+	</div>
+		
+		<div id="">
+			<div class="dashboard-container mb20 guide-success-box">
+			    <table cellspacing="6" width="100%">
+			        <tr>  
+			            <td>
+			                <div class="entry-edit" style="">
+			                    <div style="margin:20px;">
+			                   		<div class="mb25">
+			                   			<h3>行业与产品设置</h3>
+			                   			<div class="bx">
+				                   			<dl>
+				                   				<dt>选择行业：</dt>
+					                    		<dd><?php echo implode('; ',$catNames); ?></dd>
+				                    		</dl>
+				                    		<dl>
+					                    		<dt>选择产品：</dt>
+					                    		<dd><?php echo implode('; ',$subCatNames); ?></dd>
+				                    		</dl>
+				                    		<div class="clr"></div>
+			                    		</div>
+		                   			</div>
+		                   			<div class="clr"></div>
+		                   			<div class="mb25 mt20">
+		                   				<h3>基本信息设置</h3>
+		                   				<div class="bx">
+			                   				<dl>
+				                   				<dt>公司名称：</dt>
+					                    		<dd><?php echo $company->getName(); ?></dd>
+				                    		</dl>
+			                   				<dl>
+				                   				<dt>联系人：</dt>
+					                    		<dd><?php echo $company->getData('contact_person'); ?></dd>
+				                    		</dl>
+			                   				<dl>
+				                   				<dt>联系邮箱：</dt>
+					                    		<dd><?php echo $company->getData('contact_email'); ?></dd>
+				                    		</dl>
+			                   				<dl>
+				                   				<dt>官网网址：</dt>
+					                    		<dd><?php echo $company->getData('website'); ?></dd>
+				                    		</dl>
+			                   				<dl>
+				                   				<dt>公司简介：</dt>
+					                    		<dd><?php echo $company->getData('about'); ?></dd>
+				                    		</dl>
+				                    		<div class="clr"></div>
+			                    		</div>
+		                   			</div>
+		                   			<div class="clr"></div>
+									<div class="mb25 success-adv mt20">
+		                   				<h3>公司优势设置</h3>
+		                   				<div class="bx">
+			                   				<?php $advantages = Mage::getResourceModel('edm/company_advantage_collection'); ?>
+			                   				
+						                    <?php $oldAdvantageArr = array(); ?>
+						                    <?php $oldAdvantage = Mage::getResourceModel('edm/company_advantage_value_collection')
+						                    	->addFieldToFilter('company_id',$company->getId())
+						                    	->addFieldToFilter('value',array('notnull'=>true)); ?>
+						                    
+						                    <?php foreach ($oldAdvantage as $_old): ?>
+						                    	<?php if (!array_key_exists($_old->getAdvantageId(),$oldAdvantageArr)): ?>
+						                    		<?php $oldAdvantageArr[$_old->getAdvantageId()] = array($_old); ?>
+						                    		<?php else: ?>
+						                    		<?php array_push($oldAdvantageArr[$_old->getAdvantageId()],$_old); ?>
+						                    		<?php endif; ?>
+						                    	
+						                    <?php endforeach; ?>
+						                    <?php foreach ($advantages as $_item): ?>
+						                    <?php if (array_key_exists($_item->getId(),$oldAdvantageArr)): ?>
+			                   				<dl>
+				                   				<dt><?php echo $_item->getName(); ?></dt>
+				                   				<dd>
+				                   					<?php foreach ($oldAdvantageArr[$_item->getId()] as $_t): ?>
+				                   					<p><?php echo $_t->getValue(); ?></p>
+				                   					<?php endforeach; ?>
+				                   				</dd>
+			                   				</dl>
+			                   				<?php endif; ?>
+			                   				<?php endforeach; ?>
+			                   				<div class="clr"></div>
+		                   				</div>
+	                   				</div>
+									
+						    		<div class="btn-box mt20 mb20 a-center">
+						    			<button class="btn mb20" type="button" style="padding:10px 120px;font-size: 25px;" onclick="setLocation('<?php echo $this->getUrl('adminhtml/email/new') ?>')">神笔君已恭候多时，立即体验神笔!</button>
+					    			</div>
+						    		
+			                    </div>
+			                </div>
+			            </td>
+			        </tr>
+			    </table>
+			</div>
+		</div>
+		
+	
+</div>
+<script>
+
+</script>

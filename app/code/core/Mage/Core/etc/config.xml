@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<config>
+    <global>
+        <helpers>
+            <core>
+                <encryption_model>Mage_Core_Model_Encryption</encryption_model>
+            </core>
+        </helpers>
+        
+        <cache>
+            <types>
+                <config translate="label,description" module="core">
+                    <label>Configuration</label>
+                    <description>System(config.xml, local.xml) and modules configuration files(config.xml).</description>
+                    <tags>CONFIG</tags>
+                </config>
+                <layout translate="label,description" module="core">
+                    <label>Layouts</label>
+                    <description>Layout building instructions.</description>
+                    <tags>LAYOUT_GENERAL_CACHE_TAG</tags>
+                </layout>
+                <block_html translate="label,description" module="core">
+                    <label>Blocks HTML output</label>
+                    <description>Page blocks HTML.</description>
+                    <tags>BLOCK_HTML</tags>
+                </block_html>
+                <collections translate="label,description" module="core">
+                    <label>Collections Data</label>
+                    <description>Collection data files.</description>
+                    <tags>COLLECTION_DATA</tags>
+                </collections>
+            </types>
+        </cache>
+        <session>
+            
+        </session>
+        <request>
+            <direct_front_name/>
+        </request>
+        <url_rewrite>
+            <model>core/url_rewrite</model>
+        </url_rewrite>
+        <request_rewrite>
+            <model>core/url_rewrite_request</model>
+        </request_rewrite>
+        <events>
+            <controller_action_predispatch>
+                <observers>
+                    <security_domain_policy>
+                        <class>Mage_Core_Model_Domainpolicy</class>
+                        <method>addDomainPolicyHeader</method>
+                    </security_domain_policy>
+                </observers>
+            </controller_action_predispatch>
+        </events>
+    </global>
+    <frontend>
+        <routers>
+            <core>
+                <use>standard</use>
+                <args>
+                    <module>Mage_Core</module>
+                    <frontName>core</frontName>
+                </args>
+            </core>
+        </routers>
+    </frontend>
+    <adminhtml>
+        <events>
+            <cms_wysiwyg_config_prepare>
+                <observers>
+                    <variable_observer>
+                        <class>core/variable_observer</class>
+                        <method>prepareWysiwygPluginConfig</method>
+                    </variable_observer>
+                </observers>
+            </cms_wysiwyg_config_prepare>
+            <clean_cache_by_tags>
+                <observers>
+                    <clean_cache_observer>
+                        <class>core/observer</class>
+                        <method>cleanCacheByTags</method>
+                    </clean_cache_observer>
+                </observers>
+            </clean_cache_by_tags>
+        </events>
+    </adminhtml>
+    <crontab>
+        <jobs>
+            <core_clean_cache>
+                <schedule>
+                    <cron_expr>30 2 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>core/observer::cleanCache</model>
+                </run>
+            </core_clean_cache>
+        </jobs>
+    </crontab>
+</config>

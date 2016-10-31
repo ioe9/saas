@@ -1,0 +1,2 @@
+1.队列发送 Jobs_Send_API
+2.获取队列信息 API->FetchFromQueue

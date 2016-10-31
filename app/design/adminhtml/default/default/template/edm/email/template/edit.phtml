@@ -1,0 +1,99 @@
+<link rel="stylesheet" href="<?php echo $this->getSkinUrl('css/jquery-ui.css'); ?>" />
+<link rel="stylesheet" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ckeditor/skedm/moono/editor_gecko.css" />
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>jquery/jquery.ui.js"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>jquery/jquery.lightbox.js"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ckeditor/lang/zh-cn.js"></script>
+
+
+<?php $template = Mage::registry('current_template'); ?>
+<div class="c-box">
+	<div class="content-header">
+		<div class="f-right">
+			<div class=" f-right">
+		   		
+		   		<button class="btn btn-primary f-left" id="save_email_btn" type="button" onclick="saveTemplate()" style=""><i class="fa fa-save"></i>&nbsp;保存模版</button>
+		   		<div class="clr"></div>
+		   	</div>
+		</div>
+	   	<h2 class="m0"><?php if ($template->getId()): ?>编辑模板：“<?php echo $template->getTemplateName(); ?>”<?php else: ?>创建新模板<?php endif; ?></h2>
+		<div class="clr"></div>
+		<div id="messages"></div>
+	</div>
+	<div class="mb20 p20 editor-box">
+		<div class="drag-box">
+			<div class="md-empty">快速定制属于您的邮件模板</div>
+		</div>
+		<button class="drag-btn drag-btn-add" ><i class="fa fa-plus-square-o" aria-hidden="true"></i>&nbsp;点击新增内容</button>
+		<div id="template-md-tpl" class='no-display'>
+			<div class="drag-handle">
+				<div class="legend"></div>
+				<div class="handle-tools">
+					<a href="javascript:;" title=""><i class="fa fa-plus"></i>&nbsp;添加内容</a>
+					<a href="javascript:;" title=""><i class="fa fa-trash"></i>&nbsp;移除</a>
+				</div>
+				<div class="inner"></div>
+				
+			</div>
+		</div>
+	</div>
+	<div class="content-bottom">
+
+    	<div class="f-left wp50">
+    		<button class="btn f-left btn-primary" id="send_email_btn" type="button" onclick="renderEmail()" style=""><i class="fa fa-refresh"></i>&nbsp;随机预览</button>
+    	</div>
+    	<div class="f-right wp50">
+    		
+    		
+    		<button class="btn btn-primary f-right" id="saveTemplate_copy" type="button" onclick="saveTemplate()" style=""><i class="fa fa-save"></i>&nbsp;保存模版</button>
+    		
+    	</div>
+    	<div class="clr"></div>
+	</div>
+	<div class="clr"></div>
+</div>
+<div class="no-display">
+	<div class="module-mask lbme">
+		<div class="lbme-h">
+			<h3 class="f-left">选择内容模块</h3>
+			<button class="btn btn-green f-right" id="chosen_module_btn" type="button" onclick="chosenModule()" style=""><i class="fa fa-send-o"></i>&nbsp;确认并添加</button>
+			<div class="clr"></div>
+		</div>
+		<div class="inner">
+			<?php $modules = $this->getModuleCollection(); ?>
+			<?php foreach($modules as $_item):  ?>
+				<a href="javascript:;" class="md-handle bx" data-name="<?php echo $_item->getName(); ?>">
+					<h5><?php echo $_item->getName(); ?></h5>
+					<i class="fa fa-check-square-o" aria-hidden="true"></i>
+				</a>
+				
+			<?php endforeach; ?>
+		</div>
+		<div class="close"><i></i></div>
+	</div>
+</div>
+<script>
+$(function(){
+	$('.drag-btn-add').click(function(){
+		$('.module-mask').lightbox_me({
+			
+			
+		})
+	})
+	$('.md-handle').click(function(){
+		$(this).toggleClass('over');
+	})
+	$('#chosen_module_btn').click(function(){
+		$('.drag-box .md-empty').remove();
+		
+		$('.md-handle.over').each(function(){
+			$this = $('#template-md-tpl');
+			$this.find('.legend').html($(this).attr('data-name'));
+			$('.drag-box').append($this.html());
+		})
+		$('.lbme .close').click();
+	})
+})
+
+
+</script>

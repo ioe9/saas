@@ -1,0 +1,24 @@
+<?php
+$page = Mage::getResourceModel('cms/page_collection')
+	->addFieldToFilter('identifier',Mage::registry('current_key'))
+	->addFieldToFilter('is_active',1)
+	->getFirstItem();
+?>
+<div class="c-box">
+	<div class="content-header">
+		<h2 class="m0"><?php echo $page->getTitle(); ?></h2>
+		<div id="messages">
+            <?php echo $this->getMessagesBlock()->toHtml() ?>
+        </div>
+	</div>
+	<form action="<?php echo $this->getUrl('*/*/save'); ?>" method="post" id="baseForm">
+		<div class="mb20">
+            <div style="margin:20px;">
+           	<?php echo $page->getContent(); ?>	
+            </div>
+		</div>
+	</form>
+</div>
+<script>
+
+</script>

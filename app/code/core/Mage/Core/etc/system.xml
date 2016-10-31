@@ -1,0 +1,474 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <general module="core">
+            <label>General</label>
+            <sort_order>100</sort_order>
+        </general>
+        <service module="core">
+            <label>Services</label>
+            <sort_order>99999</sort_order>
+        </service>
+        <advanced module="core">
+            <label>Advanced</label>
+            <sort_order>999999</sort_order>
+        </advanced>
+    </tabs>
+    <sections>
+        <system>
+            <groups>
+                <csrf module="core">
+                    <label>CSRF protection</label>
+                    
+                    <sort_order>0</sort_order>
+                    <fields>
+                        <use_form_key>
+                            <label>Add Secret Key To Url</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                        </use_form_key>
+                    </fields>
+                </csrf>
+            </groups>
+        </system>
+        <advanced module="core">
+            <label>Advanced</label>
+            <tab>advanced</tab>
+            
+            <sort_order>910</sort_order>
+            <groups>
+                <modules_disable_output>
+                    <label>Disable Modules Output</label>
+                    
+                    <frontend_model>adminhtml/system_config_form_fieldset_modules_disableOutput</frontend_model>
+                    <sort_order>2</sort_order>
+                </modules_disable_output>
+            </groups>
+        </advanced>
+        <dev module="core">
+            <label>Developer</label>
+            <tab>advanced</tab>
+            
+            <sort_order>920</sort_order>
+            <groups>
+                <restrict>
+                    <label>Developer Client Restrictions</label>
+                    
+                    <sort_order>10</sort_order>
+                    <fields>
+                        <allow_ips translate="label comment">
+                            <label>Allowed IPs (comma separated)</label>
+                            
+                            <sort_order>20</sort_order>
+                            <comment>Leave empty for access from any location.</comment>
+                        </allow_ips>
+                    </fields>
+                </restrict>
+                <debug>
+                    <label>Debug</label>
+                    
+                    <sort_order>20</sort_order>
+                    <fields>
+                        <template_hints>
+                            <label>Template Path Hints</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                        </template_hints>
+                    </fields>
+                </debug>
+                <template>
+                    <label>Template Settings</label>
+                    
+                    <sort_order>25</sort_order>
+                    <fields>
+                        <allow_symlink translate="label comment">
+                            <label>Allow Symlinks</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <comment>Warning! Enabling this feature is not recommended on production environments because it represents a potential security risk.</comment>
+                        </allow_symlink>
+                    </fields>
+                </template>
+                <js>
+                    <label>JavaScript Settings</label>
+                    
+                    <sort_order>100</sort_order>
+                    <fields>
+                        <merge_files>
+                            <label>Merge JavaScript Files</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                        </merge_files>
+                    </fields>
+                </js>
+                <css>
+                    <label>CSS Settings</label>
+                    
+                    <sort_order>110</sort_order>
+                    <fields>
+                        <merge_css_files>
+                            <label>Merge CSS Files</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                        </merge_css_files>
+                    </fields>
+                </css>
+            </groups>
+        </dev>
+        <general module="core">
+            <label>General</label>
+            <tab>general</tab>
+            
+            <sort_order>10</sort_order>
+            <groups>
+                <store_information>
+                    <label>Store Information</label>
+                    
+                    <sort_order>100</sort_order>
+                    <fields>
+                        <name>
+                            <label>Store Name</label>
+                            
+                            <sort_order>10</sort_order>
+                        </name>
+                        <address>
+                            <label>Store Contact Address</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>30</sort_order>
+                        </address>
+                    </fields>
+                </store_information>
+            </groups>
+        </general>
+        <admin module="core">
+            <label>Admin</label>
+            <tab>advanced</tab>
+            
+            <sort_order>20</sort_order>
+            <groups>
+                <emails>
+                    <label>Admin User Emails</label>
+                    
+                    <sort_order>10</sort_order>
+                    <fields>
+                        <forgot_email_template>
+                            <label>Forgot Password Email Template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_website>0</show_in_website>
+                        </forgot_email_template>
+                        <password_reset_link_expiration_period translate="label comment">
+                            <label>Recovery Link Expiration Period (days)</label>
+                            <comment>Please enter a number 1 or greater in this field.</comment>
+                            
+                            <validate>required-entry validate-digits validate-digits-range digits-range-1-</validate>
+                            <backend_model>adminhtml/system_config_backend_admin_password_link_expirationperiod</backend_model>
+                            <sort_order>30</sort_order>
+                        </password_reset_link_expiration_period>
+                    </fields>
+                </emails>
+                <url>
+                    <label>Admin Base URL</label>
+                    
+                    <sort_order>30</sort_order>
+                    <fields>
+                        <use_custom>
+                            <label>Use Custom Admin URL</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>adminhtml/system_config_backend_admin_usecustom</backend_model>
+                            <sort_order>1</sort_order>
+                        </use_custom>
+                        <custom translate="label comment">
+                            <label>Custom Admin URL</label>
+                            
+                            <backend_model>adminhtml/system_config_backend_admin_custom</backend_model>
+                            <depends><use_custom>1</use_custom></depends>
+                            <sort_order>2</sort_order>
+                            <comment>Make sure that base URL ends with '/' (slash), e.g. http://yourdomain/magento/</comment>
+                        </custom>
+                        <use_custom_path>
+                            <label>Use Custom Admin Path</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>adminhtml/system_config_backend_admin_usecustompath</backend_model>
+                            <sort_order>3</sort_order>
+                        </use_custom_path>
+                        <custom_path translate="label comment">
+                            <label>Custom Admin Path</label>
+                            
+                            <validate>required-entry validate-alphanum</validate>
+                            <backend_model>adminhtml/system_config_backend_admin_custompath</backend_model>
+                            <depends><use_custom_path>1</use_custom_path></depends>
+                            <sort_order>4</sort_order>
+                            <comment>You will have to log in after you save your custom admin path.</comment>
+                        </custom_path>
+                    </fields>
+                </url>
+                <security>
+                    <label>Security</label>
+                    
+                    <sort_order>35</sort_order>
+                    <fields>
+                        <use_form_key>
+                            <label>Add Secret Key to URLs</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>adminhtml/system_config_backend_admin_usesecretkey</backend_model>
+                            <sort_order>1</sort_order>
+                        </use_form_key>
+                        <use_case_sensitive_login>
+                            <label>Login is Case Sensitive</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                        </use_case_sensitive_login>
+                        <session_cookie_lifetime translate="label comment">
+                            <label>Session Lifetime (seconds)</label>
+                            <comment>Values less than 60 are ignored. Note that changes will apply after logout.</comment>
+                            <validate>validate-digits</validate>
+                            <sort_order>3</sort_order>
+                        </session_cookie_lifetime>
+                        <domain_policy_backend translate="label comment">
+                            <label>Allow Magento Backend to run in frame</label>
+                            <frontend_type>select</frontend_type>
+                            <comment>Enabling ability to run Magento in a frame is not recommended for security reasons.</comment>
+                            <source_model>adminhtml/system_config_source_security_domainpolicy</source_model>
+                            <sort_order>4</sort_order>
+                        </domain_policy_backend>
+                        <domain_policy_frontend translate="label comment">
+                            <label>Allow Magento Frontend to run in frame</label>
+                            <comment>Enabling ability to run Magento in a frame is not recommended for security reasons.</comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>5</sort_order>
+                            <source_model>adminhtml/system_config_source_security_domainpolicy</source_model>
+                        </domain_policy_frontend>
+                        <extensions_compatibility_mode translate="label comment">
+                            <label>Admin routing compatibility mode for extensions</label>
+                            <comment>Enabling this setting increases risk of automated attacks against admin functionality.</comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>6</sort_order>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                        </extensions_compatibility_mode>
+                    </fields>
+                </security>
+                <dashboard>
+                    <label>Dashboard</label>
+                    <sort_order>40</sort_order>
+                    <fields>
+                        
+                    </fields>
+                </dashboard>
+            </groups>
+        </admin>
+        <web module="core">
+            <label>Web</label>
+            <tab>general</tab>
+            <sort_order>20</sort_order>
+            <groups>
+                <seo>
+                    <label>Search Engines Optimization</label>
+                    <sort_order>5</sort_order>
+                    <fields>
+                        <use_rewrites>
+                            <label>Use Web Server Rewrites</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                        </use_rewrites>
+                    </fields>
+                </seo>
+                <unsecure>
+                    <label>Unsecure</label>
+                    <sort_order>10</sort_order>
+                    <fields>
+                        <base_url>
+                            <label>Base URL</label>
+                            <backend_model>adminhtml/system_config_backend_baseurl</backend_model>
+                            <sort_order>10</sort_order>
+                        </base_url>
+                        <base_link_url>
+                            <label>Base Link URL</label>
+                            <backend_model>adminhtml/system_config_backend_baseurl</backend_model>
+                            <sort_order>20</sort_order>
+                        </base_link_url>
+                        <base_skin_url>
+                            <label>Base Skin URL</label>
+                            <backend_model>adminhtml/system_config_backend_baseurl</backend_model>
+                            <sort_order>30</sort_order>
+                        </base_skin_url>
+                        <base_media_url>
+                            <label>Base Media URL</label>
+                            <backend_model>adminhtml/system_config_backend_baseurl</backend_model>
+                            <sort_order>40</sort_order>
+                        </base_media_url>
+                        <base_js_url translate="label comment">
+                            <label>Base JavaScript URL</label>
+                            <backend_model>adminhtml/system_config_backend_baseurl</backend_model>
+                            <sort_order>50</sort_order>
+                            <comment><![CDATA[<strong style="color:red">Warning!</strong> When using CDN, in some cases JavaScript may not run properly if CDN is not in your subdomain]]></comment>
+                        </base_js_url>
+                    </fields>
+                </unsecure>
+                <secure>
+                    <label>Secure</label>
+                    <sort_order>20</sort_order>
+                    <fields>
+                        <base_url translate="label comment">
+                            <label>Base URL</label>
+                            <backend_model>adminhtml/system_config_backend_baseurl</backend_model>
+                            <sort_order>10</sort_order>
+                            <comment>Make sure that base URL ends with '/' (slash), e.g. http://yourdomain/magento/</comment>
+                        </base_url>
+                        <base_link_url translate="label comment">
+                            <label>Base Link URL</label>
+                            <backend_model>adminhtml/system_config_backend_baseurl</backend_model>
+                            <sort_order>20</sort_order>
+                            <comment>Make sure that base URL ends with '/' (slash), e.g. http://yourdomain/magento/</comment>
+                        </base_link_url>
+                        <base_skin_url>
+                            <label>Base Skin URL</label>
+                            <backend_model>adminhtml/system_config_backend_baseurl</backend_model>
+                            <sort_order>30</sort_order>
+                        </base_skin_url>
+                        <base_media_url>
+                            <label>Base Media URL</label>
+                            <backend_model>adminhtml/system_config_backend_baseurl</backend_model>
+                            <sort_order>40</sort_order>
+                        </base_media_url>
+                        <base_js_url translate="label comment">
+                            <label>Base JavaScript URL</label>
+                            <backend_model>adminhtml/system_config_backend_baseurl</backend_model>
+                            <sort_order>50</sort_order>
+                            <comment><![CDATA[<strong style="color:red">Warning!</strong> When using CDN, in some cases JavaScript may not run properly if CDN is not in your subdomain]]></comment>
+                        </base_js_url>
+                        <use_in_frontend>
+                            <label>Use Secure URLs in Frontend</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>adminhtml/system_config_backend_secure</backend_model>
+                            <sort_order>60</sort_order>
+                        </use_in_frontend>
+                        <use_in_adminhtml>
+                            <label>Use Secure URLs in Admin</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>adminhtml/system_config_backend_secure</backend_model>
+                            <sort_order>65</sort_order>
+                        </use_in_adminhtml>
+                        <offloader_header>
+                            <label>Offloader header</label>
+                            <backend_model>adminhtml/system_config_backend_web_secure_offloaderheader</backend_model>
+                            <sort_order>75</sort_order>
+                        </offloader_header>
+                    </fields>
+                </secure>
+                <default>
+                    <label>Default Pages</label>
+                    <sort_order>30</sort_order>
+                    <fields>
+                        <front>
+                            <label>Default Web URL</label>
+                            <sort_order>1</sort_order>
+                        </front>
+                        <no_route>
+                            <label>Default No-route URL</label>
+                            <sort_order>2</sort_order>
+                        </no_route>
+                    </fields>
+                </default>
+                <cookie>
+                    <label>Session Cookie Management</label>
+                    <sort_order>50</sort_order>
+                    <fields>
+                        <cookie_lifetime>
+                            <label>Cookie Lifetime</label>
+                            <sort_order>10</sort_order>
+                        </cookie_lifetime>
+                        <cookie_path>
+                            <label>Cookie Path</label>
+                            <sort_order>20</sort_order>
+                        </cookie_path>
+                        <cookie_domain>
+                            <label>Cookie Domain</label>
+                            <sort_order>30</sort_order>
+                        </cookie_domain>
+                        <cookie_httponly>
+                            <label>Use HTTP Only</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                        </cookie_httponly>
+                        <cookie_restriction>
+                            <label>Cookie Restriction Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>adminhtml/system_config_backend_cookie</backend_model>
+                            <sort_order>50</sort_order>
+                        </cookie_restriction>
+                    </fields>
+                </cookie>
+                <session>
+                    <label>Session Validation Settings</label>
+                    <fields>
+                        <use_remote_addr>
+                            <label>Validate REMOTE_ADDR</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                        </use_remote_addr>
+                        <use_http_via>
+                            <label>Validate HTTP_VIA</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                        </use_http_via>
+                        <use_http_x_forwarded_for>
+                            <label>Validate HTTP_X_FORWARDED_FOR</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                        </use_http_x_forwarded_for>
+                        <use_http_user_agent>
+                            <label>Validate HTTP_USER_AGENT</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                        </use_http_user_agent>
+                        <use_frontend_sid translate="label comment">
+                            <label>Use SID on Frontend</label>
+                            <comment>Allows customers to stay logged in when switching between different stores.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                        </use_frontend_sid>
+                    </fields>
+                </session>
+                <browser_capabilities>
+                    <label>Browser Capabilities Detection</label>
+                    <sort_order>200</sort_order>
+                    <fields>
+                        <cookies module="cms">
+                            <label>Redirect to CMS-page if Cookies are Disabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                        </cookies>
+                        <javascript module="cms">
+                            <label>Show Notice if JavaScript is Disabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>200</sort_order>
+                        </javascript>
+                    </fields>
+                </browser_capabilities>
+            </groups>
+        </web>
+    </sections>
+</config>

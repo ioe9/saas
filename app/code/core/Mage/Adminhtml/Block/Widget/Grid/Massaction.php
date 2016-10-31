@@ -1,0 +1,5 @@
+<?php
+class Mage_Adminhtml_Block_Widget_Grid_Massaction extends Mage_Adminhtml_Block_Widget_Grid_Massaction_Abstract
+{
+
+}

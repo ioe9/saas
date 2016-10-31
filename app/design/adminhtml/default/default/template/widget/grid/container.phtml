@@ -1,0 +1,25 @@
+<div class="c-box <?php if ($this->getWide()): ?> c-box-wide <?php endif; ?>">
+	<div class="content-header">
+		<table>
+			<tr>
+				<td><?php echo $this->getHeaderHtml() ?></td>
+				<td class="form-buttons"><?php echo $this->getButtonsHtml() ?></td>
+			</tr>
+		</table>
+		<div id="messages">
+            <?php echo $this->getMessagesBlock()->toHtml() ?>
+        </div>
+	</div>
+    <table cellspacing="6" width="100%">
+        <tr>  
+            <td>
+                <div class="entry-edit">
+					
+					<div>
+					    <?php echo $this->getGridHtml() ?>
+					</div>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>

@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <design translate="label" module="core">
+            <groups>
+                <head translate="label">
+                    <label>HTML Head</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+
+                    <fields>
+                        <shortcut_icon translate="label comment">
+                            <label>Favicon Icon</label>
+                            <comment>Allowed file types: ICO, PNG, GIF, JPG, JPEG, APNG, SVG. Not all browsers support all these formats!</comment>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image_favicon</backend_model>
+                            <base_url type="media" scope_info="1">favicon</base_url>
+                            <sort_order>5</sort_order>
+
+                        </shortcut_icon>
+                        <default_title translate="label">
+                            <label>Default Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+
+                        </default_title>
+                        <title_prefix translate="label">
+                            <label>Title Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>12</sort_order>
+
+                        </title_prefix>
+                        <title_suffix translate="label">
+                            <label>Title Suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>14</sort_order>
+
+                        </title_suffix>
+                        <default_description translate="label">
+                            <label>Default Description</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>20</sort_order>
+
+                        </default_description>
+                        <default_keywords translate="label">
+                            <label>Default Keywords</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>30</sort_order>
+
+                        </default_keywords>
+                        <default_robots translate="label">
+                            <label>Default Robots</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_design_robots</source_model>
+                            <sort_order>40</sort_order>
+
+                        </default_robots>
+                        <includes translate="label comment">
+                            <label>Miscellaneous Scripts</label>
+                            <comment>This will be included before head closing tag in page HTML.</comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>70</sort_order>
+
+                        </includes>
+                        <demonotice translate="label comment">
+                            <label>Display Demo Store Notice</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>80</sort_order>
+
+                        </demonotice>
+                    </fields>
+                </head>
+                <header translate="label">
+                    <label>Header</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+
+                    <fields>
+                        <logo_src translate="label">
+                            <label>Logo Image Src</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+
+                        </logo_src>
+                        <logo_alt translate="label">
+                            <label>Logo Image Alt</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+
+                        </logo_alt>
+                        <logo_src_small translate="label">
+                            <label>Small Logo Image Src</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>25</sort_order>
+
+                        </logo_src_small>
+                        <welcome translate="label">
+                            <label>Welcome Text</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+
+                        </welcome>
+                    </fields>
+                </header>
+                <footer translate="label">
+                    <label>Footer</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+
+                    <fields>
+                        <copyright translate="label">
+                            <label>Copyright</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>10</sort_order>
+
+                        </copyright>
+                        <absolute_footer translate="label comment">
+                            <label>Miscellaneous HTML</label>
+                            <comment>This will be displayed just before body closing tag.</comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>20</sort_order>
+
+                        </absolute_footer>
+                    </fields>
+                </footer>
+            </groups>
+        </design>
+    </sections>
+</config>

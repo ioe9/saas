@@ -1,0 +1,21 @@
+<div class="detail-box c-box mt0">
+	<?php $item = $this->getDetail(); ?>
+	<div class="content-header">
+		<div class="f-right">
+			<div class=" f-right">
+		   		<button class="btn btn-primary f-left" id="save_email_btn" type="button" onclick="saveInfo()" style=""><i class="fa fa-"></i>&nbsp;我要发布</button>
+		   		
+		   		<div class="clr"></div>
+		   	</div>
+		</div>
+		<h2 class="m0"><?php echo $item->getArticleTitle(); ?></h2>
+		<div id="messages"></div>
+	</div>
+
+	<div class="desc p25">
+		
+		<?php echo $item->getArticleDesc(); ?>
+		
+	</div>
+	<div class="clr"></div>
+</div>

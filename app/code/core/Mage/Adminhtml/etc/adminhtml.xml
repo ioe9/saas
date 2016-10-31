@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow everything</title>
+            </all>
+            <admin module="adminhtml">
+                <title>Magento Admin</title>
+                <children>
+                    <dashboard>
+                        <title>Dashboard</title>
+                        <sort_order>0</sort_order>
+                    </dashboard>
+                    
+                </children>
+            </admin>
+        </resources>
+        <privilegeSets>
+            <default>
+                <view>
+                    <descr>View entity</descr>
+                </view>
+                <edit>
+                    <descr>Edit entity</descr>
+                </edit>
+                <delete>
+                    <descr/>
+                </delete>
+                <create>
+                    <descr/>
+                </create>
+            </default>
+        </privilegeSets>
+    </acl>
+</config>

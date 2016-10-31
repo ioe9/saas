@@ -1,0 +1,165 @@
+<!-- 客户分析结果   -->
+<?php $user = Mage::getSingleton('admin/session')->getUser(); ?>
+<?php
+$company = Mage::registry('current_company');
+$client = $this->getClient();
+$categories = $client->getData('categories');
+$attrs = $client->getData('attrs');
+$emails = $client->getData('emails');
+
+?>
+<div class="a-left">
+	<input type="hidden" value="<?php echo $client->getId(); ?>" id="client_id"  name="client_id"/></span>
+	<h3>关于客户: <span class="r"><input type="hidden" vlaue="<?php echo $client->getName(); ?>" id="client_name"  name="client_name"/></span></h3>
+	<div class="bx">
+		<?php $type = array(); ?>
+		<?php $options = $this->getAttrOptions($attrs['客户渠道特征']['attr']->getId()); ?>
+		<?php foreach ($attrs['客户渠道特征']['value']  as $_value): ?>
+		<?php array_push($type,ucwords($options[$_value->getValue()]->getData('value'))); ?>
+		<?php endforeach; ?>
+		<?php if (count($type)): ?>
+		<p>This prospect is a <span class="r"><?php echo implode(' & ',$type); ?></span> <?php if ($client->getData('country')): ?>in <span class="r"><?php echo $client->getData('country'); ?></span>.<?php endif; ?></p>
+		<?php endif; ?>
+		<?php 
+		$quality=$client->getData('index_quality');
+		$price = $client->getData('index_price');
+		$design = $client->getData('index_design');
+		$service = $client->getData('index_service');
+		$indexArr = array($quality,$price,$design,$service);
+		$maxPos = array_search(max($indexArr), $indexArr);
+		unset($indexArr[$maxPos]);
+		$secondMaxPos = array_search(max($indexArr), $indexArr);
+		$strArr = array('Good Quality','Lower Price','Good Design','Good Service');
+		$strArr2 = $strArr;
+		unset($strArr2[$maxPos]);
+		?>
+		
+		<p>They build their business on <span class="r"><?php echo $strArr[$maxPos]; ?></span> & <span class="r"><?php echo $strArr2[$secondMaxPos]; ?></span>.</p>
+	</div>
+	<div class="clr"></div>
+	<!--
+	<h3>业务匹配度：</h3>
+	<div class="bx">
+		<p>产品匹配度: 客户和贵司的产品匹配度为 <?php  ?>%.</p>
+		<p>定位匹配度：客户和贵司的定位匹配度为 <?php  ?>%.</p>
+		<p>总体匹配度：75%</p>
+	</div>
+	-->
+	<div class="clr mt25"></div>
+	<h3>客户的产品范围：</h3>
+	<div class="bx" id="joystep_2">
+		<?php if ($categories->count()): ?>
+		<ul  class="items">
+			<?php foreach ($categories  as $_cat): ?>
+			<li><input type="checkbox" name="client_product" class="mr5"  value="<?php echo $_cat->getCategoryId(); ?>"/><?php echo $_cat->getName(); ?></li>
+			<?php endforeach; ?>
+		</ul>
+		<?php else: ?>
+		<p class="empty-txt" style="font-size: 18px;padding: 30px 30px 20px;">对不起，找不到匹配的产品，您可以 <a href="javascript:searchAgain();" title="再尝试一次">再尝试一次</a></p>
+		<?php endif; ?>
+		<div class="clr"></div>
+	</div>
+	<div class="clr mt25"></div>
+	
+	<h3>请输入您要推广的产品：</h3>
+	<div class="bx pr" id="joystep_3">
+		<?php $cats = Mage::getResourceModel('edm/company_category_collection')
+				->addFieldToFilter('company_id',$company->getId());	?>
+		<?php $cats->getSelect()->join(array('p'=>'edm_product_category'),'p.category_id=main_table.category_id and p.level=2',array('level','name')); ?>
+		<?php $catNames = array(); ?>
+		<?php foreach ($cats as $_cat): ?>
+		<?php array_push($catNames,$_cat->getData('name')); ?>
+		<?php endforeach; ?>
+		<!--
+		<select data-placeholder="请选择您要推广的产品" multiple="multiple" class="chosen-select wp100" type="text" name="product_promo" id="product_promo">
+			<option value=""> - 请选择 - </option>
+			<?php foreach ($cats as $_cat): ?>
+			<option value="<?php echo $_cat->getData('category_id'); ?>"><?php echo $_cat->getData('name'); ?></option>
+			<?php endforeach; ?>
+		</select>-->
+		
+		<input name="product_promo" id="product_promo" type="text" value="<?php implode(',',$catNames); ?>" class="ipt wp100" onclick="chosenShow('keyword_ctn_word');"  onblur="chosenHide('keyword_ctn_word');"/>
+		<?php $words = Mage::getResourceModel('edm/company_keyword_collection')
+				->addFieldToFilter('company_id',$company->getId())
+				->setPageSize(10)
+				->setOrder('date_create','desc');	?>
+		<div class="pa keyword-box" id="keyword_ctn_word" style="display:none;">
+			<ul>
+				<?php foreach ($words as $_word): ?>
+				<li class="k-item" onclick="chosenKeyword('product_promo',this)"><?php echo $_word->getData('keyword'); ?></li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+		<!--
+		<script>
+		jQuery('#product_promo').tagsInput({
+		  	autocomplete_url:'<?php echo $this->getUrl('adminhtml/ajax_company/getcategories'); ?>',
+		  	'width':'100%', //设置高度
+   			'height':'60px',  //设置宽度
+   			'defaultText': '请输入',
+		});
+		</script>-->
+		<div class="clr"></div>
+	</div>
+	<div class="clr mt25"></div>
+	<?php if (count($emails)): ?>
+	<h3>联系信息：</h3>
+	<div class="bx" id="joystep_4">
+		<p>联系人：<?php echo $client->getData('contact_person'); ?></p>
+		<?php $emailWebsite = array(); ?>
+		<?php $emailWhois = array(); ?>
+		<?php foreach ($emails  as $_email): ?>
+		<?php if ($_email->getData('source')==1): ?>
+		<?php array_push($emailWhois,$_email); ?>
+		<?php elseif ($_email->getData('source')==2 || true): ?>
+		<?php array_push($emailWebsite,$_email); ?>	
+		<?php endif; ?>
+		<?php endforeach; ?>
+		<?php if (count($emailWhois)): ?>
+		<h4>来自Whois</h4>
+		
+		<ul>
+		<?php foreach ($emailWhois  as $_email): ?>
+		<li><input type="radio" name="client_email" class="mr10" value="<?php echo $_email->getData('email'); ?>"/><?php echo $_email->getData('email'); ?></li>
+		<?php endforeach; ?>
+		</ul>
+		<?php endif; ?>
+		<?php if (count($emailWebsite)): ?>
+		<h4>来自网站</h4>
+		<ul>
+		<?php foreach ($emailWebsite  as $_email): ?>
+		<li><input type="radio" name="client_email" class="mr10" value="<?php echo $_email->getData('email'); ?>"/><?php echo $_email->getData('email'); ?></li>
+		<?php endforeach; ?>
+		</ul>
+		<?php endif; ?>
+		<div class="clr"></div>
+	</div>
+	<div class="clr"></div>
+	<?php endif; ?>
+	<div class="clr mt25"></div>
+	<div class="bx a-center" style="padding: 20px"  id="joystep_5">
+		<button class="btn" style="padding: 8px 50px;border-radius: 5px;font-size: 22px" onclick="renderEmail();">生成开发信</button>
+	</div>
+	<div class="clr mt25"></div>
+	<h3>开发建议：</h3>
+	<div class="bx">
+		
+			<p>根据该客户的定位，我们建议您选择（<?php echo trim(str_replace(array('Good','Lower'),'',$strArr[$maxPos])); ?>） 和 （<?php echo trim(str_replace(array('Good','Lower'),'',$strArr2[$secondMaxPos])); ?>）这2个客户比较看重的方面去触动客户，提高您获得回复的机率。</p>
+			<p>1）如果您还没有挖掘好自己的优势，请点击这个链接深度挖掘自己的优势；一个鲜明有力的优势说明，会给客户留下深刻的印象，也会提升您获得客户关注的机会。</p>
+			<p>2）有关调查显示，平均一个客户需要触动8次才会合作。建议您在第一封邮件后电话跟踪一下。即便不成功，也继续保持关注和跟踪。</p>
+		
+	</div>
+	<div class="clr"></div>
+</div>
+<script>
+jQuery(function(){
+	jQuery(".chosen-select").chosen({disable_search_threshold: 10});
+});
+jQuery(function(){
+	var status = '<?php if(!$user->getData('status_guide_email') && !$_SESSION['status_guide_email']){ echo 0; }else { echo 1;} ?>';
+
+	if (status=='0') {
+		renderJoyride();
+	}
+})
+</script>

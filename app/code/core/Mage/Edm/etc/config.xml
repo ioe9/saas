@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+    <global/>
+    <frontend>
+        <routers>
+            <edm>
+                <use>standard</use>
+                <args>
+                    <module>Mage_Edm</module>
+                    <frontName>edm</frontName>
+                </args>
+            </edm>
+        </routers>
+	</frontend>
+</config>

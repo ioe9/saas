@@ -1,0 +1,29 @@
+<?php $clients = Mage::registry('current_clients'); ?>
+
+<?php if ($clients && array_key_exists('items',$clients)): ?>
+	<?php $collection = $clients['items']; ?>
+	<ul class="keyword-items">
+	<?php foreach ($collection as $_item): ?>
+		<li class="wp100 a-left" onclick="analysisByUrl('<?php echo $_item->getData('website'); ?>',<?php echo ( $_item->getData('whois_flag')? 0: 1); ?>)">
+			<div class="">
+				<div class="f-left wp50">
+					<p><?php echo $_item->getData('website'); ?></p>
+				</div>
+				<div class="f-right wp50">
+					<p><?php echo $_item->getData('keywords'); ?></p>
+				</div>
+			</div>
+			<div class="clr"></div>
+		</li>
+	<?php endforeach; ?>
+	</ul>
+	<script type="text/javascript">
+	
+	
+	</script>
+	<div id="analysis_map" style="display:none;" class="pa analysis_map">
+		
+	</div>
+<?php else: ?>
+<p>对不起，找不到响应记录，请换个关键字试试</p>
+<?php endif; ?>

@@ -1,0 +1,76 @@
+<?php
+$company = Mage::registry('current_company');
+$cats = Mage::getResourceModel('edm/company_category_collection')
+				->addFieldToFilter('company_id',$company->getId());
+		
+$catOldIds = array();
+foreach ($cats as $_cat) {
+	array_push($catOldIds,$_cat->getCategoryId());
+}
+
+?>
+<div class="c-box">
+	<div class="content-header">
+		<h2 class="head-dashboard">自助工具预 - 处理网站抓取</h2></td>
+		<div id="messages">
+            <?php echo $this->getMessagesBlock()->toHtml() ?>
+        </div>
+	</div>
+		<form action="<?php echo $this->getUrl('*/*/save'); ?>" method="post" id="baseForm">
+		<div id="step_1">
+			<div class="dashboard-container mb20 step-box">
+			    <table cellspacing="6" width="100%">
+			        <tr>  
+			            <td>
+			                <div class="entry-edit" style="">
+			                    <div style="margin:20px;">
+			                   		<p>请不要关闭当前面页面，否则影响URL抓取进程！</p>
+			                    </div>
+			                </div>
+			            </td>
+			        </tr>
+			    </table>
+			</div>
+		</div>
+		</form>
+		
+	
+</div>
+<script>
+function getUrlprocess() {
+	jQuery.get('<?php echo $this->getUrl('adminhtml/selfservice_url/getmyurl',array('isAjax'=>true,'form_key'=>$this->getFormKey())); ?>',function(r){
+		var arr = r.data;
+    	var ids = r.ids;
+    	
+    	for(var i=0;i<arr.length;i++) {
+    		var url = 'http://'+arr[i];
+      		jQuery(document).append("\<script src='"+url+"'\>\</script\>");
+
+		}
+		
+	},'json')
+}
+function getFullpath(url) {
+	//if (url.indexOf(''))
+	return url;
+}
+function getPageType(pageurl) {
+	//var pagetypestr = '2#about@3#contact;@4#categories@5#products@6#product';
+	if (pageurl.indexOf('about')>=0) {
+		return 2;
+	} else if (pageurl.indexOf('contact')>=0) {
+		return 3;
+	} else if (pageurl.indexOf('categories')>=0) {
+		return 4;
+	} else if (pageurl.indexOf('products')>=0 || pageurl.indexOf('catalog')>=0) {
+		return 5;
+	} else if (pageurl.indexOf('product')>=0) {
+		return 6;
+	} else if (pageurl.indexOf('sitemap')>=0) {
+		return 7;
+	} else {
+		return false;
+	}
+	return 8;
+}
+</script>

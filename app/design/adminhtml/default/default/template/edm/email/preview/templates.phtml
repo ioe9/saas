@@ -1,0 +1,19 @@
+<div class="side-box">
+	<div class="panel-heading">
+		
+	   	<h2 class="m0">请选择设计风格</h2>
+		<div class="clr"></div>
+
+	</div>
+	<div class="mb20 p20 editor-box">
+		<?php $layouts = $this->getLayouts(); ?>
+		<?php foreach ($layouts as $_item): ?>
+		<div class="">
+			<img src="" />
+			<h5><?php echo $_item->getName(); ?></h5>
+		
+		</div>
+		
+		<?php endforeach; ?>
+	</div>
+</div>

@@ -1,0 +1,9 @@
+<?php $draft = Mage::registry('current_draft'); ?>
+<?php $content = json_decode($draft->getData('draft_content'),true); ?>
+<html>
+
+<body>
+
+	<?php echo $content['email_body']; ?>
+</body>
+</html>

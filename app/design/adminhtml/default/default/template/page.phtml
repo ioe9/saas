@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+    <?php echo $this->getChildHtml('head') ?>
+</head>
+
+<body id="html-body"<?php echo $this->getBodyClass() ? ' class="' . $this->getBodyClass() . '"' : ''; ?>>
+<?php echo $this->getChildHtml('notification_window'); ?>
+<div class="ioe-wrapper">
+    <?php echo $this->getChildHtml('global_notices') ?>
+        <div class="header">
+        	<div class="wrapper">
+            	<?php echo $this->getChildHtml('header') ?>
+            	<?php echo $this->getChildHtml('menu') ?>
+        	</div>
+        <div class="clr"></div>
+            
+        </div>
+        <div class="clr"></div>
+        <div class="middle wrapper" id="anchor-content">
+            <div id="page:main-container">
+            <?php if($this->getChildHtml('navigation')): ?>
+				<?php $rightHtml = $this->getChildHtml('right'); ?>
+                <div class="columns columns-left mt20 <?php echo $this->getContainerCssClass() ?>">
+                    <div class="<?php if($rightHtml): ?>side-left<?php else: ?>side-left-s<?php endif; ?>" id="page:left">
+                        <?php echo $this->getChildHtml('navigation') ?>
+                    </div>
+                    <?php if($rightHtml): ?>
+                    <div class="main-col sides-main" id="content">
+                        <div class="main-col-inner">
+                            <?php echo $this->getChildHtml('content') ?>
+                        </div>
+                        <div class="side-right" id="page:right">
+	                        <?php echo $rightHtml; ?>
+	                    </div>
+                     </div>
+                     <?php else: ?>
+                     <div class="main-col side-left-main" id="content">
+                        <div class="main-col-inner">
+                            <?php echo $this->getChildHtml('content') ?>
+                        </div>
+                       
+                    </div>
+                     <?php endif; ?>
+                </div>
+            <?php endif; ?>
+            
+            </div>
+        </div>
+      	<div class="clr"></div>
+        <div class="footer">
+            <?php echo $this->getChildHtml('footer') ?>
+        </div>
+    </div>
+    <?php echo $this->getChildHtml('js') ?>
+    <?php echo $this->getChildHtml('profiler') ?>
+<div id="loading-mask" style="display:none">
+    <p class="loader" id="loading_mask_loader"><img src="<?php echo $this->getSkinUrl('images/ajax-loader-tr.gif') ?>" alt="<?php echo Mage::helper('core')->quoteEscape(Mage::helper('adminhtml')->__('Loading...')) ?>"/><br/><?php echo Mage::helper('adminhtml')->__('Please wait...') ?></p>
+</div>
+
+<?php echo $this->getChildHtml('before_body_end') ?>
+
+</body>
+</html>

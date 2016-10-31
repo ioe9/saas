@@ -1,0 +1,10 @@
+1.安装后删除指定文件
+2.事件全部移到指定目录里 core/event/controller_front_init_routers[事件名]/cms.php[模块名]/->observe
+3.追踪 Mage::app()->getConfig()对象，严格控制该对象的大小，去掉无用的数据
+	加载layout.xml文件前 55K, $config->_initModules 前/后为7.34k(6.8)/42K,
+	优化后: $config->loadDb();前16.1k
+	
+	
+
+
+

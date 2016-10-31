@@ -1,0 +1,53 @@
+<?php
+$company = Mage::registry('current_company');
+$cats = Mage::getResourceModel('edm/company_category_collection')
+				->addFieldToFilter('company_id',$company->getId());
+		
+$catOldIds = array();
+foreach ($cats as $_cat) {
+	array_push($catOldIds,$_cat->getCategoryId());
+}
+
+?>
+<div class="c-box">
+	<div class="content-header">
+		<div class="f-right">
+			<div class=" f-right">
+		   		<button class="btn btn-primary f-left" id="save_email_btn" type="button" onclick="saveInfo()" style=""><i class="fa fa-save"></i>&nbsp;保存基本信息</button>
+		   		
+		   		<div class="clr"></div>
+		   	</div>
+		</div>
+		<h2 class="m0">我的设置 - 基本信息 设置</h2></td>
+		<div id="messages">
+            <?php echo $this->getMessagesBlock()->toHtml() ?>
+        </div>
+	</div>
+	<div class="p20">
+	
+			
+		<div class="box-inner">
+			
+            <div style="margin:20px;">
+           		<form action="<?php echo $this->getUrl('adminhtml/ajax_company/save'); ?>" method="POST" name="companyForm" id="companyForm">
+		    		<input type="hidden" name="form_key" id="" value="<?php echo $this->getFormKey(); ?>" />
+		    		<?php echo $this->getBaseInfoForm(); ?>
+		    		<div class="clr mt40 wp100"></div>
+		    		<?php echo $this->getAdvanceInfoForm(); ?>
+	    		</form>
+            </div>
+
+		</div>
+		<div class="clear"></div>
+		
+	</div>
+	<div class="content-bottom">
+    	<div class="text-center">
+    		<button class="btn btn-primary btn-lg" id="send_email_btn" type="button" onclick="saveInfo()" style=""><i class="fa fa-save"></i>&nbsp;保存基本信息</button>
+    	</div>
+    	<div class="clr"></div>
+	</div>
+</div>
+<script>
+
+</script>

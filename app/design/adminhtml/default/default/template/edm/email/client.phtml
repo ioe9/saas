@@ -1,0 +1,57 @@
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ckeditor/lang/zh-cn.js"></script>
+<link rel="stylesheet" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ckeditor/skedm/moono/editor_gecko.css" />
+
+
+<?php $company = Mage::registry('current_company'); ?>
+<?php $user = Mage::getSingleton('admin/session')->getUser(); ?>
+<div class="c-box">
+	<div class="content-header">
+		<div class="f-right">
+			
+		   	<div class="btn-group f-left mr5">
+	  			<button type="button" class="btn btn-default">高亮模式</button>
+	  			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				    <span class="caret"></span>
+				    
+				  </button>
+	  			 <ul class="dropdown-menu" role="menu">
+				    <li id="mode-highlight" onclick="toggleModel(0)"><a href="javascript:;">高亮模式</a></li>
+	    			<li id="mode-preview" onclick="toggleModel(1)"><a href="javascript:;">预览模式</a></li>
+				  </ul>
+			</div>
+			
+			<div class=" f-right">
+		   		<!--<button class="btn btn_grey f-left mr5" class="preview_email_btn" type="button" onclick="previewEmail()" style="">预览</button>-->
+		   		<button class="btn btn-info f-left mr5" id="save_email_btn" type="button" onclick="saveasTemplateProcess()" style=""><i class="fa fa-save"></i>&nbsp;存为模版</button>
+		   		<button class="btn btn-primary f-left mr5" id="send_email_btn" type="button" onclick="previewEmail()" style=""><i class="fa fa-send-o"></i>&nbsp;邮件预览</button>
+		   		<div class="clr"></div>
+		   	</div>
+		</div>
+	   	<h2 class="m0">给老客户发邮件</h2>
+		<div class="clr"></div>
+		<div id="messages"></div>
+	</div>
+	<div class="mb20 p20 editor-box">
+		<div class="box-inner">
+			<div class="clr"></div>
+    		<?php echo $this->getEditor(); ?>
+    		<div class="clr"></div>
+		</div>
+		<div id="send_email_loading" class=" loading-txt" style="display:none;"><img src="<?php echo $this->getSkinUrl('images/loading_32x32.gif'); ?>" />邮件正在发送中，请稍后...</div>
+	</div>
+	<div class="content-bottom">
+
+    	<div class="f-left wp50">
+    		<button class="btn f-left btn-primary" id="send_email_btn" type="button" onclick="renderEmail()" style=""><i class="fa fa-refresh"></i>&nbsp;不满意，换一个</button>
+    	</div>
+    	<div class="f-right wp50">
+    		
+    		<button class="btn f-right btn-primary" id="send_email_btn" type="button" onclick="previewEmail()" style=""><i class="fa fa-send-o"></i>&nbsp;下一步，预览</button>
+    		<button class="btn btn-info f-right mr10" id="save_as_template_copy" type="button" onclick="saveasTemplateProcess()" style=""><i class="fa fa-save"></i>&nbsp;存为模版</button>
+    		<button class="btn f-right btn-default mr10" id="save_draft_btn" type="button" onclick="saveDraft()" style=""><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;暂存草稿</i></button>
+    	</div>
+    	<div class="clr"></div>
+	</div>
+	<div class="clr"></div>
+</div>

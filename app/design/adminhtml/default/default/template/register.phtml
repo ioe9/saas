@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>注册帐号 - IOEGO邮件助手，您值得信赖的好帮手！</title>
+    <link type="text/css" rel="stylesheet" href="<?php echo $this->getSkinUrl('css/login.css') ?>" media="all" />
+	<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>jquery.min.js"></script>
+	<link rel="icon" href="<?php echo MAGE_HOST . 'favicon.ico' ?>" type="image/x-icon"/>
+	<link rel="shortcut icon" href="<?php echo MAGE_HOST . 'favicon.ico' ?>" type="image/x-icon"/>
+</head>
+<body id="page-login" onload="document.forms.loginForm.username.focus();">
+    <div class="login-container" style="margin: 100px auto;">
+        <div class="login-box">
+            <form method="post" action="" id="loginForm" autocomplete="off">
+                <div class="login-form">
+                	<div class="heading">
+                    	<h2>注册帐号 - IOEGO邮件助手</h2>
+                	</div>
+                	<div class="c-box">
+	                    <input name="form_key" type="hidden" value="<?php echo $this->getFormKey() ?>" />
+
+	                    <div id="messages">
+	                        <?php echo $this->getMessagesBlock()->toHtml() ?>
+	                    </div>
+	                    <?php $formData = Mage::getSingleton('adminhtml/session')->getRegisterFormData(); ?>
+	                    
+	                    <?php if (!$formData): ?>
+	                    <?php $formData = new Varien_Object(); ?>
+	                    <?php endif; ?>
+	                    
+	                    <div class="input-box mb15 a-left">
+	                    	<label class="mb5 f-left">邮箱地址：</label><div class="clr"></div>
+	                        <input type="text" id="email" name="register[email]" value="<?php echo $formData->getData('email'); ?>" class="required-entry input-text validate-email" placeholder="邮箱"/>
+	                    </div>
+	                    <div class="input-box mb15">
+	                    	<label class="mb5 f-left">用户名：</label><div class="clr"></div>
+	                        <input type="text" id="username" name="register[username]" value="<?php echo $formData->getData('username'); ?>" class="required-entry input-text" placeholder="用户名"/>
+	                    </div>
+	                    <div class="input-box mb15">
+	                    	<label class="mb5 f-left">密码：</label><div class="clr"></div>
+	                        <input type="password" id="register" name="register[password]" class="required-entry input-text" value=""  placeholder="密码"/>
+	                    </div>
+	                    <div class="input-box mb15">
+	                    	<label class="mb5 f-left">邀请码：</label><div class="clr"></div>
+	                        <input type="text" id="aff_code" name="register[aff_code]" class="required-entry input-text" value="<?php echo $formData->getData('aff_code'); ?>"  placeholder="邀请码"/>
+	                    </div>
+	                    <div class="clear"></div>
+	                    <div class="form-buttons mb20">
+	                        
+	                        <input type="submit" class="form-button" value="立即注册" title="立即注册" />
+	                    </div>
+	                   
+	            		<a class="right" href="<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/index/login', array('_nosecret' => true)) ?>">已有帐号，前往登录 &gt;&gt;</a>
+            			<div class="clr"></div>
+            		</div>
+            	</div>
+                
+                 <p class="legal">&copy;<?php echo date('Y') ?> All rights reserved 上海龙茧信息科技有限公司 | Powered by Mio</p>
+            </form>
+           
+            <script type="text/javascript">
+                 var loginForm = new mioForm('loginForm');
+                 jQuery(function(){
+                 	
+                 	jQuery('#aff_code').blur(function(){
+                 		var aff_code = jQuery(this).val();
+                 		if (!aff_code) {
+                 			
+                 			return;
+                 		}
+             			jQuery('#aff_code').removeClass('validation-failed');
+                 		jQuery('#aff_code').siblings('.validation-advice').remove();
+                 		
+                 		jQuery.get('<?php echo $this->getUrl('edm/aff/ajaxcheck'); ?>',{aff_code:aff_code,form_key:'<?php echo $this->getFormKey(); ?>'},function(res){
+                 			if (res.ret==1) {
+                 				
+                 			} else if(res.ret==0) {
+                 				jQuery('#aff_code').addClass('validation-failed').after('<div class="validation-advice" style=""><div class="inner"><i class="fa fa-warning"></i>邀请码不可用</div></div>');
+                 			
+                 			} else {
+                 				alert(res.msg);
+                 			}
+                 		},'json')
+                 	})
+                 })
+            </script>
+        </div>
+    </div>
+</body>
+
+</html>
+

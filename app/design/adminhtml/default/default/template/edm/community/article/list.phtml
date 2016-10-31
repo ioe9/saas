@@ -1,0 +1,42 @@
+<?php
+    $collection=$this->getCollection();
+?>
+<?php if(!$collection->count()): ?>
+<p class="note-msg">对不起，找不到相应记录</p>
+<?php else: ?>
+<div class="items-box">
+    <?php $_iterator = 0; ?>
+    <ol class="item-grid article-grid" id="item-grid">
+    <?php foreach ($collection as $_item): ?>
+        <li class="item<?php if( ++$_iterator == sizeof($collection) ): ?> last<?php endif; ?>">
+            
+            <div class="f-fix">
+                <?php $name = $_item->getArticleTitle(); ?>
+                <?php $url = $this->getUrl('adminhtml/community_article/view').'?id='.$_item->getId(); ?>
+                <div style="height: 168px;background: url(<?php echo $_item->getImageUrl(); ?>);background-size:cover;background-position:50% 50%;border-radius: 5px;" class="imgbg"></div>
+                <h3 class="name"><a href="<?php echo $url ?>" title="<?php echo $name; ?>"><?php echo $name; ?></a></h3>
+                <div class="sdesc">
+                	<p>
+                	<?php $sdesc = trim($_item->getData('article_sdesc')); ?>
+                	<?php if ($sdesc): ?>
+                	<?php echo Mage::helper('core/string')->truncate($sdesc,80,'...'); ?>
+                	<?php else: ?>
+                	<?php $desc = trim($_item->getData('article_desc')); ?>
+                	<?php $desc = trim(Mage::helper('core')->stripTags($desc,null,false)); ?>
+                	<?php $desc = preg_replace("/\s+/",'',$desc); ?>
+                	<?php echo Mage::helper('core/string')->truncate($desc,180,'...'); ?>
+                	<?php endif; ?>
+                	</p>
+                </div>
+                <div class="tags">
+                	 
+                </div>
+               
+            </div>
+        </li>
+    <?php endforeach; ?>
+    </ol>
+</div>
+<div class="clr"></div>
+<?php echo $this->getChildHtml('pager'); ?>
+<?php endif; ?>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<layout>
+	<routermatch>
+		<adminhtml_cms/>
+    </routermatch>
+</layout>

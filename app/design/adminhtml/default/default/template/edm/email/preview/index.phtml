@@ -1,0 +1,167 @@
+<?php $template = Mage::registry('current_template'); ?>
+<?php if ($template && $template->getId()): ?>
+
+<?php endif; ?>
+
+<table cellspacing="0" cellpadding="0" align="center" width="600" style="font-family: 'Verdana';">
+    <tbody>
+    	
+        <tr>
+            <td>
+                <table cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFFF" width="100%"
+                style="border-bottom: solid 1px #666;">
+                    <tbody>
+                        <tr>
+                            <td width="21" valign="top">
+                                <img width="20" height="25" src="http://interspire.com/admin/resources/email_templates/Family%20and%20Friends%202/Friendship/c1.gif">
+                            </td>
+                            <td width="*" colspan="2">
+                            </td>
+                            <td width="20" valign="top">
+                                <img width="20" height="25" src="http://interspire.com/admin/resources/email_templates/Family%20and%20Friends%202/Friendship/c2.gif">
+                            </td>
+                        </tr>
+                        <!--
+                        <tr>
+                            <td align="left" width="*" valign="top">
+                                &nbsp;
+                            </td>
+                            <td align="left" width="253" valign="top" style="padding:35px 0px 0px 0px;">
+                                <span description="mediumColor" name="tid" style="font-family: Arial, Helvetica, sans-serif; font-weight: normal; letter-spacing:-1px; color: #cc6600; font-size: 26px; line-height: 26px; padding: 5px 0px; margin: 0px;">
+                                    CompanyName
+                                </span>
+                                <br>
+                                <span description="lightColor" name="tid" style="font-size: 10px; font-family: 'Verdana'; color:#ab998b; padding: 2px 0px; margin: 0px;">
+                                    <strong>
+                                        Type your company slogan here
+                                    </strong>
+                                </span>
+                            </td>
+                            <td width="304">
+                                <img width="304" height="131" src="http://interspire.com/admin/resources/email_templates/Family%20and%20Friends%202/Friendship/MainImg.jpg">
+                            </td>
+                        </tr>
+                        -->
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            	<table cellspacing="20" cellpadding="0" border="0" bgcolor="#FFFFFF" width="100%">
+                    <tbody>
+                        <tr>
+                            <td valign="top">
+            					<?php echo Mage::helper('edm/template')->render($template->getData('htmlbody')); ?>
+        					</td>
+    					</tr>
+					</tbody>
+				</table>
+            	<!--
+                <table cellspacing="20" cellpadding="0" border="0" bgcolor="#FFFFFF" width="100%">
+                    <tbody>
+                        <tr>
+                            <td valign="top">
+                                <p style="font-size: 10px; font-weight: bold; line-height: 1.5em; font-family: Verdana, Arial, Helvetica, sans-serif; color:#696e72;">
+                                    You are subscribed as %%emailaddress%%
+                                </p>
+                                <div description="mediumColor" name="tid" style="font-family: Arial, Helvetica, sans-serif; border-bottom: dashed 1px #996633; padding: 5px 0px 5px 0px; margin: 0px; color:#996633; font-size: 16px; font-weight: bold; letter-spacing: -1px;">
+                                    Content Block Heading
+                                </div>
+                                <p style="font-size: 12px; line-height: 1.5em; font-family: 'Verdana'; color:#50524b;">
+                                    <img align="left" width="155" height="106" style="margin-right: 10px; margin-bottom: 10px;"
+                                    src="http://interspire.com/admin/resources/email_templates/Family%20and%20Friends%202/Friendship/MainImg1.jpg">
+                                    This is a block of text for your email campaign. Enter in your content
+                                    here.
+                                    <br>
+                                    <br>
+                                    Lorem ipsum phaedrum assueverit id mea. Eu nemore imperdiet vix, id sed
+                                    eius meliore omittam, ut his putent efficiantur complectitur. Equidem dolores
+                                    similique pri in, ad amet verear dignissim mei, ne pro vero docendi mediocrem.
+                                    Sumo labitur disputando ex per, quo viderer ancillae delectus eu, ad sed
+                                    iriure dignissim appellantur. Scaevola menandri deseruisse et mea, cum
+                                    veniam impedit dolores no. Audiam meliore mei ut, dicta doming detraxit
+                                    ius ex. Ullum numquam accusam vim ex, augue ancillae ut mea, ei stet laoreet
+                                    nominavi nam.
+                                </p>
+                                <div description="mediumColor" name="tid" style="font-family: Arial, Helvetica, sans-serif; border-bottom: dashed 1px #996633; padding: 5px 0px 5px 0px; margin: 0px; color:#996633; font-size: 16px; font-weight: bold; letter-spacing: -1px;">
+                                    Content Block Heading
+                                </div>
+                                <p style="font-size: 12px; line-height: 1.5em; font-family: 'Verdana'; color:#50524b;">
+                                    This is a block of text for your email campaign. Enter in your content
+                                    here.
+                                    <br>
+                                    <br>
+                                    Qui dicta placerat salutatus et, inani feugait omnesque vis ei, ne facete
+                                    deleniti offendit his. Dicta conclusionemque an eam, usu at corpora maluisset.
+                                    Justo audiam vidisse ei qui, has quot erroribus mnesarchum at. Dolorem
+                                    disputationi reprehendunt te duo, vix fabellas eleifend referrentur ne,
+                                    sed ei veri quando eruditi. Doming persius discere vel ex, doctus fabellas
+                                    oporteat in qui.
+                                    <br>
+                                    <br>
+                                    Sit alia mundi iisque ei, ex has delectus vituperatoribus veri. Sed alii
+                                    exerci mediocritatem te, eam et paulo audire abhorreant, nec nostrum offendit
+                                    at. Ea pri pericula dissentiunt, mel voluptua lucilius omittantur id, mea
+                                    esse elitr dolorem eu. Id velit noster edmtructior has, has legere suscipit
+                                    id, ea iudico feugiat petentium qui. In has reque porro everti, mel cu
+                                    quot takimata senserit, cum kasd vocent nusquam at. Mel movet ornatus detraxit
+                                    ut, est ex modus eruditi, ne nibh assum adolescens mea.
+                                </p>
+                            </td>
+                            <td bgcolor="#FFFFFF" width="33%" valign="top">
+                                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding: 10px;">
+                                                <div description="mediumColor" name="tid" style="font-family: Arial, Helvetica, sans-serif; border-bottom: dashed 1px #b2a99d; padding: 5px 0px 5px 0px; margin: 0px; color:#b08769; font-size: 14px; font-weight: bold; letter-spacing: -1px;">
+                                                    Sidebar Block Heading
+                                                </div>
+                                                <p style="font-size:11px; line-height: 15px; color:#576164; padding: 5px 0px; margin: 0px;">
+                                                    This is the small right column block of text. Here you can place short
+                                                    text items such as event notices, news items and other short notices.
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>-->
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFFF" width="100%"
+                style="padding: 0px; color:#999; font-size: 10px; font-family: 'Verdana';">
+                    <tbody>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                                <a style="color: #999" href="%%unsubscribelink%%">
+                                    To stop receiving these emails please unsubscribe.
+                                </a>
+                                <br>
+                                Company Name, Address and Contact Details
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="7">
+                                <img width="20" height="25" src="http://interspire.com/admin/resources/email_templates/Family%20and%20Friends%202/Friendship/c3.gif">
+                            </td>
+                            <td>
+                            </td>
+                            <td width="7">
+                                <img width="20" height="25" src="http://interspire.com/admin/resources/email_templates/Family%20and%20Friends%202/Friendship/c4.gif">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

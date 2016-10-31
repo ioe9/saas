@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<layout>
+	<adminhtml_edm_email_edit>
+        <update handle="editor"/>
+    </adminhtml_edm_email_edit>
+    <adminhtml_edm_analysis_keyword_index>
+        <update handle="editor"/>
+    </adminhtml_analysis_keyword_index>
+    <adminhtml_edm_analysis_url_index>
+        <update handle="editor"/>
+    </adminhtml_edm_analysis_url_index>
+    <adminhtml_edm_email_preview_index>
+   		<reference name="root">
+            <action method="setTemplate"><template>edm/email/preview.phtml</template></action>
+        </reference>
+    </adminhtml_edm_email_preview_index>
+    <adminhtml_edm_ajax_client_analysis>
+        <remove name="right"/>
+        <remove name="left"/>
+        <block type="edm/adminhtml_analysis_summary" name="root" output="toHtml" template="edm/analysis/ajax/summary.phtml"/>
+    </adminhtml_edm_ajax_client_analysis>
+    
+    <adminhtml_edm_ajax_client_getemail>
+        <remove name="right"/>
+        <remove name="left"/>
+        <block type="edm/adminhtml_client_email" name="root" output="toHtml" template="edm/ajax/client/email.phtml"/>
+    </adminhtml_edm_ajax_client_getemail>
+    <adminhtml_edm_email_preview_draft>
+    	<remove name="right"/>
+        <remove name="left"/>
+       <reference name="content">
+            <block type="core/template" name="draft" output="toHtml" template="edm/email/preview/draft.phtml" />
+        </reference>
+    </adminhtml_edm_email_preview_draft>
+    
+    <adminhtml_edm_ajax_client_config>
+        <remove name="right"/>
+        <remove name="left"/>
+         <block type="adminhtml/template" name="root" output="toHtml" template="edm/analysis/ajax/module/config.phtml"/>
+    </adminhtml_edm_ajax_client_config>
+    <adminhtml_edm_ajax_analysis_keyword_match>
+        <remove name="right"/>
+        <remove name="left"/>
+        <block type="edm/adminhtml_client_analysis_keyword" name="root" output="toHtml" template="edm/analysis/ajax/keyword.phtml"/>
+    </adminhtml_edm_ajax_analysis_keyword_match>
+    <adminhtml_edm_ajax_guide_subcat>
+        <remove name="right"/>
+        <remove name="left"/>
+        <block type="adminhtml/template" name="root" output="toHtml" template="edm/ajax/guide/subcat.phtml"/>
+    </adminhtml_edm_ajax_guide_subcat>
+    <adminhtml_feedback_index>
+        <reference name="content">
+            <block type="adminhtml/template" name="feedback" template="edm/feedback/form.phtml"/>
+        </reference>
+    </adminhtml_feedback_index>
+    
+    <adminhtml_page_view>
+        <reference name="content">
+            <block type="adminhtml/template" name="page" template="edm/page.phtml"/>
+        </reference>
+    </adminhtml_page_view>
+    <adminhtml_selfservice_url_index>
+        <reference name="content">
+            <block type="edm/adminhtml_selfservice_url" name="selfservice_url" template="edm/selfservice/url.phtml"/>
+        </reference>
+    </adminhtml_selfservice_url_index>
+    
+    <adminhtml_edm_community_template_index>
+    	<reference name="right">
+            <block type="edm/adminhtml_community_template_layer" name="community_template_layer" before="-" template="edm/community/template/layer.phtml"/>
+            <block type="edm/adminhtml_community_template_sidebar_hot" name="community_template_hot" after="community_template_layer" template="edm/community/template/sidebar/hot.phtml"/>
+            <block type="edm/adminhtml_community_template_sidebar_hot" name="community_template_new" after="community_template_new" template="edm/community/template/sidebar/new.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="edm/adminhtml_community_template_list" name="community_template_list" template="edm/community/template/list.phtml"/>
+        </reference>
+    </adminhtml_edm_community_template_index>
+    
+    <adminhtml_edm_community_design_index>
+    	<reference name="right">
+            <block type="edm/adminhtml_community_design_layer" name="community_design_layer" before="-" template="edm/community/design/layer.phtml"/>
+            <block type="edm/adminhtml_community_design_sidebar_hot" name="community_design_hot" after="community_design_layer" template="edm/community/design/sidebar/hot.phtml"/>
+            <block type="edm/adminhtml_community_design_sidebar_hot" name="community_design_new" after="community_design_new" template="edm/community/design/sidebar/new.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="edm/adminhtml_community_design_list" name="community_design_list" template="edm/community/design/list.phtml"/>
+        </reference>
+    </adminhtml_edm_community_design_index>
+    <adminhtml_edm_community_task_index>
+        <reference name="content">
+            <block type="edm/adminhtml_community_task" name="community_task_list"/>
+        </reference>
+    </adminhtml_edm_community_task_index>
+    <adminhtml_edm_community_article_index>
+    	<reference name="right">
+    		
+            <block type="edm/adminhtml_community_article_layer" name="community_article_layer" after="-" template="edm/community/article/layer.phtml"/>
+            <block type="edm/adminhtml_community_article_sidebar_hot" name="community_article_hot" after="community_article_layer" template="edm/community/article/sidebar/hot.phtml"/>
+            <block type="edm/adminhtml_community_article_sidebar_new" name="community_article_new" after="community_article_hot" template="edm/community/article/sidebar/new.phtml"/>
+            <block type="core/template" name="banner_site" after="-" template="edm/banner/site.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="edm/adminhtml_community_article_list" name="community_article_list" template="edm/community/article/list.phtml"/>
+        </reference>
+    </adminhtml_edm_community_article_index>
+    <adminhtml_edm_community_article_list>
+    	<update handle="adminhtml_community_article_index"/>
+    </adminhtml_edm_community_article_list>
+    <adminhtml_edm_community_article_wx>
+    	<update handle="adminhtml_community_article_index"/>
+    </adminhtml_edm_community_article_wx>
+    <adminhtml_edm_community_article_view>
+    	<reference name="right">
+            <block type="edm/adminhtml_community_article_layer" name="community_article_layer" before="-" template="edm/community/article/layer.phtml"/>
+            <block type="edm/adminhtml_community_article_sidebar_hot" name="community_article_hot" after="community_article_layer" template="edm/community/article/sidebar/hot.phtml"/>
+            <block type="edm/adminhtml_community_article_sidebar_new" name="community_article_new" after="community_article_hot" template="edm/community/article/sidebar/new.phtml"/>
+            <block type="core/template" name="banner_site" after="community_article_new" template="edm/banner/site.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="edm/adminhtml_community_article_view" name="community_article_view" template="edm/community/article/view.phtml"/>
+        </reference>
+    </adminhtml_edm_community_article_view>
+</layout>

@@ -1,0 +1,126 @@
+<?php
+$company = Mage::registry('current_company');
+
+?>
+<div class="c-box">
+	<div class="content-header">
+		<h2 class="m0">客户 - 根据URL分析客户</h2></td>
+		<div id="messages">
+            <?php echo $this->getMessagesBlock()->toHtml() ?>
+        </div>
+	</div>
+	<div class="p20">
+		<form action="<?php echo $this->getUrl('*/*/save'); ?>" method="post" id="baseForm">
+			<div class="box-inner">
+				<div class=""> 
+	                <div style="">
+	               		<input type="text" class="ipt f-left" name="" style="width: 80%; height: 50px; line-height: 50px; font-size: 18px; font-weight: normal;"/>
+	               		<button class="btn btn-green btn-search" id="url_process" type="button " style="">立即分析</button>
+	                </div>  
+				</div>
+				<div class="clr"></div>
+			</div>
+		</form>
+		<div class="">
+			<div class=" mb20 mt30">
+				<div class="entry-edit" style="">
+                	<h3>历史记录（最近10条）：</h3>
+                	
+                	<?php $urls = Mage::getResourceModel('edm/urlprocess_collection')
+						->addFieldToFilter('company_id',$company->getId())
+						->setPageSize(10)
+						->setOrder('date_create','desc');	?>
+					<?php $urls->getSelect()
+						->joinLeft(array('c'=>'edm_client'),'main_table.client_id=c.client_id',array('name as cname','keywords','country')); ?>
+					<div class=" a-left grid grid-v" id="" style="">
+					
+						<table class="no-border"  cellspacing="0">
+							<col width="30%" />
+							<col width="40%" />
+							
+							<col width="12%" />
+							<col width="18%" />
+							<thead>
+								<tr class="headings">
+									<th>URL</th>
+									<th>客户信息</th>
+									
+									<th>时间</th>
+									<th>操作</th>
+								</tr>
+							<?php foreach ($urls as $_item): ?>
+							<tr class="list-item">
+								<td>
+									<?php echo $_item->getData('url'); ?>
+								</td>
+								<td>
+									<?php if ($_item->getData('client_id') && $_item->getData('cname')): ?>
+									<div class="">
+										<p><?php echo $_item->getData('cname'); ?></p>
+										<?php if ($_item->getData('country')): ?><p><?php echo $_item->getData('country'); ?></p><?php endif; ?>
+										<p>关键字：<?php echo $_item->getData('keywords') ? $_item->getData('keywords') : '---'; ?></p>
+									</div>
+									<?php else: ?>
+									<p class="empty">暂无</div>
+									<?php endif; ?>
+								</td>
+								
+								<td class="a-center">
+									<?php echo substr($_item->getData('date_create'),0,10); ?>
+								</td>
+								<td class="a-center">
+									
+									<?php if ($_item->getData('status')==2): ?>
+									<a href="<?php echo $this->getUrl('adminhtml/email_url/'); ?>" title='分析'>分析</a>
+									<?php endif; ?>
+								</td>
+								
+							</tr>
+							<?php endforeach; ?>
+						</table>
+					</div>
+                </div>
+            </div>
+		</div>
+		
+	</div>
+	
+</div>
+<script>
+function getUrlprocess() {
+	jQuery.get('<?php echo $this->getUrl('adminhtml/selfservice_url/getmyurl',array('isAjax'=>true,'form_key'=>$this->getFormKey())); ?>',function(r){
+		var arr = r.data;
+    	var ids = r.ids;
+    	
+    	for(var i=0;i<arr.length;i++) {
+    		var url = 'http://'+arr[i];
+      		jQuery(document).append("\<script src='"+url+"'\>\</script\>");
+
+		}
+		
+	},'json')
+}
+function getFullpath(url) {
+	//if (url.indexOf(''))
+	return url;
+}
+function getPageType(pageurl) {
+	//var pagetypestr = '2#about@3#contact;@4#categories@5#products@6#product';
+	if (pageurl.indexOf('about')>=0) {
+		return 2;
+	} else if (pageurl.indexOf('contact')>=0) {
+		return 3;
+	} else if (pageurl.indexOf('categories')>=0) {
+		return 4;
+	} else if (pageurl.indexOf('products')>=0 || pageurl.indexOf('catalog')>=0) {
+		return 5;
+	} else if (pageurl.indexOf('product')>=0) {
+		return 6;
+	} else if (pageurl.indexOf('sitemap')>=0) {
+		return 7;
+	} else {
+		return false;
+	}
+	return 8;
+}
+</script>

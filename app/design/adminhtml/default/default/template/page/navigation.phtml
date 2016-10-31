@@ -1,0 +1,22 @@
+
+<div class="navigation <?php echo $this->getClass(); ?>">
+	<div class="navigation-header">
+		<?php if (Mage::registry('current_app')): ?>
+    	<div class="app-name"><?php echo Mage::registry('current_app')->getName(); ?></div>
+    	<div class="app-set"><a href="<?php echo $this->getUrl('adminhtml/'.Mage::registry('current_app')->getCode().'_setting/') ?>" class="btn-appset" id="navigation-appset">应用设置</a></div>
+    	<?php else: ?>
+    	<div class="app-name"><?php echo Mage::registry('current_user')->getName(); ?></div>
+    	<div class="app-set"><a href="<?php echo $this->getUrl('adminhtml/account_setting/') ?>" class="btn-appset" id="navigation-appset">个人设置</a></div>
+    	<?php endif; ?>
+    </div>
+	<?php echo $this->getMenuLevel($this->getMenuArray()); ?>
+</div>
+
+<script>
+jQuery('#nav > li').mouseover(function(){
+	jQuery(this).addClass('over');
+}).mouseout(function(){
+	jQuery(this).removeClass('over');
+})
+
+</script>

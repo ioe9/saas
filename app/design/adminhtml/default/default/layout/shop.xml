@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<layout>
+	<adminhtml_shop_email_edit>
+        <update handle="editor"/>
+    </adminhtml_email_edit>
+    <adminhtml_shop_analysis_keyword_index>
+        <update handle="editor"/>
+    </adminhtml_shop_analysis_keyword_index>
+    <adminhtml_shop_analysis_url_index>
+        <update handle="editor"/>
+    </adminhtml_shop_analysis_url_index>
+    <adminhtml_shop_email_preview_index>
+   		<reference name="root">
+            <action method="setTemplate"><template>shop/email/preview.phtml</template></action>
+        </reference>
+    </adminhtml_shop_email_preview_index>
+    <adminhtml_shop_ajax_client_analysis>
+        <remove name="right"/>
+        <remove name="left"/>
+        <block type="shop/adminhtml_analysis_summary" name="root" output="toHtml" template="shop/analysis/ajax/summary.phtml"/>
+    </adminhtml_shop_ajax_client_analysis>
+    
+    <adminhtml_shop_ajax_client_getemail>
+        <remove name="right"/>
+        <remove name="left"/>
+        <block type="shop/adminhtml_client_email" name="root" output="toHtml" template="shop/ajax/client/email.phtml"/>
+    </adminhtml_shop_ajax_client_getemail>
+    <adminhtml_shop_email_preview_draft>
+    	<remove name="right"/>
+        <remove name="left"/>
+       <reference name="content">
+            <block type="core/template" name="draft" output="toHtml" template="shop/email/preview/draft.phtml" />
+        </reference>
+    </adminhtml_shop_email_preview_draft>
+    
+    <adminhtml_shop_ajax_client_config>
+        <remove name="right"/>
+        <remove name="left"/>
+         <block type="adminhtml/template" name="root" output="toHtml" template="shop/analysis/ajax/module/config.phtml"/>
+    </adminhtml_shop_ajax_client_config>
+    <adminhtml_shop_ajax_analysis_keyword_match>
+        <remove name="right"/>
+        <remove name="left"/>
+        <block type="shop/adminhtml_client_analysis_keyword" name="root" output="toHtml" template="shop/analysis/ajax/keyword.phtml"/>
+    </adminhtml_shop_ajax_analysis_keyword_match>
+    <adminhtml_shop_ajax_guide_subcat>
+        <remove name="right"/>
+        <remove name="left"/>
+        <block type="adminhtml/template" name="root" output="toHtml" template="shop/ajax/guide/subcat.phtml"/>
+    </adminhtml_shop_ajax_guide_subcat>
+    <adminhtml_feedback_index>
+        <reference name="content">
+            <block type="adminhtml/template" name="feedback" template="shop/feedback/form.phtml"/>
+        </reference>
+    </adminhtml_feedback_index>
+    
+    <adminhtml_page_view>
+        <reference name="content">
+            <block type="adminhtml/template" name="page" template="shop/page.phtml"/>
+        </reference>
+    </adminhtml_page_view>
+    <adminhtml_selfservice_url_index>
+        <reference name="content">
+            <block type="shop/adminhtml_selfservice_url" name="selfservice_url" template="shop/selfservice/url.phtml"/>
+        </reference>
+    </adminhtml_selfservice_url_index>
+    
+    <adminhtml_shop_community_template_index>
+    	<reference name="right">
+            <block type="shop/adminhtml_community_template_layer" name="community_template_layer" before="-" template="shop/community/template/layer.phtml"/>
+            <block type="shop/adminhtml_community_template_sidebar_hot" name="community_template_hot" after="community_template_layer" template="shop/community/template/sidebar/hot.phtml"/>
+            <block type="shop/adminhtml_community_template_sidebar_hot" name="community_template_new" after="community_template_new" template="shop/community/template/sidebar/new.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="shop/adminhtml_community_template_list" name="community_template_list" template="shop/community/template/list.phtml"/>
+        </reference>
+    </adminhtml_shop_community_template_index>
+    
+    <adminhtml_shop_community_design_index>
+    	<reference name="right">
+            <block type="shop/adminhtml_community_design_layer" name="community_design_layer" before="-" template="shop/community/design/layer.phtml"/>
+            <block type="shop/adminhtml_community_design_sidebar_hot" name="community_design_hot" after="community_design_layer" template="shop/community/design/sidebar/hot.phtml"/>
+            <block type="shop/adminhtml_community_design_sidebar_hot" name="community_design_new" after="community_design_new" template="shop/community/design/sidebar/new.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="shop/adminhtml_community_design_list" name="community_design_list" template="shop/community/design/list.phtml"/>
+        </reference>
+    </adminhtml_shop_community_design_index>
+    <adminhtml_shop_community_task_index>
+        <reference name="content">
+            <block type="shop/adminhtml_community_task" name="community_task_list"/>
+        </reference>
+    </adminhtml_shop_community_task_index>
+    <adminhtml_shop_community_article_index>
+    	<reference name="right">
+    		
+            <block type="shop/adminhtml_community_article_layer" name="community_article_layer" after="-" template="shop/community/article/layer.phtml"/>
+            <block type="shop/adminhtml_community_article_sidebar_hot" name="community_article_hot" after="community_article_layer" template="shop/community/article/sidebar/hot.phtml"/>
+            <block type="shop/adminhtml_community_article_sidebar_new" name="community_article_new" after="community_article_hot" template="shop/community/article/sidebar/new.phtml"/>
+            <block type="core/template" name="banner_site" after="-" template="shop/banner/site.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="shop/adminhtml_community_article_list" name="community_article_list" template="shop/community/article/list.phtml"/>
+        </reference>
+    </adminhtml_shop_community_article_index>
+    <adminhtml_shop_community_article_list>
+    	<update handle="adminhtml_community_article_index"/>
+    </adminhtml_shop_community_article_list>
+    <adminhtml_shop_community_article_wx>
+    	<update handle="adminhtml_community_article_index"/>
+    </adminhtml_shop_community_article_wx>
+    <adminhtml_shop_community_article_view>
+    	<reference name="right">
+            <block type="shop/adminhtml_community_article_layer" name="community_article_layer" before="-" template="shop/community/article/layer.phtml"/>
+            <block type="shop/adminhtml_community_article_sidebar_hot" name="community_article_hot" after="community_article_layer" template="shop/community/article/sidebar/hot.phtml"/>
+            <block type="shop/adminhtml_community_article_sidebar_new" name="community_article_new" after="community_article_hot" template="shop/community/article/sidebar/new.phtml"/>
+            <block type="core/template" name="banner_site" after="community_article_new" template="shop/banner/site.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="shop/adminhtml_community_article_view" name="community_article_view" template="shop/community/article/view.phtml"/>
+        </reference>
+    </adminhtml_shop_community_article_view>
+</layout>

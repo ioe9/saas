@@ -1,0 +1,42 @@
+<?php
+$company = Mage::registry('current_company');
+$collection = $this->getCollection();
+?>
+<div class="c-box">
+	<div class="content-header">
+		<h2 class="head-dashboard"><?php if (!Mage::registry('use_filter_my')): ?>模板大厅<?php else: ?>我的模板<?php endif; ?></h2></td>
+		<div id="messages">
+            <?php echo $this->getMessagesBlock()->toHtml() ?>
+        </div>
+	</div>
+		
+		<div id="step_1">
+			<div class="dashboard-container mb20 step-box">
+			    <table cellspacing="6" width="100%">
+			        <tr>  
+			            <td>
+			                <div class="entry-edit" style="">
+			                    <div style="margin:20px;" class="item-grid">
+			                    	<?php $i = 1; ?>
+			                   		<?php foreach ($collection as $_item): ?>
+			                   		<div class="item <?php if ($i%4==0): ?>last<?php endif; ?>">
+			                   			<p><img src="<?php echo Mage::getBaseUrl('media').$_item->getData('image'); ?>" title="<?php echo $_item->getName(); ?>"/></p>
+			                   			<p><?php echo $_item->getName(); ?></p>
+			                   			<p></p>
+			                   		</div>
+			                   		<?php $i++; ?>
+			                   		<?php endforeach; ?>
+			                   		<div class="clr"></div>
+			                   		<?php echo $this->getChildHtml('pager'); ?>
+			                    </div>
+			                </div>
+			            </td>
+			        </tr>
+			    </table>
+			</div>
+		</div>
+		
+</div>
+<script>
+
+</script>

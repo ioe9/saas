@@ -1,0 +1,63 @@
+<script type="text/javascript">
+//<![CDATA[
+enUS = {"m":{"wide":["January","February","March","April","May","June","July","August","September","October","November","December"],"abbr":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]}}; // en_US locale reference
+Calendar._DN = ["\u661f\u671f\u65e5","\u661f\u671f\u4e00","\u661f\u671f\u4e8c","\u661f\u671f\u4e09","\u661f\u671f\u56db","\u661f\u671f\u4e94","\u661f\u671f\u516d"]; // full day names
+Calendar._SDN = ["\u5468\u65e5","\u5468\u4e00","\u5468\u4e8c","\u5468\u4e09","\u5468\u56db","\u5468\u4e94","\u5468\u516d"]; // short day names
+Calendar._FD = 0; // First day of the week. "0" means display Sunday first, "1" means display Monday first, etc.
+Calendar._MN = ["\u4e00\u6708","\u4e8c\u6708","\u4e09\u6708","\u56db\u6708","\u4e94\u6708","\u516d\u6708","\u4e03\u6708","\u516b\u6708","\u4e5d\u6708","\u5341\u6708","\u5341\u4e00\u6708","\u5341\u4e8c\u6708"]; // full month names
+Calendar._SMN = ["1\u6708","2\u6708","3\u6708","4\u6708","5\u6708","6\u6708","7\u6708","8\u6708","9\u6708","10\u6708","11\u6708","12\u6708"]; // short month names
+Calendar._am = "\u4e0a\u5348"; // am/pm
+Calendar._pm = "\u4e0b\u5348";
+
+// tooltips
+Calendar._TT = {};
+Calendar._TT["INFO"] = "关于日历";
+
+Calendar._TT["ABOUT"] =
+"DHTML 日期/时间选择器\n" +
+"(c) dynarch.com 2002-2005 / Author: Mihai Bazon\n" +
+"最新版访问：http://www.dynarch.com/projects/calendar/\n" +
+"在GNU LGPL下分发。详情请参考 http://gnu.org/licenses/lgpl.html。" +
+"\n\n" +
+"选择日期：\n" +
+"- 使用\xab，\xbb按钮选择年份\n" +
+"- Use the \u2039, \u203a buttons to select month\n" +
+"- 在任何按钮上按下鼠标按键即可选中。";
+Calendar._TT["ABOUT_TIME"] = "\n\n" +
+"时间选择：\n" +
+"- 点击时间的任何部分即可更改\n" +
+"- 或Shift-点击以减小\n" +
+"- 或点击并拖拽以快速选中。";
+
+Calendar._TT["PREV_YEAR"] = "去年（按下可打开菜单）";
+Calendar._TT["PREV_MONTH"] = "上个月（按下菜单）";
+Calendar._TT["GO_TODAY"] = "转到今天";
+Calendar._TT["NEXT_MONTH"] = "下个月（按下可打开菜单）";
+Calendar._TT["NEXT_YEAR"] = "明年（按下可打开菜单）";
+Calendar._TT["SEL_DATE"] = "选择日期";
+Calendar._TT["DRAG_TO_MOVE"] = "拖拽以移动";
+Calendar._TT["PART_TODAY"] = ' (' + "\u4eca\u5929" + ')';
+
+// the following is to inform that "%s" is to be the first day of week
+Calendar._TT["DAY_FIRST"] = "显示前 %s个";
+
+// This may be locale-dependent. It specifies the week-end days, as an array
+// of comma-separated numbers. The numbers are from 0 to 6: 0 means Sunday, 1
+// means Monday, etc.
+Calendar._TT["WEEKEND"] = "0,6";
+
+Calendar._TT["CLOSE"] = "关闭";
+Calendar._TT["TODAY"] = "\u4eca\u5929";
+Calendar._TT["TIME_PART"] = "（Shift-）点击或拖拽即可更改值";
+
+// date formats
+Calendar._TT["DEF_DATE_FORMAT"] = "%Y\u5e74%m\u6708%e\u65e5";
+Calendar._TT["TT_DATE_FORMAT"] = "%Y\u5e74%m\u6708%e\u65e5";
+
+Calendar._TT["WK"] = "\u5468";
+Calendar._TT["TIME"] = "时间：";
+
+CalendarDateObject._LOCAL_TIMZEONE_OFFSET_SECONDS = 28800;
+CalendarDateObject._SERVER_TIMZEONE_SECONDS = 1458381598;
+//]]>
+</script>

@@ -1,0 +1,129 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<meta content="en-us" http-equiv="Content-Language">
+<style>
+* {
+	margin:0 auto;
+}
+.overview th,
+.overview td {
+	color: #FFF;
+}
+
+</style>
+</head>
+<body>
+	<!-- 背景层开始 bgcolor="#494f59" -->
+	<!--根据产品分类获取匹配的客户-->
+	<?php $subject = $_GET['subject']; ?>
+	<?php $company = Mage::registry('current_company'); ?>
+	<?php 
+		$cats = Mage::getResourceModel('edm/company_category_collection')
+				->addFieldToFilter('company_id',$company->getId());	
+		$catIds = array();
+		foreach ($cats as $_cat) {
+			array_push($catIds,$_cat->getCategoryId());
+		}
+		
+		$clientCatCollection = Mage::getResourceModel('edm/client_category_collection')
+			->addFieldToFilter('main_table.category_id',array('in'=>$catIds));	
+		$clientCatCollection->getSelect()->join(array('c'=>'edm_product_category'),'c.category_id=main_table.category_id',array('name as cname'));
+		$clientIds = array();
+		$clientCatData = array();
+		foreach ($clientCatCollection as $_clientCat) {
+			if (!in_array($_clientCat->getData('client_id'),$clientIds)) {
+				array_push($clientIds,$_clientCat->getData('client_id'));
+				$clientCatData[$_clientCat->getData('client_id')] = array($_clientCat->getData('cname'));
+			} else {
+				array_push($clientCatData[$_clientCat->getData('client_id')],$_clientCat->getData('cname'));
+			}
+		}
+		$clientCollection = Mage::getResourceModel('edm/client_collection')
+			->addFieldToFilter('client_id',array('in'=>$clientIds));
+	?>
+	<?php $count = count($clientCollection); ?>
+	<?php $clientContacts = array(); ?>
+	<?php $clientContactsData = array(); ?>
+	<?php if ($count):  ?><!-- 匹配到客户  -->
+	<div class="overview" style="background:#000;color:#FFF; width:100%;padding:20px;">
+		<h2>精确匹配到客户：<?php echo $count; ?> 个</h2>
+		<table border="1" cellspacing="0" cellspadding="0">
+			<tr>
+				<th>客户名称</th>
+				<th>经营产品分类</th>
+				<th>所在国家</th>
+				<th>官网</th>
+				<th>邮箱列表</th>
+			</tr>
+			<?php foreach ($clientCollection as $_client): ?>
+			<!-- 根据客户获取员工邮箱 -->
+			<?php $emails = Mage::getResourceModel('edm/client_email_collection')->addFieldToFilter('client_id',$_client->getId())  ?>
+			<?php $clientContacts[$_client->getId()] = $emails; ?>
+			<tr>
+				<td><?php echo $_client->getData('name'); ?></td>
+				<td><?php echo implode(',',$clientCatData[$_client->getData('client_id')]); ?></td>
+				<td><?php echo $_client->getData('country') ? $_client->getData('country') : '未知'; ?></td>
+				<td><?php echo $_client->getData('website'); ?></td>
+				<td>
+					<?php $tmp = array(); ?>
+					<?php foreach ($emails as $_email) :?>
+					<?php $clientContactsData[$_email->getData('email')] = $_email; ?>
+					<?php array_push($tmp,$_email->getData('email')); ?>
+					<?php endforeach; ?>
+					<?php echo implode(',',$tmp); ?>
+				</td>
+			</tr>
+			<?php endforeach; ?>
+		</table>
+	</div>
+	<?php foreach ($clientCollection as $_client): ?>
+	<?php Mage::unregister('current_client'); ?>
+	<?php Mage::register('current_client',$_client); ?>
+		<?php foreach ($clientContacts[$_client->getId()] as $_contact): ?>
+		<div style="background:#888;color:#FFF; width:100%;padding:20px;">
+			<p>客户公司名称：<?php echo $_client->getName(); ?></p>
+			<p>收件人邮箱地址：<?php echo $_contact->getEmail(); ?></p>
+		</div>
+		<?php Mage::unregister('current_contact'); ?>
+		<?php Mage::register('current_contact',$clientContactsData[$_contact]); ?>
+		<table bgcolor="#494f59" width="100%" description="darkestBgcolor" name="tid" style="margin: 0px; padding: 0px;">
+			<tbody>
+				<tr>
+					<td>
+		
+						<div id="BG">
+							<table cellspacing="0" cellpadding="0" align="center" width="600" style="font-family: 'Verdana';">
+								<tbody>
+									<tr>
+										<td>
+											<h3 style="color:#FFF;margin:20px 0 10px;">Subject:<?php echo Mage::helper('edm/template')->render($subject); ?></h3>
+										</td>
+									</tr>
+									<tr>
+										<td><!--背景层结束-->
+											<?php echo $this->getLayout()->createBlock('edm/adminhtml_email_preview','preview')->toHtml(); ?>
+										</td>
+									</tr>
+								</tbody>
+							
+							</table>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<?php endforeach; ?>
+	<?php endforeach; ?>
+	<?php else: ?>
+	
+	<div class="tips" style="background: #F5f5f5">
+		<p>对不起，当期匹配不到合适的客户，请完善个人信息（产品分类信息）后重试。</p>
+		<p>或者等待我们为您从物联网中查找合适的客户，找到合适客户后，我们会通过邮件提醒通知您。</p>
+		
+	</div>
+	<?php endif; ?>
+
+</body>
+
+</html>

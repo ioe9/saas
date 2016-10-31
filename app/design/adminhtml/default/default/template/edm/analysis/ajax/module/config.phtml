@@ -1,0 +1,26 @@
+<?php $module = Mage::registry('current_module'); ?>
+<?php $items = Mage::registry('current_items'); ?>
+<?php $template = Mage::registry('current_template'); ?>
+<?php $relateds = Mage::getResourceModel('edm/company_template_module_item_collection')
+		->addFieldToFilter('item_module',$module->getId())
+		->addFieldToFilter('item_template',$template->getId())
+		->addFieldToFilter('item_company',Mage::registry('current_company')->getId())
+		->addFieldToFilter('status',1);
+	$curIds = $relateds->getAllIds();
+?>
+
+<div class="config-items a-left">
+	<input type="hidden" id="module_id" value="<?php echo $module->getId(); ?>" />
+	<dl>
+	<?php foreach ($items as $_key=>$_item): ?>
+		<dt><input value="<?php echo $_key; ?>" type="checkbox" class="mr5" name="item_id" id="" <?php if (in_array($_key,$curIds)): ?>checked="checked"<?php endif; ?>/></dt>
+		<dd><?php echo $_item; ?><a class="close"></a></dd>
+		<div class="clr"></div>
+	<?php endforeach; ?>
+	</dl>
+
+	<div class="clr"></div>
+	<div class="btns a-right">
+		<button class="btn" type="button" onclick="saveModuleConfig();">确认</button>
+	</div>
+</div>

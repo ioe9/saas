@@ -1,0 +1,634 @@
+<?php $company = Mage::registry('current_company'); ?>
+<?php $user = Mage::getSingleton('admin/session')->getUser(); ?>
+
+<div class="e-edit">
+    <section class="col3 col-1 b-r wp50" id="col_url">
+    	<div class="inner">
+    		<div id="search_switch" class="a-left sch-switch mb10 fs16">
+    			<ul class="">
+    				<li class="mr20"><input name="sch-switch" type="radio" id="sch_switch_keyword"/> <label for="sch_switch_keyword">分析关键字</label></li>
+    				<li><input type="radio" name="sch-switch" id="sch_switch_url"/> <label for="sch_switch_url">分析URL</label></li>
+    			</ul>
+	    		<div class="clr"></div>
+			</div>
+	    	<div class="sch-box pr"  id="joystep_1">
+	    		<div class="" id="sch_ctn_keyword">
+		    		<input type="text" id="keyword" class="ipt" placeholder="输入推广的产品关键字" value="" onclick="chosenShow('keyword_ctn');" onblur="chosenHide('keyword_ctn');"/>
+		    		<button type="button " id="sch_btn_keyword" class="btn pa">搜索</button>
+		    		<span class="i-icon-delete"></span>
+		    		<?php $urls = Mage::getResourceModel('edm/company_keyword_collection')
+						->addFieldToFilter('company_id',$company->getId())
+						->setPageSize(20)
+						->setOrder('date_create','desc');	?>
+					<div class="pa keyword-box a-left" id="keyword_ctn" style="display:none;">
+						<h5>最近输入：</h5>
+						<ul>
+							<?php foreach ($urls as $_url): ?>
+							<li class="k-item" onclick="chosenKeyword('keyword',this)"><?php echo $_url->getData('url'); ?></li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+				</div>
+				<div class="" id="sch_ctn_url" style="display:none;">
+					<input type="text" id="url" class="ipt" placeholder="输入推广的客户网址" value="" onclick="chosenShow('url_ctn');" onblur="chosenHide('url_ctn');"/>
+		    		<button type="button " id="sch_btn" class="btn pa">搜索</button>
+		    		<span class="i-icon-delete"></span>
+		    		<?php $urls = Mage::getResourceModel('edm/company_keyword_collection')
+						->addFieldToFilter('company_id',$company->getId())
+						->setPageSize(20)
+						->setOrder('date_create','desc');	?>
+					<div class="pa keyword-box a-left" id="url_ctn" style="display:none;">
+						<h5>最近输入：</h5>
+						<ul>
+							<?php foreach ($urls as $_url): ?>
+							<li class="k-item" onclick="chosenKeyword('keyword',this)"><?php echo $_url->getData('url'); ?></li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+				
+				</div>
+	    	</div>
+	    	<div id="sch-result">
+	    		
+	    	</div>
+	    	<div id="sch_tips_keyword" class="tips">
+				<div style="padding:100px;font-size:26px;">输入推广的产品关键字</div>
+			</div>
+			<div id="sch_tips" class="tips" style="display:none;">
+				<div style="padding:100px;font-size:26px;">输入推广客户网址</div>
+			</div>
+    	</div>
+    </section>
+    <section class="col3 col-2 b-r email-main wp50" id="col_email">
+    	<div class="mask" style="display:none;"></div>
+    	<div class="inner"  id="box_email">
+	    	<div class="">
+	    		<!--
+		    	<div class="actions mb15">
+		    		<button class="btn">设置发送时间</button>
+		    		<button class="btn">发弹率告警</button>
+		    		<button class="btn">重复发送配置</button>
+		    	</div>
+		    	<div class="field">
+					<label class="tit">推广产品：</label>
+					<div class="multi fields">
+						<input type="text" name="email_product" id="email_product" class="ipt" disabled="disabled"/>
+						
+					</div>
+				</div>-->
+		    	<div class="field">
+					<label class="tit">收件人：</label>
+					<div class="multi fields">
+						<div class="wp100">
+							<input type="text" name="email_to" id="email_to" class="ipt wp80 f-left"/>
+							<div class="wp20">
+							
+							</div>
+							<div class="clr"></div>
+						</div>
+					</div>
+				</div>
+				<div class="field">
+					<label class="tit">发件人：</label>
+					<div class="selection fields a-left">
+						<div class=" f-left mr10">
+							<span class="selected" id="email_from" data-from="<?php echo $company->getData('contact_person') ?>" data="<?php echo $company->getData('contact_email') ?>"><?php echo $company->getData('contact_person') ?>&lt;<?php echo $company->getData('contact_email') ?>&gt;</span>
+							<i class="icon icon-ad"></i>
+						</div>
+						<div class=" f-left">
+							<div class="">
+								<input type="checkbox" name="cc_me" id="cc_me" /> 给我CC
+							</div>
+						</div>
+						<ul class="dropdown" style="display:none">
+							<li></li>
+						</ul>
+						<div class="clr"></div>
+					</div>
+					
+				</div>
+				<div class="field mb15">
+					<label class="tit">邮件主题：</label>
+					<div class="fields">
+						<div class="wp100">
+							<input type="text" name="email_subject" id="email_subject" class="ipt f-left wp80"/>
+							<div class="wp20 a-left">
+								<a class="switch ml15" href="javascript:switchSubject();" title="换一个">换一个</a>
+							</div>
+							<div class="clr"></div>
+						</div>
+					</div>
+				</div>
+				<div class="email-content " style="padding-right:20px;">
+					<?php $template = Mage::getModel('edm/templates')->load(4); ?>
+					<?php $bodyStr = Mage::helper('edm/template')->render($template->getData('htmlbody')); ?>
+					<textarea name="name" rows="20" id="email_body" name="email_body" style="width:90%;"><?php echo ""; ?></textarea>
+					<script type="text/javascript">
+					openEditorPopup = function(url, name, specs, parent) {
+					    if ((typeof popups == "undefined") || popups[name] == undefined || popups[name].closed) {
+					        if (typeof popups == "undefined") {
+					            popups = new Array();
+					        }
+					        var opener = (parent != undefined ? parent : window);
+					        popups[name] = opener.open(url, name, specs);
+					    } else {
+					        popups[name].focus();
+					    }
+					    return popups[name];
+					}
+					
+					closeEditorPopup = function(name) {
+					    if ((typeof popups != "undefined") && popups[name] != undefined && !popups[name].closed) {
+					        popups[name].close();
+					    }
+					}
+					</script>
+					<script type="text/javascript">
+						wysiwygemail_body = new tinyMceWysiwygSetup(
+							"email_body", 
+							{
+								"enabled":true,
+								"hidden":false,
+								"use_container":false,
+								"add_variables":false,
+								"add_widgets":false,
+								"no_display":false,
+								"translator":{},
+								"encode_directives":true,
+								"directives_url":"<?php echo $this->getUrl('cms_wysiwyg/directive'); ?>",
+								"popup_css":"<?php echo Mage::getBaseUrl('js')."/mage/adminhtml/wysiwyg/tiny_mce/themes/advanced/skedm/default/dialog.css"; ?>",
+								"content_css":"<?php echo Mage::getBaseUrl('js')."/mage/adminhtml/wysiwyg/tiny_mce/themes/advanced/skedm/default/content.css"; ?>",
+								"width":"100%",
+								"plugedm":[],
+								"directives_url_quoted":"<?php echo $this->getUrl('cms_wysiwyg/directive'); ?>",
+								"add_images":true,
+								"files_browser_window_url":"<?php echo $this->getUrl('cms_wysiwyg_images'); ?>",
+								"files_browser_window_width":1000,
+								"files_browser_window_height":400,
+								"tab_id":"email_body",
+								"widget_plugin_src":"<?php echo Mage::getBaseUrl('js')."/mage/adminhtml/wysiwyg/tiny_mce/plugedm/magentowidget/editor_plugin.js"; ?>",
+								"widget_images_url":"http:\/\/kdd.com\/skin\/adminhtml\/default\/default\/images\/widget\/",
+								"widget_placeholders":["catalog__category_widget_link.gif","catalog__product_widget_link.gif","catalog__product_widget_new.gif","cms__widget_block.gif","cms__widget_page_link.gif","default.gif","reports__product_widget_compared.gif","reports__product_widget_viewed.gif"],
+								"widget_window_url":"http:\/\/kdd.com\/index.php\/meegii\/widget\/index\/key\/358f59f7f17210b00440cee2ea666abe\/",
+								"firebug_warning_title":"\u8b66\u544a",
+								"firebug_warning_text":"Firebug is known to make the WYSIWYG editor slow unless it is turned off or configured properly.",
+								"firebug_warning_anchor":"Hide",
+							});
+						Event.observe(window, "load", wysiwygemail_body.setup.bind(wysiwygemail_body, "exact"));
+					    editorFormValidationHandler = wysiwygemail_body.onFormValidation.bind(wysiwygemail_body);
+					    //registry 报错
+					    //Event.observe("toggleemail_body", "click", wysiwygemail_body.toggle.bind(wysiwygemail_body));
+					    varienGlobalEvents.attachEventHandler("formSubmit", editorFormValidationHandler);
+					    varienGlobalEvents.attachEventHandler("tinymceBeforeSetContent", wysiwygemail_body.beforeSetContent.bind(wysiwygemail_body));
+					    varienGlobalEvents.attachEventHandler("tinymceSaveContent", wysiwygemail_body.saveContent.bind(wysiwygemail_body));
+					    varienGlobalEvents.clearEventHandlers("open_browser_callback");
+					    varienGlobalEvents.attachEventHandler("open_browser_callback", wysiwygemail_body.openFileBrowser.bind(wysiwygemail_body));
+					
+					    
+					</script>
+		           
+	            </div>
+	            <div class="clr"></div>
+	            <div class="actions mt15">
+	            	<div class="f-left wp50">
+	            		<ul class="mode-toggle wp80 f-left">
+	            			<li class="active " id="mode-highlight" onclick="toggleModel(0)"><a href="javascript:;">高亮模式</a></li>
+	            			<li class="" id="mode-preview" onclick="toggleModel(1)"><a href="javascript:;">预览模式</a></li>
+	            		</ul>
+	            	</div>
+	            	
+	            	<div class="f-right wp50">
+	            		
+	            		<button class="btn mb20 f-right" id="send_email_btn" type="submit" onclick="checkEmail()" style="padding: 8px 0;border-radius: 5px;font-size: 22px;width: 80%;">立即发送</button>
+	            	</div>
+	            	<div class="clr"></div>
+	            	<div id="send_email_loading" class=" loading-txt" style="display:none;"><img src="<?php echo $this->getSkinUrl('images/loading_32x32.gif'); ?>" />邮件正在发送中，请稍后...</div>
+	            </div>
+			</div>
+		</div>
+    </section>
+</div>
+<script>
+jQuery(function() {
+	jQuery(document).ajaxStart(function(res){
+		
+	}).ajaxSuccess(function(res){
+		
+	}) 
+})
+function toggleModel(mode) {
+	var targetBody = jQuery('#email_body_ifr').contents().find('#tinymce');
+	if (mode==0) {
+		
+		targetBody.addClass('highlight');
+		jQuery('#mode-highlight').addClass('active');
+		jQuery('#mode-highlight').siblings().removeClass('active');
+	} else if (mode==1) {
+		targetBody.removeClass('highlight');
+		jQuery('#mode-preview').addClass('active');
+		jQuery('#mode-preview').siblings().removeClass('active');
+	}
+}
+//根据网址，分析客户
+function searchAgain() {
+	var url = jQuery('#keyword').val();
+	if (Validation.get('IsEmpty').test(url)) {
+		alert("请输入正确的网址！");
+	} else {
+		setTimeout("searchWhois('"+url+"')",2000);
+		jQuery('#sch_tips').html('<div class="load"><img src="<?php echo $this->getSkinUrl("images/loading2.gif"); ?>" width="100%"/></div>"');
+		jQuery.ajax({
+			  url:'<?php echo $this->getUrl('adminhtml/ajax_client/url',array('isAjax'=>true)); ?>',
+			  data:{url:url,form_key:'<?php echo $this->getFormKey(); ?>'},
+			  timeout:120000,
+			  dataType:"json",
+			  complete:function(resp) {
+			  	    res = resp.responseText;
+			  	    if (res) {
+			  	    	res = JSON.parse(res);
+				  	    
+					  	if (res.ret==1) {
+							if (res.data) {
+								jQuery('#sch_tips').html(res.data);
+							} else {
+								jQuery('#sch_tips').html('<p style="padding:50px;font-size:18px">对不起，由于网络原因，分析不成功。请重试或提交反馈给我们</p>');
+							}
+					  		
+						} else {
+							if (res.hasOwnProperty('ajaxRedirect')) {
+								window.location.href = res.ajaxRedirect;
+							}
+							getAnalysisProcess();
+							
+						}
+			  	    } else {
+			  	    	getAnalysisProcess();
+			  	    	//setInterval(getAnalysisProcess,2000);
+			  	    }
+				  	    
+			  }
+		})
+		
+	}
+}
+function searchWhois(url) {
+	jQuery.ajax({
+			  url:'<?php echo $this->getUrl('adminhtml/ajax_client/whois',array('isAjax'=>true)); ?>',
+			  data:{url:url,form_key:'<?php echo $this->getFormKey(); ?>'},
+			  timeout:20000,
+			  dataType:"json",
+			  complete:function(resp) { 
+			  }
+		})
+}
+jQuery('#sch_btn').click(function(){
+	searchAgain();
+})
+/******************************************** 关键字搜索 start *********************************************************/
+jQuery('#sch_btn_keyword').click(function(){
+	searchKeyword();
+})
+function searchKeyword() {
+	var q = jQuery('#keyword').val().trim();
+	if (!q || q.length<3) {
+		return;
+	}
+	jQuery('#sch_tips_keyword').html('<div class="load"><img src="<?php echo $this->getSkinUrl("images/loading2.gif"); ?>" width="100%"/></div>"');
+	jQuery.ajax({
+		  url:'<?php echo $this->getUrl('adminhtml/ajax_client/keyword',array('isAjax'=>true)); ?>',
+		  data:{q:q,form_key:'<?php echo $this->getFormKey(); ?>'},
+		  timeout:120000,
+		  dataType:"json",
+		  complete:function(resp) {
+		  	    res = resp.responseText;
+		  	    if (res) {
+		  	    	res = JSON.parse(res);
+				  	if (res.ret==1) {
+						if (res.data) {
+							jQuery('#sch_tips_keyword').html(res.data);
+						} else {
+							jQuery('#sch_tips_keyword').html('<p style="padding:50px;font-size:18px">对不起，由于网络原因，分析不成功。请重试或提交反馈给我们</p>');
+						}
+					} else {
+						if (res.hasOwnProperty('ajaxRedirect')) {
+							window.location.href = res.ajaxRedirect;
+						}	
+					}
+		  	    } else {
+		  	    	alert("分析出错，请重试或提交反馈信息，帮助我们不断提高服务质量")
+		  	    }
+			  	    
+		  }
+	})
+}
+/******************************************** 关键字搜索 end *********************************************************/
+function getAnalysisProcess(last) {
+	var url = jQuery('#keyword').val();
+	jQuery.ajax({
+		url:'<?php echo $this->getUrl('adminhtml/ajax_client/url',array('isAjax'=>true)); ?>',
+		data:{url:url,form_key:'<?php echo $this->getFormKey(); ?>'},
+	    timeout:40000,
+	    dataType:"json",
+	    complete:function(resp) {
+  			res = resp.responseText;
+		  	    if (res) {
+		  	    	res = JSON.parse(res);
+				  	if (res.ret==1) {
+				  		console.log(res.data);
+				  		
+						jQuery('#sch_tips').html(res.data);
+						
+					} else {
+						if (res.hasOwnProperty('ajaxRedirect')) {
+							window.location.href = res.ajaxRedirect;
+						}
+						if (!last) {
+							getAnalysisProcess(1);
+						}
+					}
+		  	    } else {
+		  	    	if (!last) {
+						getAnalysisProcess(1);
+					}
+		  	    }
+		  }
+	})
+}
+
+jQuery('#companyForm').submit(function(){
+	jQuery.post(jQuery(this).attr('action'),jQuery('#companyForm').serialize(),function(res){
+		if (res.ret==1) {
+			alert('保存成功');
+		} else {
+			alert('res.msg');
+		}
+	},'json')
+	
+	return false;
+})
+jQuery(function(){
+	
+	jQuery('#emailPreview').click(function(){
+		var email_to = jQuery('#email_to').val();
+		var email_subject = jQuery('#email_subject').val();
+		if (!email_subject) {
+			alert("请填写邮件主题");
+			return;
+		}
+		var url = jQuery(this).attr('data-url')+'?tid=4&subject='+email_subject;
+		window.open(url);
+	})
+})
+function chosenShow(target) {
+	jQuery('#'+target).show();
+}
+function chosenHide(target) {
+	jQuery('#'+target).fadeOut();
+}
+function chosenKeyword(target,e) {
+	jQuery('#'+target).val(jQuery(e).text());
+	jQuery(e).parents('.keyword-box').hide();
+}
+function renderEmail() {
+	//jQuery('#col_url').removeClass('wp50').addClass('wp25');
+	//jQuery('#col_email').removeClass('wp25').addClass('wp50');
+	jQuery('#col_email .mask').hide();
+	var email = jQuery('input[name=client_email]:checked').length > 0 ? jQuery('input[name=client_email]:checked').val() : '';
+	var product = new Array();
+	
+	jQuery('input[name=client_product]:checked').each(function(){
+		product.push(jQuery(this).parent().text());
+	})
+	if (jQuery('input[name=client_product]').length>0) {
+		if (product.length==0) {
+			//alert('请至少选择一个产品。');
+			//return;
+		}
+	}
+	
+	var product_promo = jQuery('#product_promo').val().trim();
+	if (!product_promo.length) {
+
+		alert('请至少输入一个推广产品。');
+		return;
+	} 
+	
+	product = product.join(";");
+	product_promo = product_promo.replace(/,/g,";");
+
+	//渲染内容
+	var url = jQuery('#keyword').val();
+	jQuery('#email_product').val(product);
+	jQuery.ajax({
+		  url:'<?php echo $this->getUrl('adminhtml/ajax_client/getmail',array('isAjax'=>true)); ?>',
+		  data:{url:url,form_key:'<?php echo $this->getFormKey(); ?>',email:email,product:product,product_promo:product_promo},
+		  timeout:20000,
+		  dataType:"json",
+		  complete:function(resp) {
+		  		res = resp.responseText;
+		  	    if (res) {
+		  	    	res = JSON.parse(res);
+			  	    //console.log(res);
+				  	if (res.ret==1) {
+						$this = jQuery(res.data);
+						jQuery('#email_body').text($this.find('#email_body').text());
+						//console.log(jQuery('#email_body_ifr').contents().find('#tinymce'));
+						jQuery('#email_body_ifr').contents().find('#tinymce').html($this.find('#email_body').text());
+						jQuery('#email_subject').val($this.find('#email_subject').val());
+						jQuery('#email_to').val($this.find('#email_to').val());
+						
+						window.wysiwygemail_body.toggle();
+						window.wysiwygemail_body.toggle();
+						toggleModel(0);
+					} else {
+						if (res.hasOwnProperty('ajaxRedirect')) {
+							window.location.href = res.ajaxRedirect;
+						}
+					}
+		  	    } else {
+		  	    	
+		  	    }
+		  }
+	})
+}
+
+
+function sendEmail() {
+	var email_to = jQuery('#email_to').val();
+	var email_from = jQuery('#email_from').attr('data');
+	var email_subject = jQuery('#email_subject').val();
+	var email_body = jQuery('#email_body').text();
+	var email_from_name = jQuery('#email_from').attr('data-from');
+	var cc_me = jQuery("#cc_me").attr("checked")=="checked" ? 1 : 0;
+	jQuery('#send_email_btn').attr('disabled','disabled');
+	jQuery('#send_email_loading').show();
+	jQuery.ajax({
+		  url:'<?php echo $this->getUrl('adminhtml/ajax_client/sendmail',array('isAjax'=>true)); ?>',
+		  data:{email_to:email_to,form_key:'<?php echo $this->getFormKey(); ?>',email_from:email_from,email_subject:email_subject,email_body:email_body,cc_me:cc_me},
+		  timeout:120000,
+		  dataType:"json",
+		  complete:function(resp) {
+		  		res = resp.responseText;
+		  	    if (res) {
+		  	    	res = JSON.parse(res);
+				  	if (res.ret==1) {
+				  		alert("恭喜您，邮件已经发送成功，请敬请等待客户的回复。")
+				  	} else {
+				  		if (res.hasOwnProperty('ajaxRedirect')) {
+							window.location.href = res.ajaxRedirect;
+						}
+				  	}
+		  	    }
+		  	    jQuery('#send_email_loading').hide();
+		  	    jQuery('#send_email_btn').removeAttr('disabled');
+		  }
+	})
+	
+}
+
+function checkEmail() {
+	var email_to = jQuery('#email_to').val();
+	jQuery.ajax({
+		  url:'<?php echo $this->getUrl('adminhtml/ajax_client/checksend',array('isAjax'=>true)); ?>',
+		  data:{email_to:email_to,form_key:'<?php echo $this->getFormKey(); ?>'},
+		  timeout:120000,
+		  dataType:"json",
+		  complete:function(resp) {
+		  		res = resp.responseText;
+		  	    if (res) {
+		  	    	res = JSON.parse(res);
+				  	if (res.ret==0) {
+				  		if (confirm('您最近已给该客户发送邮件，是否再发一封')) {
+							sendEmail();
+						}
+				  	} else {
+				  		if (res.hasOwnProperty('ajaxRedirect')) {
+							window.location.href = res.ajaxRedirect;
+						}
+						sendEmail();
+				  	}
+		  	    }
+		  	   
+		  }
+	})
+	
+}
+
+function switchSubject() {
+	var client_id = jQuery('#client_id').val();
+	var email_to = jQuery('#email_to').val();
+	var email_subject = jQuery('#email_subject').val();
+	var product = new Array();
+	
+	jQuery('input[name=client_product]:checked').each(function(){
+		product.push(jQuery(this).parent().text());
+	})
+	var product_promo = jQuery('#product_promo').val().trim(); 	
+	product = product.join(";");
+	product_promo = product_promo.replace(/,/g,";");
+	
+	jQuery.ajax({
+		  url:'<?php echo $this->getUrl('adminhtml/ajax_client/switch',array('isAjax'=>true,'module'=>'邮件标题')); ?>',
+		  data:{client_id:client_id,form_key:'<?php echo $this->getFormKey(); ?>',email:email_to,email_subject:email_subject,product:product,product_promo:product_promo},
+		  timeout:120000,
+		  dataType:"json",
+		  complete:function(resp) {
+		  		res = resp.responseText;
+		  	    if (res) {
+		  	    	res = JSON.parse(res);
+			  	    //console.log(res);
+				  	if (res.ret==1) {
+						$this = jQuery(res.data);
+
+						jQuery('#email_subject').val($this.find('#email_subject').val());
+					} else {
+						if (res.hasOwnProperty('ajaxRedirect')) {
+							window.location.href = res.ajaxRedirect;
+						}
+					}
+		  	    } else {
+		  	    	
+		  	    }
+		  }
+	})
+}
+</script>
+
+<script>
+jQuery(function(){
+	resetSection();
+	jQuery(window).resize(function() {
+		resetSection();
+	})
+})
+function resetSection() {
+	var height = jQuery(window).height()-40;
+	//jQuery('.e-edit > section').css({height:height+'px'})
+}
+</script>
+
+<!-- 下面是向导  -->
+<ol id="joyRideTipContent" style="display:none;">
+  <li data-id="joystep_1" data-text="下一步" class="custom" data-options="">
+    <h2>#1</h2>
+    <p>输入客户网站，如 http://www.apple.com/，点击“分析”按钮</p>
+  </li>
+  <li data-id="joystep_2" data-button="下一步" data-options="tipLocation:top;tipAnimation:fade">
+    <h2>#2</h2>
+    <p>选择客户的产品，有助于提高开发信质量</p>
+  </li>
+  <li data-id="joystep_3" data-button="下一步" data-options="tipLocation:right">
+    <h2>#3</h2>
+    <p>输入贵公司要推广的产品.</p>
+  </li>
+  <li data-id="joystep_4" data-button="下一步" data-options="tipLocation:right">
+    <h2>#4</h2>
+    <p>选择收件人邮箱地址，如没有，请手工在右侧“发件人”一栏输入.</p>
+  </li>
+  <li data-id="joystep_5" data-button="前往设置帐号基本信息" data-options="tipLocation:right">
+    <h2>#5</h2>
+    <p>点“生成开发信”按钮，即可生成一封匹配的开发信。前往设置帐号基本信息，即可立即体验！</p>
+  </li>
+  <!--
+  <li data-id="joystep_6" data-button="完成" data-options="">
+    <h2>Step #6</h2>
+    <p>点击邮件发送按钮完成工作，原来写一封高质量的开发信就这么简单.</p>
+  </li>-->
+  <li data-id="joystep_7" data-button="完成" data-options="">
+    <h2>#6</h2>
+    <p>点击“我的设置”，更改公司信息.</p>
+  </li>
+</ol>
+
+<script>
+jQuery(function(){
+	var status = '<?php if(!$user->getData('status_guide_email') && !$_SESSION['status_guide_email']){ echo 0; }else { echo 1;} ?>';
+
+	if (status=='0') {
+		jQuery('#keyword').val('www.roomstogo.com');
+		searchAgain();
+	} else {
+		<?php if ($url = $this->getRequest()->getParam('url')): ?>
+		jQuery('#keyword').val('<?php echo $url; ?>');
+		searchAgain();
+		<?php endif; ?>
+	}
+	
+})
+function renderJoyride() {
+	jQuery('#joyRideTipContent').joyride({
+    	autoStart : true,
+      	postStepCallback : function (index, tip) {
+      		if (index==5) { 
+      			//完成设置
+      			jQuery.get('<?php echo $this->getUrl('adminhtml/ajax_guide/finishsearch',array('isAjax'=>true)); ?>',{form_key:'<?php echo $this->getFormKey(); ?>'},function(res){
+         			
+         		},'json')
+      		}
+    	},
+    	modal:true,
+    	expose: true
+    });
+}
+
+</script>

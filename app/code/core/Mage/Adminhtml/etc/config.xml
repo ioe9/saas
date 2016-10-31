@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<config>
+    <global>
+        <events>
+            <adminhtml_controller_action_predispatch_start>
+                <observers>
+                   
+                    <massaction>
+                        <class>adminhtml/observer</class>
+                        <method>massactionPrepareKey</method>
+                    </massaction>
+                </observers>
+            </adminhtml_controller_action_predispatch_start>
+            <admin_user_authenticate_after>
+                <observers>
+
+                </observers>
+            </admin_user_authenticate_after>
+        </events>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <use>admin</use>
+                <args>
+                    <module>Mage_Adminhtml</module>
+                    <frontName>admin</frontName>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <events>
+            <controller_action_predispatch>
+                <observers>
+                    <auth>
+                        <class>admin/observer</class>
+                        <method>actionPreDispatchAdmin</method>
+                    </auth>
+                </observers>
+            </controller_action_predispatch>
+        </events>
+    </adminhtml>
+    <stores>
+        <admin>
+            <design>
+                <package>
+                    <name>default</name>
+                </package>
+                <theme>
+                    <default>default</default>
+                </theme>
+            </design>
+        </admin>
+    </stores>
+</config>

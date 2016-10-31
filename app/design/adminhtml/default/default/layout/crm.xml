@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<layout>
+	<adminhtml_crm_email_edit>
+        <update handle="editor"/>
+    </adminhtml_email_edit>
+    <adminhtml_crm_analysis_keyword_index>
+        <update handle="editor"/>
+    </adminhtml_crm_analysis_keyword_index>
+    <adminhtml_crm_analysis_url_index>
+        <update handle="editor"/>
+    </adminhtml_crm_analysis_url_index>
+    <adminhtml_crm_email_preview_index>
+   		<reference name="root">
+            <action method="setTemplate"><template>crm/email/preview.phtml</template></action>
+        </reference>
+    </adminhtml_crm_email_preview_index>
+    <adminhtml_crm_ajax_client_analysis>
+        <remove name="right"/>
+        <remove name="left"/>
+        <block type="crm/adminhtml_analysis_summary" name="root" output="toHtml" template="crm/analysis/ajax/summary.phtml"/>
+    </adminhtml_crm_ajax_client_analysis>
+    
+    <adminhtml_crm_ajax_client_getemail>
+        <remove name="right"/>
+        <remove name="left"/>
+        <block type="crm/adminhtml_client_email" name="root" output="toHtml" template="crm/ajax/client/email.phtml"/>
+    </adminhtml_crm_ajax_client_getemail>
+    <adminhtml_crm_email_preview_draft>
+    	<remove name="right"/>
+        <remove name="left"/>
+       <reference name="content">
+            <block type="core/template" name="draft" output="toHtml" template="crm/email/preview/draft.phtml" />
+        </reference>
+    </adminhtml_crm_email_preview_draft>
+    
+    <adminhtml_crm_ajax_client_config>
+        <remove name="right"/>
+        <remove name="left"/>
+         <block type="adminhtml/template" name="root" output="toHtml" template="crm/analysis/ajax/module/config.phtml"/>
+    </adminhtml_crm_ajax_client_config>
+    <adminhtml_crm_ajax_analysis_keyword_match>
+        <remove name="right"/>
+        <remove name="left"/>
+        <block type="crm/adminhtml_client_analysis_keyword" name="root" output="toHtml" template="crm/analysis/ajax/keyword.phtml"/>
+    </adminhtml_crm_ajax_analysis_keyword_match>
+    <adminhtml_crm_ajax_guide_subcat>
+        <remove name="right"/>
+        <remove name="left"/>
+        <block type="adminhtml/template" name="root" output="toHtml" template="crm/ajax/guide/subcat.phtml"/>
+    </adminhtml_crm_ajax_guide_subcat>
+    <adminhtml_feedback_index>
+        <reference name="content">
+            <block type="adminhtml/template" name="feedback" template="crm/feedback/form.phtml"/>
+        </reference>
+    </adminhtml_feedback_index>
+    
+    <adminhtml_page_view>
+        <reference name="content">
+            <block type="adminhtml/template" name="page" template="crm/page.phtml"/>
+        </reference>
+    </adminhtml_page_view>
+    <adminhtml_selfservice_url_index>
+        <reference name="content">
+            <block type="crm/adminhtml_selfservice_url" name="selfservice_url" template="crm/selfservice/url.phtml"/>
+        </reference>
+    </adminhtml_selfservice_url_index>
+    
+    <adminhtml_crm_community_template_index>
+    	<reference name="right">
+            <block type="crm/adminhtml_community_template_layer" name="community_template_layer" before="-" template="crm/community/template/layer.phtml"/>
+            <block type="crm/adminhtml_community_template_sidebar_hot" name="community_template_hot" after="community_template_layer" template="crm/community/template/sidebar/hot.phtml"/>
+            <block type="crm/adminhtml_community_template_sidebar_hot" name="community_template_new" after="community_template_new" template="crm/community/template/sidebar/new.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="crm/adminhtml_community_template_list" name="community_template_list" template="crm/community/template/list.phtml"/>
+        </reference>
+    </adminhtml_crm_community_template_index>
+    
+    <adminhtml_crm_community_design_index>
+    	<reference name="right">
+            <block type="crm/adminhtml_community_design_layer" name="community_design_layer" before="-" template="crm/community/design/layer.phtml"/>
+            <block type="crm/adminhtml_community_design_sidebar_hot" name="community_design_hot" after="community_design_layer" template="crm/community/design/sidebar/hot.phtml"/>
+            <block type="crm/adminhtml_community_design_sidebar_hot" name="community_design_new" after="community_design_new" template="crm/community/design/sidebar/new.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="crm/adminhtml_community_design_list" name="community_design_list" template="crm/community/design/list.phtml"/>
+        </reference>
+    </adminhtml_crm_community_design_index>
+    <adminhtml_crm_community_task_index>
+        <reference name="content">
+            <block type="crm/adminhtml_community_task" name="community_task_list"/>
+        </reference>
+    </adminhtml_crm_community_task_index>
+    <adminhtml_crm_community_article_index>
+    	<reference name="right">
+    		
+            <block type="crm/adminhtml_community_article_layer" name="community_article_layer" after="-" template="crm/community/article/layer.phtml"/>
+            <block type="crm/adminhtml_community_article_sidebar_hot" name="community_article_hot" after="community_article_layer" template="crm/community/article/sidebar/hot.phtml"/>
+            <block type="crm/adminhtml_community_article_sidebar_new" name="community_article_new" after="community_article_hot" template="crm/community/article/sidebar/new.phtml"/>
+            <block type="core/template" name="banner_site" after="-" template="crm/banner/site.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="crm/adminhtml_community_article_list" name="community_article_list" template="crm/community/article/list.phtml"/>
+        </reference>
+    </adminhtml_crm_community_article_index>
+    <adminhtml_crm_community_article_list>
+    	<update handle="adminhtml_community_article_index"/>
+    </adminhtml_crm_community_article_list>
+    <adminhtml_crm_community_article_wx>
+    	<update handle="adminhtml_community_article_index"/>
+    </adminhtml_crm_community_article_wx>
+    <adminhtml_crm_community_article_view>
+    	<reference name="right">
+            <block type="crm/adminhtml_community_article_layer" name="community_article_layer" before="-" template="crm/community/article/layer.phtml"/>
+            <block type="crm/adminhtml_community_article_sidebar_hot" name="community_article_hot" after="community_article_layer" template="crm/community/article/sidebar/hot.phtml"/>
+            <block type="crm/adminhtml_community_article_sidebar_new" name="community_article_new" after="community_article_hot" template="crm/community/article/sidebar/new.phtml"/>
+            <block type="core/template" name="banner_site" after="community_article_new" template="crm/banner/site.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="crm/adminhtml_community_article_view" name="community_article_view" template="crm/community/article/view.phtml"/>
+        </reference>
+    </adminhtml_crm_community_article_view>
+</layout>

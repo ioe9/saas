@@ -1,0 +1,101 @@
+#nav {float: left;}
+/************** ALL LEVELS  *************/ /* Style consistent throughout all nav levels */
+#nav li {
+    float: left;
+    padding: 0;
+    position: relative;
+}
+
+#nav li.over { z-index:99; }
+#nav li.active { z-index:100; } /* to prevent the li separator from showing through on mouseover on li */
+
+#nav .level0 > a:hover,
+#nav .level0 > a.active {
+    border-bottom: 2px solid #c40022;
+    
+}
+#nav span { display:block; /*cursor:pointer;*/ }
+#nav a {
+    color: #eee;
+    cursor: pointer;
+    display: block;
+    font-size: 16px;
+    font-weight: 300;
+    height: 45px;
+    letter-spacing: 0;
+    line-height: 45px;
+    padding: 0 20px;
+    text-decoration: none;
+}
+#nav a.active {
+    background-color: #1b926c;
+    color: #fff;
+}
+#nav a:hover {
+	color: #fff;
+}
+/************ 1ST LEVEL  ***************/
+
+#nav li.active {
+
+}
+#nav li.active em { display:block; position:absolute; top:0; right:-1px; width:3px; height:27px; background:url(images/nav1_active.gif) no-repeat 100% 0; }
+
+#nav > li > a > span { float:left; }
+#nav > li > a > span .fa {
+    float: left;
+    line-height: 52px;
+    margin: 0 6px;
+}
+#nav > li > a > .fa {
+    margin-left: 5px;
+}
+
+
+
+/************ 1ST LEVEL RESET ************/
+#nav ul li,
+#nav ul li.active { float:none; height:auto; background:none; margin:0; }
+#nav ul a,
+#nav ul a:hover { float:none; padding:0; line-height:1.3em; }
+#nav ul li.over a,
+#nav ul li.over a:hover,
+#nav ul a,
+#nav li.active li { font-weight:normal; }
+
+
+/************ 2ND LEVEL ************/
+#nav ul {
+    background: #fff none repeat scroll 0 0;
+    border-radius: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    left: -10000px;
+    min-width: 150px;
+    padding: 0;
+    position: absolute;
+    top: 45px;
+}
+#nav ul ul  {padding-top:2px; left:100px; top:13px; }
+
+/* Show menu */
+#nav li.over ul { left:-1px; }
+#nav li.over ul ul { left:-10000px; }
+#nav li.over ul li.over ul { left:100px; }
+
+#nav ul li { padding:0; text-align: left;}
+#nav ul li a {  }
+#nav ul li a:hover { background:#f1f1f1;color: #000; }
+#nav li.over ul a,
+#nav ul li.active a,
+#nav ul li a {
+    color: #333;
+    display: block;
+    font-size: 15px;
+    font-weight: 500;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 12px;
+    text-shadow: none;
+}
+
+

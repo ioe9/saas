@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>欢迎登陆IOEGO邮件助手 - 您值得信赖的好帮手！</title>
+    <link type="text/css" rel="stylesheet" href="<?php echo $this->getSkinUrl('css/login.css') ?>" media="all" />
+	<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>jquery.min.js"></script>
+	<link rel="icon" href="<?php echo MAGE_HOST . 'favicon.ico' ?>" type="image/x-icon"/>
+	<link rel="shortcut icon" href="<?php echo MAGE_HOST . 'favicon.ico' ?>" type="image/x-icon"/>
+</head>
+<body id="page-login" onload="document.forms.loginForm.username.focus();">
+    <div class="login-container">
+        <div class="login-box">
+            <form method="post" action="" id="loginForm" autocomplete="off">
+                <div class="login-form">
+                    <div class="heading">
+                    	<h2>登陆 - IOEGO邮件助手</h2>
+                	</div>
+                	<div class="c-box">
+	                    <div id="messages">
+	                        <?php echo $this->getMessagesBlock()->toHtml() ?>
+	                    </div>
+	                    <input name="form_key" type="hidden" value="<?php echo $this->getFormKey() ?>" />
+	                    <div class="input-box mb15">
+	                    	<label class="mb5 f-left">用户名：</label><div class="clr"></div>
+	                        <input type="text" id="username" name="login[username]" value="" class="required-entry input-text" placeholder="用户名"/></div>
+	                    <div class="clr"></div>
+	                    <div class="input-box mb15">
+	                        <!-- This is a dummy hidden field to trick firefox from auto filling the password -->
+	                        <label class="mb5 f-left">密码：</label><div class="clr"></div>
+	                        <input type="text" class="input-text no-display" name="dummy" id="dummy" />
+	                        <input type="password" id="login" name="login[password]" class="required-entry input-text" value="" placeholder="密码"/></div>
+	                    
+	                    <div class="clr"></div>
+	                    <div class="form-buttons mb20">
+	                       
+	                        <input type="submit" class="form-button" value="立即登录" title="<?php echo Mage::helper('core')->quoteEscape(Mage::helper('adminhtml')->__('Login')) ?>" />
+	                    </div>
+	            		<a class="left" href="<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/index/forgotpassword', array('_nosecret' => true)) ?>">忘记密码？</a>
+	            		<a class="right" href="<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/index/register', array('_nosecret' => true)) ?>">还没有帐号，立即注册体验？</a>
+                		<div class="clr"></div>
+                	</div>
+            	</div>
+               <p class="legal">&copy;<?php echo date('Y') ?> All rights reserved 上海龙茧信息科技有限公司 | Powered by Mio</p>
+            </form>
+            <div class="bottom"></div>
+            <script type="text/javascript">
+            $(function(){
+            	$('#loginForm').submit(function(){
+            		if ($('#username').val() && $('#login').val()) {
+            			return true;
+            		} else {
+            			return false;
+            		}
+            	})
+            })
+            </script>
+        </div>
+    </div>
+</body>
+</html>
+
