@@ -1,71 +1,5 @@
 <?php
-/**
- * Magento
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Open Software License (OSL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/osl-3.0.php
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@magento.com so we can send you a copy immediately.
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade Magento to newer
- * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magento.com for more information.
- *
- * @category    Mage
- * @package     Mage_Core
- * @copyright  Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
- * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- */
-
-/**
- * Template model
- *
- * Example:
- *
- * // Loading of template
- * $emailTemplate  = Mage::getModel('core/email_template')
- *    ->load(Mage::getStoreConfig('path_to_email_template_id_config'));
- * $variables = array(
- *    'someObject' => Mage::getSingleton('some_model')
- *    'someString' => 'Some string value'
- * );
- * $emailTemplate->send('some@domain.com', 'Name Of User', $variables);
- *
- * @method Mage_Core_Model_Resource_Email_Template _getResource()
- * @method Mage_Core_Model_Resource_Email_Template getResource()
- * @method string getTemplateCode()
- * @method Mage_Core_Model_Email_Template setTemplateCode(string $value)
- * @method string getTemplateText()
- * @method Mage_Core_Model_Email_Template setTemplateText(string $value)
- * @method string getTemplateStyles()
- * @method Mage_Core_Model_Email_Template setTemplateStyles(string $value)
- * @method int getTemplateType()
- * @method Mage_Core_Model_Email_Template setTemplateType(int $value)
- * @method string getTemplateSubject()
- * @method Mage_Core_Model_Email_Template setTemplateSubject(string $value)
- * @method string getTemplateSenderName()
- * @method Mage_Core_Model_Email_Template setTemplateSenderName(string $value)
- * @method string getTemplateSenderEmail()
- * @method Mage_Core_Model_Email_Template setTemplateSenderEmail(string $value)
- * @method string getAddedAt()
- * @method Mage_Core_Model_Email_Template setAddedAt(string $value)
- * @method string getModifiedAt()
- * @method Mage_Core_Model_Email_Template setModifiedAt(string $value)
- * @method string getOrigTemplateCode()
- * @method Mage_Core_Model_Email_Template setOrigTemplateCode(string $value)
- * @method string getOrigTemplateVariables()
- * @method Mage_Core_Model_Email_Template setOrigTemplateVariables(string $value)
- * @method Mage_Core_Model_Email_Template setQueue(Mage_Core_Model_Abstract $value)
- * @method Mage_Core_Model_Email_Queue getQueue()
- * @method int hasQueue()
- *
+/*
  * @category    Mage
  * @package     Mage_Core
  * @author      Magento Core Team <core@magentocommerce.com>
@@ -98,12 +32,12 @@ class Mage_Core_Model_Email_Template extends Mage_Core_Model_Email_Template_Abst
     /**
      * Retrieve mail object instance
      *
-     * @return Zend_Mail
+     * @return Varien_Mail
      */
     public function getMail()
     {
         if (is_null($this->_mail)) {
-            $this->_mail = new Zend_Mail('utf-8');
+            $this->_mail = new Varien_Mail('utf-8');
         }
         return $this->_mail;
     }
@@ -153,18 +87,18 @@ class Mage_Core_Model_Email_Template extends Mage_Core_Model_Email_Template_Abst
      * @param string $templateId
      * @param string $locale
      */
-    public function loadDefault($templateId, $locale=null)
+    public function loadDefault($templateId)
     {
         $defaultTemplates = self::getDefaultTemplates();
         if (!isset($defaultTemplates[$templateId])) {
             return $this;
         }
-
+		
         $data = &$defaultTemplates[$templateId];
         $this->setTemplateType($data['type']=='html' ? self::TYPE_HTML : self::TYPE_TEXT);
 
         $templateText = Mage::app()->getTranslator()->getTemplateFile(
-            $data['file'], 'email', $locale
+            $data['file'], 'email'
         );
 
         if (preg_match('/<!--@subject\s*(.*?)\s*@-->/u', $templateText, $matches)) {
@@ -201,7 +135,7 @@ class Mage_Core_Model_Email_Template extends Mage_Core_Model_Email_Template_Abst
     static public function getDefaultTemplates()
     {
         if(is_null(self::$_defaultTemplates)) {
-            self::$_defaultTemplates = Mage::getConfig()->getNode(self::XML_PATH_TEMPLATE_EMAIL)->asArray();
+            self::$_defaultTemplates = Mage::helper('core/config_email_template')->getDefaultTemplates();
         }
 
         return self::$_defaultTemplates;
@@ -370,11 +304,12 @@ class Mage_Core_Model_Email_Template extends Mage_Core_Model_Email_Template_Abst
      **/
     public function send($email, $name = null, array $variables = array())
     {
+    	
         if (!$this->isValidForSend()) {
             Mage::logException(new Exception('This letter cannot be sent.')); // translation is intentionally omitted
             return false;
         }
-
+		
         $emails = array_values((array)$email);
         $names = is_array($name) ? $name : (array)$name;
         $names = array_values($names);
@@ -428,10 +363,10 @@ class Mage_Core_Model_Email_Template extends Mage_Core_Model_Email_Template_Abst
         ini_set('smtp_port', Mage::getStoreConfig('system/smtp/port'));
 
         $mail = $this->getMail();
-
+        
         if ($returnPathEmail !== null) {
-            $mailTransport = new Zend_Mail_Transport_Sendmail("-f".$returnPathEmail);
-            Zend_Mail::setDefaultTransport($mailTransport);
+            $mailTransport = new Varien_Mail_Transport_Sendmail("-f".$returnPathEmail);
+            Varien_Mail::setDefaultTransport($mailTransport);
         }
 
         foreach ($emails as $key => $email) {
@@ -474,36 +409,26 @@ class Mage_Core_Model_Email_Template extends Mage_Core_Model_Email_Template_Abst
      *
      * @return  Mage_Core_Model_Email_Template
      */
-    public function sendTransactional($templateId, $sender, $email, $name, $vars=array(), $storeId=null)
+    public function sendTransactional($templateId, $sender, $email, $name, $vars=array())
     {
         $this->setSentSuccess(false);
-        if (($storeId === null) && $this->getDesignConfig()->getStore()) {
-            $storeId = $this->getDesignConfig()->getStore();
-        }
-
         if (is_numeric($templateId)) {
             $queue = $this->getQueue();
             $this->load($templateId);
             $this->setQueue($queue);
         } else {
-            $localeCode = Mage::getStoreConfig('general/locale/code', $storeId);
-            $this->loadDefault($templateId, $localeCode);
+            $this->loadDefault($templateId);
         }
-
         if (!$this->getId()) {
             throw Mage::exception('Mage_Core', Mage::helper('core')->__('Invalid transactional email code: %s', $templateId));
         }
 
         if (!is_array($sender)) {
-            $this->setSenderName(Mage::getStoreConfig('trans_email/ident_' . $sender . '/name', $storeId));
-            $this->setSenderEmail(Mage::getStoreConfig('trans_email/ident_' . $sender . '/email', $storeId));
+            $this->setSenderName(Mage::getStoreConfig('trans_email/ident_' . $sender . '/name'));
+            $this->setSenderEmail(Mage::getStoreConfig('trans_email/ident_' . $sender . '/email'));
         } else {
             $this->setSenderName($sender['name']);
             $this->setSenderEmail($sender['email']);
-        }
-
-        if (!isset($vars['store'])) {
-            $vars['store'] = Mage::app()->getStore($storeId);
         }
         $this->setSentSuccess($this->send($email, $name, $vars));
         return $this;

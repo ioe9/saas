@@ -1,5 +1,47 @@
 <?xml version="1.0"?>
 <config>
+
+	<menu>
+        <dashboard>
+        	<sort_order>0</sort_order>
+	        <title>工作台</title>
+	        <action>adminhtml/dashboard/</action>
+	        <children>
+		        <index>
+		        	<sort_order>10</sort_order>
+			        <title>主页</title>
+			        <action>adminhtml/dashboard/</action>
+		        </index>
+		        <done>
+		        	<sort_order>20</sort_order>
+			        <title>我的已办</title>
+			        <action>adminhtml/dashboard_done/</action>
+		        </done>
+		        <activity>
+		        	<sort_order>30</sort_order>
+			        <title>动态消息</title>
+			        <action>adminhtml/dashboard_activity/</action>
+		        </activity>
+		        <notice>
+		        	<sort_order>40</sort_order>
+			        <title>系统消息</title>
+			        <action>adminhtml/dashboard_notice/</action>
+		        </notice>
+		        
+		        <schedule>
+		        	<sort_order>100</sort_order>
+			        <title>日程</title>
+			        <action>adminhtml/dashboard_schedule/</action>
+		        </schedule>
+		        <contact>
+		        	<sort_order>110</sort_order>
+			        <title>通讯录</title>
+			        <action>adminhtml/dashboard_contact/colleague</action>
+		        </contact>
+	        </children>
+        
+        </dashboard>
+    </menu>
     <acl>
         <resources>
             <all>

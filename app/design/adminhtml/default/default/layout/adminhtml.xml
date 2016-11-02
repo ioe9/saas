@@ -42,9 +42,13 @@
         
     </adminhtml_system_config_edit>
     <adminhtml_dashboard_index>
+    	<reference name="right">
+            <block type="adminhtml/dashboard_right" name="dashboard.right" before="-" template="dashboard/right.phtml"/>
+        </reference>
         <reference name="content">
             <block type="adminhtml/dashboard" name="dashboard"/>
         </reference>
+        
     </adminhtml_dashboard_index>
     <adminhtml_dashboard_guidesuccess>
         <reference name="content">

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!-- 安装时初始化该文件 -->
+<config>
+    <global>
+        <install>
+            <date><![CDATA[Fri, 25 Dec 2015 05:16:25 +0000]]></date>
+        </install>
+        <crypt>
+            <key><![CDATA[3ec5e7510adfb55048045512f23941bb]]></key>
+        </crypt>
+        <resources>
+            <default_setup>
+                <connection>
+                    <host><![CDATA[localhost]]></host>
+                    <username><![CDATA[root]]></username>
+                    <password><![CDATA[]]></password>
+                    <dbname><![CDATA[ioego]]></dbname>
+                    <initStatements><![CDATA[SET NAMES utf8]]></initStatements>
+                    <active>1</active>
+                    <model><![CDATA[mysql4]]></model>
+                    <type><![CDATA[pdo_mysql]]></type>
+                    <pdoType><![CDATA[]]></pdoType>
+                </connection>
+            </default_setup>
+        </resources>
+        <session_save><![CDATA[files]]></session_save>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <frontName><![CDATA[admin]]></frontName>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+</config>

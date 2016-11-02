@@ -418,6 +418,22 @@ table.actions button:hover {
     float: right;
     width: 275px;
 }
+
+/************** right side ***********************/
+.side-setting {
+    background-color: #ec5958 !important;
+    border-color: #e74443;
+    border-radius: 2px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    height: 42px;
+    line-height: 40px;
+    padding: 0 14px 0 20px;
+}
+
+
 /************** side banner **********************/
 .side-widget a {
     background-color: #fff;
@@ -458,15 +474,15 @@ table.actions button:hover {
 }
 /******************** header ********************/
 .header {
-    width: 100%;
-	background:rgba(0, 0, 0, 0) linear-gradient(to bottom, #0096d2 0%, #4787b3 100%) repeat scroll 0 0;
-	height: 45px;
+    background: #3b5999 none repeat scroll 0 0;
+    box-shadow: 0 1px 5px #ccc;
+    color: #fff;
+    height: 48px;
     position: relative;
     transition: top 0.2s ease-in 0s;
-    box-shadow: 0 2px 12px #bbb;
+    width: 100%;
     z-index: 998;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
-    color: #FFF;
+    font-size: 15px;
 }
 
 .header .logo a.home {
@@ -487,7 +503,7 @@ table.actions button:hover {
 .header .more a {
     color: #eee;
     font-weight: normal;
-    line-height: 45px;
+    line-height: 48px;
     padding: 0 10px;
 }
 .header .more a:hover {
@@ -526,7 +542,7 @@ table.actions button:hover {
 
 .nav-m li {
     float: left;
-    line-height: 45px;
+    line-height: 48px;
     padding: 0 15px;
     position:relative;
 }
@@ -539,7 +555,7 @@ table.actions button:hover {
     left: -100px;
     padding: 10px;
     position: absolute;
-    top: 45px;
+    top: 48px;
     width: 280px;
 	
 }
@@ -565,7 +581,7 @@ table.actions button:hover {
 	display:block;
 }
 .nav-m li a {
-	color: #FFF;
+	color: #eee;
 }
 .nav-h li a {
     background: #63a3cf none repeat scroll 0 0;
@@ -596,14 +612,14 @@ table.actions button:hover {
     margin-left: 5px;
 }
 #nav a{
-    color: #fff;
+    color: #eee;
     cursor: pointer;
     display: block;
     font-size: 15px;
     font-weight: 300;
-    height: 45px;
+    height: 48px;
     letter-spacing: 0;
-    line-height: 45px;
+    line-height: 48px;
     padding: 0 20px;
     text-decoration: none;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
@@ -622,7 +638,7 @@ table.actions button:hover {
 #nav ul a,
 #nav li.active li{font-weight:normal;}
 /************ 2ND LEVEL ************/
-#nav ul{background: #fff none repeat scroll 0 0;border-radius: 0;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);left: -10000px;min-width: 150px;padding: 0;position: absolute;top: 45px;}
+#nav ul{background: #fff none repeat scroll 0 0;border-radius: 0;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);left: -10000px;min-width: 150px;padding: 0;position: absolute;top: 48px;}
 #nav ul ul{padding-top:2px;left:100px;top:13px;}
 /* Show menu*/
 #nav li.over ul{left:-1px;}

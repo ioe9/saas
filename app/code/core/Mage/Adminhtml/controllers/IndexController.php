@@ -152,7 +152,7 @@ class Mage_Adminhtml_IndexController extends Mage_Adminhtml_Controller_Action
 
 	                
         if (Mage::getSingleton('admin/session')->isLoggedIn()) {
-            //$this->_redirect('adminhtml/email/new');
+            $this->_redirect('adminhtml/dashboard');
             return;
         }
         
@@ -231,7 +231,7 @@ class Mage_Adminhtml_IndexController extends Mage_Adminhtml_Controller_Action
 
         if (!empty($email) && !empty($params)) {
             // Validate received data to be an email address
-            if (Zend_Validate::is($email, 'EmailAddress')) {
+            if (Varien_Validate::is($email, 'EmailAddress')) {
                 $collection = Mage::getResourceModel('admin/user_collection');
                 /** @var $collection Mage_Admin_Model_Resource_User_Collection */
                 $collection->addFieldToFilter('email', $email);
@@ -250,7 +250,7 @@ class Mage_Adminhtml_IndexController extends Mage_Adminhtml_Controller_Action
                     }
                 }
                 $this->_getSession()
-                    ->addSuccess(Mage::helper('adminhtml')->__('If there is an account associated with %s you will receive an email with a link to reset your password.', Mage::helper('adminhtml')->escapeHtml($email)));
+                    ->addSuccess(Mage::helper('adminhtml')->__('重置密码链接已发送至邮箱：%s.', Mage::helper('adminhtml')->escapeHtml($email)));
                 $this->_redirect('*/*/login');
                 return;
             } else {
@@ -280,7 +280,7 @@ class Mage_Adminhtml_IndexController extends Mage_Adminhtml_Controller_Action
             );
             $this->_outTemplate('resetforgottenpassword', $data);
         } catch (Exception $exception) {
-            $this->_getSession()->addError(Mage::helper('adminhtml')->__('Your password reset link has expired.'));
+            $this->_getSession()->addError(Mage::helper('adminhtml')->__('重置密码请求链接已无效，请重试。'));
             $this->_redirect('*/*/forgotpassword', array('_nosecret' => true));
         }
     }
@@ -358,6 +358,7 @@ class Mage_Adminhtml_IndexController extends Mage_Adminhtml_Controller_Action
      */
     protected function _validateResetPasswordLinkToken($userId, $resetPasswordLinkToken)
     {
+    	
         if (!is_int($userId)
             || !is_string($resetPasswordLinkToken)
             || empty($resetPasswordLinkToken)
@@ -369,6 +370,7 @@ class Mage_Adminhtml_IndexController extends Mage_Adminhtml_Controller_Action
 
         /** @var $user Mage_Admin_Model_User */
         $user = Mage::getModel('admin/user')->load($userId);
+        
         if (!$user || !$user->getId()) {
             throw Mage::exception('Mage_Core', Mage::helper('adminhtml')->__('Wrong account specified.'));
         }

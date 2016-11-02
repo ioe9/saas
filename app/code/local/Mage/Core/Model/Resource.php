@@ -232,7 +232,7 @@ class Mage_Core_Model_Resource
         /*********************************************************************/
         //这里做会员帐号切换
         if (strpos($tableName,'admin_')===0) {
-        	$tableName = str_replace('admin_','ioe_admin_',$tableName);
+        	$tableName = str_replace('admin_','saas_admin_',$tableName);
         }
         /*********************************************************************/
         

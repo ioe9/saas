@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+    	<standard>
+	        <Mage_Core><name>core</name></Mage_Core>
+	        <Mage_Admin><name>admin</name></Mage_Admin>
+	        <Mage_Adminhtml><name>adminhtml</name></Mage_Adminhtml>
+        	<Mage_Page><name>page</name></Mage_Page>
+        	<Mage_Media><name>media</name></Mage_Media>
+        	<!-- APPs -->
+        	<Mage_Edm><name>edm</name></Mage_Edm>
+        	<Mage_Crm><name>crm</name></Mage_Crm>
+        	<Mage_Shop><name>shop</name></Mage_Shop>
+        	<Mage_Attendance><name>attendance</name></Mage_Attendance>
+        	<Mage_Task><name>task</name></Mage_Task>
+        	<Mage_Performance><name>performance</name></Mage_Performance>
+        	<Mage_Wms><name>wms</name></Mage_Wms>
+        	<Mage_Bill><name>bill</name></Mage_Bill>
+        	<Mage_Approve><name>approve</name></Mage_Approve>
+        	<Mage_Document><name>document</name></Mage_Document>
+        	<Mage_Bulletin><name>bulletin</name></Mage_Bulletin>
+        	<Mage_Bi><name>bi</name></Mage_Bi>
+        	<Mage_Report><name>report</name></Mage_Report>
+        	<Mage_Material><name>material</name></Mage_Material>
+        	<Mage_Workflow><name>workflow</name></Mage_Workflow>
+        	<Mage_Project><name>project</name></Mage_Project>
+        	<Mage_College><name>college</name></Mage_College>
+        </standard>
+    </modules>
+</config>

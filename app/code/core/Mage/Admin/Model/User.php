@@ -246,7 +246,7 @@ class Mage_Admin_Model_User extends Mage_Core_Model_Abstract
      */
     public function getName($separator = ' ')
     {
-        return $this->getFirstname() . $separator . $this->getLastname();
+        return $this->getData('name');
     }
 
     /**

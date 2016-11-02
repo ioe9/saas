@@ -1,9 +1,9 @@
 /* LOGIN
 *******************************************************************************/
 *                       { margin:0; padding:0; }
-body                    { background:#eee url("data:image/png;base64,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") repeat scroll 0 0; color:#555; font:14px/1.5em "Helvetica Neue",Helvetica,Arial,sans-serif;  }
+body                    { background:#f0f0f0; color:#333; font:14px/1.5em "微软雅黑","Helvetica Neue",Helvetica,Arial,sans-serif;  }
 a {
-    color: #4787b3;
+    color: #398aee;
     text-decoration: none;
 }
 a:hover {
@@ -14,7 +14,8 @@ a:hover {
 .right {float:right;}
 .clr {clear:both;}
 .messages li { list-style: outside none none; }
-.messages li.error-msg {
+.messages li.error-msg,
+.messages li.success-msg {
     background: #f9f2f4 none repeat scroll 0 0;
     border-radius: 3px;
     color: #c7254e;
@@ -23,6 +24,10 @@ a:hover {
     margin-top: -10px;
     padding: 5px 10px;
 }
+.messages li.success-msg {
+    background: #d8ecde none repeat scroll 0 0;
+    color: #4cad4e;
+}
 #page-login                             {
 	text-align: center;
 }
@@ -30,15 +35,14 @@ a:hover {
     background: #fff none repeat scroll 0 0;
     border: 1px solid #b6b6b6;
     border-radius: 0;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
-    margin: 170px auto;
+    box-shadow: 0 0 6px #999;
+    margin: 168px auto;
     width: 500px;
 }
 
 .login-box .input-text {
     background: #fff none repeat scroll 0 0;
     border: 1px solid #ddd;
-    border-radius: 3px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15) inset;
     box-sizing: border-box;
     font-size: 15px;
@@ -58,7 +62,9 @@ a:hover {
 	filter:progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#f5f5f5',endColorstr='#cfd1cf')
 }
 .login-form h2                          {
-    font-size: 18px;
+    color: #333;
+    font-family: "微软雅黑";
+    font-size: 23px;
     font-weight: normal;
     margin: 0;
 }
@@ -79,25 +85,21 @@ a:hover {
 }
 
 .login-form .form-button {
-    background: #00b4f5 none repeat scroll 0 0;
-    border: 1px solid #0096d2;
+    background: #55c357 none repeat scroll 0 0;
+    border: 1px solid #38ae3a;
     border-radius: 3px;
-    box-shadow: 0 1px 0 #ccc;
+    box-shadow: 0 2px 2px #ccc;
     color: #fff;
     cursor: pointer;
     font-size: 18px;
     height: 42px;
     margin-bottom: 10px;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
     margin-top: 5px;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
     width: 100%;
 }
 .login-form .form-button:hover {
-    background-color: #0096d2;
-    border-color: #0096d2;
-    color: #fff;
+    background-color: #4cad4e;
+    border-color: #409642;
 }
 .login-container .legal {
 	padding:10px 8px 8px;

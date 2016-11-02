@@ -77,12 +77,10 @@ abstract class Mage_Core_Model_Email_Template_Abstract extends Mage_Core_Model_T
                 return null;
             }
 
-            $storeId = $this->getDesignConfig()->getStore();
-
             $data = &$defaultTemplates[$templateId];
             $this->setTemplateType($data['type']=='html' ? self::TYPE_HTML : self::TYPE_TEXT);
 
-            $localeCode = Mage::getStoreConfig('general/locale/code', $storeId);
+            $localeCode = Mage::getStoreConfig('general/locale/code');
             $templateText = Mage::app()->getTranslator()->getTemplateFile(
                 $data['file'], 'email', $localeCode
             );
@@ -109,10 +107,9 @@ abstract class Mage_Core_Model_Email_Template_Abstract extends Mage_Core_Model_T
      * @param  Mage_Core_Model_Store|int|string $store
      * @return string
      */
-    protected function _getLogoUrl($store)
+    protected function _getLogoUrl()
     {
-        $store = Mage::app()->getStore($store);
-        $fileName = $store->getConfig(self::XML_PATH_DESIGN_EMAIL_LOGO);
+        $fileName = Mage::getStoreConfig(self::XML_PATH_DESIGN_EMAIL_LOGO);
         if ($fileName) {
             $uploadDir = Mage_Adminhtml_Model_System_Config_Backend_Email_Logo::UPLOAD_DIR;
             $fullFileName = Mage::getBaseDir('media') . DS . $uploadDir . DS . $fileName;
@@ -129,14 +126,13 @@ abstract class Mage_Core_Model_Email_Template_Abstract extends Mage_Core_Model_T
      * @param  Mage_Core_Model_Store|int|string $store
      * @return string
      */
-    protected function _getLogoAlt($store)
+    protected function _getLogoAlt()
     {
-        $store = Mage::app()->getStore($store);
-        $alt = $store->getConfig(self::XML_PATH_DESIGN_EMAIL_LOGO_ALT);
+        $alt = Mage::getStoreConfig(self::XML_PATH_DESIGN_EMAIL_LOGO_ALT);
         if ($alt) {
             return $alt;
         }
-        return $store->getFrontendName();
+        return Mage::getStoreConfig('design/head/default_title');
     }
 
     /**
@@ -146,47 +142,36 @@ abstract class Mage_Core_Model_Email_Template_Abstract extends Mage_Core_Model_T
      * @param $storeId
      * @return mixed
      */
-    protected function _addEmailVariables($variables, $storeId)
+    protected function _addEmailVariables($variables)
     {
-        if (!isset($variables['store'])) {
-            $store = Mage::app()->getStore($storeId);
-            $variables['store'] = $store;
-        }
         if (!isset($variables['logo_url'])) {
-            $variables['logo_url'] = $this->_getLogoUrl($storeId);
+            $variables['logo_url'] = $this->_getLogoUrl();
         }
         if (!isset($variables['logo_alt'])) {
-            $variables['logo_alt'] = $this->_getLogoAlt($storeId);
+            $variables['logo_alt'] = $this->_getLogoAlt();
         }
         if (!isset($variables['logo_width'])) {
             $variables['logo_width'] = Mage::getStoreConfig(
-                self::XML_PATH_DESIGN_EMAIL_LOGO_WIDTH,
-                $storeId
+                self::XML_PATH_DESIGN_EMAIL_LOGO_WIDTH
             );
         }
         if (!isset($variables['logo_height'])) {
             $variables['logo_height'] = Mage::getStoreConfig(
-                self::XML_PATH_DESIGN_EMAIL_LOGO_HEIGHT,
-                $storeId
+                self::XML_PATH_DESIGN_EMAIL_LOGO_HEIGHT
             );
         }
         if (!isset($variables['store_phone'])) {
             $variables['store_phone'] = Mage::getStoreConfig(
-                Mage_Core_Model_Store::XML_PATH_STORE_STORE_PHONE,
-                $storeId
+                Mage_Core_Model_Store::XML_PATH_STORE_STORE_PHONE
             );
         }
         if (!isset($variables['store_hours'])) {
             $variables['store_hours'] = Mage::getStoreConfig(
-                Mage_Core_Model_Store::XML_PATH_STORE_STORE_HOURS,
-                $storeId
+                Mage_Core_Model_Store::XML_PATH_STORE_STORE_HOURS
             );
         }
         if (!isset($variables['store_email'])) {
-            $variables['store_email'] = Mage::getStoreConfig(
-                Mage_Customer_Helper_Data::XML_PATH_SUPPORT_EMAIL,
-                $storeId
-            );
+            $variables['store_email'] = Mage::getStoreConfig('trans_email/ident_general/email');
         }
         // If template is text mode, don't include styles
         if (!$this->isPlain()) {
@@ -234,7 +219,7 @@ abstract class Mage_Core_Model_Email_Template_Abstract extends Mage_Core_Model_T
      */
     protected function _getCssFileContent($filename)
     {
-        $storeId = $this->getDesignConfig()->getStore();
+       
         $area = $this->getDesignConfig()->getArea();
         // This method should always be called within the context of the email's store, so these values will be correct
         $package = Mage::getDesign()->getPackageName();
@@ -245,7 +230,6 @@ abstract class Mage_Core_Model_Email_Template_Abstract extends Mage_Core_Model_T
             array(
                 '_type' => 'skin',
                 '_default' => false,
-                '_store' => $storeId,
                 '_area' => $area,
                 '_package' => $package,
                 '_theme' => $theme,
