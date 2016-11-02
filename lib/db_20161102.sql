@@ -59,11 +59,6 @@ INSERT INTO `admin_role` (`role_id`, `parent_id`, `tree_level`, `sort_order`, `r
 (5, 0, 1, 0, 'G', 0, '运营总监'),
 (6, 0, 1, 0, 'G', 0, '运营人员'),
 (9, 0, 1, 0, 'G', 0, '产品人员'),
-(14, 6, 2, 0, 'U', 5, '宏芸'),
-(15, 6, 2, 0, 'U', 6, '青'),
-(16, 5, 2, 0, 'U', 4, '席军'),
-(17, 4, 2, 0, 'U', 3, '吕兰'),
-(19, 1, 2, 0, 'U', 2, '杨琼'),
 (24, 1, 2, 0, 'U', 18, 'yang002');
 
 -- --------------------------------------------------------
@@ -202,13 +197,7 @@ CREATE TABLE `admin_user` (
 --
 
 INSERT INTO `admin_user` (`user_id`, `firstname`, `lastname`, `email`, `username`, `password`, `created`, `modified`, `logdate`, `lognum`, `reload_acl_flag`, `is_active`, `extra`, `rp_token`, `rp_token_created_at`) VALUES
-(1, 'Yang', 'Gary', 'yanggaojiao@qq.com', 'admin', '0192023a7bbd73250516f069df18b500', '2015-12-24 21:16:24', '2016-03-13 16:17:23', '2016-10-27 00:50:23', 251, 0, 1, 'a:1:{s:11:"configState";a:27:{s:12:"dev_restrict";s:1:"0";s:9:"dev_debug";s:1:"0";s:12:"dev_template";s:1:"0";s:20:"dev_translate_inline";s:1:"0";s:7:"dev_log";s:1:"0";s:6:"dev_js";s:1:"1";s:7:"dev_css";s:1:"1";s:7:"web_url";s:1:"0";s:7:"web_seo";s:1:"1";s:12:"web_unsecure";s:1:"0";s:10:"web_secure";s:1:"0";s:11:"web_default";s:1:"0";s:9:"web_polls";s:1:"0";s:10:"web_cookie";s:1:"0";s:11:"web_session";s:1:"0";s:24:"web_browser_capabilities";s:1:"0";s:14:"design_package";s:1:"0";s:12:"design_theme";s:1:"0";s:11:"design_head";s:1:"1";s:13:"design_header";s:1:"1";s:13:"design_footer";s:1:"0";s:16:"design_watermark";s:1:"1";s:17:"design_pagination";s:1:"0";s:12:"design_email";s:1:"0";s:13:"plan_settings";s:1:"1";s:11:"system_csrf";s:1:"0";s:16:"edm_txt_analysis";s:1:"1";}}', NULL, NULL),
-(2, '杨琼', '杨', '3313029632@qq.com', 'lisa', '0192023a7bbd73250516f069df18b500', '2016-02-17 02:12:24', '2016-05-18 09:07:15', '2016-02-18 23:47:07', 1, 0, 1, 'N;', NULL, NULL),
-(3, '吕兰', '吕', '3252476610@qq.com', 'locas', '3496f35f3d24652ec79b1867b2fca721:kEIaTqVa5G6sYTPurw4WXukuaWyOK1BV', '2016-02-17 02:14:49', '2016-03-13 17:08:51', NULL, 0, 0, 1, 'N;', NULL, NULL),
-(4, '韩席军', '韩', '251880795@qq.com', 'neal', '5ad8e0f1a22cfa08028f1606e2ad86a1:jAQzKgkz37XmG1brKv3ZJKzbTpnvkl9n', '2016-02-17 02:16:18', '2016-02-19 00:23:26', '2016-02-19 00:23:26', 1, 0, 1, 'N;', NULL, NULL),
-(5, '宏芸', '许', '514504483@qq.com', 'shirley', 'c77005370f7b4ae622d5c610b1355c73:YMyV3y8kAXp45OJ25MTI2qWswMzsV9pC', '2016-02-17 02:19:43', '2016-02-17 02:19:43', NULL, 0, 1, 1, 'N;', NULL, NULL),
-(6, '青', '付', '648842003@qq.com', 'summar', '28f6c47362e0558853c3672471dca139:ZVb9wzagThWDCKU122VSqfZ3zVkmADmG', '2016-02-17 02:20:54', '2016-02-18 23:59:02', '2016-02-18 23:59:02', 2, 0, 1, 'N;', NULL, NULL);
-
+(1, 'Yang', 'Gary', 'yanggaojiao@qq.com', 'admin', '0192023a7bbd73250516f069df18b500', '2015-12-24 21:16:24', '2016-03-13 16:17:23', '2016-10-27 00:50:23', 251, 0, 1, 'a:1:{s:11:"configState";a:27:{s:12:"dev_restrict";s:1:"0";s:9:"dev_debug";s:1:"0";s:12:"dev_template";s:1:"0";s:20:"dev_translate_inline";s:1:"0";s:7:"dev_log";s:1:"0";s:6:"dev_js";s:1:"1";s:7:"dev_css";s:1:"1";s:7:"web_url";s:1:"0";s:7:"web_seo";s:1:"1";s:12:"web_unsecure";s:1:"0";s:10:"web_secure";s:1:"0";s:11:"web_default";s:1:"0";s:9:"web_polls";s:1:"0";s:10:"web_cookie";s:1:"0";s:11:"web_session";s:1:"0";s:24:"web_browser_capabilities";s:1:"0";s:14:"design_package";s:1:"0";s:12:"design_theme";s:1:"0";s:11:"design_head";s:1:"1";s:13:"design_header";s:1:"1";s:13:"design_footer";s:1:"0";s:16:"design_watermark";s:1:"1";s:17:"design_pagination";s:1:"0";s:12:"design_email";s:1:"0";s:13:"plan_settings";s:1:"1";s:11:"system_csrf";s:1:"0";s:16:"edm_txt_analysis";s:1:"1";}}', NULL, NULL);
 -- --------------------------------------------------------
 
 --
