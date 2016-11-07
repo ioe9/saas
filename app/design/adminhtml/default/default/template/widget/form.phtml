@@ -28,3 +28,8 @@
     <?php echo $this->getFormHtml();?>
 </div>
 <?php echo $this->getChildHtml('form_after');?>
+<?php if ($this->getIndividual()): ?>
+<script type="text/javascript">
+    editForm = new mioForm('edit_form', '<?php echo $this->getValidationUrl() ?>');
+</script>
+<?php endif; ?>

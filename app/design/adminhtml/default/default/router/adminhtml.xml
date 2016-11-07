@@ -12,13 +12,19 @@
                 <action method="addCss"><name>css/font-awesome.min.css</name></action>
                 <action method="addCss"><name>css/tools.css</name></action>
                 <action method="addCss"><name>css/local.css</name></action>
-                <action method="addJs"><script>base.js</script></action>
+                <action method="addCss"><name>css/treechooser.css</name></action>
                 <action method="addJs"><script>jquery.min.js</script></action>
+                <action method="addJs"><script>cjpaginator.js</script></action>
+                <action method="addJs"><script>ztree.min.js</script></action>
+                <action method="addJs"><script>layer.js</script></action>
+                <action method="addJs"><script>base.js</script></action>
+                <action method="addJs"><script>lightbox.js</script></action>
                 <action method="addJs"><script>bootstrap.min.js</script></action>
                 <action method="addJs"><script>grid.js</script></action>
                 <action method="addJs"><script>validation.js</script></action>
                 <action method="addJs"><script>form.js</script></action>
                 <action method="addJs"><script>jquery/tools.js</script></action>
+                
             </block>
             <block type="adminhtml/page_header" name="header" as="header"></block>
             <block type="adminhtml/page_menu" name="menu" as="menu"></block>

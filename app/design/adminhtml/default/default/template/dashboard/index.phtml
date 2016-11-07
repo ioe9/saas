@@ -1,26 +1,46 @@
-<div class="content-header">
-    <table cellspacing="0">
-        <tr>
-            <td><h3 class="head-dashboard">我的工作面板</h3></td>
-        </tr>
-    </table>
-</div>
-<div class="dashboard-container">
-    <table cellspacing="25" width="100%">
-        <tr>
-            
-            <td>
-                <div class="entry-edit" style="border:1px solid #ccc;">
-                    
-                    <div style="margin:20px;">
-                        <?php //echo $this->getChildHtml('totals') ?>
-                    </div>
-                    <div style="margin:20px;">
-                        <?php //echo $this->getChildHtml('grids') ?>
-                        <div id="grid_tab_content"></div>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </table>
+<div class="dashboard-container ">
+    
+    <div class="d-box">
+    	<div class="h">
+    		<div class="f-left title">
+    			<h3 class="m0"><i class="fa fa-bar-chart-o mr10" aria-hidden="true"></i>数据看板</h3>
+    		</div>
+    		<div class="f-right actions">
+        		<div class="btn-group">
+				  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				    CRM <span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu" role="menu">
+				  	<?php $apps = Mage::getBlockSingleton('adminhtml/page_menu')->getApps(); ?>
+					<?php foreach ($apps as $item): ?>
+				    <li><a href="#"><?php echo $item['label']; ?></a></li>
+				    <?php endforeach; ?>
+				  </ul>
+				</div>
+				<div class="btn-group">
+				  <button type="button" class="btn btn-default">本周</button>
+				  <button type="button" class="btn btn-default">本月</button>
+				  <button type="button" class="btn btn-default">本季</button>
+				  <button type="button" class="btn btn-default">本年</button>
+				</div>
+    		</div>
+        	<div class="clr"></div>
+    	</div>
+    	<div class="inner mt15">
+    		<p class="empty">暂无数据</p>
+    		
+    	</div>
+    </div>
+    <div class="d-box mt10">
+    	<div class="h">
+    		<div class="f-left title">
+    			<h3 class="m0"><i class="fa fa-calendar-check-o mr10" aria-hidden="true"></i>我的待办</h3>
+    		</div>
+    		<div class="clr"></div>
+		</div>
+		<div class="inner mt15">
+    		<p class="empty">暂无数据</p>
+    		
+    	</div>
+	</div>         
 </div>

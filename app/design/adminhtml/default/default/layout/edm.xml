@@ -1,11 +1,16 @@
 <?xml version="1.0"?>
 <layout>
+	<adminhtml_edm_index>
+		<reference name="content">
+            <block type="core/template" name="dashboard" template="edm/dashboard.phtml" />
+        </reference>
+	</adminhtml_edm_index>
 	<adminhtml_edm_email_edit>
         <update handle="editor"/>
     </adminhtml_edm_email_edit>
     <adminhtml_edm_analysis_keyword_index>
         <update handle="editor"/>
-    </adminhtml_analysis_keyword_index>
+    </adminhtml_edm_analysis_keyword_index>
     <adminhtml_edm_analysis_url_index>
         <update handle="editor"/>
     </adminhtml_edm_analysis_url_index>
@@ -28,7 +33,7 @@
     <adminhtml_edm_email_preview_draft>
     	<remove name="right"/>
         <remove name="left"/>
-       <reference name="content">
+        <reference name="content">
             <block type="core/template" name="draft" output="toHtml" template="edm/email/preview/draft.phtml" />
         </reference>
     </adminhtml_edm_email_preview_draft>

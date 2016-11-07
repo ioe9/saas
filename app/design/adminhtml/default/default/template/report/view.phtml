@@ -1,0 +1,80 @@
+<?php $report = Mage::registry('current_report'); ?>
+<div class="view-container ">
+    <div class="c-box">
+    	<div class="content-header">
+			<h2 class="m0"><?php echo $report->getReportName(); ?></h2>
+			<div id="messages">
+		        <?php echo $this->getMessagesBlock()->toHtml() ?>
+		    </div>
+		</div>
+    </div>
+	<table width="100%" class="detail-table mt10">
+		<col width="12%"/>
+		<col width="88%"/>
+		<thead>
+			<tr>
+				<th colspan="2" class='a-left'><strong>报告信息</strong></th>
+			</tr>
+		</thead>
+		<tr>
+			<th>报告对象</th>
+			<td>
+				<?php $objects = $report->getReportObject(); ?>
+				<?php foreach ($objects as $item): ?>
+				<?php echo $item->getData('name');?>(<?php if($item->getData('link_status')):?>已读<?php else: ?>未读<?php endif; ?>;)
+				<?php endforeach; ?>
+			</td>
+		</tr>
+		<tr>
+			<th>报告时间</th>
+			<td><?php echo $report->getData('date_create'); ?></td>
+		</tr>
+		<tr>
+			<th>报告类型</th>
+			<?php $typeOption = Mage::getSingleton('report/type')->getAsOptionsArray(); ?>
+			<td><?php echo $typeOption[$report->getData('report_type')]; ?></td>
+		</tr>
+		<tr>
+			<th>抄送对象</th>
+			<td>
+			<?php $objects = $report->getReportCc(); ?>
+				<?php foreach ($objects as $item): ?>
+				<?php echo $item->getData('name');?>(<?php if($item->getData('link_status')):?>已读<?php else: ?>未读<?php endif; ?>;)
+				<?php endforeach; ?>
+			</td>
+		</tr>
+		<tr>
+			<th>报告内容</th>
+			<td><?php echo $report->getData('report_desc'); ?></td>
+		</tr>
+	</table>    
+	<div class="c-box mt10">
+    	<div class="content-header">
+			<h2 class="m0">回复列表</h2>
+			
+		</div>
+		<div class="p20">
+			<?php $replys = $this->getReplyCollection(); ?>
+			<?php foreach ($replys as  $item): ?>
+			<div class="clr">
+				<div class="f-left">
+					
+				</div>
+				<div class="f-rght">
+					<p><?php  ?></p>
+					<p><?php echo $item->getData('date_create') ?></p>
+					<p><?php echo $item->getData('reply_desc')  ?></p>
+				</div>
+			</div>
+			<?php endforeach; ?>
+		</div>
+		<div class="p20">
+			<?php $replys = $this->getReplyCollection(); ?>
+			<?php foreach ($replys as $item): ?>
+			
+			
+			<?php endforeach; ?>
+			<?php echo $this->getFormHtml(); ?>
+		</div>
+    </div>                 
+</div>

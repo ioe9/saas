@@ -1,0 +1,39 @@
+<?php $department = Mage::registry('current_department'); ?>
+<div class="dw360 bg-white tab-section-all">
+    <div class="tab-section" id="tab-personalSet">
+        <div class="dialog-personalSet-section ">
+            <div class="addnew-section">
+            	<?php if ($department->getId()): ?>
+            	<input id="staff_deptid" value="<?php echo $department->getId(); ?>" type="hidden"/>
+            	<?php endif; ?>
+                <p class="input-row">
+                    <label class="input-label">
+                        <span class="input-label-align w74">部门名称</span>
+                        <input type="text" id="<?php if ($department->getId()): ?>editDeptName<?php else: ?>addDeptName<?php endif; ?>" maxlength="20" class="input-text-nobrder w232" placeholder="请填部门名称" value="<?php echo $department->getData('dep_name') ;?>"/><span class="tip-required"></span>
+                    </label>
+                </p>
+				<p class="input-row">
+                    <label class="input-label">
+                        <span class="input-label-align w74">部门编号</span>
+                        <input type="text" id="<?php if ($department->getId()): ?>editDeptCode<?php else: ?>addDeptCode<?php endif; ?>" class="input-text-nobrder w232" placeholder="请填部门编号" value="<?php echo $department->getData('dep_code') ;?>"/><span class="tip-required"></span>
+                    </label>
+                </p>
+                <div class="input-row">
+                    <div class="input-label">
+                    	<input id="defaultDept" value="-1" type="hidden" />
+                        <span class="input-label-align w74 f-left">上级部门</span>
+                        <div class="bmtree bm-w232">
+					  		<div class="bmtree-text bm-w212 break" _id=""></div>
+					  		<div class="bmtree-area down ztree" id="bmZtreeOrg"></div>
+					  		<div class="bmtree-arrows down"></div>
+					  	</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn-row a-right">
+            <a href="javascript:;" class="btn btn-primary btn-save">确定</a>
+            <a href="javascript:;" class="btn btn-default btn-cancel">取消</a>
+        </div>
+    </div>
+</div>

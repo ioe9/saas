@@ -600,4 +600,20 @@ class Mage_Admin_Model_User extends Mage_Core_Model_Abstract
     {
         return now($dayOnly);
     }
+    
+    
+    
+    /********************* add by luke ************************/
+    public function getUserByCompany($companyId = null,$excludeLeave = true) {
+    	if (!$companyId) {
+    		$companyId = Mage::registry('current_company')->getId();
+    	}
+    	$collection = $this->getCollection()
+    		->addFieldToFilter('user_company',$companyId);
+		if ($excludeLeave) {
+			$collection->addFieldToFilter('is_active',array('gt'=>-1));
+		}
+		return $collection;
+    }
+
 }

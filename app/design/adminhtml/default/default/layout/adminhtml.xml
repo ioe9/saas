@@ -44,6 +44,7 @@
     <adminhtml_dashboard_index>
     	<reference name="right">
             <block type="adminhtml/dashboard_right" name="dashboard.right" before="-" template="dashboard/right.phtml"/>
+            <block type="adminhtml/dashboard_sidebar" name="dashboard.sidebar" after="dashboard.right" template="dashboard/sidebar.phtml"/>
         </reference>
         <reference name="content">
             <block type="adminhtml/dashboard" name="dashboard"/>

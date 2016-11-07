@@ -34,3 +34,77 @@
 		</tr>
 	</table>
 </div>
+<link rel="stylesheet" href="<?php echo $this->getSkinUrl('css/treechooser.css'); ?>" />
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>treechooser.js"></script>
+<script type="text/javascript">
+//用户/部门控件
+$(function() {
+	$('.input-user').each(function(){
+		$this = $(this).next().find('.add-user');
+		var oldDataArr = jQuery.parseJSON($this.attr('data-old'));
+		renderInputUser($this,oldDataArr);
+	})
+	
+})
+function bindInputUserEvent() {
+	$('.input-user-wrap .user-tag .delete').off('click').on('click',function(){
+		var curId = $(this).attr('data');
+		$thisWrap = $(this).parents('.input-user-wrap');
+		
+		$(this).parent().remove();
+		var newArr = [];
+		$thisWrap.find('.delete').each(function(){
+			newArr.push($(this).attr('data'));
+		})
+		$thisWrap.prev().attr('value',newArr.join(','));
+	})
+}
+function renderInputUser($this,data) {
+	var userValue = [];
+	$('#'+$this.attr('data-tag')).empty();
+	var dataOld = [];
+	$(data).each(function(i,e) {
+		
+			var tagStr = '<span class="user-tag"><span class="name">'+e.name+'</span><span class="delete" data="'+e.id+'">X</span>';
+			$('#'+$this.attr('data-tag')).append(tagStr);
+			userValue.push(e.id);
+			dataOld.push(e);
+		
+			
+	})
+	$this.attr('data-old',JSON.stringify(dataOld));
+	$('#'+$this.attr('data-target')).attr('value',userValue.join(','));
+	bindInputUserEvent();
+}
+function openTreechooser(e,t) {
+	t = t ? t :  "person";
+	$this = $(e);
+	MIO.chooser.initTreeDialog({
+		btnobj: {open_type:t},
+		oldData : jQuery.parseJSON($this.attr('data-old')),
+		args: {
+			appCode: '<?php echo Mage::registry('current_app') ? Mage::registry('current_app')->getCode() : '';  ?>',
+		},
+		confirmFn : function(arr,oldDataArr) {
+			var newArr = [];
+			$(arr).each(function(index,e) {
+				if (e.data_type==3) {
+					newArr.push({
+						'id':e.id,
+						'type':3,
+						'name':e.name,
+						'icon':e.header
+						
+					})
+				}
+			})
+			renderInputUser($this,newArr);
+		}
+	});
+}
+</script>
+<div style="display:none;width:510px;" id="lbmeTreechooser" class="lbme ">
+	<div class="lbme-h">选择人员</div>
+	
+	<div class="close"><i></i></div>
+</div>

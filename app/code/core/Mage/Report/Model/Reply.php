@@ -1,11 +1,11 @@
 <?php
-class Mage_Report_Model_Template extends Mage_Core_Model_Abstract
+class Mage_Report_Model_Reply extends Mage_Core_Model_Abstract
 {
-	const MEDIA_IMAGE_PREFIX = 'template';
+	const MEDIA_IMAGE_PREFIX = 'report/reply';
     
     protected function _construct()
     {
-        $this->_init('report/template');
+        $this->_init('report/reply');
     }
     
     public function getImageUrl() {

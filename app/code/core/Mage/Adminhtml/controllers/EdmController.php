@@ -9,7 +9,7 @@ class Mage_Adminhtml_EdmController extends Mage_Adminhtml_Controller_Edm
         $this->_title($this->__('EDM管理'));
         $this->loadLayout();
         $this->_setActiveMenu('edm');
-        
+       	//var_dump($this->getLayout()->getUpdate()->getHandles());
         $this->renderLayout();
     }
 	

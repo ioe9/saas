@@ -522,7 +522,7 @@ abstract class Varien_Db_Adapter_Abstract
              . $this->quoteIdentifier($table, true)
              . ' (' . implode(', ', $cols) . ') '
              . 'VALUES (' . implode(', ', $vals) . ')';
-		echo $sql;
+		//echo $sql;
         // execute the statement and return the number of affected rows
         if ($this->supportsParameters('positional')) {
             $bind = array_values($bind);

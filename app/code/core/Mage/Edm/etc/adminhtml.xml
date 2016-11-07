@@ -6,6 +6,11 @@
 	        <title>EDM</title>
 	        <action>adminhtml/edm/</action>
 	      	<children>
+	      		<index>
+		        	<sort_order>0</sort_order>
+			        <title>首页</title>
+			        <action>adminhtml/edm/</action>
+		        </index>
 		        <email>
 		        	<sort_order>10</sort_order>
 			        <title>邮件</title>

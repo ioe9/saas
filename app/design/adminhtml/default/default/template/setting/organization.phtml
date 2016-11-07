@@ -1,0 +1,79 @@
+<div class="c-box">
+	<div class="content-header">
+		<table>
+			<tbody><tr>
+				<td><h3 class="icon-head head-setting-company"><i class="fa fa-th mr5" aria-hidden="true"></i>组织结构设置</h3></td>
+				<td class="form-buttons"></td>
+			</tr>
+		</tbody></table>
+		
+    </div>
+    
+</div>
+<div class="d-box-wrap mt10">
+	<div class="e-box f-left" style="width:400px">
+    	<div class="h">
+    		<div class="f-left title">
+    			<h3 class="m0">组织结构</h3>
+    		</div>
+    		<div class="f-right actions">
+        		
+    		</div>
+        	<div class="clr"></div>
+    	</div>
+    	<div class="org-tree-wrapout">
+    		<div class="mm-org-tree-wrap pr0 section mCustomScrollbar _mCS_1 mCS_no_scrollbar" id="ztreeWrap">
+    			<ul class="ztree mt0" id="tree" style="-moz-user-select: none;"></ul>
+    		</div>
+    		
+    	</div>
+    </div>
+    <div class="e-box f-right" style="width:696px" >
+    	<div class="h">
+    		<div class="f-left title">
+    			<h3 class="m0" id="nodeNames">全公司(0)</h3>
+    			
+    		</div>
+    		<div class="f-right actions">
+    			<input type="text" class="form-control" id="searchname" placeholder="请输入姓名" style="width: 120px; display: inline;">
+        		<button type="button" class="btn btn-primary searchBtn">搜索</button>
+        		<button type="button" class="btn btn-primary addStaffBtn">添加员工</button>
+        		<button type="button" class="btn btn-primary batSetBtn">批量设置</button>
+        		<button type="button" class="btn btn-primary exportStaffBtn">导出</button>  
+    		</div>
+        	<div class="clr"></div>
+    	</div>
+    	<div class="inner mt15 org-staff-wrapout">
+    		<div class="mm-list-wrap section myscroll-bar">
+    			<div class="list-item org-item-header clearfix">
+			        <div class="w125 f-left">
+				        <div class="check-box-wrap mr-20" style="line-height: 39px;">
+				        	<i class="icons-checkbox icon-unchecked" _tag="all"></i>
+			        	</div>姓名
+		        	</div>
+			        <div class="w125 f-left">部门</div>
+			        <div class="w125 f-left">职位</div>
+			        <div class="w125 f-left">账号</div>
+			        <div class="w125 f-left">操作 </div>
+				</div>
+    		</div>
+    		<div id="orgStaffList" class="org-item-list">
+    		
+    		
+    		</div>
+    		
+    	</div>
+    </div>
+    <div class="clr"></div>
+    <div class="page-wrap clearfix" id="colleague_pag"></div>
+</div>
+<link rel="stylesheet" href="<?php echo $this->getSkinUrl('css/setting.css'); ?>" />
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ztreeutil.js"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>orgset.js"></script>
+
+<script type="text/javascript">
+//用户/部门控件
+$(function(){
+	
+})
+</script>

@@ -1,0 +1,17 @@
+<?php $apps = Mage::getBlockSingleton('adminhtml/page_menu')->getApps(); ?>
+<?php foreach ($apps as $item): ?>
+<div class="side-box">
+	<div class="panel-heading panel-control">
+	   	<h2 class="m0"><i class="fa fa-arrows-alt mr5" aria-hidden="true"></i><?php echo $item['label']; ?></h2>
+	   	<div class="actions">
+	   		<a href="<?php echo '#'; ?>"><i class="fa fa-angle-right f-right" aria-hidden="true"></i></a>
+	   	</div>
+		<div class="clr"></div>
+	</div>
+	<div class="mb15 p20 side-box-inner">
+		<p class="empty">暂无内容</p>
+		<?php  ?>
+	</div>
+	<div class="clr"></div>
+</div>
+<?php endforeach; ?>

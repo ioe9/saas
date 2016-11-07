@@ -6,22 +6,27 @@
 	        <title>工作报告</title>
 	        <action>adminhtml/report/</action>
 	        <children>
+	        	<index>
+		        	<sort_order>0</sort_order>
+			        <title>首页</title>
+			        <action>adminhtml/report/</action>
+		        </index>
 		        <submitto>
 		        	<sort_order>10</sort_order>
 			        <title>提交给我的</title>
-			        <action>adminhtml/report_submitto/</action>
+			        <action>adminhtml/report/submitto/</action>
 		        </submitto>
 			    <ccto>
 		        	<sort_order>20</sort_order>
 			        <title>抄送给我的</title>
-			        <action>adminhtml/report_ccto/</action>
+			        <action>adminhtml/report/ccto/</action>
 		        </ccto>
 		        <submit>
 		        	<sort_order>30</sort_order>
-			        <title>提交给我的</title>
-			        <action>adminhtml/report_submit/</action>
+			        <title>我提交的</title>
+			        <action>adminhtml/report/submit/</action>
 		        </submit>
-	               
+	            
 	        </children>
         </report>
     </menu>

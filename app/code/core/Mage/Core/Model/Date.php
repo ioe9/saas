@@ -32,7 +32,8 @@ class Mage_Core_Model_Date
      */
     protected function _getConfigTimezone()
     {
-        return Mage::app()->getStoreConfig('general/locale/timezone');
+         $timezone = Mage::app()->getStoreConfig('general/locale/timezone');
+         return ($timezone ? $timezone : 'Asia/Shanghai');
     }
 
     /**
@@ -44,8 +45,6 @@ class Mage_Core_Model_Date
     public function calculateOffset($timezone = null)
     {
         $result = true;
-        $offset = 0;
-
         if (!is_null($timezone)){
             $oldzone = @date_default_timezone_get();
             $result = date_default_timezone_set($timezone);
@@ -74,7 +73,7 @@ class Mage_Core_Model_Date
         if (is_null($format)) {
             $format = 'Y-m-d H:i:s';
         }
-
+		date_default_timezone_set('PRC');
         $result = date($format);
         return $result;
     }

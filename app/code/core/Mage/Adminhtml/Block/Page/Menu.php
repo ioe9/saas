@@ -240,6 +240,7 @@ class Mage_Adminhtml_Block_Page_Menu extends Mage_Adminhtml_Block_Template
     {
         $html = '<ul ' . (!$level ? 'id="nav"' : '') . '>' . PHP_EOL;
         foreach ($menu as $item) {
+        	
             $html .= '<li class="'
                 . (!$level && !empty($item['active']) ? ' active' : '') . ' '
                 . (!empty($item['children']) ? ' parent' : '')
@@ -261,11 +262,22 @@ class Mage_Adminhtml_Block_Page_Menu extends Mage_Adminhtml_Block_Template
 
         return $html;
     }
-    
+    public function getApps() {
+    	$menu = $this->getMenuArray();
+    	foreach ($menu as $key => $item) {
+        	if ($item['sort_order']<0) {
+        		unset($menu[$key]);
+        	}
+    	}
+    	return $menu;
+    }
     public function getMenuLevelFirst($menu)
     {
         $html = '<ul>' . PHP_EOL;
         foreach ($menu as $item) {
+        	if ($item['sort_order']<0) {
+        		continue;
+        	}
             $html .= '<li>'
                 . '<a href="' . $item['url'] . '" '
                 . (!empty($item['title']) ? 'title="' . $item['title'] . '"' : '')

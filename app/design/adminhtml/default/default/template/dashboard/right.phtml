@@ -1,14 +1,26 @@
 <div class="side-setting mb10">
-	<div class=""><i class="fa fa-cog mr5" aria-hidden="true"></i>工作台主页自定义</div>
+	<div class=""><i class="fa fa-cog mr5" aria-hidden="true"></i>工作台主页自定义<i class="fa fa-angle-down f-right" aria-hidden="true"></i></div>
 </div>
 <div class="side-box">
 	<div class="panel-heading">
-	   	<h2 class="m0">应用</h2>
+	   	<h2 class="m0"><i class="fa fa-th mr5" aria-hidden="true"></i>应用</h2>
 		<div class="clr"></div>
 
 	</div>
-	<div class="mb20 p15 side-box-inner">
-		
+	<div class="mb20 side-box-inner">
+		<?php $apps = Mage::getBlockSingleton('adminhtml/page_menu')->getApps(); ?>
+		<?php $colNum = 3; ?>
+		<?php $i = 0; ?>
+		<?php $pageNum = floor(count($apps)/$colNum); ?>
+		<?php foreach ($apps as $item): ?>
+		<div class="apps-item <?php if(($i+1)%$colNum==0): ?>last<?php endif; ?> <?php if(($i+1)>($pageNum-1)*$colNum): ?>bottom<?php endif; ?>">
+			<a href="<?php echo $item['url'] ?>" title="<?php echo $item['label'] ?>" target="_blank">
+				<img src="<?php echo $this->getSkinUrl('images/icon.png'); ?>" alt="<?php echo $item['label']; ?>"/>
+				<span><?php echo $item['label']; ?></span>
+			</a>
+		</div>
+		<?php $i++; ?>
+		<?php endforeach; ?>
 	</div>
 	<div class="clr"></div>
 </div>

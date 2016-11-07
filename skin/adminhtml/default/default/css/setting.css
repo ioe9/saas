@@ -1,0 +1,33 @@
+.org-staff-wrapout,.wrap-padding{padding: 15px 20px 15px 20px;}
+.list-item{height: 40px;line-height: 40px;padding-left: 20px;}
+.list-item > div{height: inherit;}
+.org-item-header{background: #e9f3ff;height: 33px;line-height: 33px;}
+.icons-checkbox{
+    /* display:inline-block;width:14px;height:14px;cursor: pointer;background: url("../images/v3/check-box.png") no-repeat center;*/
+}
+.check-box-wrap{float: left;line-height: 45px;height: 38px;}
+.list-item-even{background: #f3f8ff;}
+.d-addmorebtn {
+    border: 1px solid #3c8ee9;
+    border-radius: 3px;
+    color: #3c8ee9;
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 73px;
+    text-align: center;
+    width: 91px;
+}
+.btn-row {
+    padding: 20px 30px 26px 0;
+}
+.bm-w377 {
+    width: 377px !important;
+}
+.bm-w357 {
+    width: 357px !important;
+}
+.staffSetBtn,
+.staffRemoveBtn {
+	cursor:pointer;
+}

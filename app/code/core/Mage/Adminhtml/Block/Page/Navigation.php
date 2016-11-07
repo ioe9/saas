@@ -104,8 +104,8 @@ class Mage_Adminhtml_Block_Page_Navigation extends Mage_Adminhtml_Block_Template
         $sortOrder = 0;
         foreach ($parent->children() as $childName => $child) {
         	if ($level==0) {
-        		
-        		if ($this->getActive()!=$childName){
+        		$activePathArr = explode('/',$this->getActive());
+        		if ($activePathArr[0]!=$childName){
         			continue;
         		};
                 
@@ -123,7 +123,7 @@ class Mage_Adminhtml_Block_Page_Navigation extends Mage_Adminhtml_Block_Template
             $menuArr = array();
 
             $menuArr['label'] = $this->_getHelperValue($child);
-
+			$menuArr['with_line'] = $child->with_line ? (int)$child->with_line : 0;
             $menuArr['sort_order'] = $child->sort_order ? (int)$child->sort_order : $sortOrder;
 
             if ($child->action) {
@@ -248,8 +248,12 @@ class Mage_Adminhtml_Block_Page_Navigation extends Mage_Adminhtml_Block_Template
      */
     public function getMenuLevel($menu, $level = 0)
     {
-        $html = '<ul ' . (!$level ? 'id="navleft"' : '') . '>' . PHP_EOL;
+        $html = '<ul ' . (!$level ? 'id="navleft" class="navleft"' : '') . '>' . PHP_EOL;
         foreach ($menu as $item) {
+        	if ($item['with_line']) {
+        		$html .= '<li class="line"></li>';
+        		
+        	}
             $html .= '<li class="'
                 . (!$level && !empty($item['active']) ? ' active' : '') . ' '
                 . (!empty($item['children']) ? ' parent' : '')
@@ -259,7 +263,7 @@ class Mage_Adminhtml_Block_Page_Navigation extends Mage_Adminhtml_Block_Template
                 . ($level === 0 && !empty($item['active']) ? 'active' : '') . '"><span>'
                 
                 . ($item['label']) . '</span>'
-                //. ($level === 0 && !empty($item['children']) ? '<i class="fa fa-caret-down"></i>' : '')
+                . ($level === 0 && !empty($item['children']) ? '<i class="fa fa-angle-down" aria-hidden="true"></i>' : '')
 				. '</a>' . PHP_EOL;
 
             if (!empty($item['children'])) {

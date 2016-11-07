@@ -20,8 +20,8 @@
             <div id="page:main-container">
             <?php if($this->getChildHtml('navigation')): ?>
 				<?php $rightHtml = $this->getChildHtml('right'); ?>
-                <div class="columns columns-left mt20 <?php echo $this->getContainerCssClass() ?>">
-                    <div class="<?php if($rightHtml): ?>side-left<?php else: ?>side-left-s<?php endif; ?>" id="page:left">
+                <div class="columns columns-left mt15 <?php echo $this->getContainerCssClass() ?>">
+                    <div class="<?php if($rightHtml): ?>side-left<?php else: ?>side-left <?php endif; ?>" id="page:left">
                         <?php echo $this->getChildHtml('navigation') ?>
                     </div>
                     <?php if($rightHtml): ?>
@@ -58,6 +58,10 @@
 </div>
 
 <?php echo $this->getChildHtml('before_body_end') ?>
-
+<script>
+$("a").bind("focus",function() {
+if(this.blur) {this.blur()};
+});
+</script>
 </body>
 </html>

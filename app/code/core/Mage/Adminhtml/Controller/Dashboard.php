@@ -1,7 +1,14 @@
 <?php
 class Mage_Adminhtml_Controller_Dashboard extends Mage_Adminhtml_Controller_Action
 {
+	protected $_appData = array(
+		'name' => '工作面板',
+		'code' => 'dashboard',
+	);
 	public function preDispatch() {
+		$app = new Varien_Object();
+        $app->addData($this->_appData);
+        Mage::register('current_app',$app,true);
         parent::preDispatch();
         return $this;
 	}

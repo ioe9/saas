@@ -1,0 +1,169 @@
+<div class="dialog-w480 bg-white tab-section-all">
+    <div class="dialog-personalSet-header">
+        <ul class="tabList margin-l158">
+            <li class="active" _tag="tab-personalSet">创建账号</li>
+            <li _tag="tab-userImg">导入员工</li>
+        </ul>
+    </div>
+    <!-- 个人设置 -->
+    <div class="tab-section addStaffSection" id="tab-personalSet">
+    	
+        <div class="addMoreScroller" style="">
+            <div class="dialog-personalSet-section no-padding" id="addMoreWrap" style="">
+                <div class="addnew-section dialog-padding">
+                    <p class="input-row pr">
+                        <label class="input-label">
+                            <span class="input-label-align w50">姓名</span>
+                            <input type="text" name="staffname" class="input-text-nobrder w377" placeholder="请输入员工姓名" value=""/>
+                            <span class="tip-required required">*</span>
+                        </label>
+                    </p>
+                    <p class="input-row pr">
+                        <label class="input-label">
+                            <span class="input-label-align w50">手机</span>
+                            <input type="text" name="staffphone" class="input-text-nobrder w377" placeholder="请输入员工手机" value=""/>
+                            <span class="tip-required required">*</span>
+                        </label>
+                    </p>
+                    <p class="input-row">
+                        <label class="input-label">
+                            <span class="input-label-align w50">职位</span>
+                            <input type="text" name="staffduty" class="input-text-nobrder w377" placeholder="请输入员工职务信息" value=""/>
+                            <span class="tip-required required"></span>
+                        </label>
+                    </p>
+                    <div class="input-row">
+                        <div class="input-label">
+                            <span class="input-label-align w50 float-l">部门</span>
+                            <div class="bmtree bm-w377">
+						  		<div class="bmtree-text bm-w357 break" _id=""></div>
+						  		<div class="bmtree-area bm-h150 down ztree" _tag="bmZtreeAddMore"></div>
+						  		<div class="bmtree-arrows down"></div>
+						  	</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="addnew-section dialog-padding">
+                    <p class="input-row pr">
+                        <label class="input-label">
+                            <span class="input-label-align w50">姓名</span>
+                            <input type="text" name="staffname" class="input-text-nobrder w377" placeholder="请输入员工姓名" value=""/>
+                            <span class="tip-required required">*</span>
+                        </label>
+                    </p>
+                    <p class="input-row pr">
+                        <label class="input-label">
+                            <span class="input-label-align w50">手机</span>
+                            <input type="text" name="staffphone" class="input-text-nobrder w377" placeholder="请输入员工手机" value=""/>
+                            <span class="tip-required required">*</span>
+                        </label>
+                    </p>
+                    <p class="input-row">
+                        <label class="input-label">
+                            <span class="input-label-align w50">职位</span>
+                            <input type="text" name="staffduty" class="input-text-nobrder w377" placeholder="请输入员工职务信息" value=""/>
+                            <span class="tip-required required"></span>
+                        </label>
+                    </p>
+                    <div class="input-row">
+                        <div class="input-label">
+                            <span class="input-label-align w50 float-l">部门</span>
+                            <div class="bmtree bm-w377">
+						  		<div class="bmtree-text bm-w357 break" _id=""></div>
+						  		<div class="bmtree-area bm-h150 up ztree" _tag="bmZtreeAddMore"></div>
+						  		<div class="bmtree-arrows down"></div>
+						  	</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="javascript:;" class="d-addmorebtn" id="addMoreBtn">+创建更多</a>
+        <div class="btn-row  a-right">
+            <a href="javascript:;" class="btn btn-primary btn-save">确定</a>
+            <a href="javascript:;" class="btn btn-default btn-cancel">取消</a>
+        </div>
+    </div>
+
+    <!-- 导入员工设置 -->
+    <div class="tab-section importStaffSection" style="display:none;" id="tab-userImg">
+        <div class="dialog-personalSet-img clearfix padding-l30">
+            <div class="userImg-tips no-padding black dw500">
+                <div class="tipRow">操作步骤:</div>
+                <div class="tipRow">1.下载《用户导入模板》</div>
+                <div class="tipRow">2.打开下载的excel模板文件,将对应的字段信息输入并保存,请不要带格式</div>
+                <div class="tipRow">3.点击"上传"按钮,选中已填入了用户信息的excel模板文件</div>
+                <div class="tipRow">4.点击"确定",导入完成后显示导入结果</div>
+                <div class="tipRow">5.导入后,将会给所有被导入用户发送通知短信</div>
+                <div class="tipRow">6.导入前,请务必核查待导入数据,确保数据的准确性</div>
+                <div class="tipRow">7.期间如有疑问或问题,请联系在线客服</div>
+                <div class="tipRow  margin-t20">点击下载<a href="javascript:;" class="blue userImportTmp" target="_blank">《用户导入模板》</a></div>
+            </div>
+        </div>
+        <div class="import-wrap">
+            <div class="float-l import-text">
+                <input class="fileName" placeholder="导入模板" readonly value=""/>
+            </div>
+            <div class="float-l import-browse">
+                <a href="javascript:;" id="browseFile">上传</a>
+                <div class="hide"><form id="importForm" ><input type="file" id="input-choseFile" name="file"></form></div>
+            </div>
+        </div>
+        <div class="btn-row a-right">
+            <a href="javascript:;" class="btn btn-primary btn-save" id="importStart">确定</a>
+            <a href="javascript:;" class="btn btn-default btn-cancel">取消</a>
+        </div>
+    </div>
+</div>
+<script>
+$(function () {
+    bindEvent();
+});
+
+function bindEvent() {
+    $("#addMoreBtn").click(function () {
+    	var html = '<div class="addnew-section dialog-padding">'
+                + '<p class="input-row pr">'
+                + '<label class="input-label">'
+                + '<span class="input-label-align w50">姓名</span>'
+                + '<input type="text" name="staffname" class="input-text-nobrder w377" placeholder="请输入员工姓名" value=""/>'
+                + '<span class="tip-required required">*</span>'
+                + '</label>'
+                + '</p>'
+                + '<p class="input-row pr">'
+                + '<label class="input-label">'
+                + '<span class="input-label-align w50">手机</span>'
+                + '<input type="text" name="staffphone" class="input-text-nobrder w377" placeholder="请输入员工手机" value=""/>'
+                + '<span class="tip-required required">*</span>'
+                + '</label>'
+                + '</p>'
+                + '<p class="input-row">'
+                + '<label class="input-label">'
+                + '<span class="input-label-align w50">职位</span>'
+                + '<input type="text" name="staffduty" class="input-text-nobrder w377" placeholder="请输入员工职务信息" value=""/>'
+                + '<span class="tip-required required"></span>'
+                + '</label>'
+                + '</p>'
+                + '<div class="input-row">'
+                	+ '<div class="input-label">'
+                		+ '<span class="input-label-align w50 float-l">部门</span>'
+                		+ '<div class="bmtree bm-w377 no-margin-l">'
+                			+ '<div class="bmtree-text bm-w357 break" _id=""></div>'
+                			+ '<div class="bmtree-area bm-h150 up ztree" _tag="bmZtreeAddMore"></div>'
+                			+ '<div class="bmtree-arrows down"></div>'
+                		+ '</div>'
+                	+ '</div>'
+                + '</div>'
+                + '</div>';
+        $("#addMoreWrap").find(".bmtree-area:last").removeClass("up").addClass("down").end().append(html);
+        MIO.bmtree.first($("#addMoreWrap").find(".bmtree").last());
+    });
+}
+//浏览文件
+$("#browseFile").click(function(){
+    $("#input-choseFile").click();
+});
+$("body").on("change","#input-choseFile",function(){
+    $(".fileName").val($(this).val());
+});
+</script>

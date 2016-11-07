@@ -3,29 +3,36 @@
 	<span class="cname"><?php echo Mage::registry('current_company')->getName(); ?></span>
 </div>
 <div class="f-right">
-	<!--
-	<p class="more">
-		<a href="<?php echo $this->getUrl('adminhtml/account/'); ?>" title="系统试用说明">系统试用说明&nbsp;<i class="fa fa-question-circle-o" aria-hidden="true"></i></a> 
-		<a href="<?php echo $this->getUrl('adminhtml/index/logout'); ?>" title="退出系统">退出系统</a> 
-	<p>
-	-->
-	<ul class="nav-m nav-h ">
-		<li><a href="<?php echo $this->getUrl('adminhtml/account/'); ?>"><img class="avatar mr5" src="<?php echo $this->getSkinUrl('images/avatar/avatar_l.png'); ?>" /><?php echo Mage::getSingleton('admin/session')->getUser()->getName(); ?></a></li>
-		<li>
-			<a href="">了解更多</a>
-			<ul></ul>
+	<ul class="nav-h ">
+		<li class="level0"><a href="<?php echo $this->getUrl('adminhtml/dashboard_account/'); ?>"><img class="avatar mr5" src="<?php echo $this->getSkinUrl('images/avatar/avatar_l.png'); ?>" /><?php echo Mage::getSingleton('admin/session')->getUser()->getName(); ?></a></li>
+		<li class="level0">
+			<div class="btn-group">
+			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			    了解更多 <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu" role="menu">
+			    <li><a href="<?php echo $this->getUrl('adminhtml/cs_help/'); ?>" title="帮助中心">帮助中心</a></li>
+			    <li><a href="<?php echo $this->getUrl('adminhtml/cs_feedback/'); ?>" title="反馈信息">反馈信息</a></li>
+			    <li><a href="<?php echo $this->getUrl('adminhtml/cs_contact/'); ?>" title="联系我们">联系我们</a></li>
+			    <li class="divider"></li>
+			    <li><a href="<?php echo $this->getUrl('adminhtml/index/logout'); ?>">退出系统</a></li>
+			  </ul>
+			</div>
+			
 		</li>
-		
+			
 	</ul>
 </div>
-<div class="nav-bar f-right">
+<div class="nav-bar f-right mr100">
 	<ul class="nav-m ">
-		<li><a href=""><i class="fa fa-desktop mr5" aria-hidden="true"></i>工作台</a></li>
-		<li>
-			<a href=""><i class="fa fa-th mr5" aria-hidden="true"></i>应用</a>
+		<?php $currentApp = Mage::registry('current_app'); ?>
+		<?php $currentAppCode = $currentApp ? $currentApp->getCode() : ''; ?>
+		<li class="<?php if ($currentAppCode=='dashboard'):  ?>active<?php endif; ?>"><a href="<?php echo $this->getUrl('adminhtml/dashboard'); ?>" title="工作台"><i class="fa fa-desktop mr5" aria-hidden="true"></i>工作台</a></li>
+		<li class="<?php if ($currentAppCode && !in_array($currentAppCode, array('dashboard','setting'))):  ?>active<?php endif; ?>">
+			<a href="javascript:;"><i class="fa fa-th mr5" aria-hidden="true"></i>应用</a>
 			<?php echo $this->getMenuLevelFirst($this->getMenuArray()); ?>
 		</li>
-		<li><a href=""><i class="fa fa-cog mr5" aria-hidden="true"></i>系统设置</a></li>
+		<li class="<?php if ($currentAppCode=='setting'):  ?>active<?php endif; ?>"><a href="<?php echo $this->getUrl('adminhtml/setting_company/'); ?>" title=""><i class="fa fa-cog mr5" aria-hidden="true"></i>系统设置</a></li>
 	</ul>
 	
 </div>

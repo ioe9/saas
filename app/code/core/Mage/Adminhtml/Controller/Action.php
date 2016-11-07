@@ -162,7 +162,7 @@ class Mage_Adminhtml_Controller_Action extends Mage_Core_Controller_Varien_Actio
 		
 		if (Mage::getSingleton('admin/session')->isLoggedIn()) {
 			Mage::register('current_user',Mage::getSingleton('admin/session')->getUser(),true);
-			Mage::register('current_company',Mage::getModel('admin/company')->load(Mage::getSingleton('admin/session')->getUser()->getData('company_id')),true);
+			Mage::register('current_company',Mage::getModel('admin/company')->load(Mage::getSingleton('admin/session')->getUser()->getData('user_company')),true);
 		}
 		
         Mage::dispatchEvent('adminhtml_controller_action_predispatch_start', array());
@@ -211,6 +211,13 @@ class Mage_Adminhtml_Controller_Action extends Mage_Core_Controller_Varien_Actio
         }
        
         return $this;
+    }
+    
+    protected function _getUser() {
+    	return Mage::registry('current_user');
+    }
+    protected function _getCompany() {
+    	return Mage::registry('current_company');
     }
 
     /**
@@ -403,5 +410,11 @@ class Mage_Adminhtml_Controller_Action extends Mage_Core_Controller_Varien_Actio
     {
         $user = Mage::getSingleton('admin/session')->getUser();
         return $user->validateCurrentPassword($password);
+    }
+    
+    
+    protected function _getCompanyId()
+    {
+    	return Mage::registry('current_company')->getId();
     }
 }

@@ -3,7 +3,7 @@
 
 	<menu>
         <dashboard>
-        	<sort_order>0</sort_order>
+        	<sort_order>-1</sort_order>
 	        <title>工作台</title>
 	        <action>adminhtml/dashboard/</action>
 	        <children>
@@ -27,10 +27,11 @@
 			        <title>系统消息</title>
 			        <action>adminhtml/dashboard_notice/</action>
 		        </notice>
-		        
+		       
 		        <schedule>
 		        	<sort_order>100</sort_order>
 			        <title>日程</title>
+			        <with_line>1</with_line>
 			        <action>adminhtml/dashboard_schedule/</action>
 		        </schedule>
 		        <contact>
@@ -41,6 +42,65 @@
 	        </children>
         
         </dashboard>
+        
+        <setting>
+        	<sort_order>-1</sort_order>
+	        <title>系统设置</title>
+	        <action>adminhtml/setting_company/</action>
+	        <children>
+		        <company>
+		        	<sort_order>10</sort_order>
+			        <title>企业信息</title>
+			        <action>adminhtml/setting_company/</action>
+		        </company>
+		        <organization>
+		        	<sort_order>20</sort_order>
+			        <title>组织结构</title>
+			        <action>adminhtml/setting_organization/</action>
+		        </organization>
+		        <app>
+		        	<sort_order>30</sort_order>
+			        <title>应用权限</title>
+			        <action>adminhtml/setting_app/</action>
+		        </app>
+		        <dashboard>
+		        	<sort_order>40</sort_order>
+			        <title>管理看板</title>
+			        <action>adminhtml/setting_dashboard/</action>
+		        </dashboard>
+		       
+		        <circle>
+		        	<sort_order>100</sort_order>
+			        <title>工作圈</title>
+			        
+			        <action>adminhtml/setting_circle/</action>
+		        </circle>
+		        <link>
+		        	<sort_order>110</sort_order>
+			        <title>相关链接</title>
+			        <action>adminhtml/setting_link/</action>
+		        </link>
+		        
+		        <buy>
+		        	<sort_order>200</sort_order>
+			        <title>购买中心</title>
+			        <with_line>1</with_line>
+			        <children>
+				        <app>
+				        	<sort_order>10</sort_order>
+					        <title>应用购买</title>
+					        <action>adminhtml/buy_app/</action>
+				        </app>
+				        <order>
+				        	<sort_order>20</sort_order>
+					        <title>订单列表</title>
+					        <action>adminhtml/buy_order/</action>
+				        </order>
+			        </children>
+		        </buy>
+	        </children>
+        
+        </setting>
     </menu>
     <acl>
         <resources>

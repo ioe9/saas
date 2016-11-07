@@ -63,7 +63,7 @@ class Varien_Data_Form_Element_Image extends Varien_Data_Form_Element_Abstract
             $html = '<a href="' . $url . '"'
                 . ' onclick="imagePreview(\'' . $this->getHtmlId() . '_image\'); return false;">'
                 . '<img src="' . $url . '" id="' . $this->getHtmlId() . '_image" title="' . $this->getValue() . '"'
-                . ' alt="' . $this->getValue() . '" height="22" width="22" class="small-image-preview v-middle" />'
+                . ' alt="' . $this->getValue() . '" height="80" class="small-image-preview v-middle" />'
                 . '</a> ';
         }
         $this->setClass('input-file');
@@ -82,13 +82,13 @@ class Varien_Data_Form_Element_Image extends Varien_Data_Form_Element_Abstract
     {
         $html = '';
         if ($this->getValue()) {
-            $label = Mage::helper('core')->__('Delete Image');
+            $label = Mage::helper('core')->__('移除图片');
             $html .= '<span class="delete-image">';
             $html .= '<input type="checkbox"'
-                . ' name="' . parent::getName() . '[delete]" value="1" class="checkbox"'
+                . ' name="' . parent::getName() . '[delete]" value="1" class="chk "'
                 . ' id="' . $this->getHtmlId() . '_delete"' . ($this->getDisabled() ? ' disabled="disabled"': '')
                 . '/>';
-            $html .= '<label for="' . $this->getHtmlId() . '_delete"'
+            $html .= '<label class="line" for="' . $this->getHtmlId() . '_delete"'
                 . ($this->getDisabled() ? ' class="disabled"' : '') . '> ' . $label . '</label>';
             $html .= $this->_getHiddenInput();
             $html .= '</span>';

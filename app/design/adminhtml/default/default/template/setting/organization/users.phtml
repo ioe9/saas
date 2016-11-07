@@ -1,0 +1,21 @@
+<?php $users = $this->getUserCollection(); ?>
+<?php foreach ($users as $item): ?>
+<div class="list-item">
+    <div class="w125 f-left break" title="<?php echo $item->getName(); ?>">
+        <div class="check-box-wrap mr-20">
+        	<i data-id="<?php echo $item->getId(); ?>" class="icons-checkbox icon-unchecked"></i>
+    	</div>
+        <?php echo $item->getName(); ?>
+    	<i title="管理员" class="iconsManage icon-manager"></i>
+    </div>
+    <div class="w125 f-left break" title=""><?php echo $item->getDepName(); ?></div>
+    <div class="w125 f-left break" title=""><?php echo $item->getData('user_title'); ?></div>
+    <div class="w125 f-left break" title=""><?php echo $item->getData('username'); ?></div>
+    <div class="w125 f-left">
+        <p class="set-wrap">
+            <span class="staffSetBtn" data-id="<?php echo $item->getId(); ?>">设置</span>&nbsp;|&nbsp;
+            <span class="staffRemoveBtn" data-id="<?php echo $item->getId(); ?>">移除</span>
+        </p>
+    </div>
+</div>
+<?php endforeach; ?>
