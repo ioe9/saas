@@ -3,7 +3,7 @@
     <menu>
         <document>
         	<sort_order>10</sort_order>
-	        <title>文档管理</title>
+	        <title>文档</title>
 	        <action>adminhtml/document/</action>
 	        <children>
 		        <dir>

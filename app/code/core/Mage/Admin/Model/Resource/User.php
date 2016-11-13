@@ -192,6 +192,15 @@ class Mage_Admin_Model_Resource_User extends Mage_Core_Model_Resource_Db_Abstrac
         if (is_string($user->getExtra())) {
             $user->setExtra(unserialize($user->getExtra()));
         }
+        if ($user->getUserDepartment()) {
+        	$user->setDepartment(Mage::getModel('admin/department')->load($user->getUserDepartment()));
+        } else {
+        	$department = Mage::getModel('admin/department');
+        	$departmentData = array('id'=>-1,'dep_name'=>Mage::getModel('admin/company')->load($user->getUserCompany())->getCompanyNam());
+        	$department->addData($departmentData);
+        	$user->setDepartment($department->load());
+        }
+        
         return parent::_afterLoad($user);
     }
 

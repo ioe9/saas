@@ -1,0 +1,31 @@
+.dir-grid li {
+    -moz-user-select: none;
+    border: 1px solid #fff;
+    float: left;
+    height: 118px;
+    margin: 7px 10px 8px;
+    text-align: center;
+    width: 118px;
+}
+.dir-grid .icon {
+    background-position: center 20px;
+    background-repeat: no-repeat;
+    display: block;
+    height: 80px;
+    margin-left: 7px;
+    margin-top: 5px;
+    position: relative;
+    width: 108px;
+}
+.dir-grid .text {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 118px;
+}
+.dir-grid .icon-folder {
+    background-image: url("../images/document/icon-dir.png");
+}

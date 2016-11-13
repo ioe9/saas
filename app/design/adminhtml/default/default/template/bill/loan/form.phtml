@@ -1,0 +1,244 @@
+<?php $types = Mage::getModel('bill/reimburse')->getTypeOptions(); ?>
+<div class="c-box">
+	<div class="content-header">
+		<h2 class="m0">新建借款</h2>
+	</div>
+</div>
+<div class="c-box mt5">
+	<div class="p25">
+		<table class="bill-form" width="100%">
+			<colgroup>
+				<col width="7%">	
+				<col width="23%">	
+				<col width="10%">	
+				<col width="23%">
+				<col width="7%">	
+				<col width="23%">
+			</colgroup>
+			<tbody>
+				<tr>
+					<td class="title">申请人</td>
+					<td class="value"><input type="text" name="rei_create" disabled="disabled" class="ipt" value="<?php echo ''; ?>"/></td>
+					<td class="title">部门</td>
+					<td class="value"><input type="text" name="rei_create" disabled="disabled" class="ipt" value="<?php echo ''; ?>"/></td>
+					<td class="title">手机 </td>
+					<td class="value"><input type="text" name="rei_create" class="ipt" value="<?php echo ''; ?>"/></td>
+				</tr>
+				<tr>
+					<td class="title">日期</td>
+					<td class="value"><input type="text" name="rei_create" class="ipt" value="<?php echo ''; ?>"/></td>
+					<td class="title">预计还款日期</td>
+					<td class="value"><input type="text" name="rei_create" class="ipt" value="<?php echo ''; ?>"/></td>
+					<td class="title">归属项目</td>
+					<td class="value">
+						
+					</td>
+				</tr>
+				<tr>
+					<td class="title">事由</td>
+					<td class="value" colspan="5">
+						<textarea placeholder="500字以内..." class="textarea-input" style="width: 960px; height: 100px;"></textarea>
+					</td>
+					
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</div>
+<div class="d-box mt10 p25_40">
+	<div class="h">
+		<div class="f-left title">
+			<h3 class="m0">借款明细</h3>
+		</div>
+		<div class="f-right actions">
+			<div class="btn-group">
+			  <button type="button" class="btn btn-primary billItemBtn" data-target="billItemTarget" data-tpl="billItemTpl">+ 增加明细</button>
+			</div>
+		</div>
+    	<div class="clr"></div>
+	</div>
+	<div class="inner mt15 grid">
+		<table class="form-list" width="100%">
+			<colgroup>
+				<col width="10%">
+				<col width="15%">
+				<col width="50%">
+				<col width="12%">
+				<col width="13%">
+			</colgroup>
+			<thead>
+				<tr>		
+					<th class="a-center">序号</th>
+					<th class="a-center">借款类型</th>
+					<th class="a-center">说明</th>
+					<th class="a-center">借款金额</th>
+					<th class="a-center">操作</th>
+				</tr>
+			</thead>
+			<tbody id="billItemTarget">
+				
+				
+			</tbody>
+		</table>
+		<div class="no-display">
+			<script type="text/template" id="billItemTpl">
+			<tr>
+				<td></td>
+				<td>
+					<select class="wp100">
+						<?php foreach ($types as $key=>$type): ?>
+						<option value="<?php echo $key; ?>"><?php echo $type; ?></option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+				<td>
+					<input class="ipt wp100" placeholder="" type="text">
+				</td>
+				<td>
+					<input class="ipt wp100" placeholder="" type="text">
+				</td>
+				<td>
+					
+					<span class="table-btn table-btn-edit ml5" title="编辑" style="display: none;"></span>
+					<span class="table-btn table-btn-save ml5" title="保存" style="display: inline-block;"></span>
+					<span class="table-btn table-btn-delete ml5" title="删除"></span>
+				
+				</td>
+			</tr>
+			</script>
+		</div>
+		<p class="a-right mb30 mt20">合计：<b id="reimburse_item_total">￥</b>元</p>
+	</div>
+</div>
+
+<div class="d-box mt10 p25_40">
+	<div class="h">
+		<div class="f-left title">
+			<h3 class="m0">借款方式</h3>
+		</div>
+		<div class="f-right actions">
+			<div class="btn-group">
+			  <button type="button" class="btn btn-primary billItemBtn" data-target="billBankTarget" data-tpl="billBankTpl">+ 增加卡号</button>
+			</div>
+		</div>
+    	<div class="clr"></div>
+	</div>
+	<div class="box-inner mt15 grid">
+		<ul class="tabs">
+			<li class="mr20"><input class="mr5" type="radio" name="" value="" />现金</li>
+			<li><input class="mr5" type="radio" name="" value="" />银行卡</li>
+		</ul>
+		<div class="tabs-padder">
+			<table class="" width="100%">
+				<colgroup>
+					<col width="29%">
+					<col width="29%">
+					<col width="29%">
+					<col width="13%">
+				</colgroup>
+				<thead>
+					<tr>		
+						<th class="a-center">收款人姓名</th>
+						<th class="a-center">开户行名称</th>
+						<th class="a-center">银行卡号</th>
+						<th class="a-center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="billBankTarget">
+					
+					
+				</tbody>
+			</table>
+			<div class="no-display">
+				<script type="text/template" id="billBankTpl">
+				<tr>
+					<td>
+						<input class="ipt wp100" placeholder="" type="text">
+					</td>
+					<td>
+						<input class="ipt wp100" placeholder="" type="text">
+					</td>
+					<td>
+						<input class="ipt wp100" placeholder="" type="text">
+					</td>
+					<td>
+						
+						<span class="table-btn table-btn-edit ml5" title="编辑" style="display: none;"></span>
+						<span class="table-btn table-btn-save ml5" title="保存" style="display: inline-block;"></span>
+						<span class="table-btn table-btn-delete ml5" title="删除"></span>
+					</td>
+				</tr>
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="d-box mt10 p25_40">
+	<div class="h">
+		<div class="f-left title">
+			<h3 class="m0">附件</h3>
+		</div>
+		<div class="f-right actions">
+			<div class="btn-group">
+			  <button type="button" class="btn btn-primary">+ 增加附件</button>
+			</div>
+		</div>
+    	<div class="clr"></div>
+	</div>
+	<div class="box-inner mt15 grid">
+		
+		
+	</div>
+</div>
+
+<div class="d-box mt10 p25_40">
+	<div class="h">
+		<div class="f-left title">
+			<h3 class="m0">审核信息 </h3>
+		</div>
+		
+    	<div class="clr"></div>
+	</div>
+	<div class="inner mt15 grid">
+		<table class="" width="100%">
+			<colgroup>
+				<col width="15%">
+				<col width="15%">
+				<col width="15%">
+				<col width="12%">
+				<col width="40%">
+			</colgroup>
+			<thead>
+				<tr>		
+					<th class="a-center">序号</th>
+					<th class="a-center">审批人</th>
+					<th class="a-center">审批时间</th>
+					<th class="a-center">审批情况</th>
+					<th class="a-center">审批意见</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+				
+			</tbody>
+		</table>
+		
+		
+	</div>
+</div>
+<p class="a-right mt10">
+	<button class="btn btn-primary w125 mr20" type="button" onclick="editForm.submit()">保存</button>
+	<button class="btn btn-primary w125" type="button" onclick="editForm.submit()">保存并送审批</button>
+</p>
+
+
+<script>
+$(function(){
+	$('.billItemBtn').click(function(){
+		$('#'+$(this).attr('data-target')).append($('#'+$(this).attr('data-tpl')).html());
+	})
+})
+	
+</script>

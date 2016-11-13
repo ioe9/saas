@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <config>
     <menu>
-        <crm>
+        <bi>
         	<sort_order>10</sort_order>
-	        <title>CRM</title>
-	        <action>adminhtml/crm/</action>
+	        <title>BI</title>
+	        <action>adminhtml/bi/</action>
 	        <children>
 		        <sales>
 		        	<sort_order>10</sort_order>
-			        <title>销售管理</title>
+			        <title>BI</title>
 			        <children>
 		            	<client>
 		                    <title>客户</title>
@@ -75,6 +75,6 @@
 	                </children>
 		        </other>
 	        </children>
-        </crm>
+        </bi>
     </menu>
 </config>

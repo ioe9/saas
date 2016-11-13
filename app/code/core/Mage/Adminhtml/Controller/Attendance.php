@@ -11,10 +11,11 @@ class Mage_Adminhtml_Controller_Attendance extends Mage_Adminhtml_Controller_Act
 		
     protected function _setActiveMenu($menuPath)
     {
-    	$this->getLayout()->getBlock('navigation')->setActive('attendance');
+    	$this->getLayout()->getBlock('navigation')->setActive($menuPath);
         $this->getLayout()->getBlock('menu')->setActive($menuPath);
         return $this;
     }
+    
     
     protected function _isAllowed()
     {

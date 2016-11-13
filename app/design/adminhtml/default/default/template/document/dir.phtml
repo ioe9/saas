@@ -1,0 +1,59 @@
+<div id="messages">
+	<?php echo $this->getMessagesBlock()->toHtml() ?>
+</div>
+<div class="dir-container">
+    <div class="d-box">
+    	<div class="h">
+    		<div class="f-left title">
+    			<h3 class="m0">文档目录</h3>
+    		</div>
+    		<div class="f-right actions">
+        		
+				<div class="btn-group2">
+				  <button type="button" class="btn btn-default">创建文件夹</button>
+				  <button type="button" class="btn btn-default">上传文件</button>
+				  <button type="button" class="btn btn-default">LIST</button>
+				  <button type="button" class="btn btn-default">GRID</button>
+				</div>
+    		</div>
+        	<div class="clr"></div>
+    	</div>
+    </div>    
+   	<div class="d-box mt5">
+    	<div class="h">
+    		<div class="f-left actions">
+				<div class="btn-group2">
+				  <button type="button" class="btn btn-default">移动</button>
+				  <button type="button" class="btn btn-default">删除</button>
+				  <button type="button" class="btn btn-default">重命名</button>
+				</div>
+    		</div>
+    		<div class="f-right actions">
+        		
+				
+    		</div>
+    		
+        	<div class="clr"></div>
+    	</div>
+    </div> 
+    <div class="d-box mt5 p20">
+    	<?php $dirs = $this->getDirs(); ?>
+    	<ul class="dir-grid">
+    	<?php foreach ($dirs as $_dir): ?>
+    		<?php if ($_dir!='..' && $_dir!='.'): ?>
+    		<li>
+    			<div class="column column-filename" title="">
+					<span class="icon icon-folder">
+					 	<span class="set" fileid=""></span>
+						<span class="collection collection-checked" fileid=""></span>
+					</span>
+					<span class="text" filename=""><?php echo iconv('gbk' , 'utf-8' , $_dir ); ?></span>
+				</div>
+    		</li>
+    		<?php endif; ?>
+    	<?php endforeach; ?>
+    	</ul>
+    	<?php ?>
+    	<div class="clr"></div>
+    </div>                       
+</div>

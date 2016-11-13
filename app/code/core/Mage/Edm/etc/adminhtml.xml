@@ -3,6 +3,7 @@
     <menu>
     	<edm>
         	<sort_order>0</sort_order>
+        	<type>trade</type>
 	        <title>EDM</title>
 	        <action>adminhtml/edm/</action>
 	      	<children>

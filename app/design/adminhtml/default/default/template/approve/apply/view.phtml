@@ -1,0 +1,127 @@
+<?php $apply = Mage::registry('current_apply'); ?>
+<div class="view-container ">
+    <div class="c-box">
+    	<div class="content-header">
+			<h2 class="m0">查看申请编号：<?php echo $apply->getApplyCode(); ?></h2>
+			<div id="messages">
+		        <?php echo $this->getMessagesBlock()->toHtml() ?>
+		    </div>
+		</div>
+    </div>
+	<table width="100%" class="detail-table mt10">
+		<col width="12%"/>
+		<col width="88%"/>
+		<thead>
+			<tr>
+				<th colspan="2" class='a-left'><strong>申请信息</strong></th>
+			</tr>
+		</thead>
+		<tr>
+			<th>类型</th>
+			<?php $templateOption = Mage::getSingleton('approve/template')->getAsOptions(); ?>
+			<td><?php echo $templateOption[$apply->getData('apply_template')]; ?></td>
+		</tr>
+		<tr>
+			<th>单号</th>
+			
+			<td><?php echo $apply->getApplyCode(); ?></td>
+		</tr>
+		<tr>
+			<th>申请人</th>
+			
+			<td><?php echo $apply->getUserName(); ?></td>
+		</tr>
+		<tr>
+			<th>部门</th>
+			<?php $departmentOption = Mage::getModel('admin/department')->getAsOptions(); ?>
+			<td><?php echo $departmentOption[$apply->getApplyDepartment()]; ?></td>
+		</tr>
+		<tr>
+			<th>电话</th>
+			
+			<td><?php echo $apply->getApplyMobile(); ?></td>
+		</tr>
+		<tr>
+			<th>申请时间</th>
+			
+			<td><?php echo $apply->getDateCreate(); ?></td>
+		</tr>
+		<tr>
+			<th>详情</th>
+			
+			<td><?php echo $apply->getApplyDesc(); ?></td>
+		</tr>
+		<tr>
+			<th>抄送人</th>
+			<td>
+			<?php $objects = $apply->getApplyCc(); ?>
+				<?php foreach ($objects as $item): ?>
+				<?php echo $item->getData('name');?>
+				<?php endforeach; ?>
+			</td>
+		</tr>
+	</table>    
+	<div class="c-box mt10">
+    	<div class="content-header">
+			<h2 class="m0">审批流程</h2>
+		</div>
+		<div class="inner mt15 grid p25">
+			<table class="form-list" width="100%">
+				<colgroup>
+					<col width="10%">
+					<col width="25%">
+					<col width="15%">
+					<col width="50%">
+				</colgroup>
+				<thead>
+					<tr>		
+						<th class="a-center">审批人</th>
+						<th class="a-center">审批时间</th>
+						<th class="a-center">审批情况</th>
+						<th class="a-center">审批意见</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php $audits = $apply->getAuditCollection(); ?>
+					<?php foreach ($audits as $audit): ?>
+					<tr>	
+						<td class="a-center"><?php echo $audit->getData('audit_create'); ?>
+						<td class="a-center"><?php echo $audit->getData('date_create'); ?>
+						<td class="a-center"><?php echo $audit->getData('audit_status'); ?>
+						<td class="a-center"><?php echo $audit->getData('audit_desc'); ?>
+					</tr>	
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+	    </div>
+    </div> 
+    <div class="c-box mt10">
+    	<div class="content-header">
+			<h2 class="m0">抄送人意见</h2>
+		</div>
+		<div class="inner mt15 grid p25">
+			<table class="form-list" width="100%">
+				<colgroup>
+					<col width="10%">
+					<col width="90%">
+				</colgroup>
+				<thead>
+					<tr>		
+						<th class="a-center">抄送人</th>
+						<th class="a-center">抄送人意见</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php $ccs = $apply->getCcCollection(); ?>
+					<?php foreach ($ccs as $cc): ?>
+					<tr>	
+						<td class="a-center"><?php echo $cc->getData('link_user'); ?></td>
+						<td class="a-center"><?php echo $cc->getData('link_suggest'); ?></td>
+					</tr>	
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+	    </div>
+    </div>  
+	                  
+</div>

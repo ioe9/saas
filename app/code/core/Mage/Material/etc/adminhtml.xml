@@ -3,7 +3,7 @@
     <menu>
         <material>
         	<sort_order>10</sort_order>
-	        <title>物资管理</title>
+	        <title>物资</title>
 	        <action>adminhtml/material/</action>
 	        <children>
 		        <company>

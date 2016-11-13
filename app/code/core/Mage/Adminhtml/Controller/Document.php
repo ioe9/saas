@@ -11,7 +11,7 @@ class Mage_Adminhtml_Controller_Document extends Mage_Adminhtml_Controller_Actio
 		
     protected function _setActiveMenu($menuPath)
     {
-    	$this->getLayout()->getBlock('navigation')->setActive('document');
+    	$this->getLayout()->getBlock('navigation')->setActive($menuPath);
         $this->getLayout()->getBlock('menu')->setActive($menuPath);
         return $this;
     }

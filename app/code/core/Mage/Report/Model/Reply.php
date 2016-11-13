@@ -16,4 +16,6 @@ class Mage_Report_Model_Reply extends Mage_Core_Model_Abstract
 	public function getImageUrlPrefix() {
 		return Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).self::MEDIA_IMAGE_PREFIX.'/';
 	}
+	
+
 }

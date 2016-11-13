@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <config>
     <menu>
-        <crm>
-        	<sort_order>10</sort_order>
-	        <title>CRM</title>
-	        <action>adminhtml/crm/</action>
+        <college>
+        	<sort_order>990</sort_order>
+	        <title>外贸学院</title>
+	        <type>trade</type>
+	        <action>adminhtml/college/</action>
 	        <children>
 		        <sales>
 		        	<sort_order>10</sort_order>
@@ -75,6 +76,6 @@
 	                </children>
 		        </other>
 	        </children>
-        </crm>
+        </college>
     </menu>
 </config>

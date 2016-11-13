@@ -30,7 +30,18 @@
 		<li class="<?php if ($currentAppCode=='dashboard'):  ?>active<?php endif; ?>"><a href="<?php echo $this->getUrl('adminhtml/dashboard'); ?>" title="工作台"><i class="fa fa-desktop mr5" aria-hidden="true"></i>工作台</a></li>
 		<li class="<?php if ($currentAppCode && !in_array($currentAppCode, array('dashboard','setting'))):  ?>active<?php endif; ?>">
 			<a href="javascript:;"><i class="fa fa-th mr5" aria-hidden="true"></i>应用</a>
-			<?php echo $this->getMenuLevelFirst($this->getMenuArray()); ?>
+			<div class="apps-box pa">
+				<?php $menuArr = $this->getMenuArray(); ?>
+				
+				<h3>外贸办公</h3>
+				<?php echo $this->getMenuLevelTrade($menuArr); ?>
+				<div class="clr"></div>
+				<h3 class="mt15">日常办公</h3>
+				<?php echo $this->getMenuLevelBase($menuArr); ?>
+				
+				<div class="clr"></div>
+			</div>
+			
 		</li>
 		<li class="<?php if ($currentAppCode=='setting'):  ?>active<?php endif; ?>"><a href="<?php echo $this->getUrl('adminhtml/setting_company/'); ?>" title=""><i class="fa fa-cog mr5" aria-hidden="true"></i>系统设置</a></li>
 	</ul>

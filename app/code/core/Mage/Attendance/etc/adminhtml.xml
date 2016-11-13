@@ -3,13 +3,13 @@
     <menu>
         <attendance>
         	<sort_order>10</sort_order>
-	        <title>考勤管理</title>
+	        <title>考勤</title>
 	        <action>adminhtml/attendance/</action>
 	        <children>
 		        <attendance>
 		        	<sort_order>10</sort_order>
 			        <title>出勤管理</title>
-                    <action>adminhtml/attendance_attendance</action> 
+                    <action>adminhtml/attendance/attendance</action> 
 		        </attendance>
 		        <fieldwork>
 		        	<sort_order>20</sort_order>

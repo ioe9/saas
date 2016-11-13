@@ -52,6 +52,10 @@ textarea                { overflow:auto; background-color: #fff;
     overflow: auto;
     padding:5px;
 }
+.textarea-input {
+    resize: none;
+    vertical-align: top;
+}
 input, select {
     vertical-align: middle;
 }
@@ -126,6 +130,7 @@ table { border:none; }
 .p5_0 { padding: 5px 0 !important; }
 .p10_0 { padding: 10px 0 !important; }
 .p10_15 { padding: 10px 15px !important; }
+.p25_40 { padding: 25px 40px !important; }
 .p10 { padding: 10px !important; }
 .p15 { padding: 15px !important; }
 .p20 { padding: 20px !important; }
@@ -164,8 +169,14 @@ table { border:none; }
 .bt0 { border-top:0 !important;}
 
 .mr0 { margin-right:0 !important; } 
+.mr5 { margin-right:5px !important; }
 .mr10 { margin-right:10px !important; } 
-.ml5 { margin-left:5px !important; } 
+.mr20 { margin-right:20px !important; } 
+.mr30 { margin-right:30px !important; }
+.mr100 { margin-right:100px !important; } 
+
+.ml5 { margin-left:5px !important; }
+.ml10 { margin-left:10px !important; } 
 .ml15 { margin-left:15px !important; } 
 .ml20 { margin-left:20px !important; } 
 .ml25 { margin-left:25px !important; } 
@@ -174,17 +185,6 @@ table { border:none; }
 .ml50 { margin-left:50px !important; }
 .ml60 { margin-left:60px !important; }
 .ml55 { margin-left:55px !important; }
-
-
-.mr5 { margin-right:5px !important; } 
-.mr20 { margin-right:20px !important; } 
-.mr100 { margin-right:100px !important; } 
-
-.mr30 { margin-right:30px !important; }
-.ml20 { margin-left:20px !important; } 
-.ml25 { margin-left:25px !important; } 
-.ml30 { margin-left:30px !important; } 
-.mrl8 { margin-right:8px !important; margin-left: 8px !important; }
 
 .bg-white {
     background-color: #fff !important;
@@ -285,7 +285,7 @@ table.actions button:hover {
 }
 
 .c-box td > .entry-edit {
-	margin:20px;
+	margin:30px 20px 50px;
 }
 .c-box-wide {
     width: 100%;
@@ -724,38 +724,40 @@ table.actions button:hover {
     padding: 0 15px;
     position:relative;
 }
-.nav-m li > ul {
+.nav-m li > div {
     background: #fff none repeat scroll 0 0;
     border: 1px solid #ddd;
     box-shadow: 0 2px 10px 0 #aaa;
     color: #333;
     display: none;
-    left: -100px;
-    padding: 10px;
+    left: -150px;
+    padding: 18px 20px;
     position: absolute;
     top: 46px;
-    width: 280px;
-	
+    width: 380px;
 }
-.nav-m li > ul li {
-    float: left;
+.nav-m li > div h3 {
+    font-size: 15px;
+    font-weight: bold;
     margin: 0;
-    padding: 0;
+}
+.nav-m li > div ul li {
     cursor: pointer;
     float: left;
     height: 38px;
     line-height: 38px;
-    padding-left: 30px;
-    width: 128px;
+    margin: 0;
+    /*padding: 0 0 0 30px;*/
+    width: 112px;
 }
-.nav-m li > ul a {
+.nav-m li > div a {
     color: #666;
     text-shadow: none;
 }
-.nav-m li > ul a:hover {
+.nav-m li > div a:hover {
 	color:#2db3c4;
 }
-.nav-m li:hover ul {
+.nav-m li:hover div {
 	display:block;
 }
 .nav-m li a {
@@ -1290,15 +1292,18 @@ table.actions select {
 .filter select {
     height: 28px;
     line-height: 28px;
+    width:100%;
 }
 table.actions button {
-    font-size: 13px;
-    height: 25px;
-    line-height: 18px;
-    padding: 0 5px;
-    vertical-align: middle;
-    border:1px solid #ccc;
+    background: #63a3cf none repeat scroll 0 0;
+    border: 1px solid #63a3cf;
+    color: #fff;
+    font-size: 14px;
+    height: 32px;
+    line-height: 30px;
     margin-left: 5px;
+    padding: 0 25px;
+    vertical-align: middle;
 }
 table.actions .pager {
 	text-align:left;
@@ -1317,10 +1322,21 @@ table.actions .pager {
     box-shadow: 0 1px 0 #fff inset;
     color: #333;
     font-weight: normal;
-    padding: 5px;
+    height: 59px;
+    line-height: 59px;
+    padding: 0 5px;
+    text-indent: 10px;
+}
+.d-box2 .grid th {
+	height:32px;
+	line-height:32px;
 }
 .grid .filter th {
-    background: #f9f9f9 none repeat scroll 0 0;
+    background: #fafafa none repeat scroll 0 0;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 5px;
+    text-indent: 0;
 }
 .grid th a {
     color: #333;
@@ -1330,8 +1346,13 @@ table.actions .pager {
     border-bottom: 1px solid #ddd;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
+    height: 59px;
     padding: 5px;
-    vertical-align: top;
+    vertical-align: middle;
+}
+.d-box2 .grid td {
+	line-height:32px;
+	height:32px;
 }
 .grid td.empty-text {
     color: #999;

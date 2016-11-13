@@ -11,7 +11,7 @@ class Mage_Adminhtml_Controller_Approve extends Mage_Adminhtml_Controller_Action
 		
     protected function _setActiveMenu($menuPath)
     {
-    	$this->getLayout()->getBlock('navigation')->setActive('approve');
+    	$this->getLayout()->getBlock('navigation')->setActive($menuPath);
         $this->getLayout()->getBlock('menu')->setActive($menuPath);
         return $this;
     }

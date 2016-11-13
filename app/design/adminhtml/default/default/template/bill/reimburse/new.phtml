@@ -1,0 +1,31 @@
+<div id="messages">
+    <?php echo $this->getMessagesBlock()->toHtml() ?>
+</div>
+<div class="c-box">
+	<div class="content-header">
+		<h2 class="m0">新建报销</h2>
+    </div>
+</div>
+<div class="mt10">
+	<?php $types = Mage::getModel('bill/reimburse')->getTypeOptions(); ?>
+	<?php foreach ($types as $key=>$item): ?>
+	<a class="f-left reimburse-type reimburse-type-<?php echo $key; ?>" href="<?php echo $this->getUrl('adminhtml/bill_reimburse/edit/',array('type'=>$key)); ?>">
+		
+		<?php echo $item; ?>
+	</a>
+	<?php endforeach; ?>
+
+</div>
+<div class="clr"></div>
+
+<div class="c-box mt10">
+	<div class="content-header">
+		<h2 class="m0">温馨提示</h2>
+    </div>
+    <div class="p30">
+    	<p>1.日常报销：提供员工进行常规费用报销，如招待费、通信费。</p>
+    	<p>2.差旅费报销：提供员工进行出差费用报销，如往返机票、住宿费。</p>
+    	<p>3.人力成本报销：提供人事、财务部门进行人工成本费用报销，如工资、福利、五险一金等。</p>
+    	<p>4.对公付款：提供员工申请支付对公款项，如合同定金、采购款等。</p>
+    </div>
+</div>

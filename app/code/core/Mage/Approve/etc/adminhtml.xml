@@ -3,23 +3,23 @@
     <menu>
         <approve>
         	<sort_order>10</sort_order>
-	        <title>审批管理</title>
+	        <title>审批</title>
 	        <action>adminhtml/approve/</action>
 	        <children>
 		        <todo>
 		        	<sort_order>10</sort_order>
 			        <title>我的待办</title>
-			        <action>adminhtml/approve_todo/</action>
+			        <action>adminhtml/approve/todo/</action>
 		        </todo>
 		        <done>
 		        	<sort_order>20</sort_order>
 			        <title>我的已办</title>
-			        <action>adminhtml/approve_done/</action>
+			        <action>adminhtml/approve/done/</action>
 		        </done>
 		        <ccto>
 		        	<sort_order>30</sort_order>
 			        <title>抄送给我</title>
-			        <action>adminhtml/approve_ccto/</action>
+			        <action>adminhtml/approve/ccto/</action>
 		        </ccto>
 		        <data>
 		        	<sort_order>40</sort_order>

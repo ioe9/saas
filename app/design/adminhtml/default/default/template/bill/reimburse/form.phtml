@@ -1,0 +1,322 @@
+<?php $types = Mage::getModel('bill/reimburse')->getTypeOptions(); ?>
+<?php $settingTypes = Mage::getModel('bill/setting_type')->getAsOptions(); ?>
+<?php $projects = Mage::getModel('bill/setting_project')->getAsOptions(); ?>
+<?php $user = Mage::registry('current_user'); ?>
+<?php $reimburse = Mage::registry('current_reimburse'); ?>
+<?php $items = $reimburse->getItemCollection(); ?>
+<div class="c-box">
+	<div class="content-header">
+		<h2 class="m0 f-left"><?php if ($reimburse->getId()): ?>编辑报销编号：<?php echo $reimburse->getData('rei_code'); ?><?php else: ?>新建<?php echo $types[$this->getRequest()->getParam('type')]; ?><?php endif; ?></h2>
+		<div class="f-right actions">
+    		<a class="btn btn-primary" href="<?php echo $this->getUrl('adminhtml/bill_reimburse/new')?>" title="">+ 新建报销</a>  
+		</div>
+	</div>
+</div>
+<div class="c-box mt5">
+	<div class="p25">
+		<form id="reimburseForm" name="reimburseForm" method="POST" action="<?php echo $this->getUrl('adminhtml/bill_reimburse/save'); ?>">
+		<div class="no-display">
+			<?php echo $this->getBlockHtml('formkey')?>  
+			<input type="hidden" name="reimburse_id" id="reimburse_id" value="<?php echo $reimburse->getId(); ?>" />
+		</div>
+		<table class="bill-form" width="100%">
+			<colgroup>
+				<col width="7%">	
+				<col width="23%">	
+				<col width="10%">	
+				<col width="23%">
+				<col width="7%">	
+				<col width="23%">
+			</colgroup>
+			<tbody>
+				<tr>
+					<td class="title">申请人</td>
+					<td class="value"><input type="text" name="rei_create" disabled="disabled" class="ipt" value="<?php echo $user->getName(); ?>"/></td>
+					<td class="title">部门</td>
+					<td class="value"><input type="text" name="rei_department" disabled="disabled" class="ipt" value="<?php echo $user->getDepartment()->getDepName(); ?>"/></td>
+					<td class="title">手机 </td>
+					<td class="value"><input type="text" name="rei_mobile" class="ipt" value="<?php echo $reimburse->getData('rei_mobile'); ?>"/></td>
+				</tr>
+				<tr>
+					<td class="title">票据数<span class="required">*</span></td>
+					<td class="value"><input type="text " name="total_bill" class="ipt required-entry" value="<?php echo $reimburse->getData('total_bill'); ?>"/></td>
+				
+					<td class="title">归属项目</td>
+					<td class="value">
+						<select name="rei_project" id="rei_project" class="ipt wp100">
+							<?php foreach ($projects as $key=>$project): ?>
+							<option value="<?php echo $key; ?>"><?php echo $project; ?></option>
+							<?php endforeach; ?>
+						</select>
+					</td>
+					<td class="title"></td>
+					<td class="value"></td>
+				</tr>
+				<tr>
+					<td class="title">事由<span class="required">*</span></td>
+					<td class="value" colspan="5">
+						<textarea placeholder="500字以内..." name="rei_reason" class="textarea-input required-entry" style="width: 960px; height: 100px;"><?php echo $reimburse->getData('rei_reason'); ?></textarea>
+					</td>
+					
+				</tr>
+			</tbody>
+		</table>
+		<?php if (!$reimburse->getId()): ?>
+		<div class=" a-right mt10 mr10">
+		  <button type="button" class="btn btn-primary billReiSaveBtn" onclick="editForm.submit()">确认 &amp; 下一步</button>
+		</div>
+		<?php endif; ?>
+		</form>
+	</div>
+
+</div>
+<?php if ($reimburse->getId()): ?>
+<div class="d-box mt10 p25_40">
+	<div class="h">
+		<div class="f-left title">
+			<h3 class="m0">报销明细</h3>
+		</div>
+		<div class="f-right actions">
+			<div class="btn-group">
+			  <button type="button" class="btn btn-primary billItemBtn" data-target="billItemTarget" data-tpl="billItemTpl">+ 增加明细</button>
+			</div>
+		</div>
+    	<div class="clr"></div>
+	</div>
+	<div class="inner mt15 grid">
+		<table class="form-list" width="100%">
+			<colgroup>
+				<col width="10%">
+				<col width="15%">
+				<col width="50%">
+				<col width="12%">
+				<col width="13%">
+			</colgroup>
+			<thead>
+				<tr>		
+					<th class="a-center">序号</th>
+					<th class="a-center">费用类型</th>
+					<th class="a-center">说明</th>
+					<th class="a-center">报销金额</th>
+					<th class="a-center">操作</th>
+				</tr>
+			</thead>
+			<tbody id="billItemTarget">
+				<?php $i = 1; ?>
+				<?php foreach ($items as $key=>$item): ?>
+				<tr>
+					<td class="a-center"><?php echo $i++; ?></td>
+					<td>
+						<select class="wp100 item_type">
+							<?php foreach ($settingTypes as $key=>$type): ?>
+							<option value="<?php echo $key; ?>" <?php if ($item->getData('item_type')==$key):  ?>selected="selected"<?php endif; ?>><?php echo $type; ?></option>
+							<?php endforeach; ?>
+						</select>
+					</td>
+					<td>
+						<input class="ipt wp100 item_memo" placeholder="" value="<?php echo $item->getData('item_memo'); ?>" type="text">
+					</td>
+					<td>
+						<input class="ipt wp100 total_rei" placeholder="" value="<?php echo $item->getData('total_rei'); ?>" type="text">
+					</td>
+					<td>
+						
+						<span class="table-btn table-btn-edit ml5" title="编辑" style="display: none;"></span>
+						<span class="table-btn table-btn-save ml5" title="保存" style="display: inline-block;"></span>
+						<span class="table-btn table-btn-delete ml5" title="删除"></span>
+					
+					</td>
+				</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+		<div class="no-display">
+			<script type="text/template" id="billItemTpl">
+			<tr>
+				<td></td>
+				<td>
+					<select class="wp100 item_type">
+						<?php foreach ($settingTypes as $key=>$type): ?>
+						<option value="<?php echo $key; ?>"><?php echo $type; ?></option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+				<td>
+					<input class="ipt wp100 item_memo" placeholder="" type="text">
+				</td>
+				<td>
+					<input class="ipt wp100 total_rei" placeholder="" type="text">
+				</td>
+				<td>
+					
+					<span class="table-btn table-btn-edit ml5" title="编辑" style="display: none;"></span>
+					<span class="table-btn table-btn-save ml5" title="保存" style="display: inline-block;"></span>
+					<span class="table-btn table-btn-delete ml5" title="删除"></span>
+				
+				</td>
+			</tr>
+			</script>
+		</div>
+		<p class="a-right mb30 mt20">合计：<b id="reimburse_item_total">￥</b>元</p>
+	</div>
+</div>
+
+<div class="d-box mt10 p25_40">
+	<div class="h">
+		<div class="f-left title">
+			<h3 class="m0">报销方式</h3>
+		</div>
+		<div class="f-right actions">
+			<div class="btn-group">
+			  <button type="button" class="btn btn-primary billItemBtn" data-target="billBankTarget" data-tpl="billBankTpl">+ 增加卡号</button>
+			</div>
+		</div>
+    	<div class="clr"></div>
+	</div>
+	<div class="box-inner mt15 grid">
+		<ul class="tabs">
+			<li class="mr20"><input class="mr5" type="radio" name="" value="" />现金</li>
+			<li><input class="mr5" type="radio" name="" value="" />银行卡</li>
+		</ul>
+		<div class="tabs-padder">
+			<table class="" width="100%">
+				<colgroup>
+					<col width="29%">
+					<col width="29%">
+					<col width="29%">
+					<col width="13%">
+				</colgroup>
+				<thead>
+					<tr>		
+						<th class="a-center">收款人姓名</th>
+						<th class="a-center">开户行名称</th>
+						<th class="a-center">银行卡号</th>
+						<th class="a-center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="billBankTarget">
+					
+					
+				</tbody>
+			</table>
+			<div class="no-display">
+				<script type="text/template" id="billBankTpl">
+				<tr>
+					<td>
+						<input class="ipt wp100" placeholder="" type="text">
+					</td>
+					<td>
+						<input class="ipt wp100" placeholder="" type="text">
+					</td>
+					<td>
+						<input class="ipt wp100" placeholder="" type="text">
+					</td>
+					<td>
+						
+						<span class="table-btn table-btn-edit ml5" title="编辑" style="display: none;"></span>
+						<span class="table-btn table-btn-save ml5" title="保存" style="display: inline-block;"></span>
+						<span class="table-btn table-btn-delete ml5" title="删除"></span>
+					</td>
+				</tr>
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="d-box mt10 p25_40">
+	<div class="h">
+		<div class="f-left title">
+			<h3 class="m0">附件</h3>
+		</div>
+		<div class="f-right actions">
+			<div class="btn-group">
+			  <button type="button" class="btn btn-primary">+ 增加附件</button>
+			</div>
+		</div>
+    	<div class="clr"></div>
+	</div>
+	<div class="box-inner mt15 grid">
+		
+		
+	</div>
+</div>
+
+<div class="d-box mt10 p25_40">
+	<div class="h">
+		<div class="f-left title">
+			<h3 class="m0">审核信息 </h3>
+		</div>
+		
+    	<div class="clr"></div>
+	</div>
+	<div class="inner mt15 grid">
+		<table class="" width="100%">
+			<colgroup>
+				<col width="15%">
+				<col width="15%">
+				<col width="15%">
+				<col width="12%">
+				<col width="40%">
+			</colgroup>
+			<thead>
+				<tr>		
+					<th class="a-center">序号</th>
+					<th class="a-center">审批人</th>
+					<th class="a-center">审批时间</th>
+					<th class="a-center">审批情况</th>
+					<th class="a-center">审批意见</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+				
+			</tbody>
+		</table>
+		
+		
+	</div>
+</div>
+<p class="a-right mt10">
+	<button class="btn btn-primary w125 mr20" type="button" onclick="editForm.submit()">保存</button>
+	<button class="btn btn-primary w125" type="button" onclick="editForm.submit()">保存并送审批</button>
+</p>
+<?php else: ?>
+<script>
+editForm = new mioForm('reimburseForm','');
+</script>
+<?php endif; ?>
+
+<script>
+$(function(){
+	$('.billItemBtn').click(function(){
+		//判断是否已生成记录
+		var reiId = $('#reimburse_id').val();
+		if (reiId) {
+			$('#'+$(this).attr('data-target')).append($('#'+$(this).attr('data-tpl')).html());
+			billBindEvents();
+		} else {
+			alert('非法操作');
+		}
+		
+	})
+	
+})
+function billBindEvents() {
+	$('#billItemTarget .table-btn-save').off('click').click(function(){
+		$parent = $(this).parent().parent();
+		var itemType = $parent.find('.item_type').val();
+		var itemMemo = $parent.find('.item_memo').val();
+		var totalRei = $parent.find('.total_rei').val();
+		var reiId = $('#reimburse_id').val();
+		$.post('<?php echo $this->getUrl('adminhtml/bill_reimburse/saveItem'); ?>',{rei_id:reiId,item_type:itemType,item_memo:itemMemo,total_rei:totalRei,form_key:FORM_KEY},function(res){
+			if (res.succeed) {
+				$parent.find('select,input').attr("disabled","disabled");
+			} else {
+				alert(res.msg);
+			}
+		},'json')
+	})
+	
+}
+</script>

@@ -1,0 +1,137 @@
+<div id="messages">
+    <?php echo $this->getMessagesBlock()->toHtml() ?>
+</div>
+<?php $attModel = Mage::getSingleton('attendance/attendance'); ?>
+<?php $todayAtt = $attModel->getSign(); ?>
+<?php $atts = $attModel->getSignDaysByMonth(null,null,true); ?>
+
+<div class="d-box attendance-box">
+	<div class="">
+		<div class="f-left">
+			<div class="h">
+				<div class="f-left title">
+					<h3 class="m0">出勤管理</h3>
+				</div>
+				<div class="actions f-right wp50 a-right">
+					<span class="calendar_month_next">上一月</span>
+					<span class="pipe mr10 ml10">|</span>
+					<span class="calendar_month_cur"><?php echo date('Y-m'); ?></span>
+					<span class="pipe mr10 ml10">|</span>
+					<span class="calendar_month_prev">下一月</span>
+					
+				</div>
+		    	<div class="clr"></div>
+			</div>
+			<div id="calendarBox" class="calendar-box f-left mt15"></div>
+		</div>
+	    
+	    <div class="f-right calendar-bar">
+	    	<div class="h">出勤明细</div>
+		    <div class="calendar-bd mt15">
+		    	<div class="hd"><?php echo Mage::getSingleton('core/date')->gmtDate('Y-m-d'); ?>&nbsp;|&nbsp;星期<?php echo Mage::getSingleton('core/date')->gmtDate('N'); ?> </div>
+		    	<div class="inner">
+		    		<div class="cal-now mb10">
+		    			<span><?php echo Mage::getSingleton('core/date')->gmtDate('H:i'); ?><span><?php echo Mage::getSingleton('core/date')->gmtDate('A'); ?></span></span>
+		    		</div>
+		    		
+		    		<button class="btn btn-info wp100 mt10 mb15 <?php if($todayAtt->getId()): ?>disabled<?php endif; ?>" id="signInBtn"><?php if($todayAtt->getId()): ?>已签到<?php else: ?>签到<?php endif; ?></button>
+		    		<button class="btn btn-default mb10 wp100 <?php if($todayAtt->getId() && $todayAtt->getData('att_out')): ?>disabled<?php endif; ?>" id="signOutBtn"><?php if($todayAtt->getId() && $todayAtt->getData('att_out')): ?>已签出<?php else: ?>签出<?php endif; ?></button>
+	    		</div>
+	    		<div class="inner">
+	    			<p>签到时间：</p>
+	    			<p><?php echo $todayAtt->getData('att_in'); ?></p>
+	    			<p>签到IP：</p>
+	    			<p><?php echo $todayAtt->getData('att_in_ip'); ?></p>
+			    	
+			    </div>
+			    <div class="inner">
+	    			<p>签出时间：</p>
+	    			<p><?php echo $todayAtt->getData('att_out'); ?></p>
+	    			<p>签出IP：</p>
+	    			<p><?php echo $todayAtt->getData('att_out_ip'); ?></p>
+			    	
+			    </div>
+		    </div>
+	    </div>
+		<div class="clr"></div>
+    </div>
+    
+</div>
+<script type="text/javascript">
+function week(){
+	var objDate= new Date();
+	var week = objDate.getDay();
+	switch(week)
+    {
+		case 0:
+		    week="周日";
+		    break;
+	    case 1:
+		    week="周一";
+		    break;
+	    case 2:
+		    week="周二";
+		    break;
+	    case 3:
+		    week="周三";
+		    break;
+	    case 4:
+		    week="周四";
+		    break;
+	    case 5:
+		    week="周五";
+		    break;
+	    case 6:
+		    week="周六";
+		    break;
+    }
+	$("#sing_for_number").html(week);
+}
+$(function(){
+	week();
+	var current = new Date();
+	var signData = $.parseJSON('<?php echo json_encode($atts); ?>');
+	console.log(signData);
+	var str = calUtil.drawCal(current.getFullYear(),current.getMonth() + 1,signData);
+  	$('#calendarBox').html(str);
+	$("#signInBtn").click(function(){
+		var s = this;
+	    $.ajax({
+			url : "<?php echo $this->getUrl('adminhtml/attendance/doSignIn'); ?>",
+	      	type : "GET",
+	      	dataType : "json",
+	      	success : function(res) {
+		      	if (res.succeed) {
+			        if(res.data == 0) {
+			        	alert("您今天已签到！");
+			        } else if(res.data == 1) {
+			         	window.location.reload();
+			        }
+		      	} else {
+		      		alert(res.msg);
+		      	}   
+	      	}
+    	});
+  	});
+  	
+  	$("#signOutBtn").click(function(){
+		var s = this;
+	    $.ajax({
+			url : "<?php echo $this->getUrl('adminhtml/attendance/doSignOut'); ?>",
+	      	type : "GET",
+	      	dataType : "json",
+	      	success : function(res) {
+		      	if (res.succeed) {
+			        if(res.data == 0) {
+			        	alert("您今天已签到！");
+			        } else if(res.data == 1) {
+			         	window.location.reload();
+			        }
+		      	} else {
+		      		alert(res.msg);
+		      	}   
+	      	}
+    	});
+  	});
+});
+</script>

@@ -1,0 +1,190 @@
+<?php $types = Mage::getModel('bill/setting_type')->getAsOptions(); ?>
+<?php $projects = Mage::getModel('bill/setting_project')->getAsOptions(); ?>
+<div id="messages">
+    <?php echo $this->getMessagesBlock()->toHtml() ?>
+</div>
+<div class="d-box mt10 p25_40">
+	<div class="h">
+		<div class="f-left title">
+			<h3 class="m0">费用类型设置  </h3>
+		</div>
+		<div class="f-right actions">
+			<div class="btn-group">
+			  <button type="button" class="btn btn-primary type-add-btn">+ 增加费用类型</button>
+			</div>
+		</div>
+    	<div class="clr"></div>
+	</div>
+	<div class="bill-setting mt15">
+		<?php foreach ($types as $key=>$type): ?>
+		<div class="f-left wp25 type-item">
+			<div class="inner mr5 mr5 pr p30">
+				<span><?php echo $type; ?></span>
+				<span class="delete pa" data="<?php echo $key; ?>"  data-flag="type">x</span>
+			</div>
+		</div>
+		
+		<?php endforeach; ?>
+		<div class="clr"></div>
+	</div>
+</div>
+
+<div class="d-box mt10 p25_40">
+	<div class="h">
+		<div class="f-left title">
+			<h3 class="m0">归属项目设置   </h3>
+		</div>
+		<div class="f-right actions">
+			<div class="btn-group">
+			  <button type="button" class="btn btn-primary project-add-btn">+ 增加归属项目</button>
+			</div>
+		</div>
+    	<div class="clr"></div>
+	</div>
+	<div class="bill-setting mt15">
+		<?php foreach ($projects as $key=>$project): ?>
+		<div class="f-left wp25 type-item">
+			<div class="inner mr5 mr5 pr p30">
+				<span><?php echo $project; ?></span>
+				<span class="delete pa" data="<?php echo $key; ?>" data-flag="project">x</span>
+			</div>
+		</div>
+		
+		<?php endforeach; ?>
+		<div class="clr"></div>
+	</div>
+</div>
+
+<div class="d-box mt10 p25_40">
+	<div class="h">
+		<div class="f-left title">
+			<h3 class="m0">归属项目设置  </h3>
+		</div>
+		<div class="clr"></div>
+	</div>
+	<div class="mt20">
+		<p>组织结构设置，必须由平台管理员在YOP云办公平台进行设置！</p>
+	</div>
+</div>
+
+<div class="d-box mt10 p25_40">
+	<div class="h">
+		<div class="f-left title">
+			<h3 class="m0">应用权限设置  </h3>
+		</div>
+		<div class="clr"></div>
+	</div>
+	<div class="mt20">
+		
+		<p>1、系统管理员拥有应用所有权限，包括设置权限。</p>
+		<p>2、财务权限可以做为财务人员查看数据统计，录入营收管理。</p>
+		<p>3、数据统计可以查看数据统计的权限。</p>
+	</div>
+</div>
+
+
+<div style="display:none;width:438px;" id="billSettingTypeLbme" class="lbme">
+	<div class="lbme-h">新增费用类型</div>
+	<div class="inner p25 a-left">
+		<p>请输入费用类型名称:</p>
+		<input type="text" class="ipt wp100" id="type_name" name="type_name" />
+	</div>
+	<div class="lbme-f p10">
+		<button type="button" onclick="billSaveType('billSettingTypeLbme')" class="btn btn-primary type-save-btn wp30 f-right">确定</button>
+	    <button type="button" class="btn btn-default type-cancel-btn wp30 mr10 f-right">取消</button>
+	  
+		<div class="clr"></div>
+	</div>
+	<div class="close"><i></i></div>
+</div>
+
+<div style="display:none;width:438px;" id="billSettingProjectLbme" class="lbme">
+	<div class="lbme-h">新增归属项目</div>
+	<div class="inner p25 a-left">
+		<p>请输入归属项目名称:</p>
+		<input type="text" class="ipt wp100" id="project_name" name="project_name" />
+	</div>
+	<div class="lbme-f p10">
+		<button type="button" onclick="billSaveProject('billSettingProjectLbme')" class="btn btn-primary type-save-btn wp30 f-right">确定</button>
+	    <button type="button" class="btn btn-default type-cancel-btn wp30 mr10 f-right">取消</button>
+	  
+		<div class="clr"></div>
+	</div>
+	<div class="close"><i></i></div>
+</div>
+<script>
+$(function(){
+	$('.bill-setting .type-item .delete').click(function(){
+		var flag = $(this).attr('data-flag');	
+		if (flag=='type') {
+			
+			var typeId = $(this).attr('data');
+			var $this = $(this);
+			$.post(
+				'<?php echo $this->getUrl('adminhtml/bill_setting/deleteType'); ?>',
+				{id:typeId,form_key:FORM_KEY},function(res){
+					if (res.succeed) {
+						$this.parents('.type-item').remove();
+					} else {
+						alert(res.msg);
+					}
+				},'json')
+		} else if (flag=='project') {
+			
+			var projectId = $(this).attr('data');
+			var $this = $(this);
+			$.post(
+				'<?php echo $this->getUrl('adminhtml/bill_setting/deleteProject'); ?>',
+				{id:projectId,form_key:FORM_KEY},function(res){
+					if (res.succeed) {
+						$this.parents('.type-item').remove();
+					} else {
+						alert(res.msg);
+					}
+				},'json')
+		}
+			
+	})
+	
+	$('.type-add-btn').click(function(){
+		
+		jQuery('#billSettingTypeLbme').lightbox_me({});
+	})
+	$('.project-add-btn').click(function(){
+		
+		jQuery('#billSettingProjectLbme').lightbox_me({});
+	})
+		
+})
+function billSaveType(id) {
+	var typeName = $('#'+id+' #type_name').val().trim();
+	if (typeName) {
+		$.post(
+			'<?php echo $this->getUrl('adminhtml/bill_setting/saveType'); ?>',
+			{type_name:typeName,form_key:FORM_KEY},function(res){
+				if (res.succeed) {
+					//$this.parents('.type-item').remove();
+				} else {
+					//alert(res.msg);
+				}
+				window.location.reload();
+			},'json')
+	}
+}
+
+function billSaveProject(id) {
+	var projectName = $('#'+id+' #project_name').val().trim();
+	if (projectName) {
+		$.post(
+			'<?php echo $this->getUrl('adminhtml/bill_setting/saveProject'); ?>',
+			{project_name:projectName,form_key:FORM_KEY},function(res){
+				if (res.succeed) {
+					//$this.parents('.type-item').remove();
+				} else {
+					//alert(res.msg);
+				}
+				window.location.reload();
+			},'json')
+	}
+}
+</script>

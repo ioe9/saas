@@ -223,4 +223,13 @@ class Mage_Admin_Model_Department extends Mage_Core_Model_Abstract
     	}
     	return $users;
     }
+    
+    public function getAsOptions() {
+    	$collection = $this->getDepartmentCollection();
+    	$arr = array();
+    	foreach ($collection as $item) {
+    		$arr[$item->getId()] = $item->getDepName();
+    	}
+    	return $arr;
+    }
 }

@@ -3,7 +3,7 @@
     <menu>
         <bulletin>
         	<sort_order>10</sort_order>
-	        <title>企业公告</title>
+	        <title>公告</title>
 	        <action>adminhtml/bulletin/</action>
 	        <children>
 		        <published>

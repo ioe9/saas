@@ -115,6 +115,7 @@ class Mage_Adminhtml_Block_Page_Menu extends Mage_Adminhtml_Block_Template
             $menuArr['label'] = $this->_getHelperValue($child);
 
             $menuArr['sort_order'] = $child->sort_order ? (int)$child->sort_order : $sortOrder;
+            $menuArr['type'] = $child->type ? trim($child->type) : false;
 
             if ($child->action) {
                 $menuArr['url'] = $this->_url->getUrl((string)$child->action, array('_cache_secret_key' => true));
@@ -271,18 +272,40 @@ class Mage_Adminhtml_Block_Page_Menu extends Mage_Adminhtml_Block_Template
     	}
     	return $menu;
     }
+    public function getMenuLevelTrade($menu) {
+    	$arr = array();
+    	 foreach ($menu as $item) {
+        	if ($item['type']!='trade') {
+        		continue;
+        	}
+        	array_push($arr, $item);
+    	 }
+    	 return $this->getMenuLevelFirst($arr);
+    }
+    public function getMenuLevelBase($menu) {
+    	$arr = array();
+    	 foreach ($menu as $item) {
+        	if ($item['type']=='trade') {
+        		continue;
+        	}
+        	array_push($arr, $item);
+    	 }
+    	 return $this->getMenuLevelFirst($arr);
+    }
+
     public function getMenuLevelFirst($menu)
     {
         $html = '<ul>' . PHP_EOL;
         foreach ($menu as $item) {
+        	//var_dump($menu);die();
         	if ($item['sort_order']<0) {
         		continue;
         	}
             $html .= '<li>'
                 . '<a href="' . $item['url'] . '" '
-                . (!empty($item['title']) ? 'title="' . $item['title'] . '"' : '')
+                . (!empty($item['title']) ? ' title="' . $item['title'] . '"'  : '')
                 
-                . '<span>'. ($item['label']) . '</span>'
+                . '><i class="fa fa-dot-circle-o mr5"></i><span>'. ($item['label']) . '</span>'
 				. '</a>' . PHP_EOL;
 
             

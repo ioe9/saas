@@ -1,0 +1,131 @@
+<?php $types = Mage::getModel('bill/reimburse')->getTypeOptions(); ?>
+<div class="c-box">
+	<div class="content-header">
+		<h2 class="m0">营收确认单</h2>
+	</div>
+</div>
+<div class="c-box mt5">
+	<div class="p25">
+		<table class="bill-form" width="100%">
+			<colgroup>
+				<col width="15%">	
+				<col width="35%">	
+				<col width="15%">	
+				<col width="35%">
+			</colgroup>
+			<tbody>
+				<tr>
+					<td class="title">收入归属部门</td>
+					<td class="value"><input type="text" name="rei_create" disabled="disabled" class="ipt" value="<?php echo ''; ?>"/></td>
+					<td class="title">付款方</td>
+					<td class="value"><input type="text" name="rei_create" disabled="disabled" class="ipt" value="<?php echo ''; ?>"/></td>
+					
+				</tr>
+				<tr>
+					<td class="title">应收金额</td>
+					<td class="value"><input type="text" name="rei_create" class="ipt" value="<?php echo ''; ?>"/></td>
+					<td class="title">归属项目</td>
+					<td class="value"><input type="text" name="rei_create" class="ipt" value="<?php echo ''; ?>"/></td>
+
+						
+					</td>
+				</tr>
+				<tr>
+					<td class="title">其他说明</td>
+					<td class="value" colspan="3">
+						<textarea placeholder="500字以内..." class="textarea-input" style="width: 960px; height: 100px;"></textarea>
+					</td>
+					
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</div>
+<div class="d-box mt10 p25_40">
+	<div class="h">
+		<div class="f-left title">
+			<h3 class="m0">通知关注人  </h3>
+		</div>
+		
+    	<div class="clr"></div>
+	</div>
+	<div class="inner mt15 ">
+	
+	</div>
+</div>
+<div class="d-box mt10 p25_40">
+	<div class="h">
+		<div class="f-left title">
+			<h3 class="m0">实收确认 </h3>
+		</div>
+		<div class="f-right actions">
+			<div class="btn-group">
+			  <button type="button" class="btn btn-primary billItemBtn" data-target="billItemTarget" data-tpl="billItemTpl">+ 增加明细</button>
+			</div>
+		</div>
+    	<div class="clr"></div>
+	</div>
+	<div class="inner mt15 grid">
+		<table class="form-list" width="100%">
+			<colgroup>
+				<col width="20%">
+				<col width="20%">
+				<col width="20%">
+				<col width="20%">
+				<col width="20%">
+			</colgroup>
+			<thead>
+				<tr>		
+					<th class="a-center">序号</th>
+					<th class="a-center">实收金额</th>
+					<th class="a-center">金额确认</th>
+					<th class="a-center">说明</th>
+					<th class="a-center">收款日期</th>
+				</tr>
+			</thead>
+			<tbody id="billRevenueTarget">
+				
+				
+			</tbody>
+		</table>
+		<div class="no-display">
+			<script type="text/template" id="billItemTpl">
+			<tr>
+				<td></td>
+				<td>
+					<input class="ipt wp100" placeholder="" type="text">
+				</td>
+				<td>
+					<input class="ipt wp100" placeholder="" type="text">
+				</td>
+				<td>
+					<input class="ipt wp100" placeholder="" type="text">
+				</td>
+				<td>
+					
+					<span class="table-btn table-btn-edit ml5" title="编辑" style="display: none;"></span>
+					<span class="table-btn table-btn-save ml5" title="保存" style="display: inline-block;"></span>
+					<span class="table-btn table-btn-delete ml5" title="删除"></span>
+				
+				</td>
+			</tr>
+			</script>
+		</div>
+		<p class="a-right mb30 mt20">合计：<b id="reimburse_item_total">￥</b>元</p>
+	</div>
+</div>
+
+<p class="a-right mt10">
+	<button class="btn btn-primary w125 mr20" type="button" onclick="editForm.submit()">保存</button>
+</p>
+
+
+<script>
+$(function(){
+	$('.billItemBtn').click(function(){
+		$('#'+$(this).attr('data-target')).append($('#'+$(this).attr('data-tpl')).html());
+	})
+})
+	
+</script>

@@ -1,0 +1,78 @@
+<?php $overtime = Mage::registry('current_overtime'); ?>
+<div class="view-container ">
+    <div class="c-box">
+    	<div class="content-header">
+			<h2 class="m0">外勤详情：<?php echo $overtime->getOvertimeCode(); ?></h2>
+			<div id="messages">
+		        <?php echo $this->getMessagesBlock()->toHtml() ?>
+		    </div>
+		</div>
+    </div>
+	<table width="100%" class="detail-table mt10">
+		<col width="15%"/>
+		<col width="35%"/>
+		<col width="15%"/>
+		<col width="35%"/>
+		<tr>
+			<th>申请人</th>
+			<td><?php echo $overtime->getUserName(); ?></td>
+			<th>部门</th>
+			<?php $departmentOption = Mage::getModel('admin/department')->getAsOptions(); ?>
+			<td><?php echo $departmentOption[$overtime->getOvertimeDepartment()]; ?></td>
+		</tr>
+		<tr>
+			<th>日期</th>
+			<td><?php echo substr($overtime->getData('date_create'),0,10); ?></td>
+			<th>时长</th>
+			<td><?php echo $overtime->getData('overtime_hour'); ?> </td>
+		</tr>
+		<tr>
+			<th>开始</th>
+			<td><?php echo substr($overtime->getData('date_from'),0,16); ?></td>
+			<th>结束</th>
+			<td><?php echo substr($overtime->getData('date_to'),0,16); ?></td>
+		</tr>
+		<tr>
+			
+			<th>申请时间</th>
+			<td colspan="3"><?php echo $overtime->getData('date_create'); ?></td>
+		</tr>
+		<tr>
+			<th>原因说明</th>
+			<td colspan="3"><?php echo $overtime->getData('overtime_reason'); ?></td>
+		</tr>
+	</table>   
+	
+	<?php $audits = $overtime->getAuditCollection(); ?>
+	<table width="100%" class="detail-table mt10">
+		<col width="15%"/>
+		<col width="35%"/>
+		<col width="15%"/>
+		<col width="35%"/>
+		<thead>
+			<tr>
+				<th class="a-center">审批人</th>
+				<th class="a-center">审批意见 </th>	
+				<th class="a-center">审批结果</th>	
+				<th class="a-center">时间</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($audits as  $item): ?>
+			<tr>
+				<td class="a-center"><?php echo $item->getData('link_user') ?></td>
+				<td class="a-center"><?php echo $item->getData('link_suggest') ?></td>
+				<td class="a-center"><?php echo $item->getData('link_status') ?></td>
+				<td class="a-center"><?php echo $item->getData('date_link')  ?></td>
+			</tr>	
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+	<div class="c-box mt10">
+		<div class="p25">
+			<?php echo $this->getFormHtml(); ?>
+			
+		</div>
+	</div>
+	  	
+</div>

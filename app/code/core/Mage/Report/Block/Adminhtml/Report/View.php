@@ -5,19 +5,12 @@ class Mage_Report_Block_Adminhtml_Report_View extends Mage_Adminhtml_Block_Templ
     public function __construct()
     {
        parent::_construct();
-       $this->setTemplate('report/view.phtml');
+       $this->setTemplate('attendance/fieldwork/view.phtml');
 
     }
     
-    public function getReplyCollection(){
-    	$collection = Mage::getResourceModel('report/reply_collection')
-    		->addFieldToFilter('reply_report',Mage::registry('current_report')->getId())
-    		->setOrder('reply_id','desc');
-		return $collection;
-    }
-    
     public function getFormHtml() {
-    	return Mage::app()->getLayout()->createBlock('report/adminhtml_report_reply_form')->toHtml();
+    	return Mage::app()->getLayout()->createBlock('attendance/adminhtml_attendance_reply_form')->toHtml();
     }
 
 }

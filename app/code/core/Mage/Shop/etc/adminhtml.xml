@@ -4,6 +4,7 @@
         <shop>
         	<sort_order>20</sort_order>
 	        <title>商城</title>
+	        <type>trade</type>
 	        <action>adminhtml/shop/</action>
 	        <children>
 		        <sales>

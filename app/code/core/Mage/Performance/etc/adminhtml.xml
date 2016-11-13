@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <config>
     <menu>
-        <crm>
+        <performance>
         	<sort_order>10</sort_order>
-	        <title>CRM</title>
+	        <title>绩效</title>
 	        <action>adminhtml/crm/</action>
 	        <children>
 		        <sales>
@@ -75,6 +75,6 @@
 	                </children>
 		        </other>
 	        </children>
-        </crm>
+        </performance>
     </menu>
 </config>

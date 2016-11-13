@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <config>
     <menu>
-        <crm>
+        <wms>
         	<sort_order>10</sort_order>
-	        <title>CRM</title>
-	        <action>adminhtml/crm/</action>
+	        <title>WMS</title>
+	        <type>trade</type>
+	        <action>adminhtml/wms/</action>
 	        <children>
 		        <sales>
 		        	<sort_order>10</sort_order>
@@ -12,27 +13,27 @@
 			        <children>
 		            	<client>
 		                    <title>客户</title>
-		                    <action>adminhtml/crm_client/</action>
+		                    <action>adminhtml/wms_client/</action>
 		                    <sort_order>10</sort_order>
 		                </client>
 		                <contact>
 		                    <title>联系人</title>
-		                    <action>adminhtml/crm_contact/</action>
+		                    <action>adminhtml/wms_contact/</action>
 		                    <sort_order>20</sort_order>
 		                </contact>
 						<chance>
 		                    <title>销售机会</title>
-		                    <action>adminhtml/crm_chance/</action>
+		                    <action>adminhtml/wms_chance/</action>
 		                    <sort_order>30</sort_order>
 		                </chance>
 						<order>
 		                    <title>订单</title>
-		                    <action>adminhtml/crm_order/</action>
+		                    <action>adminhtml/wms_order/</action>
 		                    <sort_order>40</sort_order>
 		                </order>
 						<payment>
 		                    <title>回款</title>
-		                    <action>adminhtml/crm_payment/</action>
+		                    <action>adminhtml/wms_payment/</action>
 		                    <sort_order>50</sort_order>
 		                </payment>
 	                </children>
@@ -43,12 +44,12 @@
 			        <children>
 		            	<activity>
 		                    <title>市场活动</title>
-		                    <action>adminhtml/crm_activity</action>
+		                    <action>adminhtml/wms_activity</action>
 		                    <sort_order>10</sort_order>
 		                </activity>
 						<clue>
 		                    <title>销售线索</title>
-		                    <action>adminhtml/crm_lead</action>
+		                    <action>adminhtml/wms_lead</action>
 		                    <sort_order>20</sort_order>
 		                </clue>
 	                </children>
@@ -59,22 +60,22 @@
 			        <children>
 		            	<goal>
 		                    <title>目标</title>
-		                    <action>adminhtml/crm_goal</action>
+		                    <action>adminhtml/wms_goal</action>
 		                    <sort_order>10</sort_order>
 		                </goal>
 						<competitor>
 		                    <title>竞争对手</title>
-		                    <action>adminhtml/crm_competitor</action>
+		                    <action>adminhtml/wms_competitor</action>
 		                    <sort_order>20</sort_order>
 		                </competitor>
 		                <readme>
 		                    <title>使用说明</title>
-		                    <action>adminhtml/crm_readme</action>
+		                    <action>adminhtml/wms_readme</action>
 		                    <sort_order>999</sort_order>
 		                </readme>
 	                </children>
 		        </other>
 	        </children>
-        </crm>
+        </wms>
     </menu>
 </config>

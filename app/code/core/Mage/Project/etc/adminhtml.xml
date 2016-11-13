@@ -3,7 +3,7 @@
     <menu>
         <project>
         	<sort_order>10</sort_order>
-	        <title>项目管理</title>
+	        <title>项目</title>
 	        <action>adminhtml/project/</action>
 	        <children>
 		        <dashboard>

@@ -7,111 +7,136 @@ class Mage_Adminhtml_Bill_ReimburseController extends Mage_Adminhtml_Controller_
 	/****
 	 * 我的报销
 	 */
-    public function indexAction()
+    public function myAction()
     {
         $this->_title($this->__('报销管理'));
         $this->loadLayout();
         $this->_setActiveMenu('bill/my');
-        $this->_addContent($this->getLayout()->createBlock('bill/adminhtml_bill_reimburse', 'reimburse'));
+        $this->_addContent($this->getLayout()->createBlock('bill/adminhtml_reimburse', 'reimburse'));
         $this->renderLayout();
     }
 	
-    /*
-     * 保存报销管理
-     */
-    public function saveAction() {
-		$data = $this->getRequest()->getParams();
-		$bill = Mage::getModel('bill/bill');
-		if (isset($data['id']) && $data['id']) {
-			$bill->load($data['id']);
-			if ($bill->getData('bill_company')!=$this->_getCompanyId()) {
-				$this->_getSession()->addError("非法操作，你的行为已被记录。");
-				$this->_redirect('*/*/index');
-				return;
-			}
-		}
-		unset($data['id']);
-        //echo "<xmp>";var_dump($data);die();     
-		$data['bill_company'] = Mage::registry('current_company')->getId();
-		$bill->addData($data);
-		try {
-			$bill->save();
-			$chargeOldArr = explode(',',$data['bill_charge_old']);
-			$chargeArr = explode(',',$data['bill_charge']);
-			$ccOldArr = explode(',',$data['bill_cc_old']);
-			$ccArr = explode(',',$data['bill_cc']);
-			
-			$delChargeArr = array_diff($chargeOldArr,$chargeArr);
-			$addChargeArr = array_diff($chargeArr,$chargeOldArr);
-			
-			$delCcArr = array_diff($ccOldArr,$ccArr);
-			$addCcArr = array_diff($ccArr,$ccOldArr);
-			$write = Mage::getSingleton('core/resource')->getConnection('core_write');    
-			
-			$billId = $bill->getId();
-			$chargeType = Mage_Report_Model_Link::LINK_TYPE_TO;
-			$chargeCc = Mage_Report_Model_Link::LINK_TYPE_CC;
-			foreach ($delChargeArr as $v) {
-				$v = (int)$v;
-				$write->query("delete from bill_link where link_bill='$billId' and link_type='$chargeType' and link_user='$v'");  
-			}
-			foreach ($addChargeArr as $v) {
-				$v = (int)$v;
-				$write->query("insert into bill_link(link_bill,link_type,link_user) values('$billId','$chargeType','$v')");  
-			}
-			
-			foreach ($delCcArr as $v) {
-				$v = (int)$v;
-				$write->query("delete from bill_link where link_bill='$billId' and link_type='$chargeCc' and link_user='$v'");  
-			}
-			foreach ($addCcArr as $v) {
-				$v = (int)$v;
-				$write->query("insert into bill_link(link_bill,link_type,link_user) values('$billId','$chargeCc','$v')");  
-			}
-			
-			$this->_getSession()->addSuccess('报销管理保存成功');
-		} catch (Exception $e) {
-			$this->_getSession()->addError("报销管理保存失败，请联系管理员");
-		}
-		$this->_redirect('*/*/index');
-	}
+
     public function newAction()
     {
-        $this->_forward('edit');
+    	$this->_title($this->__('新建报销'));
+        $this->loadLayout();
+        $this->_setActiveMenu('bill/new');
+        $this->_addContent($this->getLayout()->createBlock('bill/adminhtml_reimburse_new', 'reimburse.process'));
+        $this->renderLayout();
     }
     
     public function editAction()
     {
     	$id = (int)$this->getRequest()->getParam('id');
-    	$bill = Mage::getModel('bill/reimburse')->load($id);
+    	$reimburse = Mage::getModel('bill/reimburse')->load($id);
     	
-    	if ($bill->getId()) {
+    	if ($reimburse->getId()) {
     		//判断归属
-    		if ($bill->getData('bill_create')!=$this->_getUser()->getId()) {
+    		if ($reimburse->getData('rei_create')!=$this->_getUser()->getId()) {
     			$this->_getSession()->addError('非法操作！');
     			$this->_redirect('*/*');
     		}
     	}
-    	Mage::register('current_bill',$bill);
+    	Mage::register('current_reimburse',$reimburse);
         
         $this->loadLayout();
-        if ($bill->getId()) {
+        if ($reimburse->getId()) {
         	$this->_title($this->__('编辑报销'));
         } else {
         	$this->_title($this->__('新建报销'));
         }
         $this->_setActiveMenu('bill/submit');
-        $this->_addContent($this->getLayout()->createBlock('bill/adminhtml_reimburse_edit', 'reimburse.edit'));
+        $this->_addContent($this->getLayout()->createBlock('bill/adminhtml_reimburse_edit_form', 'reimburse.edit'));
         $this->renderLayout();
     }
     
+    /*
+     * 保存报销管理
+     */
+    public function saveAction() {
+		$data = $this->getRequest()->getParams();
+		$reimburse = Mage::getModel('bill/reimburse');
+		$isNew = false;
+		if (isset($data['id']) && $data['id']) {
+			$reimburse->load($data['id']);
+			if ($reimburse->getData('rei_company')!=$this->_getCompanyId()) {
+				$this->_getSession()->addError("非法操作，你的行为已被记录。");
+				$this->_redirect('*/*/index');
+				return;
+			}
+		} else {
+			$isNew = true;
+		}
+		unset($data['id']);
+        //echo "<xmp>";var_dump($data);die();     
+		$data['rei_company'] = Mage::registry('current_company')->getId();
+		$data['rei_create'] = $this->_getUser()->getId();
+		$reimburse->addData($data);
+		try {
+			$reimburse->save();
+			$this->_getSession()->addSuccess('报销生成成功');
+		} catch (Exception $e) {
+			$this->_getSession()->addError("报销保存失败，请重试或联系管理员");
+		}
+		if ($isNew) {
+			$this->_redirect('adminhtml/bill_reimburse/edit',array('id'=>$reimburse->getId()));
+		} else {
+			
+		}
+		
+		
+	}
+    /*
+     * 保存报销明细
+     */
+    public function saveItemAction() {
+    	$res = array(
+			'succeed'=>true,
+			'code' => -1,
+			'data' => null,
+		);
+		$reiId = $this->getRequest()->getParam('rei_id');
+		$itemType = $this->getRequest()->getParam('item_type');
+		$itemMemo = $this->getRequest()->getParam('item_memo');
+		$totalRei = $this->getRequest()->getParam('total_rei');
+		$reimburse = Mage::getModel('bill/reimburse');
+		$item = Mage::getModel('bill/reimburse_item');
+		$isNew = false;
+		if ($reiId) { 
+			$reimburse->load($reiId);
+			if ($reimburse->getData('rei_company')!=$this->_getCompanyId()) {
+				$res['succeed'] = false;
+				$res['msg'] = "非法操作，您的IP已被我们记录！";
+			}
+			$data = array();
+			$data['item_rei'] = $reiId;
+			$data['item_type'] = $itemType;
+			$data['item_memo'] = $itemMemo;
+			$data['total_rei'] = $totalRei;
+			$item->addData($data);
+			try {
+				$item->save();
+				$res['succeed'] = true;
+			} catch (Exception $e) {
+				$res['succeed'] = false;
+				$res['msg'] = "报销保存失败，请重试或联系管理员";
+			}
+		} else {
+			$res['succeed'] = false;
+			$res['msg'] = "无效操作，请重试。";
+		}
+			
+		echo json_encode($res);
+		
+	} 
     public function viewAction() {
     	$id = (int)$this->getRequest()->getParam('id');
-    	$bill = Mage::getModel('bill/bill')->load($id);
+    	$reimburse = Mage::getModel('bill/bill')->load($id);
     	$back = $this->getRequest()->getParam('back');
     	$back = $back ? $back : 'submit';
-    	Mage::register('current_bill',$bill);
-    	if ($bill->getId()) {
+    	Mage::register('current_reimburse',$reimburse);
+    	if ($reimburse->getId()) {
     		 $this->_title($this->__('查看报销'));
 	        $this->loadLayout();
 	        $this->_setActiveMenu('bill/'.$back);

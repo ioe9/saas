@@ -4,6 +4,7 @@
         <crm>
         	<sort_order>10</sort_order>
 	        <title>CRM</title>
+	        <type>trade</type>
 	        <action>adminhtml/crm/</action>
 	        <children>
 		        <sales>

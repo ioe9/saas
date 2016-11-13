@@ -18,6 +18,7 @@
                 <action method="addJs"><script>ztree.min.js</script></action>
                 <action method="addJs"><script>layer.js</script></action>
                 <action method="addJs"><script>base.js</script></action>
+                <action method="addJs"><script>dialog.js</script></action>
                 <action method="addJs"><script>lightbox.js</script></action>
                 <action method="addJs"><script>bootstrap.min.js</script></action>
                 <action method="addJs"><script>grid.js</script></action>
