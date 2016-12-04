@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+         <cms translate="title" module="cms">
+            <title>CMS管理</title>
+            <sort_order>70</sort_order>
+            <children>
+                <page translate="title" module="cms">
+                    <title>CMS页面管理</title>
+                    <action>adminhtml/cms_page</action>
+                    <sort_order>0</sort_order>
+                </page>
+                <block translate="title" module="cms">
+                    <title>静态区块管理</title>
+                    <action>adminhtml/cms_block</action>
+                    <sort_order>10</sort_order>
+                </block>
+                <slide translate="title" module="cms">
+                    <title>Slide管理</title>
+                    <action>adminhtml/cms_slide</action>
+                    <sort_order>20</sort_order>
+                </slide>
+            </children>
+        </cms>
+            
+        
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                	<system>
+                		<children>
+		                    <cms translate="title" module="cms">
+		                        <title>CMS</title>
+		                        <sort_order>70</sort_order>
+		                        <children>
+		                            <block translate="title">
+		                                <title>Static Blocks</title>
+		                                <sort_order>10</sort_order>
+		                            </block>
+		                            <page translate="title">
+		                                <title>Pages</title>
+		                                <sort_order>0</sort_order>
+		                                <children>
+		                                    <save translate="title">
+		                                        <title>Save Page</title>
+		                                        <sort_order>0</sort_order>
+		                                    </save>
+		                                    <delete translate="title">
+		                                        <title>Delete Page</title>
+		                                        <sort_order>10</sort_order>
+		                                    </delete>
+		                                </children>
+		                            </page>
+		                            <media_gallery translate="title">
+		                                <title>Media Gallery</title>
+		                                <sort_order>20</sort_order>
+		                            </media_gallery>
+		                        </children>
+		                    </cms>
+                            <config>
+                                <children>
+                                    <cms translate="title" module="cms">
+                                        <title>Content Management</title>
+                                    </cms>
+                                </children>
+                            </config>
+                            <slide translate="title">
+                                <title>Slide</title>
+                                <sort_order>20</sort_order>
+                            </slide>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

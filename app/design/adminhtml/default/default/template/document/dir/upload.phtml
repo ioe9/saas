@@ -1,0 +1,30 @@
+<div class="dialog-upload-wrap">
+	<div class="dialog-upload-content">
+		<div class="dialog-upload-list">
+			<div class="dialog-upload-path pr clearfix">
+				<span class="f-left">文件路径：</span><i class="btn-chosepath-icon f-left"></i><a href="javascript:
+;" class="btn-chose-path f-left" data-id="1" id="dialog-chose-path">文件目录</a>
+				<div class="upload-filepath" id="div-pathtree"><ul id="utree" class="ztree"></ul></div>
+			</div>
+			<div class="clr"></div>
+			<div class="dialog-upload-body clearfix">
+				<ul id="fileQueue">
+					<li>
+						<div class="upload-file add-file" id="add-uploadfile"></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="dialog-upload-tip clearfix">单个文件限制在100M</div>
+	</div>
+	<div class="btn-row a-center">
+		<a href="javascript:;" class="btn btn-primary mr10" id="btn-startUpload">开始上传</a>
+		<a href="javascript:;" class="btn btn-default btn-dialog-cancel" id="btn-cancel-upload">完成</a>
+	</div>
+</div>
+<script>
+function successCallback() {
+	
+}
+DOC.uploadUtil.createUploader(successCallback);
+</script>

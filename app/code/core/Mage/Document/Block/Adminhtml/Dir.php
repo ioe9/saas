@@ -12,8 +12,9 @@ class Mage_Document_Block_Adminhtml_Dir extends Mage_Adminhtml_Block_Template
         return $this;
     }
     
-    public function getDirs() {
-    	$dirPath = Mage::helper('admin/media')->getCompanyDocumentRoot();
-    	return scandir($dirPath);
+    public function getGridHtml() {
+    	return $this->getLayout()
+                ->createBlock('document/adminhtml_dir_grid', 'adminhtml_dir_ugrid')->toHtml();
     }
+
 }

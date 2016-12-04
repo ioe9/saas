@@ -126,7 +126,75 @@ class Mage_Admin_Model_Department extends Mage_Core_Model_Abstract
 		return $depUserCollection;
 		
     }
+    /***
+     * 获取部门数据
+     */
+    public function getDeptData() {
+    	$data = array();
+    	foreach ($this->getDepartmentCollection() as $item) {
+    		$data[$item->getId()] = $item->getData();
+    	}
+    	
+    	$tree = array(
+    		'id' => '-1',
+    		'name' => Mage::registry('current_company')->getCompanyName(),
+    		'open' => 'true',
+    		'type' => '1',
+    		'nocheck' => true,
+    		'state' => null,
+    		'children' => $this->_createDeptData($data,-1,0),
+    	);
+    	return $tree;
+    }
     
+    protected function _createDeptData($data,$parentId,$i=0) {
+    	$childrenTree = null;
+    	if (count($data)) {
+    		$childrenTree = array();
+    	}
+    	foreach ($data as $key => $item) {
+    		if ($i==0) {
+    			if ($item['dep_parent']!=0) {
+    				continue;
+    			}
+    		} else {
+    			if ($item['dep_parent']!=$parentId) {
+    				continue;
+    			}
+    		}
+    		$curTree = array(
+	    		'id' => $key,
+	    		'name' => $item['dep_name'],
+	    		'type' => '2',
+	    		'nocheck' => true,
+	    		'children' => null,
+	    	);
+    		$childrenData = $this->_getChildren($key, $data);
+    		
+    		$_childrenTree = array();
+    		
+    		
+    		if (count($childrenData)) {
+    			foreach ($childrenData as $_key=>$_item) {
+    				$_curTree = array(
+			    		'id' => $key,
+			    		'name' => $_item['dep_name'],
+			    		'nocheck' => true,
+			    		'type' => '2',
+			    		'children' => null,
+			    	);
+    				$_itemTreeChildren = $this->_createUserData($data,$_key,$i+1);
+    				$_curTree['children'] = $_itemTreeChildren;
+    				array_push($_childrenTree, $_curTree);
+    				
+    			}
+    		}
+    		$curTree['children'] = $_childrenTree;
+    		array_push($childrenTree, $curTree);
+    	}
+    	return $childrenTree;
+    	
+    }
     /***
      * 获取员工数数据
      */
@@ -149,7 +217,6 @@ class Mage_Admin_Model_Department extends Mage_Core_Model_Abstract
     		'state' => null,
     		'children' => $this->_createUserData($data,$dataUser,-1,0),
     	);
-    	//echo "<xmp>";var_dump($tree);echo "</xmp>";die();
     	return $tree;
     }
     

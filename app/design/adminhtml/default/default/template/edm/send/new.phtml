@@ -1,0 +1,69 @@
+<div id="messages">
+    <?php echo $this->getMessagesBlock()->toHtml() ?>
+</div>
+<div class="c-box">
+	<div class="content-header">
+		<h2 class="m0"><i class="fa fa-edit mr5"></i>写信</h2>
+    </div>
+    <div class="p20">
+    	<form 
+		<h5 class="m0 mb10">选择场景</h5>
+		<div class="tab-box">
+			<?php $scenes = $this->getScenes(); ?>
+			<?php $i = 0; ?>
+			<?php foreach ($scenes as $scene): ?>
+			<div data-id="<?php echo $scene->getData('scene_id'); ?>" class="scene-item tab-item pr <?php if (($i+1)%5==0): ?>last<?php endif; ?>">
+				
+				<p class="name fs20"><?php echo $scene->getData('scene_name'); ?></p>
+				<p class="sdesc"><?php echo $scene->getData('scene_sdesc'); ?></p>
+				<div class="scene-child pa" style="display:none;">
+				</div>
+			</div>
+			<?php $i++; ?>
+			<?php endforeach; ?>
+			<div class="clr"></div>
+		</div>
+		<h5 class="m0 mb10 mt15">系统推荐模板</h5>
+		<div class="tab-box">
+			<?php $templates = $this->getTemplateCollection(); ?>
+			<?php $i = 0; ?>
+			<?php foreach ($templates as $template): ?>
+			<div data-id="<?php echo $template->getData('template_id'); ?>" class="template-item tab-item pr <?php if (($i+1)%5==0): ?>last<?php endif; ?>">
+				
+				<p class="name fs20"><?php echo $template->getData('template_name'); ?></p>
+				<p class="sdesc"><?php echo $template->getData('sdesc'); ?></p>
+
+			</div>
+			<?php $i++; ?>
+			<?php endforeach; ?>
+			<div class="clr"></div>
+			<div class="mb10"></div>
+		</div>
+		<div class="clr"></div>
+	</div>
+	<div class="content-bottom a-center">
+		<button class="btn btn-primary btn-lg wp50" id="" type="button" onclick="edmEmailNewContinue()" style=""><i class="fa fa-save"></i>&nbsp;确认，下一步</button>
+    	<div class="clr"></div>
+	</div>
+</div>
+<script>
+$(function(){
+	$('.tab-item').click(function(){
+		$(this).siblings().removeClass('selected');
+		$(this).addClass('selected');
+	})
+})
+function edmEmailNewContinue() {
+	if ($('.scene-item.selected').length==0) {
+		layer.alert("请先选择一个场景！");
+	} else {
+		var scene_id = $('.scene-item.selected').attr('data-id');
+		var template_id = $('.template-item.selected').attr('data-id');
+		var url = '<?php echo $this->getUrl('adminhtml/edm_send/'); ?>'+'?scene_id='+scene_id;
+		if (template_id) {
+			url += '&stid='+template_id;
+		}
+		window.location.href = url;
+	}
+}
+</script>

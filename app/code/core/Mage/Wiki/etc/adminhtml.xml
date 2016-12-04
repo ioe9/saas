@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <wiki>
+        	<sort_order>990</sort_order>
+	        <title>百科</title>
+	        <action>adminhtml/wiki/</action>
+	        <children>
+		        <index>
+		        	<sort_order>0</sort_order>
+			        <title>首页</title>
+			        <action>adminhtml/wiki/index</action>
+		        </index>
+	        </children>
+        </wiki>
+    </menu>
+</config>

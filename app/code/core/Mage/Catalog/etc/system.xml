@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <catalog module="catalog">
+            <label>菜单设置</label>
+            <tab>general</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>0</sort_order>
+            <groups>
+                <menu>
+                    <label>菜单设置</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                    	<main_menu>
+                            <label>主导航菜单</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_category_first</source_model>
+                            <sort_order>10</sort_order>
+                        </main_menu>
+                        <topsub_menu>
+                            <label>顶部副菜单</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_category_first</source_model>
+                            <sort_order>20</sort_order>
+                        </topsub_menu>
+                    </fields>
+				</menu>
+			</groups>
+		</catalog>
+    </sections>
+</config>

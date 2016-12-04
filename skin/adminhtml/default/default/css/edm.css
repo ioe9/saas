@@ -1,0 +1,266 @@
+/* Class: std - styles for admin-controlled content */
+.std .subtitle { padding:0; }
+.std ol.ol { list-style:decimal outside; padding-left:1.5em; }
+.std ul.disc { list-style:disc outside; padding-left:18px; margin:0 0 10px; }
+.std dl dt { font-weight:bold; }
+.std dl dd { margin:0 0 10px; }
+.std ul,
+.std ol,
+.std dl,
+.std p,
+.std address,
+.std blockquote { margin:0 0 1em; padding:0; }
+.std ul { list-style:disc outside; padding-left:1.5em; }
+.std ol { list-style:decimal outside; padding-left:1.5em; }
+.std ul ul { list-style-type:circle; }
+.std ul ul,
+.std ol ol,
+.std ul ol,
+.std ol ul { margin:.5em 0; }
+.std dt { font-weight:bold; }
+.std dd { padding:0 0 0 1.5em; }
+.std blockquote { font-style:italic; padding:0 0 0 1.5em; }
+.std address { font-style:normal; }
+.std b,
+.std strong { font-weight:bold; }
+.std i,
+.std em { font-style:italic; }
+/******************** editor **************/
+.box-inner .field {
+    float: left;
+    width: 100%;
+}
+.editor-box .field > label {
+    float: left;
+    line-height: 30px;
+    text-align: right;
+    width: 85px;
+}
+.editor-box .field > div {
+    float: right;
+    line-height: 32px;
+    width: 900px;
+}
+.editor-box .field input[type="radio"], 
+.editor-box .field input[type="checkbox"] {
+	margin:0;
+}
+
+/************ template edit *********************/
+.editor-box .drag-btn {
+    font-size: 18px;
+    padding: 15px;
+    width: 100%;
+}
+.editor-box .drag-btn:hover {
+
+}
+.editor-box .md-empty {
+    border: 1px solid #ccc;
+    color: #999;
+    font-size: 30px;
+    margin-bottom: 10px;
+    padding: 66px;
+    text-align: center;
+}
+.module-mask {
+    background: #fff none repeat scroll 0 0;
+    padding: 0;
+}
+#email_body {}
+#email_body .module_handle {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ddd;
+    line-height: 20px;
+    margin-bottom: 0;
+    padding: 10px 15px;
+    border-bottom:0;
+}
+#email_body .module_handle br {
+    float: left;
+}
+#email_body .module_handle:last-child {
+	border-bottom:1px solid #DDD;
+}
+#email_body .module_handle li {
+    margin-left: 15px;
+}
+#email_body .module_handle p {
+    margin: 0;
+}
+#email_body .module_handle .ins_decor {
+    color: #21b384;
+    font-weight: normal;
+}
+
+.handle-tools {
+    background: #f1f1f1 none repeat scroll 0 0;
+    border: 1px solid #ddd;
+    float: left;
+    padding: 2px 10px;
+    position: absolute;
+    right: -1px;
+    top: -15px;
+    width: auto;
+}
+.handle-tools a {
+    color: #666;
+}
+.handle-tools a {
+    margin: 0 5px;
+}
+
+.content-bottom {
+    background: #f5f5f5 none repeat scroll 0 0;
+    border-top: 1px solid #ddd;
+    padding: 20px;
+}
+.drag-handle {
+    background: #eee none repeat scroll 0 0;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    padding: 20px 10px 10px;
+    position: relative;
+}
+.drag-handle .legend {
+    background: #f1f1f1 none repeat scroll 0 0;
+    border: 1px solid #ddd;
+    color: #999;
+    font-size: 15px;
+    left: -1px;
+    line-height: 20px;
+    padding: 2px 10px;
+    position: absolute;
+    text-align: center;
+    top: -15px;
+    width: 95px;
+}
+.drag-handle .btns a {
+	color: #626262;
+}
+.tpl-item .item-content p {
+	margin:0;
+}
+
+.tpl-item .cke_chrome {
+    border: 1px solid #DDD;
+    box-shadow: none;
+    display: block;
+    padding: 0;
+}
+.tpl-item .cke_top {
+    background: #cfd1cf linear-gradient(to bottom, #f5f5f5, #ddd) repeat scroll 0 0;
+    border-bottom: 1px solid #bbb;
+    padding: 3px 5px 0;
+}
+.tpl-item .cke_bottom {
+    background: #cfd1cf linear-gradient(to bottom, #eee, #f1f1f1) repeat scroll 0 0;
+    border-top: 1px solid #ddd;
+    padding: 2px 8px;
+}
+.tpl-item .detail-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.editor-box .detail-table th, 
+.editor-box .detail-table td {
+    padding: 5px 10px;
+    vertical-align: middle;
+}
+.tab-item {
+    border: 1px solid #eee;
+    float: left;
+    height: 80px;
+    line-height: 60px;
+    margin: 0 12px 10px 0;
+    padding: 10px;
+    text-align: center;
+    width: 200px;
+    cursor:pointer;
+}
+.tab-item.last {
+	margin-right:0;
+}
+.tab-item.selected {
+    background: #34ca67 none repeat scroll 0 0;
+    color: #fff;
+}
+.template-item {
+	height:220px;
+}
+
+/*************** cat ***********/
+.cat-box .cat-selected {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ddd;
+    color: #21b384;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+}
+.cat-box dl {
+    float: left;
+    line-height: 18px;
+    margin: 0 0 10px;
+    padding-right: 12px;
+    width: 33%;
+}
+.cat-box dl dt {
+    background: #d9d9d9 none repeat scroll 0 0;
+    border: 1px solid #dddddd;
+    border-bottom: 2px solid #999999;
+    color: #000;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 17px;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+}
+
+.cat-box dl dd {
+    border: 1px solid #eee;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 3px;
+    padding: 1px 5px;
+}
+.cat-box dl dd.selected,
+.cat-box dl dd:hover {
+    background: #21b384 none repeat scroll 0 0;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+}
+.cat-box dl dd i {
+    display: inline;
+    line-height: 22px;
+    margin-right: 3px;
+	display:none;
+}
+.cat-box dl dd.selected i,
+.cat-box dl dd:hover i {
+	display:block;
+}
+
+/******************** advantage **********/
+.adv-item > p {
+    color: #000;
+}
+.adv-item .optional-box {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ddd;
+    box-shadow: 2px 2px 2px #ccc;
+    color: #666;
+    padding: 5px;
+    width: 80%;
+    z-index: 999;
+}
+.adv-item .optional-box p {
+    cursor: pointer;
+    padding: 2px 10px;
+}
+.adv-item .optional-box p:hover {
+	background: #21b384 none repeat scroll 0 0;
+	color: #FFF;
+}

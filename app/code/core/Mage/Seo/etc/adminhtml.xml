@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <seo>
+        	<sort_order>990</sort_order>
+	        <title>SEO</title>
+	        <type>trade</type>
+	        <action>adminhtml/seo/</action>
+	        <children>
+		        <index>
+		        	<sort_order>0</sort_order>
+			        <title>首页</title>
+			        <action>adminhtml/seo/index</action>
+		        </index>
+	        </children>
+        </seo>
+    </menu>
+</config>

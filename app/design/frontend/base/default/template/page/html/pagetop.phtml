@@ -1,0 +1,24 @@
+<?php if (!Mage::getBlockSingleton('page/html_header')->getIsHomePage()): ?>
+<div class="pgtop">
+	<div class="container">
+		<?php echo $this->getChildHtml('breadcrumbs'); ?>
+		<?php $title = Mage::registry('current_title'); ?>
+		<div class='clr'></div>
+		<h1><?php echo $title['name']; ?></h1>
+		<p class="sdesc"><?php echo $title['sdesc']; ?></p>
+	</div>
+</div>
+<?php echo $this->getChildHtml('subnav'); ?>
+<?php else: ?>
+<div class="pgtop">
+	<div class="container">
+		<div class="banner_home">
+			<h2>Mio - 开源PHP框架</h2>
+			<h3>重新定义WEB项目开发</h3>
+			<p>成熟的架构设计，丰富后台应用组件，便捷的后台管理操作界面，灵活的功能重写和介入，强大的页面布局方案，您值得拥有！</p>
+			<p class="btn"><a href="#">了解更多 &gt;&gt;</a></p>
+		</div>
+		
+	</div>
+</div>
+<?php endif; ?>

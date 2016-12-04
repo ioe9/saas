@@ -1,0 +1,16 @@
+<?php if($crumbs && is_array($crumbs)): ?>
+<div class="breadcrumbs">
+	
+    <ul>
+    	<li class="pos"><span>您当前的位置：</span></li>
+        <?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
+            <li class="<?php echo $_crumbName ?>">
+            
+                <a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->escapeHtml($_crumbInfo['title']) ?>"><?php echo $this->escapeHtml($_crumbInfo['label']) ?></a>
+            
+           
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>

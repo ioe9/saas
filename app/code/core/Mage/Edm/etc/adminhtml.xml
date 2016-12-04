@@ -14,39 +14,61 @@
 		        </index>
 		        <email>
 		        	<sort_order>10</sort_order>
-			        <title>邮件</title>
+			        <title>邮件管理</title>
 			      	<children>
-		            	<client_send>
-		                    <title>发邮件</title>
-		                    <action>adminhtml/edm_email_client/</action>
+			      		<send_new>
+		                    <title>写信</title>
+		                    <action>adminhtml/edm_send/new</action>
 		                    <sort_order>10</sort_order>
-		                </client_send>
-		                <client_dev>
-		                    <title>开发客户</title>
-		                    <action>adminhtml/edm_client_url/</action>
-		                    <sort_order>20</sort_order>
-		                </client_dev>
-		                
-		                <template>
-				        	<sort_order>30</sort_order>
-					        <title>邮件模版</title>
-					        <action>adminhtml/edm_email_template/</action>
-					    </template>
-					    <email_list>
+		                </send_new>
+		                <draft>
+		                    <title>草稿箱</title>
+		                    <action>adminhtml/edm_email_inbox/</action>
+		                    <sort_order>30</sort_order>
+		                </draft>
+		            	<outbox>
 		                    <title>已发送</title>
-		                    <action>adminhtml/edm_client_url/</action>
-		                    <sort_order>100</sort_order>
-		                </email_list>
-		                <email_stat>
-		                    <title>统计分析</title>
-		                    <action>adminhtml/edm_client_url/</action>
-		                    <sort_order>110</sort_order>
-		                </email_stat>
+		                    <action>adminhtml/edm_email_send/</action>
+		                    <sort_order>40</sort_order>
+		                </outbox>
+		                <inbox>
+		                    <title>收件箱</title>
+		                    <action>adminhtml/edm_email_inbox/</action>
+		                    <sort_order>50</sort_order>
+		                </inbox>
+		               
 		            </children>
 			    </email>
+			    <campaign>
+		        	<sort_order>12</sort_order>
+			        <title>邮件推广</title>
+			      	<children>
+			      		<new>
+		                    <title>创建活动</title>
+		                    <action>adminhtml/edm_campaign/new</action>
+		                    <sort_order>10</sort_order>
+		                </new>
+		                <send>
+		                    <title>推送邮件</title>
+		                    <action>adminhtml/edm_campaign/send</action>
+		                    <sort_order>30</sort_order>
+		                </send>
+		            	
+		                <list>
+		                    <title>活动列表</title>
+		                    <action>adminhtml/edm_campaign/</action>
+		                    <sort_order>50</sort_order>
+		                </list>
+		                <queue>
+		                    <title>推送队列</title>
+		                    <action>adminhtml/edm_campaign/queue</action>
+		                    <sort_order>60</sort_order>
+		                </queue>
+		            </children>
+			    </campaign>
 			    <client>
 		        	<sort_order>15</sort_order>
-			        <title>客户</title>
+			        <title>客户管理</title>
 			       	<children>
 		            	<url>
 		                    <title>URL分析客户</title>
@@ -58,44 +80,91 @@
 		                    <action>adminhtml/edm_client_keyword</action>
 		                    <sort_order>20</sort_order>
 		                </keyword>
-		                <my>
-		                    <title>客户管理</title>
-		                    <action>adminhtml/edm_client_my/</action>
+		                <list>
+		                    <title>客户列表</title>
+		                    <action>adminhtml/edm_client/</action>
 		                    <sort_order>50</sort_order>
-		                </my>
+		                </list>
+		                <group>
+		                    <title>客户分组</title>
+		                    <action>adminhtml/edm_client_group/</action>
+		                    <sort_order>90</sort_order>
+		                </group>
 		            </children>
 		            
 			    </client>
-					    
-			    <community>
-		        	<sort_order>25</sort_order>
-			        <title>社区中心</title>
+            	<template>
+                    <title>模版管理</title>
+                    <sort_order>90</sort_order>
+                    <children>
+		            	<my>
+		                    <title>我的模板</title>
+		                    <action>adminhtml/edm_template/my</action>
+		                    <sort_order>10</sort_order>
+		                </my>
+		                <wishlist>
+		                    <title>我的收藏</title>
+		                    <action>adminhtml/edm_template/wishlist</action>
+		                    <sort_order>10</sort_order>
+		                </wishlist>
+		                <list>
+		                    <title>模版大厅</title>
+		                    <action>adminhtml/edm_template/</action>
+		                    <sort_order>20</sort_order>
+		                </list>
+		            </children>
+                </template>
+                <design>
+                    <title>主题管理</title>
+                    <sort_order>95</sort_order>
+                    <children>
+		            	<my>
+		                    <title>我的主题</title>
+		                    <action>adminhtml/edm_design/my</action>
+		                    <sort_order>10</sort_order>
+		                </my>
+		                <wishlist>
+		                    <title>我的收藏</title>
+		                    <action>adminhtml/edm_design/wishlist</action>
+		                    <sort_order>20</sort_order>
+		                </wishlist>
+		                <list>
+		                    <title>主题大厅</title>
+		                    <action>adminhtml/edm_design/</action>
+		                    <sort_order>30</sort_order>
+		                </list>
+		            </children>
+                </design>
+                <task>
+                    <title>任务大厅</title>
+                    <sort_order>99</sort_order>
+                    <children>
+		            	<my>
+		                    <title>我的任务</title>
+		                    <action>adminhtml/edm_task/my</action>
+		                    <sort_order>10</sort_order>
+		                </my>
+		                <list>
+		                    <title>任务列表</title>
+		                    <action>adminhtml/edm_task/</action>
+		                    <sort_order>20</sort_order>
+		                </list>
+		            </children>
+                </task>
+			    <stat>
+		        	<sort_order>100</sort_order>
+			        <title>数据统计</title>
 			        <children>
 		            	<template>
-		                    <title>模版大厅</title>
-		                    <action>adminhtml/edm_community_template/</action>
+		                    <title>账号监控</title>
+		                    <action>adminhtml/edm_stat_mailgun/</action>
 		                    <sort_order>10</sort_order>
 		                </template>
-		                <design>
-		                    <title>设计大厅</title>
-		                    <action>adminhtml/edm_community_design/</action>
-		                    <sort_order>20</sort_order>
-		                </design>
-		                <task>
-		                    <title>任务大厅</title>
-		                    <action>adminhtml/edm_community_task/</action>
-		                    <sort_order>30</sort_order>
-		                </task>
-		                <share>
-		                    <title>外贸干货</title>
-		                    <action>adminhtml/edm_community_article/</action>
-		                    <sort_order>50</sort_order>
-		                </share>
 		            </children>
-			    </community>
-			    
+			    </stat>
+			    <!--
 			    <help>
-		        	<sort_order>30</sort_order>
+		        	<sort_order>110</sort_order>
 			        <title>帮助中心</title>
 			        <children>
 		            	<newer>
@@ -120,47 +189,51 @@
 		                </tool>
 		            </children>
 		        </help>
-		        
-		        <account module="adminhtml">
-		            <title>我的账户</title>
-		            <sort_order>100</sort_order>
+		        -->
+		        <setting module="adminhtml">
+		            <title>应用设置</title>
+		            <sort_order>150</sort_order>
 		            <children>
 		            	<info>
 		                    <title>基本信息</title>
-		                    <action>adminhtml/edm_info</action>
+		                    <action>adminhtml/edm_setting_info/</action>
 		                    <sort_order>10</sort_order>
 		                </info>
 		                <cat>
 		                    <title>行业设置</title>
-		                    <action>adminhtml/edm_info/cat</action>
+		                    <action>adminhtml/edm_setting_info/cat</action>
 		                    <sort_order>15</sort_order>
 		                </cat>
 		                <advantage>
 		                    <title>优势设置</title>
-		                    <action>adminhtml/edm_advantage</action>
+		                    <action>adminhtml/edm_setting_advantage/</action>
 		                    <sort_order>19</sort_order>
 		                </advantage>
 		                
 		            </children> 
-		        </account>
+		        </setting>
 		        
 		        
 			   
 		        <feedback module="adminhtml">
-		            <title>反馈信息</title>
-		            <sort_order>140</sort_order>
-		            <action>adminhtml/edm_feedback</action>
+		            <title>用户反馈</title>
+		            <sort_order>199</sort_order>
 		            <children>
 		            	<new>
 		                    <title>新增反馈</title>
-		                    <action>adminhtml/edm_feedback</action>
+		                    <action>adminhtml/edm_feedback/new</action>
 		                    <sort_order>10</sort_order>
 		                </new>
 		                <my>
-		                    <title>提交历史</title>
+		                    <title>我的反馈</title>
 		                    <action>adminhtml/edm_feedback/my</action>
-		                    <sort_order>50</sort_order>
+		                    <sort_order>20</sort_order>
 		                </my>
+		                <index>
+		                    <title>反馈列表</title>
+		                    <action>adminhtml/edm_feedback/index</action>
+		                    <sort_order>30</sort_order>
+		                </index>
 		            </children>
 		        </feedback>
 		        

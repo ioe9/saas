@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config>
     <sections>
-        <design translate="label" module="core">
+        <design module="core">
             <groups>
                 <head translate="label">
                     <label>HTML Head</label>

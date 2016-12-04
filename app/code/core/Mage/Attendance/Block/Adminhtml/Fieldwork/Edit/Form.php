@@ -122,7 +122,7 @@ class Mage_Attendance_Block_Adminhtml_Fieldwork_Edit_Form extends Mage_Adminhtml
             'title'     => '审批人',
 			'class'     => 'input-user',
             'required'  => true,
-            'after_element_html' => '<div class="input-user-wrap"><div class="inner" id="fieldwork_audit_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="fieldwork_audit_tag" data-target="fieldwork_audit" data-old=\''.json_encode($auditData).'\' class="add-user"><i class="fa fa-plus f-right" aria-hidden="true"></i></a></div>',
+            'after_element_html' => '<div class="input-user-wrap"><div class="inner" id="fieldwork_audit_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="fieldwork_audit_tag" data-target="fieldwork_audit" data-old=\''.json_encode($auditData).'\' class="add-user"><i class="fa fa-plus f-right"></i></a></div>',
         ));
         $fieldset->addField('fieldwork_cc_old', 'hidden', array(
             'name'      => 'fieldwork_cc_old',
@@ -134,7 +134,7 @@ class Mage_Attendance_Block_Adminhtml_Fieldwork_Edit_Form extends Mage_Adminhtml
             'title'     => '抄送人',
             'class'     => 'input-user',
             'required'  => false,
-            'after_element_html' => '<div class="input-user-wrap"><div class="inner" id="fieldwork_cc_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="fieldwork_cc_tag" data-target="fieldwork_cc" data-old=\''.json_encode($ccData).'\' class="add-user"><i class="fa fa-plus f-right" aria-hidden="true"></i></a></div>',
+            'after_element_html' => '<div class="input-user-wrap"><div class="inner" id="fieldwork_cc_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="fieldwork_cc_tag" data-target="fieldwork_cc" data-old=\''.json_encode($ccData).'\' class="add-user"><i class="fa fa-plus f-right"></i></a></div>',
         ));
         
         //上传附件

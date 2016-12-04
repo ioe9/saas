@@ -1,0 +1,43 @@
+<div id="fileListHead" class="file-list-head list-head-noControl" style="display: none;">
+	<div class="column column-filename"><span>文件名</span></div>
+	<div class="column column-size"><span>大小</span></div>
+	<div class="column column-uploadPerson">上传者<span></span></div>
+	<div class="column column-uploadTime"><span>上传时间</span></div>
+	<div class="column column-control"><span></span></div>
+</div>
+<div class="">
+<?php $dirs = $this->getDirs(); ?>
+<ul class="dir-grid icon-list">
+<?php foreach ($dirs as $_dir): ?>
+
+<li hasPri="<?php if ($_dir['hasPri']): ?>true<?php else: ?>false<?php endif; ?>" data-dirid="<?php echo $_dir['id']; ?>">
+	<div class="column column-filename" title="">
+		<span data-dirid="<?php echo $_dir['id']; ?>" data-dirpid="<?php echo $_dir['dir_parent']; ?>" class="icon <?php if ($_dir['is_file']): ?>icon-<?php echo ($_dir['file_ext'] ? $_dir['file_ext'] : 'default'); ?><?php else: ?>icon-folder<?php endif; ?>">
+		 	<?php if ($_dir['hasPri']): ?><span class="set" data-dirid="<?php echo $_dir['id']; ?>"></span><?php endif; ?>
+			<span class="wish <?php if ($_dir['wish']): ?>wish-checked<?php endif; ?>" data-dirid="<?php echo $_dir['id']; ?>"></span>
+		</span>
+		<span class="text" filename=""><?php echo $_dir['name']; ?></span>
+	</div>
+	
+	<div class="column column-size"><?php echo $_dir['file_size']; ?>KB</div>
+	<div class="column column-uploadPerson"><?php echo $_dir['username']; ?></div>
+	<div class="column column-uploadTime"><?php echo $_dir['date_create']; ?></div>
+	<div class="column column-control">
+		<span class="column-collection " file-id="<?php echo $_dir['id']; ?>"></span>
+	 	<a class="btn-column column-rename" href="javascript:;">重命名</a>
+	    <a class="btn-column column-set" fileid="<?php echo $_dir['id']; ?>" href="javascript:;">设置</a>
+	    <a class="btn-column column-moveto" href="javascript:;">移动到</a>
+		<a class="btn-column column-delete" href="javascript:;">删除</a>
+	
+	</div>
+	<div class="clr"></div>
+</li>
+
+<?php endforeach; ?>
+</ul>
+<?php ?>
+</div>
+<script>
+DOC.directory.bindGridEvents();
+</script>
+

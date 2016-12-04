@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <news>
+        	<sort_order>990</sort_order>
+	        <title>外贸头条</title>
+	        <type>trade</type>
+	        <action>adminhtml/news/</action>
+	        <children>
+		        <index>
+		        	<sort_order>0</sort_order>
+			        <title>首页</title>
+			        <action>adminhtml/news/index</action>
+		        </index>
+	        </children>
+        </news>
+    </menu>
+</config>

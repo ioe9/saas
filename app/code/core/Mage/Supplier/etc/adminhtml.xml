@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <supplier>
+        	<sort_order>990</sort_order>
+	        <title>供应商</title>
+	        <type>trade</type>
+	        <action>adminhtml/supplier/</action>
+	        <children>
+		        <index>
+		        	<sort_order>0</sort_order>
+			        <title>供应商</title>
+			        <action>adminhtml/supplier/index</action>
+		        </index>
+	        </children>
+        </supplier>
+    </menu>
+</config>

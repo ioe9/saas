@@ -31,7 +31,9 @@ class Mage_Edm_Helper_Template extends Mage_Core_Helper_Abstract {
 
 	protected function _initPreview() {
 		$template = Mage :: registry('current_template');
-		$collection = Mage :: getResourceModel('edm/company_template_module_collection')->addFieldToFilter('module_template', $template->getId());
+		
+		$collection = Mage :: getResourceModel('edm/templates_module_collection')
+			->addFieldToFilter('module_template', $template->getId());
 		$arr = array ();
 		//echo $collection->getSelect(); die();
 		foreach ($collection as $_c) {
@@ -284,7 +286,7 @@ class Mage_Edm_Helper_Template extends Mage_Core_Helper_Abstract {
 							//随机替换
 						} else {
 							//先加载再替换
-							$items = Mage :: getResourceModel('edm/company_template_module_item_collection')->addFieldToFilter('status', 1)->addFieldToFilter('item_template', Mage :: registry('current_template')->getId())->addFieldToFilter('item_company', Mage :: registry('current_company')->getId())->addFieldToFilter('item_module', $modules[$construction[1]]['info']->getId());
+							$items = Mage :: getResourceModel('edm/templates_module_item_collection')->addFieldToFilter('status', 1)->addFieldToFilter('item_template', Mage :: registry('current_template')->getId())->addFieldToFilter('item_company', Mage :: registry('current_company')->getId())->addFieldToFilter('item_module', $modules[$construction[1]]['info']->getId());
 
 							$arr = array ();
 							if (count($items)) {
@@ -859,8 +861,8 @@ class Mage_Edm_Helper_Template extends Mage_Core_Helper_Abstract {
 	/**
 	 * Layout也有依赖关系
 	 */
-	public function renderLayout($layout, $decor = false) {
-		$content = $layout->getText();
+	public function renderLayout($design, $decor = false) {
+		$content = $design->getText();
 		$this->_initPreview();
 		$output = $this->processModule($content, $decor);
 		$output = $this->processCompanyAttr($output, $decor);

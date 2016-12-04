@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default module="page">
+        <block type="page/html" name="root" output="toHtml" template="page/3columns.phtml">
+            <block type="page/html_head" name="head" as="head">
+            	
+                <action method="addCss"><stylesheet>css/bootstrap.css</stylesheet></action>
+                <action method="addCss"><stylesheet>css/font-awesome.min.css</stylesheet></action>
+                <action method="addCss"><stylesheet>css/common.css</stylesheet></action>
+                <action method="addJs"><script>jquery.min.js</script></action>
+                <action method="addJs"><script>common.js</script></action>
+                <action method="addCss"><stylesheet>css/swiper-3.3.1.min.css</stylesheet></action>
+                <action method="addJs"><script>swiper-3.3.1.jquery.min.js</script></action>
+            </block>
+            <block type="core/text_list" name="after_body_start" as="after_body_start" />
+            <block type="page/html_notices" name="global_notices" as="global_notices" template="page/html/notices.phtml" />
+            <block type="page/html_header" name="header" as="header">
+            	
+            </block>
+           
+            <block type="core/text_list" name="left" as="left" />
+            <block type="core/messages" name="messages" as="messages"/>
+            <block type="core/text_list" name="content" as="content" />
+            <block type="core/text_list" name="right" as="right" />
+            <block type="core/template" name="pagetop" as="pagetop" template="page/html/pagetop.phtml">
+            	 <block type="page/html_breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>
+            	 <block type="core/template" name="title" as="title"  template="page/html/title.phtml"/>
+            	 <block type="core/template" name="subnav" as="subnav"  template="page/html/subnav.phtml"/>
+            </block>
+            
+            <block type="core/template" name="pagebottom" as="pagebottom" template="page/html/pagebottom.phtml"/>
+            <block type="page/html_footer" name="footer" as="footer" template="page/html/footer.phtml"/>
+            <block type="core/text_list" name="before_body_end" as="before_body_end" />
+        </block>
+    </default>
+	<routermatch>
+    	<all/>
+	</routermatch>
+    
+</layout>

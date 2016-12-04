@@ -1,0 +1,19 @@
+<div class="side-box">
+	<div class="panel-heading">
+	   	<h2 class="m0">推荐<span>RECOMMEND</span></h2>
+		<div class="clr"></div>
+
+	</div>
+	<div class="mb20 p15 side-box-inner">
+		<?php $items = $this->getCollection(); ?>
+		<ul class="ilist">
+		<?php foreach ($items as $_item): ?>
+			<li>	
+				<?php $title = $_item->getArticleTitle(); ?>
+				<div class="mb5"><a href="<?php echo $this->getUrl('adminhtml/college_article/view'); ?>?id=<?php echo $_item->getId(); ?>"><?php echo $title; ?></a></div>
+			</li>
+		<?php endforeach; ?>
+		</ul>
+	</div>
+	<div class="clr"></div>
+</div>

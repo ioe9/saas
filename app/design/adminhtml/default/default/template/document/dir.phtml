@@ -10,22 +10,23 @@
     		<div class="f-right actions">
         		
 				<div class="btn-group2">
-				  <button type="button" class="btn btn-default">创建文件夹</button>
-				  <button type="button" class="btn btn-default">上传文件</button>
-				  <button type="button" class="btn btn-default">LIST</button>
-				  <button type="button" class="btn btn-default">GRID</button>
+				  <button type="button" class="btn btn-default btn-create"><i class="fa fa-plus mr5"></i>创建文件夹</button>
+				  <button type="button" class="btn btn-primary btn-upload"><i class="fa fa-upload mr5"></i>上传文件</button>
+				  <button type="button" class="btn btn-default view-as-list"><i class="fa fa-list"></i></button>
+				  <button type="button" class="btn btn-default view-as-grid"><i class="fa fa-th"></i></button>
 				</div>
     		</div>
         	<div class="clr"></div>
     	</div>
     </div>    
-   	<div class="d-box mt5">
+   	<div class="d-box mt5 ">
     	<div class="h">
     		<div class="f-left actions">
 				<div class="btn-group2">
-				  <button type="button" class="btn btn-default">移动</button>
-				  <button type="button" class="btn btn-default">删除</button>
-				  <button type="button" class="btn btn-default">重命名</button>
+				  <button type="button" class="btn btn-default btn-moveto"><i class="fa fa-sign-in mr5"></i>移动</button>
+				  <button type="button" class="btn btn-default btn-delete"><i class="fa fa-remove mr5"></i>删除</button>
+				  <button type="button" class="btn btn-default btn-rename"><i class="fa fa-edit mr5"></i>重命名</button>
+				  <button type="button" id="btn-back" class="btn btn-default btn-back" style="display:none;"><i class="fa fa-mail-reply mr5"></i>返回上级目录</button>
 				</div>
     		</div>
     		<div class="f-right actions">
@@ -36,24 +37,15 @@
         	<div class="clr"></div>
     	</div>
     </div> 
-    <div class="d-box mt5 p20">
-    	<?php $dirs = $this->getDirs(); ?>
-    	<ul class="dir-grid">
-    	<?php foreach ($dirs as $_dir): ?>
-    		<?php if ($_dir!='..' && $_dir!='.'): ?>
-    		<li>
-    			<div class="column column-filename" title="">
-					<span class="icon icon-folder">
-					 	<span class="set" fileid=""></span>
-						<span class="collection collection-checked" fileid=""></span>
-					</span>
-					<span class="text" filename=""><?php echo iconv('gbk' , 'utf-8' , $_dir ); ?></span>
-				</div>
-    		</li>
-    		<?php endif; ?>
-    	<?php endforeach; ?>
-    	</ul>
-    	<?php ?>
-    	<div class="clr"></div>
+    <div class="d-box mt5 p0">
+    	<div class="no-display">
+    		<input type="hidden" id="dir_parent" name="dir_parent" value=""/>
+    	</div>
+    	<div id="dir_ctn" class="mb20">
+	    	<?php echo $this->getGridHtml(); ?>
+	    	<div class="clr "></div>
+    	</div>
+    	<div class="clr mt20"></div>
+
     </div>                       
 </div>

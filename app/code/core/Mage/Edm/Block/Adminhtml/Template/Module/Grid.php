@@ -14,7 +14,7 @@ class Mage_Edm_Block_Adminhtml_Template_Module_Grid extends Mage_Adminhtml_Block
     {
         //$collection = Mage::getResourceModel('edm/company_template_module_collection');
         //$collection->addFieldToFilter('module_company',Mage::registry('current_company')->getId());
-        $collection = Mage::getResourceModel('edm/templates_module_collection');
+        $collection = Mage::getResourceModel('edm/template_module_collection');
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }

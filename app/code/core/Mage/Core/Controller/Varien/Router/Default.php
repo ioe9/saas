@@ -8,6 +8,7 @@ class Mage_Core_Controller_Varien_Router_Default extends Mage_Core_Controller_Va
      */
     public function match(Varien_Controller_Request_Http $request)
     {
+    	
     	/*
         $moduleName     = 'core';
         $controllerName = 'index';
@@ -31,7 +32,7 @@ class Mage_Core_Controller_Varien_Router_Default extends Mage_Core_Controller_Va
                 $actionName     = 'noRoute';
             }
         }
-
+		
         $request->setModuleName($moduleName)
             ->setControllerName($controllerName)
             ->setActionName($actionName);

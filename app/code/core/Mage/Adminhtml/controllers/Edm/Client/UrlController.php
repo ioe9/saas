@@ -2,7 +2,7 @@
 class Mage_Adminhtml_Edm_Client_UrlController extends Mage_Adminhtml_Controller_Edm {
 	public function indexAction() {
 		$this->loadLayout();
-		$this->_setActiveMenu('client');
+		$this->_setActiveMenu('client/url');
 		$this->_title("URL分析客户");
 		$this->_addContent($this->getLayout()->createBlock('edm/adminhtml_client_url', 'client.url'));
 		$this->renderLayout();

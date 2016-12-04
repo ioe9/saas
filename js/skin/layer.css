@@ -1,10 +1,5 @@
 /** 
  
- @Name: layer's style
- @Date: 2012.09.15
- @Author: ÏÍÐÄ
- @blog£º sentsin.com
- 
 **/
 
 *html{background-image:url(about:blank); background-attachment:fixed;}
@@ -23,8 +18,17 @@
 .xulayer_png32{background:url(default/xubox_ico0.png) no-repeat;}
 .xubox_moves{border:3px solid #666; cursor:move; background-color:rgba(255,255,255,.3); background-color:#fff\9;  filter:alpha(opacity=50);}
 
-.xubox_msgico{width:32px; height:32px; top:52px; left:15px; background:url(default/xubox_ico0.png) no-repeat;}
-.xubox_text{ /*padding-left:55px;*/ float:left; line-height:25px; word-break:break-all; padding-right:10px; overflow:hidden; font-size:12px;width: 90%;text-align: left; text-indent: 30px;}
+.xubox_msgico{width:32px; height:32px; top:52px; left:10px; background:url(default/xubox_ico0.png) no-repeat;}
+.xubox_text{
+    float: left;
+    font-size: 14px;
+    line-height: 25px;
+    overflow: hidden;
+    padding: 50px 15px;
+    text-align: left;
+    text-indent: 30px;
+    word-break: break-all;
+}
 .xubox_msgtype0{background-position:-91px -38px;} 
 .xubox_msgtype1{background-position:-128px -38px }
 .xubox_msgtype2{background-position:-163px -38px;}
@@ -78,6 +82,7 @@
 .xubox_tips i.layerTipsR, .xubox_tips i.layerTipsL{top:1px; border-bottom-style:solid;}
 .xubox_tips i.layerTipsR{left:-8px;}
 .xubox_tips i.layerTipsL{right:-8px;}
+
 
 
 

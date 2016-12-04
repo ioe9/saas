@@ -38,4 +38,6 @@ class Mage_Task_Model_Task extends Mage_Core_Model_Abstract
     		self::STATUS_FINISH => '已完成',
     	);
     }
+    
+
 }

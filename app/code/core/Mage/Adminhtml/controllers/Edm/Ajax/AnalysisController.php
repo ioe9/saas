@@ -403,7 +403,7 @@ class Mage_Adminhtml_Edm_Ajax_AnalysisController extends Mage_Adminhtml_Controll
 					$mail->setBody($emailBody);  
 					$mail->setSubject($emailSubject);  
 					$mail->setFromEmail('1303387324@qq.com');  
-					$mail->setFromName('IoeGo.com Admin');  
+					$mail->setFromName('艾欧外贸企业云办公');  
 				}
 				//更细您发送记录
 				$sendModel  = Mage::getModel('edm/company_email_send');

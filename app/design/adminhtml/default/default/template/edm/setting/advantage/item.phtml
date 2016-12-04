@@ -1,0 +1,142 @@
+<?php
+$company = Mage::registry('current_company');
+$group = Mage::registry('current_group');
+?>
+<div class="c-box">
+	<div class="content-header">
+		<div class=" f-right">
+				<button class="btn btn-default f-left mr10" id="" type="button" onclick="setLocation('<?php echo $this->getUrl('adminhtml/edm_setting_advantage/'); ?>')"><i class="fa fa-angle-double-left mr5"></i>返回</button>
+		   		<button class="btn btn-info f-left mr10" id="" type="button" onclick="setLocation(window.location.href)"><i class="fa fa-refresh mr5"></i>重置</button>
+		   		<button class="btn btn-primary f-left" id="" type="button" onclick="editForm.submit()" style=""><i class="fa fa-save mr5"></i>保存</button>
+		   		
+		   		<div class="clr"></div>
+		   	</div>
+		<h2 class="m0">编辑优势组：<?php echo $group->getData('group_name'); ?></h2>
+		
+	</div>
+	<div class="p15">
+		<div id="messages">
+            <?php echo $this->getMessagesBlock()->toHtml() ?>
+        </div>
+        <div class="clr"></div>
+		<form action="<?php echo $this->getUrl('*/*/save'); ?>" method="post" id="baseForm">
+			<input type="hidden" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+			<div class="box-inner">
+                <div class="entry-edit" style="">
+                	<div class="ml20 mr20 mt5">
+	                   
+	                    <?php $advantages = Mage::getResourceModel('edm/company_advantage_collection'); ?>
+	                    <?php $oldAdvantageArr = array(); ?>
+	                    <?php $oldAdvantage = Mage::getResourceModel('edm/company_advantage_value_collection')
+	                    	->addFieldToFilter('company_id',$company->getId())
+	                    	->addFieldToFilter('value',array('notnull'=>true)); ?>
+	                    
+	                    <?php foreach ($oldAdvantage as $_old): ?>
+	                    	<?php if (!array_key_exists($_old->getAdvantageId(),$oldAdvantageArr)): ?>
+	                    		<?php $oldAdvantageArr[$_old->getAdvantageId()] = array($_old); ?>
+	                    		<?php else: ?>
+	                    		<?php array_push($oldAdvantageArr[$_old->getAdvantageId()],$_old); ?>
+	                    		<?php endif; ?>
+	                    	
+	                    <?php endforeach; ?>
+	                    <?php foreach ($advantages as $_item): ?>
+	                    	<?php $_item['enable_image'] = 0; ?>
+		                    <div class="adv-item mb15">
+		                    	<p><!--<input type="checkbox" name="advantage[<?php echo $_item->getId(); ?>]" value="1" class="mr5" />--><?php echo $_item->getName(); ?></p>
+		                    	<div class="adv-inner pr">
+		                    		<?php if ($_item->getData('advantage_type')=="text"): ?>
+		                    			<?php if (array_key_exists($_item->getId(),$oldAdvantageArr)): ?>
+		                    			<?php foreach ($oldAdvantageArr[$_item->getId()] as $_t): ?>
+			                    		<div class="wr pr"><input type="text" value="<?php echo htmlentities($_t->getValue()); ?>" name="advantage[<?php echo $_item->getId(); ?>][]" class="required-entry input-text wp80 mb5"/><a href="javascript:;" class="ml10" onclick="removeAdvantageItem(this);"><i class="fa fa-trash-o"></i></a></div>
+			                    
+			                    		<?php endforeach; ?>
+			                    		<?php endif; ?>
+			                    		<div class="wr pr"><input data-optional="<?php echo $_item->getData('optional_content'); ?>" type="text" placeholder="<?php echo $_item->getData('tips'); ?>" name="advantage[<?php echo $_item->getId(); ?>][]" value="" class="required-entry input-text wp80 mb5"/></div>
+			                    		<?php if ($_item->getData('optional_content')): ?>
+				                    		<div class="optional-box pa" style="display:none;">
+				                    			<?php $optionalContent = explode("\n",trim($_item->getData('optional_content'))); ?>
+				                    			<?php foreach ($optionalContent as $_oc) : ?>
+				                    			
+				                    			<p data-item="<?php echo $_item->getId(); ?>"><?php echo $_oc; ?></p>
+				                    			<?php endforeach; ?>
+				                    		</div>
+			                    		<?php endif; ?>
+			                    		<?php if ($_item['enable_image']): ?>
+			                    		<button class="button adv-image-btn wp18 f-right" type="button" data-id="<?php echo $_item->getId(); ?>" data-target="adv_image_box_<?php echo $_item->getId(); ?>"> + 上传证书图片</button>
+			                    		<?php endif; ?>
+			                    		
+		                    		<?php elseif ($_item->getData('advantage_type')=="multiselect" || $_item->getData('advantage_type')=="select"): ?>
+		                    			<select data-placeholder="<?php echo $_item->getData('tips'); ?>" class="wp80 select chosen-select" name="advantage[<?php echo $_item->getId(); ?>]" <?php if ($_item->getData('advantage_type')=="multiselect"): ?>multiple="multiple"<?php endif; ?>>
+		                    				<option value=""> - 请选择 - </option>
+		                    				<?php $options = $_item->getChildrenOption(); ?>
+		                    				<?php foreach ($options as $_option): ?>
+		                    				<?php if ($_option->getData('value')): ?>
+		                    				<option value="<?php echo $_option->getData('value'); ?>"><?php echo $_option->getData('value'); ?></option>
+		                    				<?php endif; ?>
+		                    				<?php endforeach; ?>
+		                    			
+		                    			</select>
+	                    			<?php elseif ($_item->getData('advantage_type')=="boolean"): ?>
+	                    				<select class="wp80 select chosen-select" name="advantage[<?php echo $_item->getId(); ?>]" >
+	                    					<?php $checked = false; ?>
+	                    					<?php if (array_key_exists($_item->getId(),$oldAdvantageArr)): ?>
+		                    				<?php foreach ($oldAdvantageArr[$_item->getId()] as $_t): ?>
+		                    				<?php if ($_t->getValue()): ?>
+		                    					
+		                    				<?php $checked = true; ?>
+		                    				<?php endif; ?>
+		                    				<?php endforeach; ?>
+		                    				<?php endif; ?>
+	                    					<option value="">否</option>
+	                    					<option value="1" <?php if ($checked): ?>selected="selected"<?php endif; ?>>是</option>
+	                    				</select>
+		                    		<?php endif; ?>
+		                    	</div>
+		                    	<div class="clr"></div>
+		                    	
+		                    	<?php if ($_item['enable_image']): ?>
+		                    	<div class="adv-image-box wp80 f-left mt5" id="adv_image_box_<?php echo $_item->getId(); ?>">
+		                    		<ul>
+		                    			<li class="mb5">
+				                    		<input class="wp25" name="advantageimg[<?php echo $_item->getId(); ?>][image]" type="file" > 
+				                    		<input class="required-entry input-text wp70 f-right" placeholder="请填写图片标题，以便于您管理" name="advantageimg[<?php echo $_item->getId(); ?>][title]" type="text">
+				                    		<div class="clr"></div>
+		                    			</li>
+	                    			</ul>
+		                    	</div>
+		                    	<div class="clr"></div>
+		                    	<?php endif; ?>
+		                    </div>
+		                    <div class="clr"></div>
+	                    <?php endforeach; ?>
+                	</div>
+                </div>
+			</div>
+		</div>
+	</form>
+	<div class="content-bottom text-center">
+		<button class="btn btn-primary btn-lg" type="submit" id="select_advantage_btn" >确认   &amp; 保存</button>
+    	<div class="clr"></div>
+	</div>
+</div>
+<script>
+jQuery(function(){
+	jQuery(".chosen-select").chosen({disable_search_threshold: 10});
+	jQuery(".adv-item .input-text").focus(function(){
+		jQuery(this).parent().siblings('.optional-box').show();
+	}).blur(function(){
+		
+		jQuery(this).parent().siblings('.optional-box').fadeOut();
+	})
+	jQuery('.adv-item .optional-box p').click(function(){
+		var item_id = jQuery(this).attr('data-item');
+		jQuery(this).parent().prev().before('<div class="wr pr"><input type="text" name="advantage['+item_id+'][]" value="'+jQuery(this).text()+'" class="required-entry input-text wp80 mb5"/><a href="javascript:;" class="ml10" onclick="removeAdvantageItem(this);"><i class="fa fa-trash-o"></i></a></div>');
+		jQuery(this).parent().hide();
+	})
+	
+})
+function removeAdvantageItem(e) {
+	jQuery(e).parent().remove();
+}
+
+</script>

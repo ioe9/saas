@@ -1,0 +1,94 @@
+<?php $group = Mage::registry('current_group'); ?>
+<div class="view-container ">
+    <div class="c-box">
+    	<div class="content-header">
+    		<div class="f-right">
+			
+		   		<button class="btn btn-default f-left mr10" id="" type="button" onclick="setLocation('<?php echo $this->getUrl('adminhtml/edm_group/'); ?>')"><i class="fa fa-angle-double-left mr5"></i>返回列表</button>
+		   		<button class="btn btn-primary f-left" id="" type="button" onclick=""><i class="fa fa-plus-circle mr5"></i>发送邮件</button>
+		   		<div class="clr"></div>
+		   	
+			</div>
+			<h2 class="m0"><i class="fa fa-eye mr5"></i>分组详情：</h2>
+				
+		</div>
+
+		<table width="100%" class="detail-table">
+			<col width="12%"/>
+			<col width="88%"/>
+			
+			<tr>
+				<th>名称</th>
+				<td><?php echo $group->getData('group_name'); ?></td>
+			</tr>
+			<tr>
+				<th>客户总数</th>
+				<td><?php echo (int)$group->getData('count_client'); ?></td>
+			</tr>
+			<tr>
+				<th>备注</th>
+				<td><?php echo $group->getData('group_memo'); ?></td>
+			</tr>
+			<tr>
+				<th>创建时间</th>
+				<td><?php echo substr($group->getData('date_create'),0,10); ?></td>
+			</tr>
+		</table>    
+
+    </div>     
+    <div class="c-box mt10">
+    	<div class="content-header">
+			<h2 class="m0">客户分析</h2>
+		</div>
+		<div class="p20">
+		
+		</div>
+	</div>
+		
+    
+    <div class="c-box mt10">
+    	<div class="content-header">
+			<h2 class="m0">邮件发送历史</h2>
+		</div>
+		<div class="p20 grid">
+			<?php $children = $group->getChildren(); ?>
+			
+			<table width="100%" class="data-table">
+				<col width="15%"/>
+				<col width="20%"/>
+				<col width="10%"/>
+				<col width="12%"/>
+				<col width="12%"/>
+				<col width="12%"/>
+				<col width="18%"/>
+				<thead>
+					<tr>
+						<th align="center">发送批次</th>
+						<th align="center">客户数量</th>
+						<th align="center">发送日期</th>
+						<th align="center">到达数量</th>
+						<th align="center">点击数量</th>
+						<th align="center">回复数量</th>
+						<th align="center">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php if ($children && count($children)): ?>
+				<?php foreach ($children as $child): ?>
+					<tr>
+						<td align="center"><?php echo $child->getData('group_title'); ?></td>
+						
+					</tr>
+				<?php endforeach; ?>
+				<?php else: ?>
+				<tr><td colspan="7"><p class="a-center" style="padding:20px;">未发送邮件</p></td></tr>
+				<?php endif; ?>
+				</tbody>
+				</table>
+			
+		</div>
+		<div class="p20">
+			
+		</div>
+    </div>   
+</div>

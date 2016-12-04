@@ -2,7 +2,7 @@
 class Mage_Adminhtml_Controller_Dashboard extends Mage_Adminhtml_Controller_Action
 {
 	protected $_appData = array(
-		'name' => '工作面板',
+		'name' => '工作台',
 		'code' => 'dashboard',
 	);
 	public function preDispatch() {

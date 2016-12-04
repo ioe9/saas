@@ -1,0 +1,11 @@
+<?php $template = Mage::registry('current_template'); ?>
+<?php $data = Mage::helper('edm/scene_develop')->render(); ?>
+<?php $contact = Mage::registry('current_contact'); ?>
+<div>
+	<input type="text" name="email_to" id="email_to" class="ipt" value="<?php if ($contact && $contact->getId()): ?><?php echo $contact->getData('email'); ?><?php endif; ?>"/>
+	<input type="text" name="email_subject" id="email_subject" class="ipt" value="<?php echo $data['title']; ?>"/>
+	<div id="email_body">
+	<?php echo $data['content']; ?>
+	</div>
+</div>
+

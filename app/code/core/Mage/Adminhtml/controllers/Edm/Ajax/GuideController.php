@@ -3,57 +3,7 @@
  * 向导操作
  */
 class Mage_Adminhtml_Edm_Ajax_GuideController extends Mage_Adminhtml_Controller_Edm
-{
-
-	public function getsubcatAction() {
-		$catIds = explode(',',trim($this->getRequest()->getParam('ids')));
-		$res = array('ret'=>-1,'msg'=>'');
-		if (count($catIds)) {
-			Mage::register('current_cateogries',$catIds);
-			$res['ret'] = 1;
-			$res['data'] = $this->getChildCatOutput();
-		}
-		
-		
-		$this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
-	}
-	
-	public function savecatAction() {
-		$catIds = explode(',',trim($this->getRequest()->getParam('ids')));
-		$res = array('ret'=>-1,'msg'=>'');
-		$company = Mage::registry('current_company');
-		//保存产品分类
-		$cats = Mage::getResourceModel('edm/company_category_collection')
-				->addFieldToFilter('company_id',$company->getId());
-		
-		$catOldIds = array();
-		$catOldIdsTmp = array();
-		foreach ($cats as $_cat) {
-			array_push($catOldIds,$_cat->getCategoryId());
-			$catOldIdsTmp[$_cat->getCategoryId()] = $_cat->getId();
-		}
-		//var_dump($catOldIds);
-		foreach ($catOldIds as $_id) {
-			if (!in_array($_id,$catIds)) {
-				//删除
-				Mage::getModel('edm/company_category')->load($catOldIdsTmp[$_id])->delete();
-			}
-		}
-		foreach ($catIds as $_id) {
-			if (!in_array($_id,$catOldIds)) {
-				//添加
-				$cats = Mage::getModel('edm/company_category')
-					->setData('company_id',$company->getId())
-					->setData('category_id',$_id)
-					->save();
-			}
-		}
-		
-		$res['ret'] = 1;
-		$this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
-	}
-	
-	
+{	
 	public function savecompanyAction() {
 		$data = $this->getRequest()->getParam('company');
 		$res = array('ret'=>-1,'msg'=>'');
@@ -121,17 +71,7 @@ class Mage_Adminhtml_Edm_Ajax_GuideController extends Mage_Adminhtml_Controller_
 		$this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
 	}
 	
-	public function getChildCatOutput() {
-		
-		$layout = $this->getLayout();
-        $update = $layout->getUpdate();
-        $update->load('adminhtml_ins_ajax_guide_subcat');
-        $layout->generateXml();
-        $layout->generateBlocks();
-        $output = $layout->getOutput();
-		
-        return $output;
-	}
+
 	
 	public function finishsearchAction() {
 		$user = Mage::getSingleton('admin/session')->getUser();

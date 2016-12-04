@@ -43,6 +43,14 @@
         <request_rewrite>
             <model>core/url_rewrite_request</model>
         </request_rewrite>
+        <session>
+            <validation>
+                <http_user_agent_skip>
+                    <flash>Shockwave Flash</flash>
+                    <flash_mac><![CDATA[Adobe Flash Player\s{1,}\w{1,10}]]></flash_mac>
+                </http_user_agent_skip>
+            </validation>
+        </session>
         <events>
             <controller_action_predispatch>
                 <observers>

@@ -1,0 +1,16 @@
+<div class="side-box">
+	<div class="panel-heading">
+	   	<h2 class="m0">使用场景<span>SCENE</span></h2>
+		<div class="clr"></div>
+
+	</div>
+	<div class="mb10 p20 side-box-inner tags">
+		<?php $scenes = $this->getScenes(); ?>
+		<?php foreach ($scenes as $item): ?>
+		<a href="" class="" title="<?php echo $item->getData('scene_name'); ?>"><?php echo $item->getData('scene_name'); ?></a>
+		
+		<?php endforeach; ?>
+		<div class="clr"></div>
+	</div>
+	<div class="clr"></div>
+</div>

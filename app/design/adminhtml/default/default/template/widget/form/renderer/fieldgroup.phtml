@@ -1,0 +1,46 @@
+<?php $_element = $this->getElement() ?>
+<?php if ($_element->getLegend()): ?>
+<div class="d-box-h mt5">
+	<div class="f-left title">
+		<h3 class="m0"><?php echo $_element->getLegend() ?></h3>
+	</div>
+    <div class="f-right actions">
+		<div class="btn-group">
+		  <?php echo $_element->getHeaderBar() ?>
+		</div>
+	</div>
+	<div class="clr"></div>
+</div>
+
+<?php endif; ?>
+<div class="d-box p15_20">
+	<?php if (!$_element->getNoContainer()): ?>
+	    <div class="inner fieldgroup <?php echo $_element->getClass() ?>" id="<?php echo $_element->getHtmlId() ?>">
+	<?php endif; ?>
+	    <div class="hor-scroll">
+	        <?php if ($_element->getComment()): ?>
+	            <p class="comment"><?php echo $this->escapeHtml($_element->getComment()) ?></p>
+	        <?php endif; ?>
+	        <?php if ($_element->hasHtmlContent()): ?>
+	            <?php echo $_element->getHtmlContent(); ?>
+	        <?php else: ?>
+	        <?php $cols = $_element->getData('cols'); ?>
+	        <table cellspacing="0" width="100%" class="<?php echo $_element->hasTableClass() ? $_element->getTableClass() : 'form-list'?>">
+	            <colgroup>
+					<?php $cols = explode(',',$cols); ?>
+					<?php foreach ($cols as $col): ?>
+					<col width="<?php echo $col; ?>" />
+					<?php endforeach; ?>
+				</colgroup>
+	            <tbody>
+	                <?php echo $_element->getChildrenHtml(); ?>
+	            </tbody>
+	        </table>
+	        <?php endif; ?>
+	    </div>
+	    <?php echo $_element->getSubFieldsetHtml() ?>
+	<?php if (!$_element->getNoContainer()): ?>
+	    </div>
+	<?php endif; ?>
+	
+</div>

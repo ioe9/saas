@@ -1,0 +1,14 @@
+<?php
+/**
+ * Cookie settings initialization script
+ *
+ * @see Mage_Page_Block_Js_Cookie
+ */
+?>
+
+<script type="text/javascript">
+//<![CDATA[
+Mage.Cookies.path     = '<?php echo Mage::helper('core')->jsQuoteEscape($this->getPath()) ?>';
+Mage.Cookies.domain   = '<?php echo Mage::helper('core')->jsQuoteEscape($this->getDomain()) ?>';
+//]]>
+</script>

@@ -2,7 +2,7 @@
 /***
  * 报销管理
  */
-class Mage_Adminhtml_Bill_ReimburseController extends Mage_Adminhtml_Controller_Report
+class Mage_Adminhtml_Bill_ReimburseController extends Mage_Adminhtml_Controller_Bill
 {
 	/****
 	 * 我的报销

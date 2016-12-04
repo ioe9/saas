@@ -1,13 +1,13 @@
 <div class="logo f-left">
-	<a class="home" class="" href="javascript:;"><img src="<?php echo $this->getSkinUrl('images/logo.png'); ?>" alt="艾欧外贸云办公" /></a>
-	<span class="cname"><?php echo Mage::registry('current_company')->getName(); ?></span>
+	<a class="home f-left" class="" href="javascript:;"><i class="fa fa-skyatlas mr10 " style="display: block; float: left; font-size: 35px; margin-top: 6px;"></i><img src="<?php echo $this->getSkinUrl('images/logo.png'); ?>" alt="艾欧外贸云办公" /></a>
+	<span class="cname"><?php echo Mage::registry('current_company')->getCompanyName(); ?></span>
 </div>
 <div class="f-right">
 	<ul class="nav-h ">
 		<li class="level0"><a href="<?php echo $this->getUrl('adminhtml/dashboard_account/'); ?>"><img class="avatar mr5" src="<?php echo $this->getSkinUrl('images/avatar/avatar_l.png'); ?>" /><?php echo Mage::getSingleton('admin/session')->getUser()->getName(); ?></a></li>
 		<li class="level0">
 			<div class="btn-group">
-			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
 			    了解更多 <span class="caret"></span>
 			  </button>
 			  <ul class="dropdown-menu" role="menu">
@@ -27,9 +27,9 @@
 	<ul class="nav-m ">
 		<?php $currentApp = Mage::registry('current_app'); ?>
 		<?php $currentAppCode = $currentApp ? $currentApp->getCode() : ''; ?>
-		<li class="<?php if ($currentAppCode=='dashboard'):  ?>active<?php endif; ?>"><a href="<?php echo $this->getUrl('adminhtml/dashboard'); ?>" title="工作台"><i class="fa fa-desktop mr5" aria-hidden="true"></i>工作台</a></li>
+		<li class="<?php if ($currentAppCode=='dashboard'):  ?>active<?php endif; ?>"><a href="<?php echo $this->getUrl('adminhtml/dashboard'); ?>" title="工作台"><i class="fa fa-dashboard mr5"></i>工作台</a></li>
 		<li class="<?php if ($currentAppCode && !in_array($currentAppCode, array('dashboard','setting'))):  ?>active<?php endif; ?>">
-			<a href="javascript:;"><i class="fa fa-th mr5" aria-hidden="true"></i>应用</a>
+			<a href="javascript:;"><i class="fa fa-th mr5"></i>办公应用</a>
 			<div class="apps-box pa">
 				<?php $menuArr = $this->getMenuArray(); ?>
 				
@@ -43,7 +43,7 @@
 			</div>
 			
 		</li>
-		<li class="<?php if ($currentAppCode=='setting'):  ?>active<?php endif; ?>"><a href="<?php echo $this->getUrl('adminhtml/setting_company/'); ?>" title=""><i class="fa fa-cog mr5" aria-hidden="true"></i>系统设置</a></li>
+		<li class="<?php if ($currentAppCode=='setting'):  ?>active<?php endif; ?>"><a href="<?php echo $this->getUrl('adminhtml/setting_company/'); ?>" title=""><i class="fa fa-setting mr5"></i>系统设置</a></li>
 	</ul>
 	
 </div>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <search_result_index translate="label">
+        <remove name="right"/>
+        <remove name="left"/>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="search/result" name="search_result" template="search/result.phtml" />
+        </reference>
+    </search_result_index>
+    
+</layout>

@@ -1,0 +1,31 @@
+<?php
+    $collection=$this->getCollection();
+?>
+<div class="c-box">
+	<?php if(!$collection->count()): ?>
+	<p class="note-msg">对不起，找不到相应记录</p>
+	<?php else: ?>
+	<div class="items-box">
+	    <?php $_iterator = 0; ?>
+	    <ol class="item-grid item-grid-design" id="item-grid">
+	    <?php foreach ($collection as $_item): ?>
+	        <li class="item<?php if( ++$_iterator%3 == 0): ?> last<?php endif; ?>">
+	            
+	            <div class="f-fix">
+	                <?php $name = $_item->getDesignName(); ?>
+	                <?php $url = $this->getUrl('adminhtml/edm_design/view').'?id='.$_item->getId(); ?>
+	                <a href="<?php echo $url; ?>" title="<?php echo $name; ?>"><img src="<?php echo $_item->getImageUrl(); ?>" alt="<?php echo $name; ?>"/></a>
+	                <h3 class="name"><a href="<?php echo $url ?>" title="<?php echo $name; ?>"><?php echo $name; ?></a></h3>
+	                <div class="tags">
+	                	 
+	                </div>
+	               
+	            </div>
+	        </li>
+	    <?php endforeach; ?>
+	    </ol>
+	</div>
+	<div class="clr"></div>
+	<?php echo $this->getChildHtml('pager'); ?>
+	<?php endif; ?>
+</div>

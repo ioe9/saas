@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <express>
+        	<sort_order>990</sort_order>
+	        <title>快递单</title>
+	        <type>trade</type>
+	        <action>adminhtml/express/</action>
+	        <children>
+		        <index>
+		        	<sort_order>0</sort_order>
+			        <title>快递单</title>
+			        <action>adminhtml/express/index</action>
+		        </index>
+
+	        </children>
+        </express>
+    </menu>
+</config>

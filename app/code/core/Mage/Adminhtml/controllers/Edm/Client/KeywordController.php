@@ -2,7 +2,7 @@
 class Mage_Adminhtml_Edm_Client_KeywordController extends Mage_Adminhtml_Controller_Edm {
 	public function indexAction() {
 		$this->loadLayout();
-		$this->_setActiveMenu('client');
+		$this->_setActiveMenu('client/keyword');
 		$this->_title("根据关键字找客户");
 		$this->_addContent($this->getLayout()->createBlock('edm/adminhtml_client_keyword', 'client.url'));
 		$this->renderLayout();

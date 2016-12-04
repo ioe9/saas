@@ -1,0 +1,19 @@
+<?php $design = Mage::registry('current_design'); ?>
+<div class="view-container ">
+    <div class="c-box">
+    	<div class="content-header">
+    		<div class="f-right">
+			
+		   		<button class="btn btn-default f-left mr10" id="" type="button" onclick="setLocation('<?php echo $this->getUrl('adminhtml/edm_design/'); ?>')"><i class="fa fa-angle-double-left mr5"></i>返回列表</button>
+		   		<button class="btn btn-default f-left mr10" id="" type="button" onclick=""><i class="fa fa-heart mr5"></i>收藏</button>
+		   		<button class="btn btn-primary f-left" id="" type="button" onclick=""><i class="fa fa-gear mr5"></i>应用模板</button>
+		   		<div class="clr"></div>
+		   	
+			</div>
+			<h2 class="m0"><i class="fa fa-eye mr5"></i>主题预览：<?php echo $design->getData('design_name'); ?></h2>
+				
+		</div>
+		
+		<iframe height="800" src="<?php echo $this->getUrl('adminhtml/edm_design/preview',array('id'=>$design->getId())) ?>" width="100%" frameborder="0" scrolling="yes" ></iframe>
+    </div>     
+</div>

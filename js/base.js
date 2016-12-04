@@ -948,7 +948,12 @@ function wrap76( what )
 					}
 			$.ajax(finalConfig_);
 	}
-	
+	SimpleTool.guid = function(prefix) {
+	    function S4() {
+	       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+	    }
+	    return prefix+'_'+(S4()+S4()+"_"+S4()+"_"+S4()+"_"+S4()+"_"+S4()+S4()+S4());
+	}
 	window.SimpleTool = SimpleTool;
 })(window);
 

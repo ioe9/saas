@@ -1,0 +1,83 @@
+<?php $feedback = Mage::registry('current_feedback'); ?>
+<div class="view-container ">
+    <div class="c-box">
+    	<div class="content-header">
+    		<div class="f-right">
+			<div class=" f-right">
+		   		<button class="btn btn-default f-left" id="" type="button" onclick="setLocation('<?php echo $this->getUrl(''); ?>')"><i class="fa fa-angle-double-left mr5"></i>返回列表</button>
+		   		
+		   		<div class="clr"></div>
+		   	</div>
+		</div>
+			<h2 class="m0"><i class="fa fa-eye mr5"></i>查看反馈详情：<?php echo $feedback->getFeedbackTitle(); ?></h2>
+			
+		</div>
+    </div>
+    
+	<table width="100%" class="detail-table mt10">
+		<col width="12%"/>
+		<col width="88%"/>
+		<thead>
+			<tr>
+				<th colspan="2" class='a-left'><strong>反馈信息</strong></th>
+			</tr>
+		</thead>
+		<tr>
+			<th>标题</th>
+			<td>
+				<?php echo $feedback->getData('feedback_title'); ?>
+			</td>
+		</tr>
+		<tr>
+			<th>提交时间</th>
+			<td><?php echo $feedback->getData('date_create'); ?></td>
+		</tr>
+		<tr>
+			<th>报告内容</th>
+			<td><?php echo $feedback->getData('feedback_content'); ?></td>
+		</tr>
+		<tr>
+			<th>图片</th>
+			<td>
+				<?php if ($feedback->getData('feedback_image')): ?>
+				<img src="<?php echo Mage::getBaseUrl('media').$feedback->getData('feedback_image'); ?>" alt="" height="120" />
+				<?php endif; ?>
+				<?php if ($feedback->getData('feedback_image2')): ?>
+				<img src="<?php echo Mage::getBaseUrl('media').$feedback->getData('feedback_image2'); ?>" alt="" height="120" />
+				<?php endif; ?>
+				<?php if ($feedback->getData('feedback_image3')): ?>
+				<img src="<?php echo Mage::getBaseUrl('media').$feedback->getData('feedback_image3'); ?>" alt="" height="120" />
+				<?php endif; ?>
+			</td>
+		</tr>
+	</table>    
+	<div class="c-box mt10">
+    	<div class="content-header">
+			<h2 class="m0">客服回复</h2>
+		</div>
+		<div class="p20">
+			<?php if ($feedback->getData('reply_date')): ?>
+			<div class="clr">
+				<div class="f-left">
+					
+				</div>
+				<div class="f-rght">
+					<p><?php echo $feedback->getData('reply_date') ?></p>
+					<p><?php echo $feedback->getData('reply_content')  ?></p>
+				</div>
+			</div>
+			<?php else: ?>
+			
+			<p class="empty-text a-center" style="padding:60px 60px;">暂未回复</p>
+			<?php endif; ?>
+		</div>
+		<div class="p20">
+			<?php $replys = $this->getReplyCollection(); ?>
+			<?php foreach ($replys as $item): ?>
+			
+			
+			<?php endforeach; ?>
+			<?php echo $this->getFormHtml(); ?>
+		</div>
+    </div>                 
+</div>

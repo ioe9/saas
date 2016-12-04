@@ -2,7 +2,7 @@
 <config>
     <menu>
         <wms>
-        	<sort_order>10</sort_order>
+        	<sort_order>999</sort_order>
 	        <title>WMS</title>
 	        <type>trade</type>
 	        <action>adminhtml/wms/</action>

@@ -111,7 +111,8 @@ class Mage_Adminhtml_Block_Page_Menu extends Mage_Adminhtml_Block_Template
             }
 
             $menuArr = array();
-
+			
+			$menuArr['code'] = $childName;
             $menuArr['label'] = $this->_getHelperValue($child);
 
             $menuArr['sort_order'] = $child->sort_order ? (int)$child->sort_order : $sortOrder;
@@ -296,7 +297,7 @@ class Mage_Adminhtml_Block_Page_Menu extends Mage_Adminhtml_Block_Template
     public function getMenuLevelFirst($menu)
     {
         $html = '<ul>' . PHP_EOL;
-        foreach ($menu as $item) {
+        foreach ($menu as $code => $item) {
         	//var_dump($menu);die();
         	if ($item['sort_order']<0) {
         		continue;
@@ -305,7 +306,7 @@ class Mage_Adminhtml_Block_Page_Menu extends Mage_Adminhtml_Block_Template
                 . '<a href="' . $item['url'] . '" '
                 . (!empty($item['title']) ? ' title="' . $item['title'] . '"'  : '')
                 
-                . '><i class="fa fa-dot-circle-o mr5"></i><span>'. ($item['label']) . '</span>'
+                . '><i class="fa fa-'.$item['code'].' mr5"></i><span>'. ($item['label']) . '</span>'
 				. '</a>' . PHP_EOL;
 
             

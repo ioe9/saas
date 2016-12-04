@@ -2,7 +2,7 @@
 /*
  * @category    Mage
  * @package     Mage_Core
- * @author      Magento Core Team <core@magentocommerce.com>
+ * @author      Mio Core Team <developer@ioe9.com>
  */
 class Mage_Core_Model_Email_Template extends Mage_Core_Model_Email_Template_Abstract
 {

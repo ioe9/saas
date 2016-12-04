@@ -3,7 +3,6 @@ class Mage_Edm_Model_Resource_Company_Template_Collection extends Mage_Core_Mode
 {
     protected function _construct()
     {
-        $this->_init('edm/company_template');
+        $this->_init("edm/company_template");
     }
-
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <customer>
+        	<sort_order>990</sort_order>
+	        <title>客户</title>
+	        <type>trade</type>
+	        <action>adminhtml/customer/</action>
+	        <children>
+		        <index>
+		        	<sort_order>0</sort_order>
+			        <title>首页</title>
+			        <action>adminhtml/customer/index</action>
+		        </index>
+	        </children>
+        </customer>
+    </menu>
+</config>

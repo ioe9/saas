@@ -121,7 +121,8 @@ class Mage_Adminhtml_Block_Page_Navigation extends Mage_Adminhtml_Block_Template
             }
 
             $menuArr = array();
-
+			
+			$menuArr['code'] = $childName;
             $menuArr['label'] = $this->_getHelperValue($child);
 			$menuArr['with_line'] = $child->with_line ? (int)$child->with_line : 0;
             $menuArr['sort_order'] = $child->sort_order ? (int)$child->sort_order : $sortOrder;
@@ -255,15 +256,21 @@ class Mage_Adminhtml_Block_Page_Navigation extends Mage_Adminhtml_Block_Template
         		
         	}
             $html .= '<li class="'
-                . (!$level && !empty($item['active']) ? ' active' : '') . ' '
+                . (!empty($item['active']) ? ' active' : '') . ' '
                 . (!empty($item['children']) ? ' parent' : '')
                 . (!empty($level) && !empty($item['last']) ? ' last' : '')
-                . ' level' . $level . '"> <a href="' . $item['url'] . '" '
+                
+                . ' level' . $level . '">'
+                
+                .' <a href="' . $item['url'] . '" '
                 . (!empty($item['title']) ? 'title="' . $item['title'] . '"' : '') . ' class="'
-                . ($level === 0 && !empty($item['active']) ? 'active' : '') . '"><span>'
+                . (!empty($item['active']) ? 'active' : '') . '">'
+                . ($level==1 && !empty($item['active']) ? '<i class="fa fa-angle-double-right mr5"></i>' : '')
+                . (($level==0) ? '<i class="fa fa-'.$item['code'].' mr10"></i>' : '')
+                . '<span>'
                 
                 . ($item['label']) . '</span>'
-                . ($level === 0 && !empty($item['children']) ? '<i class="fa fa-angle-down" aria-hidden="true"></i>' : '')
+                . ($level === 0 && !empty($item['children']) ? '<i class="fa fa-angle-down f-right"></i>' : '')
 				. '</a>' . PHP_EOL;
 
             if (!empty($item['children'])) {

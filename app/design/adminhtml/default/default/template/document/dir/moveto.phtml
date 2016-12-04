@@ -1,0 +1,24 @@
+<?php $dir = Mage::registry('current_dir'); ?>
+<div class="dialog-moveto-wrap">
+	<div class="dialog-moveto">
+		<div class="moveto-header clearfix">
+			<div class="moveto-header-type <?php if (!$dir->getData('is_file')): ?>icon-folder<?php else: ?>icon-<?php echo ($dir->getData('file_ext') ? $dir->getData('file_ext') : 'default'); ?><?php endif; ?>"></div>
+			<div class="moveto-header-info break">
+				<div class="moveto-header-filename break"><?php echo $dir->getData('dir_name'); ?></div>
+				<div class="moveto-header-filesize"><?php echo sprintf("%.2f",$dir->getData('filesize')/1024); ?>KB</div>
+			</div>
+		</div>
+		<div class="moveto-directory">
+			<div class="moveto-title f-left wp100">移动到：</div>
+			<div class="clr"></div>
+			<div id="moveto-filepath"><ul id="tree" class="ztree"></ul></div>
+		</div>
+	</div>
+	<div class="no-display">
+		<input type="hidden" id="moveto-dir-parent" />
+	</div>
+	<div class="btn-row a-center">
+		<a href="javascript:;" class="btn btn-primary mr10 " id="btn-save-moveto">保存</a><a href="javascript:;" class="btn btn-default  btn-dialog-cancel" id="btn-cancel-moveto">取消</a>
+		<div class="clr"></div>
+	</div>
+</div>

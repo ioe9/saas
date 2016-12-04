@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <social>
+        	<sort_order>990</sort_order>
+	        <title>社交应用</title>
+	        <type>trade</type>
+	        <action>adminhtml/social/</action>
+	        <children>
+		        <index>
+		        	<sort_order>0</sort_order>
+			        <title>首页</title>
+			        <action>adminhtml/social/index</action>
+		        </index>
+	        </children>
+        </social>
+    </menu>
+</config>

@@ -68,7 +68,7 @@ class Mage_Core_Controller_Request_Http extends Varien_Controller_Request_Http
      * Set the ORIGINAL_PATH_INFO string
      *
      * @param string|null $pathInfo
-     * @return Zend_Controller_Request_Http
+     * @return Varien_Controller_Request_Http
      */
     public function setPathInfo($pathInfo = null)
     {

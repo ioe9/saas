@@ -1,0 +1,136 @@
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_post = $this->getPost(); ?>
+<script type="text/javascript">
+    var optionsPrice = new Post.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+<div id="messages_post_view"><?php echo $this->getMessagesBlock()->toHtml() ?></div>
+<div class="post-view">
+    <div class="post-essential">
+    <form action="<?php echo $this->getSubmitUrl($_post, array('_secure' => $this->_isSecure())) ?>" method="post" id="post_addtocart_form"<?php if($_post->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <?php echo $this->getBlockHtml('formkey') ?>
+        <div class="no-display">
+            <input type="hidden" name="post" value="<?php echo $_post->getId() ?>" />
+            <input type="hidden" name="related_post" id="related-posts-field" value="" />
+        </div>
+
+        <div class="post-shop">
+            <div class="post-name">
+                <h1><?php echo $_post->getName(); ?></h1>
+            </div>
+            <?php if ($this->canEmailToFriend()): ?>
+                <p class="email-friend"><a href="<?php echo $this->helper('catalog/post')->getEmailToFriendUrl($_post) ?>"><?php echo $this->__('Email to a Friend') ?></a></p>
+            <?php endif; ?>
+
+            <?php echo $this->getReviewsSummaryHtml($_post, false, true)?>
+            <?php echo $this->getChildHtml('alert_urls') ?>
+            <?php echo $this->getChildHtml('post_type_data') ?>
+            <?php echo $this->getTierPriceHtml() ?>
+            <?php echo $this->getChildHtml('extrahint') ?>
+
+            <?php if (!$this->hasOptions()):?>
+                <div class="add-to-box">
+                    <?php if($_post->isSaleable()): ?>
+                        <?php echo $this->getChildHtml('addtocart') ?>
+                        <?php if( $this->helper('wishlist')->isAllow()): ?>
+                            <span class="or"><?php echo $this->__('OR') ?></span>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <?php echo $this->getChildHtml('addto') ?>
+                </div>
+                <?php echo $this->getChildHtml('extra_buttons') ?>
+            <?php elseif (!$_post->isSaleable()): ?>
+                <div class="add-to-box">
+                    <?php echo $this->getChildHtml('addto') ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($_post->getShortDescription()):?>
+                <div class="short-description">
+                    <h2><?php echo $this->__('Quick Overview') ?></h2>
+                    <div class="std"><?php echo nl2br($_post->getShortDescription()) ?></div>
+                </div>
+            <?php endif;?>
+
+            <?php echo $this->getChildHtml('other');?>
+
+            <?php if ($_post->isSaleable() && $this->hasOptions()):?>
+                <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+            <?php endif;?>
+
+        </div>
+
+        <div class="post-img-box">
+            <?php echo $this->getChildHtml('media') ?>
+        </div>
+
+        <div class="clearer"></div>
+        <?php if ($_post->isSaleable() && $this->hasOptions()):?>
+            <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+        <?php endif;?>
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var postAddToCartForm = new VarienForm('post_addtocart_form');
+        postAddToCartForm.submit = function(button, url) {
+            if (this.validator.validate()) {
+                var form = this.form;
+                var oldUrl = form.action;
+
+                if (url) {
+                   form.action = url;
+                }
+                var e = null;
+                try {
+                    this.form.submit();
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+        }.bind(postAddToCartForm);
+
+        postAddToCartForm.submitLight = function(button, url){
+            if(this.validator) {
+                var nv = Validation.methods;
+                delete Validation.methods['required-entry'];
+                delete Validation.methods['validate-one-required'];
+                delete Validation.methods['validate-one-required-by-name'];
+                // Remove custom datetime validators
+                for (var methodName in Validation.methods) {
+                    if (methodName.match(/^validate-datetime-.*/i)) {
+                        delete Validation.methods[methodName];
+                    }
+                }
+
+                if (this.validator.validate()) {
+                    if (url) {
+                        this.form.action = url;
+                    }
+                    this.form.submit();
+                }
+                Object.extend(Validation.methods, nv);
+            }
+        }.bind(postAddToCartForm);
+    //]]>
+    </script>
+    </div>
+
+    <div class="post-collateral">
+<?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
+        <div class="box-collateral <?php echo "box-{$alias}"?>">
+            <?php if ($title = $this->getChildData($alias, 'title')):?>
+            <h2><?php echo $this->escapeHtml($title); ?></h2>
+            <?php endif;?>
+            <?php echo $html; ?>
+        </div>
+<?php endforeach;?>
+        <?php echo $this->getChildHtml('upsell_posts') ?>
+        <?php echo $this->getChildHtml('post_additional_data') ?>
+    </div>
+</div>

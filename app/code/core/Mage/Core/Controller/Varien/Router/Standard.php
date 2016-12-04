@@ -56,30 +56,13 @@ class Mage_Core_Controller_Varien_Router_Standard extends Mage_Core_Controller_V
     }
 
     /**
-     * dummy call to pass through checking
-     *
-     * @return bool
-     */
-    protected function _afterModuleMatch()
-    {
-        return true;
-    }
-	    protected function _beforeModuleMatch()
-    {
-        
-        return true;
-    }
-    /**
      * Match the request
      *
-     * @param Zend_Controller_Request_Http $request
+     * @param Varien_Controller_Request_Http $request
      * @return boolean
      */
     public function match(Varien_Controller_Request_Http $request)
     {
-    	if (!$this->_beforeModuleMatch()) {
-            return false;
-        }
         $this->fetchDefault();
         $front = $this->getFront();
        

@@ -6,15 +6,19 @@
 	        <Mage_Admin><name>admin</name></Mage_Admin>
 	        <Mage_Adminhtml><name>adminhtml</name></Mage_Adminhtml>
         	<Mage_Page><name>page</name></Mage_Page>
+        	<Mage_Cms><name>cms</name></Mage_Cms>
+        	<Mage_Catalog><name>catalog</name></Mage_Catalog>
         	<Mage_Media><name>media</name></Mage_Media>
         	<!-- APPs -->
         	<Mage_Edm><name>edm</name></Mage_Edm>
-        	<Mage_Crm><name>crm</name></Mage_Crm>
+        	
+        	<!--<Mage_Crm><name>crm</name></Mage_Crm>-->
         	<Mage_Shop><name>shop</name></Mage_Shop>
         	<Mage_Attendance><name>attendance</name></Mage_Attendance>
         	<Mage_Task><name>task</name></Mage_Task>
         	<Mage_Performance><name>performance</name></Mage_Performance>
-        	<Mage_Wms><name>wms</name></Mage_Wms>
+        	<!--<Mage_Wms><name>wms</name></Mage_Wms>-->
+        	<!--<Mage_Chat><name>chat</name></Mage_Chat>-->
         	<Mage_Bill><name>bill</name></Mage_Bill>
         	<Mage_Approve><name>approve</name></Mage_Approve>
         	<Mage_Document><name>document</name></Mage_Document>
@@ -25,6 +29,22 @@
         	<Mage_Workflow><name>workflow</name></Mage_Workflow>
         	<Mage_Project><name>project</name></Mage_Project>
         	<Mage_College><name>college</name></Mage_College>
+        	<Mage_Express><name>express</name></Mage_Express>
+        	<Mage_Hr><name>hr</name></Mage_Hr>
+        	<Mage_Purchase><name>purchase</name></Mage_Purchase>
+        	<Mage_Finance><name>finance</name></Mage_Finance>
+        	<Mage_Product><name>product</name></Mage_Product>
+        	<Mage_Supplier><name>supplier</name></Mage_Supplier>
+        	<Mage_Export><name>export</name></Mage_Export>
+        	<Mage_Domestic><name>domestic</name></Mage_Domestic>
+        	<Mage_Cs><name>cs</name></Mage_Cs>
+        	<Mage_Tool><name>tool</name></Mage_Tool>
+        	<Mage_News><name>news</name></Mage_News>
+        	<Mage_Data><name>data</name></Mage_Data>
+        	<Mage_Seo><name>seo</name></Mage_Seo>
+        	<Mage_Social><name>social</name></Mage_Social>
+        	<Mage_Wiki><name>wiki</name></Mage_Wiki>
+        	<Mage_Live><name>live</name></Mage_Live>
         </standard>
     </modules>
 </config>

@@ -115,7 +115,7 @@ class Mage_Approve_Block_Adminhtml_Apply_Edit_Form extends Mage_Adminhtml_Block_
             'title'     => '审批人',
 			'class'     => 'input-user',
             'required'  => true,
-            'after_element_html' => '<div class="input-user-wrap"><div class="inner" id="apply_audit_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="apply_audit_tag" data-target="apply_audit" data-old=\''.json_encode($auditData).'\' class="add-user"><i class="fa fa-plus f-right" aria-hidden="true"></i></a></div>',
+            'after_element_html' => '<div class="input-user-wrap"><div class="inner" id="apply_audit_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="apply_audit_tag" data-target="apply_audit" data-old=\''.json_encode($auditData).'\' class="add-user"><i class="fa fa-plus f-right"></i></a></div>',
         ));
         
         $fieldset->addField('apply_cc', 'text', array(
@@ -124,7 +124,7 @@ class Mage_Approve_Block_Adminhtml_Apply_Edit_Form extends Mage_Adminhtml_Block_
             'title'     => '抄送人',
 			'class'     => 'input-user',
             'required'  => true,
-            'after_element_html' => '<div class="input-user-wrap"><div class="inner" id="apply_cc_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="apply_cc_tag" data-target="apply_cc" data-old=\''.json_encode($ccData).'\' class="add-user"><i class="fa fa-plus f-right" aria-hidden="true"></i></a></div>',
+            'after_element_html' => '<div class="input-user-wrap"><div class="inner" id="apply_cc_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="apply_cc_tag" data-target="apply_cc" data-old=\''.json_encode($ccData).'\' class="add-user"><i class="fa fa-plus f-right"></i></a></div>',
         ));
         //上传附件
         $form->setUseContainer(true);

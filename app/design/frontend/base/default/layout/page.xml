@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<print module="page">
+        <block type="page/html" name="root" output="toHtml" template="page/print.phtml">
+            <block type="core/text_list" name="content" as="content" />
+        </block>
+    </print>
+    <page_empty >
+        <reference name="root">
+            <action method="setTemplate"><template>page/empty.phtml</template></action>
+            <action method="setIsHandle"><applied>1</applied></action>
+        </reference>
+    </page_empty>
+    <page_one_column >
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+            <action method="setIsHandle"><applied>1</applied></action>
+        </reference>
+    </page_one_column>
+
+    <page_two_columns_left >
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+            <action method="setIsHandle"><applied>1</applied></action>
+        </reference>
+    </page_two_columns_left>
+
+    <page_two_columns_right >
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+            <action method="setIsHandle"><applied>1</applied></action>
+            
+        </reference>
+    </page_two_columns_right>
+
+    <page_three_columns>
+        <reference name="root">
+            <action method="setTemplate"><template>page/3columns.phtml</template></action>
+            <action method="setIsHandle"><applied>1</applied></action>
+        </reference>
+    </page_three_columns>
+</layout>

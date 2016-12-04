@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <cs>
+        	<sort_order>990</sort_order>
+	        <title>客服</title>
+	        <type>trade</type>
+	        <action>adminhtml/cs/</action>
+	        <children>
+		        <index>
+		        	<sort_order>0</sort_order>
+			        <title>首页</title>
+			        <action>adminhtml/cs/index</action>
+		        </index>
+		        <workorder>
+		        	<sort_order>10</sort_order>
+			        <title>工单管理</title>
+			        <action>adminhtml/cs_workorder/index</action>
+		        </workorder>
+		        
+		        <livechat>
+		        	<sort_order>20</sort_order>
+			        <title>在线客服</title>
+			        <action>adminhtml/cs_livechat/index</action>
+		        </livechat>
+		        <complain>
+		        	<sort_order>30</sort_order>
+			        <title>客户投诉</title>
+			        <action>adminhtml/cs_complain/index</action>
+		        </complain>
+		        <customer>
+		        	<sort_order>80</sort_order>
+			        <title>客户管理</title>
+			        <action>adminhtml/cs_customer/index</action>
+		        </customer>
+		        <faq>
+		        	<sort_order>90</sort_order>
+			        <title>常见问题</title>
+			        <action>adminhtml/cs_faq/index</action>
+		        </faq>
+		        
+		        <stat>
+		        	<sort_order>99</sort_order>
+			        <title>统计报告</title>
+			        <action>adminhtml/cs_stat/index</action>
+		        </stat>
+	        </children>
+        </cs>
+    </menu>
+</config>

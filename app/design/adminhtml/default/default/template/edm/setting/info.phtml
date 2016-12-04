@@ -1,0 +1,58 @@
+<?php
+$company = Mage::registry('current_company');
+$cats = Mage::getResourceModel('edm/company_category_collection')
+				->addFieldToFilter('company_id',$company->getId());
+		
+$catOldIds = array();
+foreach ($cats as $_cat) {
+	array_push($catOldIds,$_cat->getCategoryId());
+}
+
+?>
+
+<div class="c-box">
+	<div class="content-header">
+		<div class="f-right">
+			<div class=" f-right">
+		   		<button class="btn btn-primary f-left" id="save_email_btn" type="button" onclick="editForm.submit()" style=""><i class="fa fa-save"></i>&nbsp;保存基本信息</button>
+		   		
+		   		<div class="clr"></div>
+		   	</div>
+		</div>
+		<h2 class="m0"><i class="fa fa-setting mr5"></i>基本信息设置</h2></td>
+		
+	</div>
+	<form action="<?php echo $this->getUrl('adminhtml/edm_setting_info/save'); ?>" method="POST" name="edit_form" id="edit_form" enctype="multipart/form-data">
+	<div class="p20">
+		<div id="messages">
+		    <?php echo $this->getMessagesBlock()->toHtml() ?>
+		</div>
+		<div class="clr"></div>
+		<div class="box-inner">
+			
+            <div style="margin:20px;">
+           		
+		    		<input type="hidden" name="form_key" id="" value="<?php echo $this->getFormKey(); ?>" />
+		    		<?php echo $this->getBaseInfoForm(); ?>
+		    		<!--
+		    		<div class="clr mt40 wp100"></div>
+		    		<?php //echo $this->getAdvanceInfoForm(); ?>
+		    		-->
+	    		
+            </div>
+
+		</div>
+		<div class="clear"></div>
+		
+	</div>
+	<div class="content-bottom">
+    	<div class="text-center">
+    		<button class="btn btn-primary btn-lg" id="send_email_btn" type="submit" style=""><i class="fa fa-save"></i>&nbsp;保存基本信息</button>
+    	</div>
+    	<div class="clr"></div>
+	</div>
+	</form>
+</div>
+<script type="text/javascript">
+    editForm = new mioForm('edit_form', '');
+</script>

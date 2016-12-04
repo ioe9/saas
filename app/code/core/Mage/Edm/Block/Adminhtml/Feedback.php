@@ -5,11 +5,14 @@ class Mage_Edm_Block_Adminhtml_Feedback extends Mage_Adminhtml_Block_Widget_Grid
     {
         $this->_controller = 'adminhtml_feedback';
     	$this->_blockGroup = 'edm';
-    	
-		$this->_headerText = "反馈提交记录";
+    	if (Mage::registry('current_filter')=='my') {
+			$this->_headerText = "我提交的反馈";
+    	} else {
+    		$this->_headerText = "反馈列表";
+    	}
     	//$this->_updateButton(array(''))
         parent::__construct();
-        $this->_updateButton('add', 'label', "我要提交反馈信息");
+        $this->_updateButton('add', 'label', '<i class="fa fa-plus-circle mr5"></i>'."我要提交反馈");
         
     }
 }

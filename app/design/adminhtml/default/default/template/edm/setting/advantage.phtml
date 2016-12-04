@@ -1,0 +1,35 @@
+<?php
+$group = Mage::registry('current_group');
+?>
+<div class="c-box">
+	<div class="content-header">
+		<div class="f-right">
+			<div class=" f-right">
+				<button class="btn btn-default f-left mr10" id="" type="button" onclick="setLocation('<?php echo $this->getUrl('adminhtml/edm_setting_advantage/'); ?>')"><i class="fa fa-angle-double-left mr5"></i>返回</button>
+		   		<button class="btn btn-info f-left mr10" id="" type="button" onclick="setLocation(window.location.href)"><i class="fa fa-refresh mr5"></i>重置</button>
+		   		<button class="btn btn-primary f-left" id="" type="button" onclick="editForm.submit()" style=""><i class="fa fa-save mr5"></i>保存</button>
+		   		
+		   		<div class="clr"></div>
+		   	</div>
+		</div>
+		<h2 class="m0"><i class="fa fa-edit mr5"></i><?php if($group->getId()):?>编辑优势分组：<?php echo $group->getData('group_name'); ?><?php else: ?>新增优势分组<?php endif; ?></h2>
+		
+	</div>
+	<div class="p20">
+		<div id="messages">
+            <?php echo $this->getMessagesBlock()->toHtml() ?>
+        </div>
+        <div class="clr"></div>
+        <div class="box-inner">
+			<?php echo $this->getFormHtml(); ?>
+		</div>
+	</div>
+	<div class="content-bottom a-center">
+		<button class="btn btn-primary btn-lg w200" type="button" onclick="editForm.submit()"><i class="fa fa-save mr5"></i>保存 </button>
+		
+    	<div class="clr"></div>
+	</div>
+</div>
+<script>
+	editForm = new mioForm('edit_form','');
+</script>

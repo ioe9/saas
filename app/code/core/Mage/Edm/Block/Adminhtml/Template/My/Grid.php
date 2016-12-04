@@ -14,6 +14,12 @@ class Mage_Edm_Block_Adminhtml_Template_My_Grid extends Mage_Adminhtml_Block_Wid
     {
         $collection = Mage::getResourceModel('edm/company_template_collection');
         $collection->addFieldToFilter('template_company',Mage::registry('current_company')->getId());
+        $collection->getSelect()
+	    		->joinLeft(
+	    			array('u'=>'saas_admin_user'),
+					'main_table.template_create=u.user_id',
+					array('name as username')
+				);
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
@@ -25,7 +31,7 @@ class Mage_Edm_Block_Adminhtml_Template_My_Grid extends Mage_Adminhtml_Block_Wid
         $this->addColumn('template_id', array(
             'header'    => "ID",
             'align'     => 'center',
-            'width'     => '65px',
+            'width'     => '80px',
             'index'     => 'template_id',
         ));
 		
@@ -35,29 +41,39 @@ class Mage_Edm_Block_Adminhtml_Template_My_Grid extends Mage_Adminhtml_Block_Wid
             'index'     => 'template_name',
 			'sortable' => false,
         ));
-       
-        
-        $this->addColumn('memo', array(
-            'header'    => "备注",
-            'align'     => 'left',
-            'index'     => 'memo',
-            'filter' => false,
+       $this->addColumn('template_scene', array(
+            'header'    => "场景",
+            'align'     => 'center',
+            'width'     => '120px',
+            'index'     => 'template_scene',
 			'sortable' => false,
-			'width'     => '300px',
+			'type' => 'options',
+			'options' => Mage::getSingleton('edm/template_scene')->getAsOptions(),
         ));
-       $this->addColumn('template_user', array(
+
+       $this->addColumn('username', array(
             'header'    => "创建人",
             'align'     => 'center',
-            'index'     => 'template_user',
+            'index'     => 'username',
             'width'     => '120px',
             'sortable' => false,
-            'default' => '系统',
+            //'default' => '系统',
+        ));
+        $this->addColumn('template_status', array(
+            'header'    => "状态",
+            'align'     => 'center',
+            'index'     => 'template_status',
+			'sortable' => false,
+			'type' => 'options',
+			'options' => Mage::getSingleton('edm/company_template')->getStatusOptions(),
         ));
         $this->addColumn('date_create', array(
             'header'    => "创建时间",
             'index'     => 'date_create',
             'filter' => false,
-            'width'     => '120px',
+            'align'     => 'center',
+            'width'     => '150px',
+            'renderer' => 'adminhtml/widget_grid_renderer_datetime'
         ));
         
         $this->addColumn('action',

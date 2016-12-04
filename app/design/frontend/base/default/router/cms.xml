@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="footer">
+            <block type="cms/block" name="cms_footer_links" before="footer_links">
+                <action method="setBlockId"><block_id>footer_links</block_id></action>
+            </block>
+        </reference>
+    </default>
+    <routermatch>
+		<all/>
+    </routermatch>
+</layout>

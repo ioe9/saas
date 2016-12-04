@@ -6,15 +6,15 @@
 				<td class="form-buttons"><?php echo $this->getButtonsHtml() ?></td>
 			</tr>
 		</table>
-		<div id="messages">
-            <?php echo $this->getMessagesBlock()->toHtml() ?>
-        </div>
+		
 	</div>
     <table cellspacing="6" width="100%">
         <tr>  
             <td>
                 <div class="entry-edit">
-					
+					<div id="messages">
+			            <?php echo $this->getMessagesBlock()->toHtml() ?>
+			        </div>
 					<div>
 					    <?php echo $this->getGridHtml() ?>
 					</div>

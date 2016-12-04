@@ -1,38 +1,12 @@
 <?php
 /**
- * Magento
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Open Software License (OSL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/osl-3.0.php
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@magento.com so we can send you a copy immediately.
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade Magento to newer
- * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magento.com for more information.
- *
- * @category    Mage
- * @package     Mage_Core
- * @copyright  Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
- * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- */
-
-
-/**
- * Custom Zend_Controller_Action class (formally)
+ * Custom Varien_Controller_Action class (formally)
  *
  * Allows dispatching before and after events for each controller action
  *
  * @category   Mage
  * @package    Mage_Core
- * @author     Magento Core Team <core@magentocommerce.com>
+ * @author     Mio Core Team <developer@ioe9.com>
  */
 abstract class Mage_Core_Controller_Varien_Action
 {
@@ -55,14 +29,14 @@ abstract class Mage_Core_Controller_Varien_Action
     /**
      * Request object
      *
-     * @var Zend_Controller_Request_Abstract
+     * @var Varien_Controller_Request_Abstract
      */
     protected $_request;
 
     /**
      * Response object
      *
-     * @var Zend_Controller_Response_Abstract
+     * @var Varien_Controller_Response_Abstract
      */
     protected $_response;
 
@@ -131,8 +105,8 @@ abstract class Mage_Core_Controller_Varien_Action
     /**
      * Constructor
      *
-     * @param Zend_Controller_Request_Abstract $request
-     * @param Zend_Controller_Response_Abstract $response
+     * @param Varien_Controller_Request_Abstract $request
+     * @param Varien_Controller_Response_Abstract $response
      * @param array $invokeArgs
      */
     public function __construct(Mage_Core_Controller_Request_Http $request, Mage_Core_Controller_Response_Http $response, array $invokeArgs = array())
@@ -406,7 +380,6 @@ abstract class Mage_Core_Controller_Varien_Action
 
             Varien_Profiler::start(self::PROFILER_KEY.'::predispatch');
             $this->preDispatch();
-            
             Varien_Profiler::stop(self::PROFILER_KEY.'::predispatch');
 
             if ($this->getRequest()->isDispatched()) {
@@ -482,20 +455,22 @@ abstract class Mage_Core_Controller_Varien_Action
             }
         }
 
-     
+     	
 
         if ($this->_rewrite()) {
             return;
         }
-
+		
         if (!$this->getFlag('', self::FLAG_NO_START_SESSION)) {
+        	
             $checkCookie = in_array($this->getRequest()->getActionName(), $this->_cookieCheckActions)
                 && !$this->getRequest()->getParam('nocookie', false);
             $cookies = Mage::getSingleton('core/cookie')->get();
+
             /** @var $session Mage_Core_Model_Session */
             $session = Mage::getSingleton('core/session', array('name' => $this->_sessionNamespace))->start();
-
             if (empty($cookies)) {
+            	
                 if ($session->getCookieShouldBeReceived()) {
                     $this->setFlag('', self::FLAG_NO_COOKIES_REDIRECT, true);
                     $session->unsCookieShouldBeReceived();
@@ -513,14 +488,14 @@ abstract class Mage_Core_Controller_Varien_Action
         }
 
         Mage::app()->loadArea($this->getLayout()->getArea());
-
+		
         if ($this->getFlag('', self::FLAG_NO_COOKIES_REDIRECT)
             && Mage::getStoreConfig('web/browser_capabilities/cookies')
         ) {
             $this->_forward('noCookies', 'index', 'core');
             return;
         }
-
+		
         if ($this->getFlag('', self::FLAG_NO_PRE_DISPATCH)) {
             return;
         }
@@ -986,10 +961,10 @@ abstract class Mage_Core_Controller_Varien_Action
             return $array;
         }
         /*
-        $filterInput = new Zend_Filter_LocalizedToNormalized(array(
+        $filterInput = new Varien_Filter_LocalizedToNormalized(array(
             'date_format' => Mage::app()->getLocale()->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT)
         ));
-        $filterInternal = new Zend_Filter_NormalizedToLocalized(array(
+        $filterInternal = new Varien_Filter_NormalizedToLocalized(array(
             'date_format' => Varien_Date::DATE_INTERNAL_FORMAT
         ));
 
@@ -1014,10 +989,10 @@ abstract class Mage_Core_Controller_Varien_Action
         if (empty($dateFields)) {
             return $array;
         }
-        $filterInput = new Zend_Filter_LocalizedToNormalized(array(
+        $filterInput = new Varien_Filter_LocalizedToNormalized(array(
             'date_format' => Mage::app()->getLocale()->getDateTimeFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT)
         ));
-        $filterInternal = new Zend_Filter_NormalizedToLocalized(array(
+        $filterInternal = new Varien_Filter_NormalizedToLocalized(array(
             'date_format' => Varien_Date::DATETIME_INTERNAL_FORMAT
         ));
 

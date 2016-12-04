@@ -2,7 +2,14 @@
 <layout>
 	<default>
 		<reference name="head">
+			
             <action method="addCss"><name>css/document.css</name></action>
+            <action method="addCss"><name>css/uploadify.css</name></action>
+            <action method="addJs"><file>document.js</file></action>
+            <action method="addJs"><file>jquery/jquery.cookie.js</file></action>
+            <action method="addJs"><file>jquery.uploadify.js</file></action>
+            <action method="addJs"><file>uploadify.util.js</file></action>
+            
         </reference>
 	</default>
 </layout>

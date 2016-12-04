@@ -102,7 +102,7 @@ class Mage_Report_Block_Adminhtml_Report_Edit_Form extends Mage_Adminhtml_Block_
             'title'     => '报告对象',
 			'class'     => 'input-user',
             'required'  => true,
-            'after_element_html' => '<div class="input-user-wrap"><div class="inner" id="report_charge_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="report_charge_tag" data-target="report_charge" data-old=\''.json_encode($chargeData).'\' class="add-user"><i class="fa fa-plus f-right" aria-hidden="true"></i></a></div>',
+            'after_element_html' => '<div class="input-user-wrap"><div class="inner" id="report_charge_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="report_charge_tag" data-target="report_charge" data-old=\''.json_encode($chargeData).'\' class="add-user"><i class="fa fa-plus f-right"></i></a></div>',
         ));
         $fieldset->addField('report_cc_old', 'hidden', array(
             'name'      => 'report_cc_old',
@@ -114,7 +114,7 @@ class Mage_Report_Block_Adminhtml_Report_Edit_Form extends Mage_Adminhtml_Block_
             'title'     => '抄送对象',
             'class'     => 'input-user',
             'required'  => false,
-            'after_element_html' => '<div class="input-user-wrap"><div class="inner" id="report_cc_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="report_cc_tag" data-target="report_cc" data-old=\''.json_encode($ccData).'\' class="add-user"><i class="fa fa-plus f-right" aria-hidden="true"></i></a></div>',
+            'after_element_html' => '<div class="input-user-wrap"><div class="inner" id="report_cc_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="report_cc_tag" data-target="report_cc" data-old=\''.json_encode($ccData).'\' class="add-user"><i class="fa fa-plus f-right"></i></a></div>',
         ));
         
         $fieldset->addField('report_desc', 'editor', array(

@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <export>
+        	<sort_order>990</sort_order>
+	        <title>出口业务</title>
+	        <type>trade</type>
+	        <action>adminhtml/export/</action>
+	        <children>
+		        <index>
+		        	<sort_order>0</sort_order>
+			        <title>首页</title>
+			        <action>adminhtml/export/index</action>
+		        </index>
+		        
+		        <inquiry>
+		        	<sort_order>10</sort_order>
+			        <title>询价管理</title>
+			        <action>adminhtml/export_inquiry/index</action>
+		        </inquiry>
+		        <sample>
+		        	<sort_order>20</sort_order>
+			        <title>样品管理</title>
+			        <action>adminhtml/export_sample/index</action>
+		        </sample>
+		        <purchase>
+		        	<sort_order>30</sort_order>
+			        <title>采购订单</title>
+			        <action>adminhtml/export_purchase/index</action>
+		        </purchase>
+		        <quotation>
+		        	<sort_order>40</sort_order>
+			        <title>报价单</title>
+			        <action>adminhtml/export_quotation/index</action>
+		        </quotation>
+		        <sales>
+		        	<sort_order>50</sort_order>
+			        <title>外销订单</title>
+			        <action>adminhtml/export_sales/index</action>
+		        </sales>
+		        <produce>
+		        	<sort_order>60</sort_order>
+			        <title>生产任务单</title>
+			        <action>adminhtml/export_produce/index</action>
+		        </produce>
+		        <shipment>
+		        	<sort_order>70</sort_order>
+			        <title>出运明细单</title>
+			        <action>adminhtml/export_shipment/index</action>
+		        </shipment>
+		        <inspection>
+		        	<sort_order>80</sort_order>
+			        <title>验货单</title>
+			        <action>adminhtml/export_inspection/index</action>
+		        </inspection>
+		        <document>
+		        	<sort_order>90</sort_order>
+			        <title>单证制作</title>
+			        <action>adminhtml/export_document/index</action>
+		        </document>
+		        <delivery>
+		        	<sort_order>100</sort_order>
+			        <title>发货单</title>
+			        <action>adminhtml/export_delivery/index</action>
+		        </delivery>
+		        <track>
+		        	<sort_order>110</sort_order>
+			        <title>订单跟踪</title>
+			        <action>adminhtml/export_track/index</action>
+		        </track>
+		        <cs>
+		        	<sort_order>120</sort_order>
+			        <title>客户服务</title>
+			        <action>adminhtml/export_cs/index</action>
+		        </cs>
+	        </children>
+        </export>
+    </menu>
+</config>
+
+
+
+
+
+
+
+
+
+
+

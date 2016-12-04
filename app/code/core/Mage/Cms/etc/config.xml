@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<config>
+    <frontend>
+        <routers>
+            <cms>
+                <use>standard</use>
+                <args>
+                    <module>Mage_Cms</module>
+                    <frontName>cms</frontName>
+                </args>
+            </cms>
+        </routers>
+        <events>
+            <controller_action_noroute>
+                <observers>
+                    <cms>
+                        <class>cms/observer</class>
+                        <method>noRoute</method>
+                    </cms>
+                </observers>
+            </controller_action_noroute>
+            <controller_action_nocookies>
+                <observers>
+                    <cms>
+                        <class>cms/observer</class>
+                        <method>noCookies</method>
+                    </cms>
+                </observers>
+            </controller_action_nocookies>
+        </events>
+    </frontend>
+    
+    <global>
+        <events>
+            <controller_front_init_routers>
+                <observers>
+                    <cms>
+                        <class>Mage_Cms_Controller_Router</class>
+                        <method>initControllerRouters</method>
+                    </cms>
+                </observers>
+            </controller_front_init_routers>
+        </events>
+    </global>
+    
+</config>

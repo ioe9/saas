@@ -58,6 +58,7 @@ class Mage_Approve_Block_Adminhtml_Approve_Reply_Form extends Mage_Adminhtml_Blo
             'required'  => false,
             
         ));
+        
         $data['reply_submit'] = '发表回复';
         //上传附件
         $form->setUseContainer(true);

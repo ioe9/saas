@@ -123,7 +123,7 @@ class Mage_Attendance_Block_Adminhtml_Travel_Edit_Form extends Mage_Adminhtml_Bl
             'title'     => '审批人',
 			'class'     => 'input-user',
             'required'  => true,
-            'after_element_html' => '<div class="input-user-wrap"><div class="inner" id="travel_audit_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="travel_audit_tag" data-target="travel_audit" data-old=\''.json_encode($auditData).'\' class="add-user"><i class="fa fa-plus f-right" aria-hidden="true"></i></a></div>',
+            'after_element_html' => '<div class="input-user-wrap"><div class="inner" id="travel_audit_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="travel_audit_tag" data-target="travel_audit" data-old=\''.json_encode($auditData).'\' class="add-user"><i class="fa fa-plus f-right"></i></a></div>',
         ));
         $fieldset->addField('travel_cc_old', 'hidden', array(
             'name'      => 'travel_cc_old',
@@ -135,7 +135,7 @@ class Mage_Attendance_Block_Adminhtml_Travel_Edit_Form extends Mage_Adminhtml_Bl
             'title'     => '抄送人',
             'class'     => 'input-user',
             'required'  => false,
-            'after_element_html' => '<div class="input-user-wrap"><div class="inner" id="travel_cc_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="travel_cc_tag" data-target="travel_cc" data-old=\''.json_encode($ccData).'\' class="add-user"><i class="fa fa-plus f-right" aria-hidden="true"></i></a></div>',
+            'after_element_html' => '<div class="input-user-wrap"><div class="inner" id="travel_cc_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="travel_cc_tag" data-target="travel_cc" data-old=\''.json_encode($ccData).'\' class="add-user"><i class="fa fa-plus f-right"></i></a></div>',
         ));
         
         //上传附件

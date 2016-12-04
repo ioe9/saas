@@ -1,0 +1,10 @@
+<?php $slide = Mage::registry('current_slide'); ?>
+<?php if ($slide && $slide->getId()): ?>
+<?php $processor = Mage::helper('cms')->getBlockTemplateProcessor(); ?>
+<div class="swiper-container" id="banner_swiper">
+    <div class="swiper-wrapper">
+        <?php echo $processor->filter($slide->getContent()); ?>
+    </div>
+    <div class="swiper-pagination" id="banner_swp"></div>
+</div>
+<?php endif; ?>

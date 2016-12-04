@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<layout>
+	<default>
+		<reference name="head">
+            <action method="addCss"><name>css/college.css</name></action>
+        </reference>
+	</default>
+    <adminhtml_college_article_index>
+    	<reference name="right">
+    		
+            <block type="college/adminhtml_article_layer" name="article_layer" after="-" template="college/article/layer.phtml"/>
+            <block type="college/adminhtml_article_sidebar_hot" name="article_hot" after="article_layer" template="college/article/sidebar/hot.phtml"/>
+            <block type="college/adminhtml_article_sidebar_new" name="article_new" after="article_hot" template="college/article/sidebar/new.phtml"/>
+            <block type="core/template" name="banner_site" after="-" template="college/banner/site.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="college/adminhtml_article_list" name="article_list" template="college/article/list.phtml"/>
+        </reference>
+    </adminhtml_college_article_index>
+    <adminhtml_college_article_list>
+    	<update handle="adminhtml_college_article_index"/>
+    </adminhtml_college_article_list>
+    <adminhtml_college_article_wx>
+    	<update handle="adminhtml_article_index"/>
+    </adminhtml_college_article_wx>
+    <adminhtml_college_article_view>
+    	<reference name="right">
+            <block type="college/adminhtml_article_layer" name="article_layer" before="-" template="college/article/layer.phtml"/>
+            <block type="college/adminhtml_article_sidebar_hot" name="article_hot" after="article_layer" template="college/article/sidebar/hot.phtml"/>
+            <block type="college/adminhtml_article_sidebar_new" name="article_new" after="article_hot" template="college/article/sidebar/new.phtml"/>
+            <block type="core/template" name="banner_site" after="article_new" template="college/banner/site.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="college/adminhtml_article_view" name="article_view" template="college/article/view.phtml"/>
+        </reference>
+    </adminhtml_college_article_view>
+</layout>

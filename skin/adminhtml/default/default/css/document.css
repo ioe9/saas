@@ -1,4 +1,4 @@
-.dir-grid li {
+.icon-list li {
     -moz-user-select: none;
     border: 1px solid #fff;
     float: left;
@@ -7,7 +7,12 @@
     text-align: center;
     width: 118px;
 }
-.dir-grid .icon {
+.icon-list li:hover,
+.icon-list li.selected {
+    background: #ebf3ff none repeat scroll 0 0;
+    border: 1px solid #c3d7ef;
+}
+.icon-list .icon {
     background-position: center 20px;
     background-repeat: no-repeat;
     display: block;
@@ -17,7 +22,7 @@
     position: relative;
     width: 108px;
 }
-.dir-grid .text {
+.icon-list .text {
     display: block;
     height: 30px;
     line-height: 30px;
@@ -26,6 +31,427 @@
     white-space: nowrap;
     width: 118px;
 }
-.dir-grid .icon-folder {
+.icon-list .icon-folder {
     background-image: url("../images/document/icon-dir.png");
+}
+
+.icon-list  .set {
+    background: rgba(0, 0, 0, 0) url("../images/document/icon-set.png") no-repeat scroll center center;
+    right: 24px;
+}
+.icon-list .set, .icon-list .wish {
+    display: none;
+    height: 15px;
+    position: absolute;
+    width: 15px;
+}
+
+.icon-list .wish {
+    background: rgba(0, 0, 0, 0) url("../images/document/icon-collect-not.png") no-repeat scroll center center;
+    right: 0;
+}
+.icon-list .wish-checked {
+    background: rgba(0, 0, 0, 0) url("../images/document/icon-collected.png") no-repeat scroll center center;
+    right: 0;
+    display:block;
+}
+.icon-list li:hover .set,
+.icon-list li:hover .wish,
+.icon-list li.selected .set, 
+.icon-list li.selected .wish {
+	display:block;
+}
+.icon-list .icon-pic, .upload-file.icon-pic {
+    background-image: url("../images/document/icon-pic-52.png");
+}
+
+.icon-list .icon-folder, .upload-file.icon-folder {
+    background-image: url("../images/document/icon-file-52.png");
+}
+.icon-list .icon-xsl, .upload-file.icon-xsl {
+    background-image: url("../images/document/icon-xsl-52.png");
+}
+.icon-list .icon-zip, .upload-file.icon-zip {
+    background-image: url("../images/document/icon-zip-52.png");
+}
+.icon-list .icon-txt, .upload-file.icon-txt {
+    background-image: url("../images/document/icon-txt-52.png");
+}
+.icon-list .icon-doc, .upload-file.icon-doc {
+    background-image: url("../images/document/icon-doc-52.png");
+}
+.icon-list .icon-pdf, .upload-file.icon-pdf {
+    background-image: url("../images/document/icon-pdf-52.png");
+}
+.icon-list .icon-html, .upload-file.icon-html {
+    background-image: url("../images/document/icon-html-52.png");
+}
+.icon-list .icon-video, .upload-file.icon-video {
+    background-image: url("../images/document/icon-video-52.png");
+}
+.icon-list .icon-ppt, .upload-file.icon-ppt {
+    background-image: url("../images/document/icon-ppt-52.png");
+}
+.icon-list .icon-dll, .upload-file.icon-dll {
+    background-image: url("../images/document/icon-dll-52.png");
+}
+.icon-list .icon-music, .upload-file.icon-music {
+    background-image: url("../images/document/icon-music-52.png");
+}
+.icon-list .icon-pic, .upload-file.icon-pic {
+    background-image: url("../images/document/icon-pic-52.png");
+}
+.icon-list .icon-default, .upload-file.icon-default {
+    background-image: url("../images/document/icon-default-52.png");
+}
+.icon-list .column-size, .icon-list .column-uploadPerson, .icon-list .column-uploadTime, .icon-list .column-control {
+    display: none;
+}
+
+.file-list-head{
+	height: 47px;
+	line-height: 47px;
+	border-bottom: 1px solid #e8e8e8;
+	background: #fafafa;
+	display: none;
+}
+.file-list-head .column,.list-list .column{
+	float: left;
+}
+.file-list-head .column-size,.list-list .column-size{
+	width: 100px;
+	text-indent: 20px;
+}
+.file-list-head .column-filename,.list-list .column-filename{
+	width: 320px;
+	text-indent: 30px;
+	overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+.file-list-head .column-uploadPerson,.list-list .column-uploadPerson{
+	width: 130px;
+	text-indent: 20px;
+}
+.file-list-head .column-uploadTime{
+	width: 210px;
+	text-indent: 45px;
+}
+.list-list .column-uploadTime{
+	width: 210px;
+	text-indent: 15px;
+}
+.file-list-head .column-control{
+	width: 245px;
+	text-align: center;
+	text-indent: 10px;
+}
+.list-list .column-control{
+	width: 245px;
+	text-indent: 10px;
+}
+.list-list li{
+	height: 47px;
+	line-height: 47px;
+	border-bottom: 1px solid #e8e8e8;
+	-webkit-user-select: none; 
+	-moz-user-select: none; 
+	-ms-user-select: none; 
+	-o-user-select: none;
+	user-select: none; 
+}
+.list-list li:hover{
+	background: #f3f8ff;
+}
+.list-list li.filelist-item-checked{
+	background: #ebf3ff;
+}
+.list-list .icon{
+	background-position: center center;
+    background-repeat: no-repeat;
+    display: block;
+    width: 16px;
+    height: 47px;
+    margin-right: 13px;
+    float: left;
+    position: relative;
+    left: 30px;
+}
+.list-list .icon-folder{
+	background-image: url(../images/document/icon-file-14.png);
+}
+.list-list .icon-xsl{
+	background-image: url(../images/document/icon-xsl-14.png);
+}
+.list-list .icon-zip{
+	background-image: url(../images/document/icon-zip-14.png);
+}
+.list-list .icon-txt{
+	background-image: url(../images/document/icon-txt-14.png);
+}
+.list-list .icon-doc{
+	background-image: url(../images/document/icon-doc-14.png);
+}
+.list-list .icon-pdf{
+	background-image: url(../images/document/icon-pdf-14.png);
+}
+.list-list .icon-html{
+	background-image: url(../images/document/icon-html-14.png);
+}
+.list-list .icon-video{
+	background-image: url(../images/document/icon-video-14.png);
+}
+.list-list .icon-ppt{
+	background-image: url(../images/document/icon-ppt-14.png);
+}
+.list-list .icon-dll{
+	background-image: url(../images/document/icon-dll-14.png);
+}
+.list-list .icon-music{
+	background-image: url(../images/document/icon-music-14.png);
+}
+.list-list .icon-pic{
+	background-image: url(../images/document/icon-pic-14.png);
+}
+.list-list .icon-default{
+	background-image: url(../images/document/icon-default-14.png);
+}
+.list-list .column-collection{
+	display: inline-block;
+	float: left;
+	height: 47px;
+	width: 32px;
+	background: url(../images/document/icon-collect-not.png) no-repeat center;
+}
+.list-list .column-collection:hover{
+	cursor: pointer;
+}
+.list-list .column-collection.collection-checked{
+	background: url(../images/document/icon-collected.png) no-repeat center;
+}
+.btn-column{
+	color: #3091f2;
+	text-decoration: underline;
+	margin-left: 12px;
+}
+.list-list .text{
+	float:left;
+	width:290px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.list-list .text:hover{
+	cursor: pointer;
+}
+.list-list .input-text-rename{
+	margin-left: 30px;
+}
+.btn-row {
+    border-top: 1px dashed #d8d8d8;
+    margin-top: 8px;
+    padding: 22px 0;
+}
+.dialog-moveto-wrap {
+    background: #fff none repeat scroll 0 0;
+    width: 392px;
+}
+.dialog-moveto {
+    background: #fff none repeat scroll 0 0;
+    padding: 0 16px;
+    width: 392px;
+}
+.moveto-header {
+    height: 83px;
+    line-height: 83px;
+}
+.moveto-header-type {
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    float: left;
+    height: 83px;
+    width: 68px;
+}
+.moveto-header-type.icon-pic {
+    background-image: url("../images/document/icon-pic-34.png");
+}
+.moveto-header-type.icon-folder {
+    background-image: url("../images/document/icon-file-34.png");
+}
+.moveto-header-type.icon-xsl {
+    background-image: url("../images/document/icon-xsl-34.png");
+}
+.moveto-header-type.icon-zip {
+    background-image: url("../images/document/icon-zip-34.png");
+}
+.moveto-header-type.icon-txt {
+    background-image: url("../images/document/icon-txt-34.png");
+}
+.moveto-header-type.icon-doc {
+    background-image: url("../images/document/icon-doc-34.png");
+}
+.moveto-header-type.icon-pdf {
+    background-image: url("../images/document/icon-pdf-34.png");
+}
+.moveto-header-type.icon-html {
+    background-image: url("../images/document/icon-html-34.png");
+}
+.moveto-header-type.icon-video {
+    background-image: url("../images/document/icon-video-34.png");
+}
+.moveto-header-type.icon-ppt {
+    background-image: url("../images/document/icon-ppt-34.png");
+}
+.moveto-header-type.icon-dll {
+    background-image: url("../images/document/icon-dll-34.png");
+}
+.moveto-header-type.icon-music {
+    background-image: url("../images/document/icon-music-34.png");
+}
+.moveto-header-type.icon-default {
+    background-image: url("../images/document/icon-default-34.png");
+}
+.moveto-header-info {
+    float: left;
+    height: 38px;
+    padding-bottom: 20px;
+    padding-top: 25px;
+    width: 292px;
+}
+.moveto-header-filename {
+    font-size: 14px;
+    height: 22px;
+    line-height: 22px;
+}
+.moveto-header-filesize {
+    color: #bbb;
+    height: 17px;
+    line-height: 17px;
+}
+.moveto-directory {
+    border: 1px solid #ddd;
+    height: 270px;
+    margin-bottom: 22px;
+}
+.moveto-title {
+    background: #f0f0f0 none repeat scroll 0 0;
+    height: 43px;
+    line-height: 43px;
+    text-indent: 18px;
+}
+#moveto-filepath {
+    height: 226px;
+    overflow: auto;
+}
+
+.ztree li span.button.fIcon_ico_open, .ztree li span.button.fIcon_ico_close {
+    background: rgba(0, 0, 0, 0) url("../images/document/icon-file-14.png") no-repeat scroll 4px 3px;
+    margin-right: 2px;
+}
+
+.dialog-upload-wrap {
+    background: #fff none repeat scroll 0 0;
+    width: 860px;
+}
+.dialog-upload-content {
+    padding: 25px 14px 0 16px;
+}
+.dialog-upload-list {
+    border: 1px solid #ddd;
+    min-height: 183px;
+}
+.dialog-upload-path {
+    border-bottom: 1px solid #ddd;
+    height: 41px;
+    line-height: 41px;
+    text-indent: 18px;
+}
+.dialog-upload-tip {
+    color: #666;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 11px;
+}
+.dialog-upload-body {
+    max-height: 339px;
+    min-height: 141px;
+    overflow-y: auto;
+    padding-top: 21px;
+}
+.dialog-upload-body li {
+    float: left;
+    height: 118px;
+    padding: 0 14px;
+    width: 100px;
+}
+.upload-file-filename {
+    height: 27px;
+    line-height: 27px;
+    width: 72px;
+}
+.upload-file {
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 62px;
+    width: 72px;
+}
+.upload-progress {
+    height: 12px;
+    width: 72px;
+}
+.upload-file.add-file {
+    background-image: url("../images/document/add-file.png");
+}
+.upload-file.add-file:hover {
+    cursor: pointer;
+}
+.btn-chosepath-icon {
+    background: rgba(0, 0, 0, 0) url("../images/document/icon-file-14.png") no-repeat scroll center 12px;
+    display: inline-block;
+    height: 42px;
+    width: 16px;
+}
+.btn-chose-path {
+    background: rgba(0, 0, 0, 0) url("../images/document/icon-arrow-d.png") no-repeat scroll right 15px;
+    display: inline-block;
+    padding-right: 10px;
+    text-indent: 5px;
+}
+.upload-filepath {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ddd;
+    box-shadow: 2px 1px 10px #aaa;
+    display: none;
+    left: 15px;
+    max-width: 700px;
+    min-height: 223px;
+    min-width: 220px;
+    overflow: auto;
+    position: absolute;
+    top: 45px;
+    z-index: 30;
+}
+.uploadify-button {
+    background-color: transparent !important;
+    background-position: center bottom !important;
+    border: medium none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+}
+.uploadify:hover .uploadify-button {
+    background-color: transparent !important;
+}
+.file-item .cancel {
+    position: absolute;
+    right: 10px;
+    top: 0;
+}
+.latestUp-tip {
+    background: rgba(0, 0, 0, 0) url("../images/document/icon-announce.png") no-repeat scroll left center;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    min-width: 230px;
+    padding-right: 10px;
+    text-indent: 25px;
 }

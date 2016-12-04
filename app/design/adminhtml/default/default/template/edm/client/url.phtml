@@ -35,10 +35,10 @@ $company = Mage::registry('current_company');
 					<div class=" a-left grid grid-v" id="" style="">
 					
 						<table class="no-border"  cellspacing="0">
-							<col width="30%" />
-							<col width="40%" />
+							<col width="20%" />
+							<col width="45%" />
 							
-							<col width="12%" />
+							<col width="17%" />
 							<col width="18%" />
 							<thead>
 								<tr class="headings">
@@ -50,7 +50,7 @@ $company = Mage::registry('current_company');
 								</tr>
 							<?php foreach ($urls as $_item): ?>
 							<tr class="list-item">
-								<td>
+								<td align="center">
 									<?php echo $_item->getData('url'); ?>
 								</td>
 								<td>
@@ -66,7 +66,7 @@ $company = Mage::registry('current_company');
 								</td>
 								
 								<td class="a-center">
-									<?php echo substr($_item->getData('date_create'),0,10); ?>
+									<?php echo date('m/d h:i',strtotime($_item->getData('date_create'))); ?>
 								</td>
 								<td class="a-center">
 									

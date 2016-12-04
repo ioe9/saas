@@ -1225,7 +1225,7 @@ function dropEndback(event, treeId, treeNodes, targetNode, moveType, isCopy) {
         })
         .done(function (data) {
             MIO.treeUtil.createTree("/admin/setting_organization/getOrgTree",
-                "", "", clickCallBack, beaforDragback, dropEndback);//初始化tree
+                "", "", clickCafllBack, beaforDragback, dropEndback);//初始化tree
         })
         .fail(function (e) {
         	console.log("数据加载失败！");

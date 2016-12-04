@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="<?php echo $this->getSkinUrl('css/jquery-ui.css'); ?>" />
-<link rel="stylesheet" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ckeditor/skedm/moono/editor_gecko.css" />
+<link rel="stylesheet" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ckeditor/skins/moono/editor_gecko.css" />
 <script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>jquery/jquery.ui.js"></script>
 <script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>jquery/jquery.lightbox.js"></script>
 <script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ckeditor/ckeditor.js"></script>
@@ -11,60 +11,222 @@
 	<div class="content-header">
 		<div class="f-right">
 			<div class=" f-right">
-		   		
-		   		<button class="btn btn-primary f-left" id="save_email_btn" type="button" onclick="saveTemplate()" style=""><i class="fa fa-save"></i>&nbsp;保存模版</button>
+		   		<?php if ($template->getId()): ?>
+		   		<button class="btn btn-primary f-left w160" id="preview_email_btn" type="button" onclick="edmPreviewTemplate()" style=""><i class="fa fa-eye"></i>&nbsp;预览模版</button>
+		   		<?php endif; ?>
 		   		<div class="clr"></div>
 		   	</div>
 		</div>
-	   	<h2 class="m0"><?php if ($template->getId()): ?>编辑模板：“<?php echo $template->getTemplateName(); ?>”<?php else: ?>创建新模板<?php endif; ?></h2>
+	   	<h2 class="m0"><i class="fa fa-edit mr5"></i><?php if ($template->getId()): ?>编辑模板：“<?php echo $template->getTemplateName(); ?>”<?php else: ?>创建新模板<?php endif; ?></h2>
 		<div class="clr"></div>
 		<div id="messages"></div>
 	</div>
-	<div class="mb20 p20 editor-box">
-		<div class="drag-box">
-			<div class="md-empty">快速定制属于您的邮件模板</div>
-		</div>
-		<button class="drag-btn drag-btn-add" ><i class="fa fa-plus-square-o" aria-hidden="true"></i>&nbsp;点击新增内容</button>
-		<div id="template-md-tpl" class='no-display'>
-			<div class="drag-handle">
-				<div class="legend"></div>
-				<div class="handle-tools">
-					<a href="javascript:;" title=""><i class="fa fa-plus"></i>&nbsp;添加内容</a>
-					<a href="javascript:;" title=""><i class="fa fa-trash"></i>&nbsp;移除</a>
-				</div>
-				<div class="inner"></div>
+	<div class="mb10 <?php if (!$template->getId()): ?>p15_20<?php else: ?>p20_15<?php endif; ?> editor-box">
+		<form method="POST" action="<?php echo $this->getUrl('adminhtml/edm_email_template/save')  ?>" name="templateFrom" id="templateForm" class="form-list form-list-multi">
+			<div class="no-display">
+				<input type="hidden" name="template_id" id="template_id" value="<?php echo $template->getId(); ?>"/>
+				<?php echo $this->getBlockHtml('formkey'); ?>
+				<?php if (!$template->getId()): ?>
+				<input type="hidden" name="template_scene" id="template_scene" value=""/>
+				<?php endif; ?>
+			</div>
+			<?php if ($template->getId()): ?>
+			<div class="drag-box">
+				<?php $links = $template->getLinks(); ?>
+				<?php if ($links && count($links)): ?>
+					<?php foreach ($links as $link): ?>
+					<div class="drag-handle edm-template-module" data-order="<?php echo $link->getData('link_order'); ?>" data-link="<?php echo $link->getId(); ?>" >
+						<div class="legend" data-id="<?php echo $link->getData('link_module'); ?>" data-link="<?php echo $link->getData('link_id'); ?>"><?php echo $link->getData('module_name'); ?></div>
+						<div class="handle-tools">
+							<a href="javascript:;" onclick="edmTplItemAdd(this)" title="" class="btn-add-item"><i class="fa fa-plus mr5"></i></a>
+							<a href="javascript:;" onclick="edmTplItemMoveUp(this)" title="" class="btn-add-item"><i class="fa fa-arrow-circle-up mr5"></i></a>
+							<a href="javascript:;" onclick="edmTplItemMoveDown(this)" title="" class="btn-add-item"><i class="fa fa-arrow-circle-down mr5"></i></a>
+							<a href="javascript:;" onclick="edmTplModuleDelete(this)" title="" class="btn-delete-item"><i class="fa fa-trash mr5"></i></a>
+						</div>
+						<div class="inner">
+							<div class="tpl-item">
+								<div class="">
+									<table class="detail-table" style="" width="100%">
+										<colgroup>
+											<col width="">
+											<col width="129px">
+										</colgroup>
+										<tbody class="item-content-tbody">
+											<?php $items = $link->getItems(); ?>
+											<?php if ($items && count($items)): ?>
+											<?php foreach ($items as $item): ?>
+												<?php $itemId = $item->getId(); ?>
+												<tr class="item-content-tr" data-id="<?php echo $itemId; ?>">
+											    	<td>
+														<div class="item-content std" data-item="<?php echo $item->getId(); ?>"id="itemid_<?php echo $itemId; ?>"><?php echo $item->getData('item_content'); ?></div>
+											      	</td>
+											    	<td align="center" class="bg-grey btns">
+											    		<a class="mr15 action-edit" href="javascript:;" onclick="edmTplItemEdit('itemid_<?php echo $itemId; ?>',this)"><i class="fa fa-edit"></i></a>
+											    		<a class="action-delete" href="javascript:;" onclick="edmTplItemDelete('itemid_<?php echo $itemId; ?>',this)"><i class="fa fa-trash"></i></a>
+											    		<a class="action-save mr15" href="javascript:;" style="display:none" onclick="edmTplItemSave('itemid_<?php echo $itemId; ?>',this)"><i class="fa fa-check-square-o"></i></a>
+											    		<a class="action-reset " href="javascript:;" style="display:none" onclick="edmTplItemReset('itemid_<?php echo $itemId; ?>',this)"><i class="fa fa-repeat"></i></a>
+										    		</td>
+											 	 </tr>
+											<?php endforeach; ?>
+											<?php endif; ?>
+										</tbody>
+									</table>
+								</div>
+							</div><!-- end tpl-item -->
+						</div>
+					</div>
+					<?php endforeach; ?>
+				<?php else: ?>
+				<div class="md-empty">快速定制属于您的邮件模板</div>
+				<?php endif; ?>
+			</div>
+			<button class="drag-btn drag-btn-add btn btn-default" type="button"><i class="fa fa-plus-square-o"></i>&nbsp;点击新增内容</button>
+			<div class="clr mt10"></div>
+			<?php endif; ?>
+			<?php if (!$template->getId()): ?>
+			<h5 class="m0 mb10">选择邮件场景</h5>
+			<div class="tab-box">
+				<?php //echo get_class($this); ?>
+				<?php $scenes = $this->getScenes(); ?>
+				<?php $i = 0; ?>
+				<?php foreach ($scenes as $scene): ?>
 				
+				<div data-id="<?php echo $scene->getData('scene_id'); ?>" class="scene-item tab-item pr <?php if (($i+1)%5==0): ?>last<?php endif; ?>">
+					
+					<p class="name fs20"><?php echo $scene->getData('scene_name'); ?></p>
+					<p class="sdesc"><?php echo $scene->getData('scene_sdesc'); ?></p>
+					<div class="scene-child pa" style="display:none;">
+						
+					</div>
+				</div>
+				<?php $i++; ?>
+				<?php endforeach; ?>
+				<div class="clr"></div>
+			</div>
+			<h5 class="m0 mb10 mt10">填写基本信息</h5>
+			<?php endif; ?>
+			
+			<table class="detail-table" width="100%">
+				<colgroup>
+					<col width="10%">
+					<col width="40%">
+					<col width="10%">
+					<col width="40%">
+				</colgroup>
+				<tbody>
+					<tr>
+						<th>模板名称<span class="required">*</span></th>
+						<td class="value"><input type="text" class="ipt wp100 required-entry" name="template_name" id="template_name" value="<?php echo $template->getData('template_name'); ?>" /></td>
+						<th>状态</th>
+						<td class="value">
+							<input name="template_status" value="1" id="template_status1" <?php  if($template->getData('template_status')): ?>checked="checked"<?php endif; ?>type="radio"><label class="inline" for="template_status1">启用</label>&nbsp;
+							<input name="template_status" value="0" id="template_status0" <?php  if(!$template->getData('template_status')): ?>checked="checked"<?php endif; ?> type="radio"><label class="inline" for="template_status0">停用</label>&nbsp;                  
+						</td>
+					</tr>
+					<tr>
+						<th>星标模板</th>
+						<td class="value">
+							<input name="is_mark" value="1" id="is_mark1" <?php  if($template->getData('is_mark')): ?>checked="checked"<?php endif; ?>type="radio"><label class="inline" for="is_mark1">是</label>&nbsp;
+							<input name="is_mark" value="0" id="is_mark0" <?php  if(!$template->getData('is_mark')): ?>checked="checked"<?php endif; ?> type="radio"><label class="inline" for="is_mark0">否</label>&nbsp;       
+						</td>
+						<th>权重</th>
+						<td class="value"><input type="text" class="ipt wp100" name="template_position" id="template_position" value="<?php echo $template->getData('template_position'); ?>" /></td>
+					</tr>
+					<tr>
+						<th>可见范围</th>
+						<td class="value">
+        					<input name="visible_scope" value="0" id="visible_scope0" checked="checked" type="radio"><label class="inline" for="visible_scope0">公开</label>&nbsp;
+							<input name="visible_scope" value="1" id="visible_scope1" type="radio"><label class="inline" for="visible_scope1">仅自己</label>&nbsp;            
+						</td>
+						<th>可见人员</th>
+						<td class="value">
+        					<input id="visible_user" name="visible_user" value="" title="可见人员" class="input-user input-text" type="text">
+							<div class="input-user-wrap"><div class="inner" id="visible_user_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="visible_user_tag" data-target="visible_user" data-old="[]" class="add-user"><i class="fa fa-plus f-right"></i></a></div>
+						</td>
+					</tr>
+					<tr>
+						<th>备注</th>
+						<td colspan="3">
+							<textarea style="width:100%" name="template_memo"><?php echo $template->getData('template_memo'); ?></textarea>
+						</td>
+					</tr>
+				</tbody>
+			
+			</table>
+			
+		</div>
+		<div class="content-bottom a-center">
+			<?php if ($template->getId()): ?>
+	    	<div class="f-left wp50">
+	    		<button class="btn f-left btn-primary btn-lg w200" id="send_email_btn" type="button" onclick="renderEmail()" style=""><i class="fa fa-refresh"></i>&nbsp;预览模板</button>
+	    	</div>
+	    	<div class="f-right wp50">
+	    		<button class="btn btn-primary f-right btn-lg w200" id="edmSaveTemplate_copy" type="button" onclick="edmSaveTemplate()" style=""><i class="fa fa-save"></i>&nbsp;保存模版</button>
+	    	</div>
+	    	<?php else: ?>
+	    		<button class="btn btn-primary btn-lg wp50" id="edmSaveContinueTemplate" type="button" onclick="edmSaveAndContinueTemplate()" style=""><i class="fa fa-save"></i>&nbsp;保存，下一步</button>
+	    	<?php endif; ?>
+	    	<div class="clr"></div>
+		</div>
+		<div class="clr"></div>
+		<script>
+			editForm = new mioForm('templateForm','');
+		</script>
+	</form>
+</div>
+
+<div id="template-md-tpl" class='no-display'>
+	<script type="text/template" id="itemtpl">
+		<tr class="item-content-tr">
+	    	<td>
+				<div class="item-content std" id="{guid}"></div>
+	      	</td>
+	    	<td align="center" class="bg-grey btns">
+	    		<a class="mr15 fs18 action-edit" href="javascript:;" onclick="edmTplItemEdit('{guid}',this)"><i class="fa fa-edit"></i></a>
+	    		<a class="fs18 action-delete" href="javascript:;" onclick="edmTplItemDelete('{guid}',this)"><i class="fa fa-trash"></i></a>
+	    		<a class="fs18 action-save mr15" href="javascript:;" style="display:none" onclick="edmTplItemSave('{guid}',this)"><i class="fa fa-check-square-o"></i></a>
+	    		<a class="fs18 action-reset " href="javascript:;" style="display:none" onclick="edmTplItemReset('{guid}',this)"><i class="fa fa-repeat"></i></a>
+    		</td>
+	 	 </tr>
+	</script>
+	<script type="text/template" id="moduletpl">
+		<div class="drag-handle edm-template-module">
+			<div class="legend"></div>
+			<div class="handle-tools">
+				<a href="javascript:;" onclick="edmTplItemAdd(this)" title="" class="btn-add-item"><i class="fa fa-plus mr5"></i></a>
+				<a href="javascript:;" onclick="edmTplItemMoveUp(this)" title="" class="btn-add-item"><i class="fa fa-arrow-circle-up mr5"></i></a>
+				<a href="javascript:;" onclick="edmTplItemMoveDown(this)" title="" class="btn-add-item"><i class="fa fa-arrow-circle-down mr5"></i></a>
+				<a href="javascript:;" onclick="edmTplModuleDelete(this)" title="" class="btn-delete-item"><i class="fa fa-trash mr5"></i></a>
+			</div>
+			<div class="inner">
+				<div class="tpl-item">
+					<div class="">
+						<table class="detail-table" style="" width="100%">
+							<colgroup>
+								<col width="">
+								<col width="149px">
+							</colgroup>
+							<tbody class="item-content-tbody"></tbody>
+						</table>
+					</div>
+				</div><!-- end tpl-item -->
 			</div>
 		</div>
-	</div>
-	<div class="content-bottom">
-
-    	<div class="f-left wp50">
-    		<button class="btn f-left btn-primary" id="send_email_btn" type="button" onclick="renderEmail()" style=""><i class="fa fa-refresh"></i>&nbsp;随机预览</button>
-    	</div>
-    	<div class="f-right wp50">
-    		
-    		
-    		<button class="btn btn-primary f-right" id="saveTemplate_copy" type="button" onclick="saveTemplate()" style=""><i class="fa fa-save"></i>&nbsp;保存模版</button>
-    		
-    	</div>
-    	<div class="clr"></div>
-	</div>
-	<div class="clr"></div>
+	</script>
 </div>
 <div class="no-display">
 	<div class="module-mask lbme">
 		<div class="lbme-h">
 			<h3 class="f-left">选择内容模块</h3>
-			<button class="btn btn-green f-right" id="chosen_module_btn" type="button" onclick="chosenModule()" style=""><i class="fa fa-send-o"></i>&nbsp;确认并添加</button>
+			<button class="btn btn-primary f-right" id="chosen_module_btn" type="button" style=""><i class="fa fa-send-o"></i>&nbsp;确认并添加</button>
 			<div class="clr"></div>
 		</div>
 		<div class="inner">
 			<?php $modules = $this->getModuleCollection(); ?>
 			<?php foreach($modules as $_item):  ?>
-				<a href="javascript:;" class="md-handle bx" data-name="<?php echo $_item->getName(); ?>">
-					<h5><?php echo $_item->getName(); ?></h5>
-					<i class="fa fa-check-square-o" aria-hidden="true"></i>
+				<a href="javascript:;" class="md-handle bx" data-id="<?php echo $_item->getId(); ?>" data-name="<?php echo $_item->getModuleName(); ?>">
+					<h5><?php echo $_item->getModuleName(); ?></h5>
+					<i class="fa fa-check-square-o"></i>
 				</a>
 				
 			<?php endforeach; ?>
@@ -75,8 +237,8 @@
 <script>
 $(function(){
 	$('.drag-btn-add').click(function(){
+		$('.md-handle').removeClass('over');
 		$('.module-mask').lightbox_me({
-			
 			
 		})
 	})
@@ -85,15 +247,276 @@ $(function(){
 	})
 	$('#chosen_module_btn').click(function(){
 		$('.drag-box .md-empty').remove();
-		
+		var modules = [];
+		var elements = [];
 		$('.md-handle.over').each(function(){
-			$this = $('#template-md-tpl');
+			$this = $($('#moduletpl').html());
+			$this.find('.legend').attr('data-id',$(this).attr('data-id'));
 			$this.find('.legend').html($(this).attr('data-name'));
-			$('.drag-box').append($this.html());
+			//$('.drag-box').append($this);
+			modules.push($(this).attr('data-id'));
+			elements.push($this);
 		})
+		//提交到后台
+		$.post(
+			'<?php echo $this->getUrl('adminhtml/edm_email_template/addModule'); ?>',
+			{form_key:FORM_KEY,id:$('#template_id').val(),module_ids:modules.join(',')},
+			function(res){
+				if (!res.succeed) {
+					alert(res.msg);
+				} else {
+					//更新Link ID
+					var linkIdArr = res.data;
+					for (var j=0;j<linkIdArr.length;j++) {
+						var tmp = linkIdArr[j].split('_');
+						console.log(tmp);
+						for (var k=0;k<elements.length;k++) {
+							console.log($(elements[k]).find('.legend').attr('data-id'));
+							
+							if ($(elements[k]).find('.legend').attr('data-id')==tmp[1]) {
+								$(elements[k]).attr('data-link',tmp[0])
+								$(elements[k]).attr('data-order',tmp[2])
+								break;
+							}
+						}
+					}
+					for (var k=0;k<elements.length;k++) {
+						$('.drag-box').append(elements[k]);
+					}
+				}
+			
+			},'json'
+		)
 		$('.lbme .close').click();
 	})
+	$('.scene-item').click(function(){
+		$('#template_scene').attr('value',$(this).attr('data-id'));
+		$(this).siblings().removeClass('selected');
+		$(this).addClass('selected');
+	})
 })
+function edmSaveAndContinueTemplate() {
+	if (!$('#template_scene').val()) {
+		layer.alert("请先选择一个场景！");
+	} else {
+		editForm.submit();
+	}
+	
+}
+//保存模板
+function edmSaveTemplate() {
+	//判断是否有为保存的内容项
+	var ckes = $('.item-content-tr .cke_chrome');
+	if (ckes.length>0) {
+		layer.confirm("当前有未保存的内容，点击”确定“将强制保存并放弃为保存的修改。",function(index) {
+			layer.close(index);
+			//Ajax提交内容
+			edmSaveTemplateSubmit();
+			return;
+		});
+	} else {
+		edmSaveTemplateSubmit();
+	}
+}
+function edmSaveTemplateSubmit() {
+	var templateId = $('#template_id').val();
+	if (!templateId) {
+		var tplData = new Array();
+		$('.edm-template-module').each(function(){
+			var moduleId = $(this).find('.legend').attr('data-id');
+			//对应记录ID
+			var linkId = $(this).find('.legend').attr('data-link');
+			$(this).find('.item-content-tr').each(function(){
+				var itemId = $(this).attr('data-id');
+				if (itemId) {
+					
+				} else {
+					
+				}
+			})
+		})
+		$.ajax({
+			url:'/admin/edm_email_template/save',
+			type:'POST',
+			dataType:'json',
+			data:{form_key:FORM_KEY},
+			success:function(res) {
+				
+			}
+		})
+	} else {
+		//只提交基本设置信息，item module都是异步提交
+		$.ajax({
+			url:'/admin/edm_email_template/save',
+			type:'POST',
+			dataType:'json',
+			data:{form_key:FORM_KEY},
+			success:function(res) {
+				
+			}
+		})
+	}
+		
+}
+function edmTplModuleDelete(e) {
+	layer.confirm("删除当前模块，该模块下的内容也连同一起删除，确认删除吗？",function(index) {
+		layer.close(index);
+		$(e).parents('.edm-template-module').remove();
+		//Ajax提交
+		$.ajax({
+			url:'/admin/edm_email_template/deleteModule',
+			type:'POST',
+			dataType:'json',
+			data:{form_key:FORM_KEY,link_id:$(e).parents('.edm-template-module').attr('data-link')},
+			success:function(res) {
+				if (!res.succeed) {
+					alert(res.msg);
+				}
+			}
+		})
+		return;
+	});
+}
+//添加内容
+function edmTplItemAdd(cur){
+	var itemTpl = $('#itemtpl').html();
+	
+	var guid = SimpleTool.guid('tplitem_');
+	//console.log(guid);
+	var p = $(cur).parent().next().find('.item-content-tbody');
+	p.append(itemTpl.replace(/\{guid\}/g,guid));
+	
+	edmTplItemEdit(guid,p.find('.action-edit'));
+}
+function edmTplItemMoveUp(cur) {
+	
+	var p = $(cur).parents('.edm-template-module');
+	console.log(p.prev());
+	if (p.prev() && p.prev().hasClass('edm-template-module')) {
+		var linkId = p.attr('data-link');
+		var prevLinkId = p.prev().attr('data-link');
+		var linkOrder = p.attr('data-order');
+		var prevLinkOrder = p.prev().attr('data-order');
+		p.attr('data-order',prevLinkOrder);
+		p.prev().attr('data-order',linkOrder);
+		edmTplItemMoveSave(linkId,prevLinkOrder,prevLinkId,linkOrder);
+		p.insertBefore(p.prev());
+	}
+}
 
-
+function edmTplItemMoveDown(cur) {
+	var p = $(cur).parents('.edm-template-module');
+	if (p.next() && p.next().hasClass('edm-template-module')) {
+		var linkId = p.attr('data-link');
+		var nextLinkId = p.next().attr('data-link');
+		var linkOrder = p.attr('data-order');
+		var nextLinkOrder = p.next().attr('data-order');
+		p.attr('data-order',nextLinkOrder);
+		p.next().attr('data-order',linkOrder);
+		edmTplItemMoveSave(linkId,nextLinkOrder,nextLinkId,linkOrder);
+		p.insertAfter(p.next());
+	}
+}
+function edmTplItemMoveSave(a,aorder,b,border) {
+	$.ajax({
+		url:'/admin/edm_email_template/moveModule',
+		type:'POST',
+		dataType:'json',
+		data:{form_key:FORM_KEY,link_id_a:a,link_id_b:b,link_order_a:aorder,link_order_b:border},
+		success:function(res) {
+			if (!res.succeed) {
+				alert(res.msg);
+			}
+		}
+	})
+}
+function edmTplItemEdit(e,cur) {
+    if(CKEDITOR.instances[e] ){
+        CKEDITOR.remove(CKEDITOR.instances[e]);
+    }
+    
+	var config = {
+			height:100,
+			 resize_minHeight:100,
+             toolbar :
+             [
+                //加粗     斜体，     下划线      穿过线      下标字        上标字
+                ['Bold','Italic','Underline','Strike','Subscript','Superscript'],
+                // 数字列表          实体列表            减小缩进    增大缩进
+                ['NumberedList','BulletedList','-','Outdent','Indent'],
+                //左对 齐             居中对齐          右对齐          两端对齐
+                ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+                //超链接  取消超链接 锚点
+                ['Link','Unlink'],
+                //图片    flash    表格       水平线            表情       特殊字符        分页符
+                ['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
+                '/',
+                // 样式       格式      字体    字体大小
+                ['Styles','Format','Font','FontSize'],
+                //文本颜色     背景颜色
+                ['TextColor','BGColor'],
+                //全屏           显示区块
+                ['Maximize', 'ShowBlocks','-']
+             ]
+        };
+	CKEDITOR.replace(e, config);
+	$(cur).hide();
+	$(cur).siblings().hide();
+	$(cur).siblings('.action-save,.action-reset').show();
+}
+function edmTplItemDelete(e,cur) {
+	$('#'+e).parents('.item-content-tr').remove();
+	//ajax 请求
+	var item_id = $(cur).parents('.item-content-tr').attr('data-id');
+	$.ajax({
+		url:'/admin/edm_email_template/deleteItem',
+		type:'POST',
+		dataType:'json',
+		data:{form_key:FORM_KEY,item_id:item_id},
+		success:function(res) {
+			if (!res.succeed) {
+				alert(res.msg);
+			}
+		}
+	})
+}
+function edmTplItemSave(e,cur) {
+	//ajax 提交保存item
+	var link_id = $('#'+e).parents('.edm-template-module').attr('data-link');
+	var item_id = $('#'+e).attr('data-item');
+	var content = CKEDITOR.instances[e].getData();
+	var item_content = content;
+	if (item_content.trim()) {
+		$.post(
+			'<?php echo $this->getUrl('adminhtml/edm_email_template/saveItem'); ?>',
+			{form_key:FORM_KEY,id:$('#template_id').val(),item_id:item_id,link_id:link_id,item_content:item_content},
+			function(res){
+				if (!res.succeed) {
+					alert(res.msg);
+				} else {
+					//
+					
+					$('#cke_'+e).remove();
+					$('#'+e).html(content).show().css('visibility','visible');
+					$(cur).hide();
+					$(cur).siblings().hide();
+					$(cur).siblings('.action-edit,.action-delete').show();
+				}
+			
+			},'json'
+		)
+	} else {
+		layer.alert("内容不能为空！");
+	}
+		
+				
+	
+}
+function edmTplItemReset(e,cur) {
+	$('#cke_'+e).remove();
+	$('#'+e).show().css('visibility','visible');
+	$(cur).hide();
+	$(cur).siblings().hide();
+	$(cur).siblings('.action-edit,.action-delete').show();
+}
 </script>

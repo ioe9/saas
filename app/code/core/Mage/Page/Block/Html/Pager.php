@@ -1,35 +1,10 @@
 <?php
 /**
- * Magento
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Open Software License (OSL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/osl-3.0.php
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@magento.com so we can send you a copy immediately.
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade Magento to newer
- * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magento.com for more information.
- *
- * @category    Mage
- * @package     Mage_Page
- * @copyright  Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
- * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- */
-
-/**
  * Html page block
  *
  * @category   Mage
  * @package    Mage_Page
- * @author      Magento Core Team <core@magentocommerce.com>
+ * @author      Mio Core Team <developer@ioe9.com>
  *
  * @todo        separate order, mode and pager
  */
@@ -38,7 +13,7 @@ class Mage_Page_Block_Html_Pager extends Mage_Core_Block_Template
     protected $_collection = null;
     protected $_pageVarName    = 'p';
     protected $_limitVarName   = 'limit';
-    protected $_availableLimit = array(9=>9,18=>20,36=>36);
+    protected $_availableLimit = array(12=>12,18=>18,30=>30);
     protected $_dispersion     = 3;
     protected $_displayPages   = 5;
     protected $_showPerPage    = true;

@@ -1,0 +1,23 @@
+<div class="header navbar-default">
+    <div class="nav_bar" id="navbar">
+    	<div class="container">
+        	<a href="<?php echo $this->getUrl(''); ?>" class="logo f-left"><img src="<?php echo $this->getSkinUrl('images/logo.png'); ?>" /></a>
+            <ul class="main_nav" id="menu_box_pc">
+            	<li>
+                	<a href="<?php echo $this->getUrl(''); ?>" alt="首页">首页</a>
+                </li>
+            	<?php $mainMenuId = Mage::getStoreConfig('catalog/menu/main_menu'); ?>
+            	<?php $category = Mage::getModel('catalog/category')->load($mainMenuId); ?>
+            	<?php $categoryCollection = $category->getChildrenCategories(); ?>
+            	<?php foreach ($categoryCollection as $_category): ?>
+            	<li>
+                	<a href="<?php echo $_category->getUrl(); ?>"><?php echo $_category->getName(); ?></a>
+                   
+                </li>
+                <?php endforeach; ?>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+

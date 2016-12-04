@@ -1,0 +1,13 @@
+<?php $subnav = Mage::registry('current_subnav'); ?>
+<?php if (is_array($subnav) && count($subnav)): ?>
+<div class="sec_menu">
+	<div class="container">
+    	<ul class="menu nav">
+    		<?php foreach ($subnav as $_nav): ?>
+        	<li <?php if($_nav['is_active']): ?>class="on" <?php endif; ?>><a href="<?php echo $_nav['url']; ?>"><?php echo $_nav['name']; ?></a></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</div>
+
+<?php endif; ?>

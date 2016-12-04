@@ -1,0 +1,21 @@
+<?php
+    $collection=$this->getCollection();
+?>
+<div class="side-box">
+	<div class="panel-heading">
+	   	<h2 class="m0">推荐<span>RECOMMEND</span></h2>
+		<div class="clr"></div>
+
+	</div>
+	<div class="p20 side-box-inner">
+		 <ul class="ilist">
+	     <?php foreach ($collection as $_item): ?>
+	    	<?php $name = $_item->getLayoutName(); ?>
+	        <li class="item<?php if( ++$_iterator%3 == 0): ?> last<?php endif; ?>">
+                <a href="<?php echo $url ?>" title="<?php echo $name; ?>"><?php echo $name; ?></a>
+	        </li>
+	    <?php endforeach; ?>
+	    </ul>
+	</div>
+	<div class="clr"></div>
+</div>

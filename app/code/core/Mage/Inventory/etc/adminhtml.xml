@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <inventory>
+        	<sort_order>990</sort_order>
+	        <title>库存</title>
+	        <type>trade</type>
+	        <action>adminhtml/inventory/</action>
+	        <children>
+		        <index>
+		        	<sort_order>0</sort_order>
+			        <title>首页</title>
+			        <action>adminhtml/inventory/index</action>
+		        </index>
+	        </children>
+        </inventory>
+    </menu>
+</config>

@@ -1,0 +1,159 @@
+<?php $task = Mage::registry('current_task'); ?>
+<div class="view-container ">
+    <div class="c-box">
+    	<div class="content-header">
+    		<div class="f-right">
+			
+		   		<button class="btn btn-default f-left" id="" type="button" onclick="setLocation('<?php echo $this->getUrl(''); ?>')"><i class="fa fa-angle-double-left mr5"></i>返回列表</button>
+		   		
+		   		<div class="clr"></div>
+		   	
+			</div>
+			<h2 class="m0"><i class="fa fa-eye mr5"></i>查看任务详情：<?php echo $task->getData('task_title'); ?></h2>
+				
+		</div>
+		<table width="100%" class="detail-table">
+			<col width="12%"/>
+			<col width="88%"/>
+			<!--
+			<thead>
+				<tr>
+					<th colspan="2" class='a-left'><strong>任务信息</strong></th>
+				</tr>
+			</thead>-->
+			<tr>
+				<th>任务标题</th>
+				<td>
+					<?php echo $task->getData('task_title'); ?>
+				</td>
+			</tr>
+			<tr>
+				<th>奖励总积分</th>
+				<td><?php echo $task->getData('task_point'); ?></td>
+			</tr>
+			<tr>
+				<th>任务总量</th>
+				<td><?php echo sprintf("%.2f",$task->getData('task_total')/10000); ?>W</td>
+			</tr>
+			<tr>
+				<th>认领进度</th>
+				<?php $pecent = intval($task->getData('task_claim')*100/$task->getData('task_total')); ?>
+				<td>
+					<div class="wp30 mr10">
+						<div class="progress">
+							<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<?php echo $pecent; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $pecent; ?>%"></div>
+						</div>
+					</div>
+					<div class="wp50 a-left ml10">
+						<?php echo $pecent; ?>%&nbsp;
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>采集进度</th>
+				<?php $pecent = intval($task->getData('task_finish')*100/$task->getData('task_total')); ?>
+				<td>
+					<div class="wp30 mr10">
+						<div class="progress">
+							<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<?php echo $pecent; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $pecent; ?>%"></div>
+						</div>
+					</div>
+					<div class="wp50 a-left">
+						<?php echo $pecent; ?>%&nbsp;
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>发布时间</th>
+				<td><?php echo substr($task->getData('date_create'),0,10); ?></td>
+			</tr>
+			<tr>
+				<th>预计完成时间</th>
+				<td><?php echo substr($task->getData('date_finish'),0,10); ?></td>
+			</tr>
+			<tr>
+				<th>任务简述</th>
+				<td><?php echo $task->getData('task_sdesc'); ?></td>
+			</tr>
+			
+		</table>    
+    </div>
+    
+			
+	<div class="c-box mt10">
+    	<div class="content-header">
+			<h2 class="m0">子任务列表</h2>
+		</div>
+		<div class="p20 grid">
+			<?php $children = $task->getChildren(); ?>
+			<?php if ($children && count($children)): ?>
+			<table width="100%" class="data-table">
+				<col width="35%"/>
+				<col width="10%"/>
+				<col width="12%"/>
+				<col width="12%"/>
+				<col width="12%"/>
+				<col width="18%"/>
+				<thead>
+					<tr>
+						<th align="center">标题</th>
+						<th align="center">奖励积分</th>
+						<th align="center">认领进度</th>
+						<th align="center">采集进度</th>
+						<th align="center">截止时间</th>
+						<th align="center">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php foreach ($children as $child): ?>
+					<tr>
+						<td align="center"><?php echo $child->getData('task_title'); ?></td>
+						<td align="center"><?php echo $child->getData('task_point'); ?></td>
+						<?php $pecent = intval($child->getData('task_claim')*100/$child->getData('task_total')); ?>
+						<td>
+							<div class="wp100">
+								<div class="progress">
+									<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<?php echo $pecent; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $pecent; ?>%"></div>
+								</div>
+							</div>
+							
+						</td>
+						<?php $pecent = intval($child->getData('task_finish')*100/$child->getData('task_total')); ?>
+						<td>
+							<div class="wp100">
+								<div class="progress">
+									<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<?php echo $pecent; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $pecent; ?>%"></div>
+								</div>
+							</div>
+							
+						</td>
+						<td align="center"><?php echo substr($child->getData('date_finish'),0,10); ?></td>
+						<td align="center">
+							<?php $status = $child->getData('task_status'); ?>
+							<?php if ($status==0): ?>
+							<a href="javascript:;" onclick="">认领</a>
+							<?php elseif ($status==1 && $child->getData('task_company')==Mage::registry('current_company')->getId()): ?>
+							<a href="javascript:;" onclick="">上传数据</a>
+							<?php endif; ?>
+						</td>
+					</tr>
+				<?php endforeach; ?>
+				</tbody>
+				</table>
+			<?php else: ?>
+			<p class="a-center" style="padding:20px;">未发布子任务</p>
+			<?php endif; ?>
+		</div>
+		<div class="p20">
+			
+		</div>
+    </div>   
+    <div class="c-box mt10">
+    	<div class="content-header">
+			<h2 class="m0">任务详情</h2>
+		</div>
+		<div class="" style="padding:25px 50px 50px">
+			<?php echo $task->getData('task_desc'); ?>
+		</div>
+	</div>              
+</div>

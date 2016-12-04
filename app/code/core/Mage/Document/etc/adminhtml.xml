@@ -9,18 +9,18 @@
 		        <dir>
 		        	<sort_order>10</sort_order>
 			        <title>文档目录</title>
-			        <action>adminhtml/document_dir/</action>
+			        <action>adminhtml/document/dir/</action>
 			     </dir>
 			     <recent>
 		        	<sort_order>20</sort_order>
 			        <title>最近上传</title>
-			        <action>adminhtml/document_recent/</action>
+			        <action>adminhtml/document/recent/</action>
 			     </recent>
-			     <wishlist>
+			     <wish>
 		        	<sort_order>30</sort_order>
 			        <title>我的收藏</title>
-			        <action>adminhtml/document_wishlist/</action>
-			     </wishlist> 
+			        <action>adminhtml/document/wish/</action>
+			     </wish> 
 			     <app>
 		        	<sort_order>40</sort_order>
 			        <title>应用文件</title>
@@ -29,7 +29,7 @@
 			     <trash>
 		        	<sort_order>50</sort_order>
 			        <title>回收站</title>
-			        <action>adminhtml/document_trash/</action>
+			        <action>adminhtml/document/trash/</action>
 			     </trash>
 			     <setting>
 		        	<sort_order>999</sort_order>

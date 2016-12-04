@@ -186,22 +186,23 @@ class Mage_Adminhtml_Block_Widget_Grid extends Mage_Adminhtml_Block_Widget
                 ->setData(array(
                     'label'     => Mage::helper('adminhtml')->__('Export'),
                     'onclick'   => $this->getJsObjectName().'.doExport()',
-                    'class'   => 'task'
+                    'class'   => 'task btn btn-info'
                 ))
         );
         $this->setChild('reset_filter_button',
             $this->getLayout()->createBlock('adminhtml/widget_button')
                 ->setData(array(
-                    'label'     => "重置筛选条件",
+                    'label'     => '<i class="fa fa-mail-reply-all mr5"></i>'."重置筛选条件",
                     'onclick'   => $this->getJsObjectName().'.resetFilter()',
+                    'class' => 'btn btn-info'
                 ))
         );
         $this->setChild('search_button',
             $this->getLayout()->createBlock('adminhtml/widget_button')
                 ->setData(array(
-                    'label'     => "立即过滤",
+                    'label'     => '<i class="fa fa-filter mr5"></i>'."立即过滤",
                     'onclick'   => $this->getJsObjectName().'.doFilter()',
-                    'class'   => 'task'
+                    'class'   => 'btn btn-info task'
                 ))
         );
         return parent::_prepareLayout();

@@ -1,0 +1,16 @@
+<?php  
+foreach ($types as $type) {
+    if ( $messages = $this->getMessages($type) ) {
+        if ( !$html ) {
+            $html .= '<div class="alert alert-' . $type . '">';
+        }
+        foreach ( $messages as $message ) {
+            $html.= $message->getText();
+            $html.= '</div>';
+        }
+    }
+}
+if ( $html) {
+    $html .= '</div>';
+}
+?>

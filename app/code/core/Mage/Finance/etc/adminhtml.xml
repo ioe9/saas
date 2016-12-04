@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <finance>
+        	<sort_order>990</sort_order>
+	        <title>财务</title>
+	        <type>trade</type>
+	        <action>adminhtml/finance/</action>
+	        <children>
+		        <index>
+		        	<sort_order>0</sort_order>
+			        <title>首页</title>
+			        <action>adminhtml/finance/index</action>
+		        </index>
+	        </children>
+        </finance>
+    </menu>
+</config>

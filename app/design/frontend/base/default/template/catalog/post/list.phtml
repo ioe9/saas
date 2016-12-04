@@ -1,0 +1,30 @@
+<?php
+    $_postCollection=$this->getLoadedPostCollection();
+    $_helper = $this->helper('catalog/output');
+?>
+<?php if(!$_postCollection->count()): ?>
+<p class="note-msg">对不起，找不到相应记录</p>
+<?php else: ?>
+<div class="category-posts">
+    <?php $_iterator = 0; ?>
+    <ol class="posts-list" id="posts-list">
+    <?php foreach ($_postCollection as $_post): ?>
+        <li class="item<?php if( ++$_iterator == sizeof($_postCollection) ): ?> last<?php endif; ?>">
+            
+            <div class="f-fix">
+                <?php $_postNameStripped = $this->stripTags($_post->getTitle(), null, true); ?>
+                <h2 class="post-name"><a href="<?php echo $_post->getPostUrl() ?>" title="<?php echo $_postNameStripped; ?>"><?php echo $_postNameStripped; ?></a></h2>
+                
+                
+               
+                <div class="desc std">
+                    <?php echo $_post->getSdesc() ?>
+                   
+                </div>
+               
+            </div>
+        </li>
+    <?php endforeach; ?>
+    </ol>
+</div>
+<?php endif; ?>

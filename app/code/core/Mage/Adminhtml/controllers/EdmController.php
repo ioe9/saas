@@ -6,9 +6,9 @@ class Mage_Adminhtml_EdmController extends Mage_Adminhtml_Controller_Edm
 {
     public function indexAction()
     {
-        $this->_title($this->__('EDM管理'));
+        $this->_title($this->__('EDM - 电子邮件营销管理'));
         $this->loadLayout();
-        $this->_setActiveMenu('edm');
+        $this->_setActiveMenu('edm/index');
        	//var_dump($this->getLayout()->getUpdate()->getHandles());
         $this->renderLayout();
     }

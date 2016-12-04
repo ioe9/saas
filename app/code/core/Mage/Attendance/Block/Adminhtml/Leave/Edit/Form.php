@@ -126,7 +126,7 @@ class Mage_Attendance_Block_Adminhtml_Leave_Edit_Form extends Mage_Adminhtml_Blo
             'title'     => '审批人',
 			'class'     => 'input-user',
             'required'  => true,
-            'after_element_html' => '<div class="input-user-wrap"><div class="inner" id="leave_audit_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="leave_audit_tag" data-target="leave_audit" data-old=\''.json_encode($auditData).'\' class="add-user"><i class="fa fa-plus f-right" aria-hidden="true"></i></a></div>',
+            'after_element_html' => '<div class="input-user-wrap"><div class="inner" id="leave_audit_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="leave_audit_tag" data-target="leave_audit" data-old=\''.json_encode($auditData).'\' class="add-user"><i class="fa fa-plus f-right"></i></a></div>',
         ));
         $fieldset->addField('leave_cc_old', 'hidden', array(
             'name'      => 'leave_cc_old',
@@ -138,7 +138,7 @@ class Mage_Attendance_Block_Adminhtml_Leave_Edit_Form extends Mage_Adminhtml_Blo
             'title'     => '抄送人',
             'class'     => 'input-user',
             'required'  => false,
-            'after_element_html' => '<div class="input-user-wrap"><div class="inner" id="leave_cc_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="leave_cc_tag" data-target="leave_cc" data-old=\''.json_encode($ccData).'\' class="add-user"><i class="fa fa-plus f-right" aria-hidden="true"></i></a></div>',
+            'after_element_html' => '<div class="input-user-wrap"><div class="inner" id="leave_cc_tag"></div><a href="javascript:;" onclick="openTreechooser(this);" data-tag="leave_cc_tag" data-target="leave_cc" data-old=\''.json_encode($ccData).'\' class="add-user"><i class="fa fa-plus f-right"></i></a></div>',
         ));
         
         //上传附件

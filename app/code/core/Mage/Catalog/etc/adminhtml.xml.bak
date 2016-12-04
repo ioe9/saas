@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+    	<categories module="catalog">
+            <title>菜单管理</title>
+            <action>adminhtml/catalog_category/</action>
+            <sort_order>10</sort_order>
+        </categories>
+        <posts module="catalog">
+            <title>文章管理</title>
+            <action>adminhtml/catalog_post/</action>
+            <sort_order>20</sort_order>
+        </posts>
+        <event translate="title" module="cms">
+            <title>活动管理</title>
+            <sort_order>25</sort_order>
+            <action>adminhtml/catalog_event</action>
+        </event>
+        <seo module="catalog">
+            <title>SEO管理</title>
+            <sort_order>30</sort_order>
+            <children>
+                <urlrewrite module="catalog">
+		            <title>URL重写管理</title>
+		            <action>adminhtml/urlrewrite/index</action>
+		            <sort_order>30</sort_order>
+		        </urlrewrite>
+            </children>
+        </seo>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <catalog module="catalog">
+                                        <title>Catalog Section</title>
+                                    </catalog>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <catalog module="catalog">
+                        <title>Catalog</title>
+                        <sort_order>30</sort_order>
+                        <children>
+                            <categories translate="title">
+                                <title>Manage Categories</title>
+                            </categories>
+                            <posts translate="title">
+                                <title>Manage Posts</title>
+                            </posts>
+                            <urlrewrite translate="title">
+                                <title>URL Rewrite Management</title>
+                            </urlrewrite>
+                        </children>
+                    </catalog>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <tool>
+        	<sort_order>990</sort_order>
+	        <title>工具箱</title>
+	        <type>trade</type>
+	        <action>adminhtml/tool/</action>
+	        <children>
+		        <index>
+		        	<sort_order>0</sort_order>
+			        <title>首页</title>
+			        <action>adminhtml/tool/index</action>
+		        </index>
+	        </children>
+        </tool>
+    </menu>
+</config>
